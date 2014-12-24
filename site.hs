@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
+import           Text.Pandoc.Options
 
 
 --------------------------------------------------------------------------------
@@ -23,7 +24,7 @@ main = hakyll $ do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ compiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -60,6 +61,19 @@ main = hakyll $ do
     match "templates/*" $ compile templateCompiler
 
 
+--------------------------------------------------------------------------------
+pandocReaderOptions :: ReaderOptions
+pandocReaderOptions = def
+  {
+    readerSmart = True
+  }
+
+pandocWriterOptions :: WriterOptions
+pandocWriterOptions = def
+  {
+    writerHTMLMathMethod = MathML Nothing
+  }
+compiler = pandocCompilerWith pandocReaderOptions pandocWriterOptions
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
