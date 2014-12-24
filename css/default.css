@@ -7,14 +7,16 @@ body {
     margin: 0px 20% 0px 20%;
 }
 
-header {
+nav {
     border-bottom: 2px solid black;
     background: black;
     margin-bottom: 30px;
     padding: 12px 10px 12px 10px;
+    text-align: right;
 }
 
 div#logo a {
+    text-align: left;
     color: white;
     float: left;
     font-size: 18px;
@@ -22,11 +24,7 @@ div#logo a {
     text-decoration: none;
 }
 
-header nav {
-    text-align: right;
-}
-
-header nav a {
+nav a {
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -48,6 +46,7 @@ h1 {
     font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
     font-size: 200%;
     font-weight: normal;
+    font-style: normal;
 }
 
 h2, h3, h4, h5, h6 {
@@ -102,7 +101,7 @@ th {
   background: #EEE;
 }
 
-div.info {
+header {
     color: #555;
     font-size: 14px;
     font-style: italic;
