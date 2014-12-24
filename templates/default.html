@@ -10,20 +10,26 @@
     </script>
   </head>
   <body>
-    <header>
+    <nav>
       <div id="logo">
         <a href="/">Edward Ross' Site</a>
       </div>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/archive.html">Archive</a>
-      </nav>
-    </header>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/archive.html">Archive</a>
+    </nav>
 
     <article>
-      <h1>$title$</h1>
+      <header>
+        <h1>$title$</h1>
+        $if(date)$
+        Posted on <time datetime="$fulldate$" pubdate="pubdate">$date$</time>
+        $endif$
+        $if(author)$
+        by $author$
+        $endif$
+      </header>
 
             $body$
     </article>
