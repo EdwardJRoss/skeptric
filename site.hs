@@ -78,4 +78,5 @@ compiler = pandocCompilerWith pandocReaderOptions pandocWriterOptions
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
+    dateField "fulldate" "%FT%T%z" `mappend`
     defaultContext
