@@ -1,18 +1,21 @@
 body {
-    color: black;
-    font-size: 16px;
-    margin: 0px auto 0px auto;
-    width: 600px;
+    line-height: 120%;
+    font-height: 120%;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", Charcoal, sans-serif;
+    color: #333;
+    text-align: left;
+    margin: 0px 20% 0px 20%;
 }
 
 header {
     border-bottom: 2px solid black;
+    background: black;
     margin-bottom: 30px;
-    padding: 12px 0px 12px 0px;
+    padding: 12px 10px 12px 10px;
 }
 
 div#logo a {
-    color: black;
+    color: white;
     float: left;
     font-size: 18px;
     font-weight: bold;
@@ -24,7 +27,7 @@ header nav {
 }
 
 header nav a {
-    color: black;
+    color: white;
     font-size: 18px;
     font-weight: bold;
     margin-left: 12px;
@@ -42,11 +45,61 @@ footer {
 }
 
 h1 {
-    font-size: 24px;
+    font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
+    font-size: 200%;
+    font-weight: normal;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: Palatino, "Palatino Linotype", Georgia, Times, "Times New Roman", serif;
+  color: #222;
+  font-size: 100%;
+  font-weight: bold;
 }
 
 h2 {
-    font-size: 20px;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 150%;
+  font-weight: normal;
+}
+
+pre {
+  padding: 0.25em 0em 0.25em 0em;
+  margin: 0em 1em 0em 1em;
+  overflow: auto;
+  font-family: "Courier New", Courier, "Andale Mono", monospace;
+  line-height: 100%;
+}
+
+code {
+  font-family: "Courier New", Courier, "Andale Mono", monospace;
+  display: block;
+  padding: 0em 1em;
+}
+
+a {
+  color: #684;
+}
+  
+a:hover {
+  color: blue;
+}
+
+
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+th {
+  font-style: bold;
+  background: #EEE;
 }
 
 div.info {
