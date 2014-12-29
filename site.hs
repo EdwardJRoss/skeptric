@@ -7,7 +7,7 @@ import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -48,6 +48,10 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateCompiler
 
+config = defaultConfiguration 
+  {
+    deployCommand = "rsync -rvv _site/ edwardro@edwardross.id.au:public_html/"
+  }
 
 --------------------------------------------------------------------------------
 pandocReaderOptions :: ReaderOptions
