@@ -1,6 +1,5 @@
 body {
     line-height: 120%;
-    font-height: 120%;
     font-family: Tahoma, Geneva, sans-serif;
     color: #333;
     text-align: left;
@@ -8,7 +7,6 @@ body {
 }
 
 nav {
-    border-bottom: 2px solid black;
     background: black;
     margin-bottom: 30px;
     margin-top: 10px;
@@ -99,7 +97,6 @@ table, th, td {
 }
 
 th {
-  font-style: bold;
   background: #EEE;
 }
 
