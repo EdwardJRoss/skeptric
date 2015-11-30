@@ -57,7 +57,8 @@ config = defaultConfiguration
 pandocReaderOptions :: ReaderOptions
 pandocReaderOptions = def
   {
-    readerSmart = True
+    readerSmart = True,
+    readerApplyMacros = True
   }
 
 pandocWriterOptions :: WriterOptions
