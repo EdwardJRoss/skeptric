@@ -1,1 +1,6 @@
-public/
+_cache/
+_site/
+#Ignore compiled files and the binary
+*.hi
+*.o
+site
