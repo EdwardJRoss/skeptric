@@ -1,4 +1,4 @@
 baseURL = "http://skeptric.com/"
 languageCode = "en-us"
 title = "Skeptric"
-theme = "ananke"
+theme = "casper-two"
