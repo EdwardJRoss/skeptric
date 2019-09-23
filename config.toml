@@ -2,6 +2,13 @@ baseURL = "http://skeptric.com/"
 languageCode = "en-us"
 title = "Skeptric"
 theme = "casper-two"
+paginate = 12
 
 [params]
   customCSS = ["css/custom.css"]
+
+  githubName = "edwardjross"
+  orgName = "Skeptric"
+  orgWebsite = "http://www.skeptric.com"
+
+  author = "Edward Ross"
