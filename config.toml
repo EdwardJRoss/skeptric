@@ -2,3 +2,6 @@ baseURL = "http://skeptric.com/"
 languageCode = "en-us"
 title = "Skeptric"
 theme = "casper-two"
+
+[params]
+  customCSS = ["css/custom.css"]
