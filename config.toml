@@ -1,4 +1,4 @@
-baseURL = "http://skeptric.com/"
+baseURL = "https://skeptric.com/"
 languageCode = "en-us"
 title = "Skeptric"
 theme = "casper-two"
@@ -9,6 +9,6 @@ paginate = 12
 
   githubName = "edwardjross"
   orgName = "Skeptric"
-  orgWebsite = "http://www.skeptric.com"
+  orgWebsite = "https://www.skeptric.com"
 
   author = "Edward Ross"
