@@ -231,7 +231,7 @@ Below are the operations, I will use the notation n[4] to represent a parameter 
 A dvi must start with a preamble, followed by 1 or more pages ends with a postamble. A page is a bop followed by any instructions and terminating in an eop. The only operations that can go between these chunks are nop and font definitions.
 
 
-The postamble has a 4-byte pointer to the beginning of the last page, then the parameters j,  k, and l from the preamble (called numerator, denominator, and magnification respectively), a 4-byte signed integer giving the height+depth of the tallest page, a 4-byte signed integer giving the width or the widest page, a 2-byte unsigned integer giving the maximum stack depth in the DVI, and a 2-byte unsigned integer giving the total number of pages (bop commands).
+The postamble has a 4-byte pointer to the beginning of the last page, then the parameters j, k, and l from the preamble (called numerator, denominator, and magnification respectively), a 4-byte signed integer giving the height+depth of the tallest page, a 4-byte signed integer giving the width or the widest page, a 2-byte unsigned integer giving the maximum stack depth in the DVI, and a 2-byte unsigned integer giving the total number of pages (bop commands).
 
 
 Then each font must be defined. Each font must be defined exactly twice in the document, once before its first use (before the postamble) and once in the postamble.

@@ -10,7 +10,7 @@ This post is based mainly on a chapter in *A Radical Approach to Lebesgue’s Th
 <!--more-->The modern concept of a limit, central to how we understand analysis today, was not formulated until (arguably) 1821 by Cauchy, despite calculus being invented in the late 17th century and limiting approaches extending back into Greek mathematics. A major reason for the time it took for the rigorous foundations of analysis to develop is because they were not really necessary – most manipulations in mathematics and science involved “well-behaved” analytic functions. (This was well before the notion of a set was in vogue, so a function was generally considered to be a “formula” or a geometric concept, not an arbitrary mapping of one set into another). However there were exceptions to this; for instance trigonometric series, used by Bernoulli to solve a vibrating string problem in 1753 and by Fourier in 1821 to solve a heat equation.
 
 
-Trigonometric (or Fourier) series were useful for solving a wide range of physical problems, and at the same time challenged mathematical intuition, for instance Fourier found  $$\frac{4}{\pi}\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{2n-1} \cos(\frac{(2n-1)\pi x}{2})$$  converged to a square wave – a  discontinuous function.
+Trigonometric (or Fourier) series were useful for solving a wide range of physical problems, and at the same time challenged mathematical intuition, for instance Fourier found  $$\frac{4}{\pi}\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{2n-1} \cos(\frac{(2n-1)\pi x}{2})$$  converged to a square wave – a discontinuous function.
 
 
 In investigating these sorts of pathological functions rigorous notions of continuity, differentiability, uniform convergence and integrability arose. In particular Riemann’s definition of an integral (I can’t find his original definition, so this is a modern version)
@@ -61,7 +61,7 @@ The Lebesgue integral is great; it can integrate a much larger suite of function
 There is an integral more powerful than the Lebesgue integral on the real line, the Henstock-Kurzweil-Denjoy-Perron integral, or as it is sometimes known, the generalized Riemann integral, defined on a bounded interval as follows:
 
 
-The function f is integrable on [a,b] with integral A if for every positive number  $$\epsilon$$  there exists a positive function  $$\delta$$  on [a,b] such that every tagged partition   $$\{a_0,\ldots,a_n\},\{t_1,\ldots,t_n\}$$  satisfying  $$t_i - \delta (t_i) \leq a_{i-1} \leq t_i \leq a_i \leq t_i + \delta (t_i)$$ ,  $$\left|A - \sum_{j=1}^{n} f(t_j) (a_j - a_{j-1})\right| < \epsilon$$ .
+The function f is integrable on [a,b] with integral A if for every positive number  $$\epsilon$$  there exists a positive function  $$\delta$$  on [a,b] such that every tagged partition $$\{a_0,\ldots,a_n\},\{t_1,\ldots,t_n\}$$  satisfying  $$t_i - \delta (t_i) \leq a_{i-1} \leq t_i \leq a_i \leq t_i + \delta (t_i)$$ ,  $$\left|A - \sum_{j=1}^{n} f(t_j) (a_j - a_{j-1})\right| < \epsilon$$ .
 
 
 This integral (once extended to the whole real line) contains every Lebesgue integrable function, limits of Lebesgue integrable functions and some new functions to boot! In particular every derivative is integrable. (Robert Bartle’s *A modern theory of integration* gives an accessible exposition on the subject).

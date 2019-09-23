@@ -86,7 +86,7 @@ Theorem: The regular languages are equivalent to the languages representable by 
 This theorem can be proved as follows: a DFA is inductively transformed into a regular expression by transforming the DFA that can only pass through an increasingly large subset of states. A regular expression is transformed into a nondeterministic finite automoton, which is in turn transformed into a DFA.
 
 
-A [nondeterministic finite automaton](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton) (NFA) over a set Σ is a set S, an initial state s, a set of accepting states F and a transition map t  $$S \times \Sigma \to 2^S$$ . Then a string (a b … c) is in the language of the NFA if and only if there is some  $$s_1 \in t(s, a), s_2 \in t(s_1, b), ... s_n \in t(s_{n-1}, c)$$  such that  $$s_n \in F$$ .
+A [nondeterministic finite automaton](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton) (NFA) over a set Σ is a set S, an initial state s, a set of accepting states F and a transition map t  $$S \times \Sigma \to 2^S$$ . Then a string (a b … c) is in the language of the NFA if and only if there is some  $$s_1 \in t(s, a), s_2 \in t(s_1, b), ... s_n \in t(s_{n-1}, c)$$  such that  $$s_n \in F$$ .
 
 
 Sometimes epsilon transitions are allowed; that is transitions that take no input so t  $$S \times \Sigma \cup \{\epsilon\} \to 2^S$$ , and we allow arbitrary epsilon insertions in the string. As with DFAs, NFAs can be represented diagramatically and implemented efficiently as a table (though in this case we need to trace every possible path of a transition).

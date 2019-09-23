@@ -19,7 +19,7 @@ So as an example  $$p(x) = x^2 - 1$$  has a sequence of coefficients  $$(1, 0, -
 Descartes’ theorem tells us about the number of zeros of a degree n polynomial  $$p(x)$$  on the open interval  $$(0, \infty)$$ ; what if we wanted to know about the number of zeros on some other interval  $$(u, v)$$ ? We could perform a **projective transformation**  $$f(x) = \frac{a x + b}{c x + d}$$  ( $$ad - bc \neq 0$$ ); in order to still have a polynomial we need to multiply out the denominator to get  $$q(x) = (cx+d)^{n} p(\frac{ax +b}{cx+d})$$ . The positive zeros of q(x) are the positive zeros of  $$(cx+d)^n$$  and the zeros of p(x) between  $$-\frac{b}{a}$$  and  $$-\frac{d}{c}$$ . In particular if we choose a=u, b=v, c=1, d=1 the number of positive zeros of q(x) is precisely the number of zeros of p(x) in the interval  $$(u, v)$$ .
 
 
-By  the rule of signs if q(x) has zero sign variations then p(x) has no root in  $$(u, v)$$ . This leads to our **iterative ****bisection strategy **for finding the zeros of a polynomial on an interval. Given a sequence of intervals bisect each interval and find the sign variations of the polynomial projected on each subinterval;  if it is zero then discard it, otherwise add it to the next sequence of intervals. This yields a sequence of intervals which may contain zeros of p. However we don’t know which intervals contain no zeros or multiple zeros.
+By the rule of signs if q(x) has zero sign variations then p(x) has no root in  $$(u, v)$$ . This leads to our **iterative bisection strategy** for finding the zeros of a polynomial on an interval. Given a sequence of intervals bisect each interval and find the sign variations of the polynomial projected on each subinterval; if it is zero then discard it, otherwise add it to the next sequence of intervals. This yields a sequence of intervals which may contain zeros of p. However we don’t know which intervals contain no zeros or multiple zeros.
 
 
 Consider the case of one sign variation; for sufficiently small x, p(x) will have the sign of the terms at the end of the sequence (towards the constant term), and for sufficiently large x, p(x) will have the sign of the leading term. Consequently, since these signs are opposite, by the [intermediate value theorem](http://en.wikipedia.org/wiki/Intermediate_value_theorem) there exists a positive real x such that p(x) is zero. By Descartes’ rule of signs there is at most one real zero; hence there must be exactly one real zero.
@@ -79,8 +79,3 @@ I haven’t been sufficiently precise with my algorithm to analyse it, but there
 
 
 There are, of course, other methods of finding all the roots of a real polynomial; but few of them are global and stable like this one. (Though [a variation of Newton’s method](http://mathlab.sunysb.edu/~scott/Papers/Newton/Published.pdf) isn’t a bad candidate, albeit without precise bounds).
-
-
-
-
- 

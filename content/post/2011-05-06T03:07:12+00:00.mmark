@@ -1,5 +1,5 @@
 ---
-title: Do you really mean ℝ<sup>n</sup>?
+title: Do you really mean ℝⁿ?
 date: 2011-05-06T03:07:12+00:00
 ---
 
@@ -40,12 +40,7 @@ We should explicitly distinguish these structures from $$\mathbb{R}^n$$. A vecto
 As I’ve said at the end of the day to do calculations we will go into a specific representation which may look like  $$\mathbb{R}^n$$  and this is fine – but it is important to state and develop the theory in ways that are independent of these choices.
 
 
-End Note: Given a basis for a vector space V  $$\{e_1,\ldots,e_n\}$$  we can define a **dual basis** for $$V^*$$,  $$\{e^1,\ldots,e^n\}$$  by  $$e^i(e_j) = \delta^i_j$$ . The mapping of a basis onto its dual gives an isomorphism from $$V$$ to $$V^*$$, but this isomorphism isn’t *natural*.  This has a specific categorical meaning but roughly its because if we have a linear transformation $$L$$ on $$V$$, $$L$$ has a natural action on $$V^*$$. In terms of the matrix of the transformation the action on $$V^*$$ is the adjoint matrix (that is the transpose or Hermitian conjugate depending if the matrix is real or complex). But the dual basis transforms by the *inverse* to maintain  $$e^i(e_j) = \delta^i_j$$ . So the adjoint action preserves the identification of bases (and so the isomorphism is independent of our choice of basis) if and only if  $$T^* = T^{-1}$$ , which means the matrix is orthogonal or unitary. However apriori there is no reason to only use this type of linear transformation so the identification is not canonical. If, however, there is a metric on our vector space we should only use linear transformations that preserve this metric, and in terms of an orthonormal basis, this means we only use orthogonal/unitary transformations. So a metric induces a canonical isomorphism between a vector space and its dual! It is not too hard to see conversely that an isomorphism between a vector space and its dual gives a metric.
+End Note: Given a basis for a vector space V  $$\{e_1,\ldots,e_n\}$$  we can define a **dual basis** for $$V^*$$,  $$\{e^1,\ldots,e^n\}$$  by  $$e^i(e_j) = \delta^i_j$$ . The mapping of a basis onto its dual gives an isomorphism from $$V$$ to $$V^*$$, but this isomorphism isn’t *natural*. This has a specific categorical meaning but roughly its because if we have a linear transformation $$L$$ on $$V$$, $$L$$ has a natural action on $$V^*$$. In terms of the matrix of the transformation the action on $$V^*$$ is the adjoint matrix (that is the transpose or Hermitian conjugate depending if the matrix is real or complex). But the dual basis transforms by the *inverse* to maintain  $$e^i(e_j) = \delta^i_j$$ . So the adjoint action preserves the identification of bases (and so the isomorphism is independent of our choice of basis) if and only if  $$T^* = T^{-1}$$ , which means the matrix is orthogonal or unitary. However apriori there is no reason to only use this type of linear transformation so the identification is not canonical. If, however, there is a metric on our vector space we should only use linear transformations that preserve this metric, and in terms of an orthonormal basis, this means we only use orthogonal/unitary transformations. So a metric induces a canonical isomorphism between a vector space and its dual! It is not too hard to see conversely that an isomorphism between a vector space and its dual gives a metric.
 
 
 This is another reason (related to the existence of a natural inner product) a vector space should not be represented by  $$\mathbb{R}^n$$  – it is canonically identified with its dual.
-
-
-
-
- 

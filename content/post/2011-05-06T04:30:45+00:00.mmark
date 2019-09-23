@@ -1,5 +1,5 @@
 ---
-title: Do you really mean S<sup>1</sup>?
+title: Do you really mean S¹?
 date: 2011-05-06T04:30:45+00:00
 ---
 
@@ -31,9 +31,4 @@ To a differential geometer  $$S^1$$  means anything diffeomorphic to a Euclidean
 A set theorist wouldn’t call it  $$S^1$$ , but to her it would be any set with the same cardinality as the real numbers.
 
 
-This is a major theme of category theory – it’s not only the objects that matter but also the maps that preserve them  – whether it be affine transformations, orthogonal transformations, group homomorphisms, group homomorphisms, homeomorphisms, diffeomorphisms or bijections. So if you must write  $$S^1$$  to represent a structure at least make sure it is clear which category you are working in – i.e. which maps preserve the structure.
-
-
-
-
- 
+This is a major theme of category theory – it’s not only the objects that matter but also the maps that preserve them – whether it be affine transformations, orthogonal transformations, group homomorphisms, group homomorphisms, homeomorphisms, diffeomorphisms or bijections. So if you must write  $$S^1$$  to represent a structure at least make sure it is clear which category you are working in – i.e. which maps preserve the structure.
