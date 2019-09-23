@@ -4,7 +4,7 @@ date: 2011-06-08T14:10:28+00:00
 ---
 
 
-In a [previous post](http://physjam.wordpress.com/2011/01/03/solving-polynomials-of-degree-23-and-4/) I discussed finding the zeros of low degree polynomials; I want to extend that discussion to algorithmically finding the zeros of polynomials, more on solving the quintic and a brief discussion of transcendental numbers.
+In a [previous post](/post/solving-polynomials-of-low-degree) I discussed finding the zeros of low degree polynomials; I want to extend that discussion to algorithmically finding the zeros of polynomials, more on solving the quintic and a brief discussion of transcendental numbers.
 
 
 <!--more-->
@@ -35,8 +35,3 @@ Of course one often talks as well about elementary functions (functions generate
 
 
 One last trick to leave you with. Solving one linear equation is easy, and in first year mathematics courses we are taught how to solve systems of linear equations. Since we’ve discussed solving one polynomial equation it’s natural to ask how would one solve a system of linear equations… one approach is a [Gröbner basis](http://math.berkeley.edu/~bernd/what-is.pdf)
-
-
-
-
- 

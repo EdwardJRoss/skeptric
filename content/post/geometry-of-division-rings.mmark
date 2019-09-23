@@ -94,9 +94,4 @@ With any of these replacements all the appropriately projectivised statements ab
 It’s also remarkable there is a geometric proposition that is satisfied if and only if the space is commutative, [Pappus’ theorem](http://en.wikipedia.org/wiki/Pappus%27s_hexagon_theorem).
 
 
-Above all the geometric approach shows the space for geometry (as I’ve argued [before](http://physjam.wordpress.com/2011/05/06/do-you-really-mean-rn/)) is the affine/projective plane itself, and not its group of transformations, the vector space. From an algebraic perspective that is to say the geometric element is not the vector space itself but the set on which the vector space acts transitively and freely (it can be represented by the same underlying set as the vector space, but does not have the same algebraic structure).
-
-
-
-
- 
+Above all the geometric approach shows the space for geometry (as I’ve argued [before](/post/really-mean-rn/)) is the affine/projective plane itself, and not its group of transformations, the vector space. From an algebraic perspective that is to say the geometric element is not the vector space itself but the set on which the vector space acts transitively and freely (it can be represented by the same underlying set as the vector space, but does not have the same algebraic structure).
