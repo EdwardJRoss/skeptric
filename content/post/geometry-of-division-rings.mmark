@@ -22,7 +22,7 @@ Interestingly it’s just as possible to go the other way, if we’re careful ab
 <!--more-->
 
 
-There are obviously a couple of definitions wanting. A **linear manifold **is a collection of points such that given any pair of distinct points in the collection, every point that lies on the line is also in the collection. The **span **of a set of points is the smallest linear manifold containing each of the points (that such exists follows from the fact the collection of all points is a linear manifold, and the intersection of two linear manifolds is a linear manifold). A **plane **is a set that is spanned by 3 points and no fewer.
+There are obviously a couple of definitions wanting. A **linear manifold** is a collection of points such that given any pair of distinct points in the collection, every point that lies on the line is also in the collection. The **span** of a set of points is the smallest linear manifold containing each of the points (that such exists follows from the fact the collection of all points is a linear manifold, and the intersection of two linear manifolds is a linear manifold). A **plane** is a set that is spanned by 3 points and no fewer.
 
 
 We can define a **dilation** to be a mapping of points onto points such that the image of all points that lie on a given line lie on a line (that is a transformation that preserves lying on a line). We define a **translation** to be an injective dilation with no fixed points, or the identity.
