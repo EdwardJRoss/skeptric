@@ -4,17 +4,17 @@ date: 2010-11-18T17:44:50+00:00
 ---
 
 
-Lie Groups are mathematically “very nice” structures – they are **analytic** manifolds (real or complex) with a group structure such that multiplication and inversion are continuous. They are deeply related to infinitesimal symmetries; a group acting on a space can generally be thought of as a group of symmetries (or automorphisms) of some structure [e.g. rotations ($SO(n)$) preserve lengths, Möbius transformations map circles and lines in the complex plane into circles and lines], and the analyticity gives a “local” feel to it – if we know the symmetry locally we can extend it analytically (by the exponential map).
+Lie Groups are mathematically “very nice” structures – they are **analytic** manifolds (real or complex) with a group structure such that multiplication and inversion are continuous. They are deeply related to infinitesimal symmetries; a group acting on a space can generally be thought of as a group of symmetries (or automorphisms) of some structure [e.g. rotations ($$SO(n)$$) preserve lengths, Möbius transformations map circles and lines in the complex plane into circles and lines], and the analyticity gives a “local” feel to it – if we know the symmetry locally we can extend it analytically (by the exponential map).
 
 
 Hilbert’s Fifth Problem essentially asked how restrictive just looking at analytic actions is – what if we looked at continuous actions, how many more groups would we get?
 
 
-**Theorem [Gleason, Montgomery, Zippin]** For a locally compact group $G$ the following are equivalent:
+**Theorem [Gleason, Montgomery, Zippin]** For a locally compact group $$G$$ the following are equivalent:
 
-1.  $G$ is locally Euclidean.
-2.  $G$ has no small subgroups; i.e. there exists a neighbourhood of the identity that contains no non-trivial subgroups of $G$.
-3.  $G$ is a Lie Group.
+1.  $$G$$ is locally Euclidean.
+2.  $$G$$ has no small subgroups; i.e. there exists a neighbourhood of the identity that contains no non-trivial subgroups of $$G$$.
+3.  $$G$$ is a Lie Group.
 
 <!--more-->
 
@@ -22,10 +22,10 @@ Hilbert’s Fifth Problem essentially asked how restrictive just looking at anal
 This is very remarkable: Every topological group that is a manifold is a Lie group! That is if the group operation is continuous and forms a topological manifold then there is an analytic structure on the manifold such that the group operation is analytic.
 
 
-(Note that this is not true at all for non-group manifolds: In dimensions  $\geq4$  there exist topological manifolds that admit no smooth structure, let alone an analytic one. Evidently these can not be given a compatible group structure.)
+(Note that this is not true at all for non-group manifolds: In dimensions  $$\geq4$$  there exist topological manifolds that admit no smooth structure, let alone an analytic one. Evidently these can not be given a compatible group structure.)
 
 
-Now if we take a neighbourhood of the identity we can paste an $n$-dimensional Lie group onto an $n$-dimensional vector space via the manifold structure – which is extremely convenient for calculations: we have explicit coordinates and everything is analytic so we can extend it (unless we hit a pole). Consequently we get the notion of a Local Lie Group: the restriction of a Lie group to some submanifold.
+Now if we take a neighbourhood of the identity we can paste an $$n$$-dimensional Lie group onto an $$n$$-dimensional vector space via the manifold structure – which is extremely convenient for calculations: we have explicit coordinates and everything is analytic so we can extend it (unless we hit a pole). Consequently we get the notion of a Local Lie Group: the restriction of a Lie group to some submanifold.
 
 
 Essentially the definition of a local group is a Hausdorff topological space with a “locally defined” group: the product and inverse are only defined near the identity and the product is associative (where it’s defined). (For a proper definition see the references later in the post).
