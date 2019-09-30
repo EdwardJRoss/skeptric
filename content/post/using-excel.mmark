@@ -44,7 +44,7 @@ However executing custom code someone has sent you is a huge security risk, and 
 The primary benefit of using Excel is it's easy and convenient; if your clients need approval from the security team to access your spreadsheet it's probably better to use a different solution.
 They also raise the barrier to entry; unless your function is clearly named and documented it's not going to be clear to most Excel users what it's doing, and it's going to be hard for them to modify it.
 
-[Excel Ribbon showing Macros have been Disabled](/images/macros_disabled.png)
+![Excel Ribbon showing Macros have been Disabled](/images/macros_disabled.png)
 
 
 
