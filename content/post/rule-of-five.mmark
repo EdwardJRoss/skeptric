@@ -1,0 +1,77 @@
++++
+title =  "90% confidence with 5 measurements"
+date = 2019-09-30T21:06:27+10:00
+draft = true
+tags = []
+featured_image = ""
+description = ""
++++
+
+There are many things that are valuable for a business to know but are hard to measure at scale.
+Like the amount of time from customer awareness to purchase, the number of related products customers use or the or the actual value your products are delivering.
+However you can get a statistically significant measurement from just measuring on 5 random customers.
+
+For any of these measurements there's a 94% chance that the median value is between the biggest and smallest value of 5 random samples.
+The median value is a "typical" value; half of measurements will have a larger value and half will have a smaller value.
+In fact the chance of all 5 samples being larger or smaller than the median is exactly the same as the chance of flipping 5 heads in a row or 5 tails in a row.
+
+Particularly for important metrics that have never been measured it's often worth investing a little to measure it.
+This helps make decisions on how to better invest in the business, and provides a benchmark for any improvements.
+
+IF you take a
+
+For reference here's a table for estimating the median from small samples
+
+| Sample Size |
+
+
+  Sample Size (n)  Sample Value  Confidence
+  5  1st  93.75%
+  8  2nd  93.0%
+  11  3rd  93.5%
+  13  4th  90.8%
+  16  5th  92.3%
+  18  6th  90.4%
+  21  7th  92.2%
+  23  8th  90.7%
+  26  9th  92.4%
+  28  10th  91.3%
+  30  11th  90.1%
+
+
+From: How to Measure Anything by Douglas W. Hubbard
+
+```{R}
+
+# https://stackoverflow.com/questions/2453326/fastest-way-to-find-second-third-highest-lowest-value-in-vector-or-column
+maxN <- function(x, N=2){
+  len <- length(x)
+  if(N>len){
+    warning('N greater than length(x).  Setting N=length(x)')
+    N <- length(x)
+  }
+  sort(x,partial=len-N+1)[len-N+1]
+}
+
+minN <- function(x, N=2){- maxN(-x, N)}
+
+
+n <- 5
+N <- 100
+x <- rnorm(n * N)
+dim(x) <- c(n, N)
+
+
+rulen <- function(sample_size, nth, num_sample) {
+    x <- rnorm(sample_size * num_sample)
+    dim(x) <- c(sample_size, num_sample)
+
+    mean(apply(x, 2, function(x) minN(x, N=nth)) <= 0 &
+         apply(x, 2, function(x) maxN(x, N=nth)) >= 0)
+}
+
+rulen(5, 1, 1000)
+rulen(8, 2, 5000)
+rulen(11, 3, 5000)
+rulen(14, 4, 5000)
+```
