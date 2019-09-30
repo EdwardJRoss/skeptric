@@ -2,3 +2,19 @@ li {
     font-size: 1.8rem;
     line-height: 1.0rem;
 }
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+th {
+  background: #EEE;
+}
+
+/* Centre tables by default */
+table {
+    margin-left:auto;
+    margin-right:auto;
+}
