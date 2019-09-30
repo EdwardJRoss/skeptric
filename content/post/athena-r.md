@@ -1,6 +1,7 @@
 +++
 title =  "Connecting to Amazon Athena in R from Ubuntu with ODBC"
 date = 2019-08-02T10:39:06+10:00
+draft = true
 tags = []
 featured_image = ""
 description = ""
