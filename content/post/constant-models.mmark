@@ -1,6 +1,7 @@
 ---
 title: "Constant Models"
 date: 2019-09-29T15:49:53+10:00
+image: "/images/absolute_deviation_example.png"
 ---
 
 When predicting outcomes using machine learning it's always useful to have a baseline to compare results against.
