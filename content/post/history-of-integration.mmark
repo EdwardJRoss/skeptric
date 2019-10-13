@@ -49,7 +49,7 @@ Borel took a different approach, by defining the lengths of countable disjoint u
 However the cardinality of the Borel measurable sets is  $$\mathfrak{c}$$  (the cardinality of the reals) since every Borel measurable set can be constructed from the intervals (which have cardinality  $$\mathfrak{c}$$ ) by complementation and countable unions. To contrast the Cantor set has outer content zero, so every subset will have outer content zero, and hence be Jordan measurable. Since the Cantor set is uncountable this implies the cardinality of the Jordan measurable sets is at least  $$2^\mathfrak{c}$$ .
 
 
-Lebesgue’s criterion for a subset of [a,b] to be measurable is a subtle play on Borel’s and Peano-Jordan’s. The *outer measure* of a set S,  $$m^*(S)$$ , is the sum of the infimum of the sum of **countably** many intervals which have a union containing the set. The *inner content *of a set is the length of [a,b] minus the outer measure of the sets complement in [a,b], that is  $$b-a-m^*([a,b]\setminus S)$$ . A subset of [a,b] is *Lebesgue measurable *if its inner measure and outer measure are equal. A subset of the real line is Lebesgue measurable if its intersection with [-n,n] is for every positive integer n. Carathéodory came up with the equivalent criterion: a set E is Lebesgue measurable if  $$m^*(A) = m^*(A \cap E) + m^*(A\setminus E)$$  for all sets A.
+Lebesgue’s criterion for a subset of [a,b] to be measurable is a subtle play on Borel’s and Peano-Jordan’s. The *outer measure* of a set S,  $$m^\star(S)$$ , is the sum of the infimum of the sum of **countably** many intervals which have a union containing the set. The *inner content* of a set is the length of [a,b] minus the outer measure of the sets complement in [a,b], that is  $$b-a-m^*([a,b]\setminus S)$$ . A subset of [a,b] is *Lebesgue measurable* if its inner measure and outer measure are equal. A subset of the real line is Lebesgue measurable if its intersection with [-n,n] is for every positive integer n. Carathéodory came up with the equivalent criterion: a set E is Lebesgue measurable if  $$m^*(A) = m^*(A \cap E) + m^*(A\setminus E)$$  for all sets A.
 
 
 This final result is normally what is presented early in a course on Lebesgue integration, but I hope it seems a little less mysterious now. The countable unions and insisting  $$m^*(A \setminus E) = m^*(A) - m^*(E)$$  if A contains E is essential to measure sets such as the Smith-Volterra-Cantor set. Using the outer measure ensures we automatically get the non-Borel sets of measure zero (and in fact a subset of the real line is Lebesgue measurable if and only if it is the disjoint union of a Borel measurable set and a set of measure zero).
@@ -71,8 +71,3 @@ Of course there’s more: Cesaro-Denjoy integrals, approximate Perron integrals 
 
 
 I’d like to conclude by reflecting how solving problems in physics by questionably performing operations on infinite trigonometric series was a major source of inspiration for mathematics, and I wonder how much impact resolving the questionable path-integrals in Quantum Field Theory will have (and has already had) on mathematics.
-
-
-
-
- 
