@@ -281,3 +281,66 @@ self.opt.zero_grad()
 ```
 
 This is still a work in progress, and I'll need to experiment with it to see whether it's any better in production.
+
+
+
+
+
+Full source:
+
+```
+from collections import defaultdict, OrderedDict
+
+def apply_before(function, before_functions, extra_args=[]):
+    def out_function(*args, **kwargs):
+        for f in before_functions: f(*extra_args, *args, **kwargs)
+        return function(*args, **kwargs)
+    out_function.__name__ = function.__name__
+    return out_function
+
+class Advisable(object):
+    def __init__(self): self.advice_before = defaultdict(OrderedDict)
+
+    def advise_before(self, name, advice):
+        if callable(name): name = name.__name__
+        if not callable(object.__getattribute__(self, name)):
+            raise ValueError('{} not a callable method'.format(name))
+
+        advice_name = advice.__name__
+        if advice_name is None: raise ValueError('The advice must have a name')
+
+        self.advice_before[name][advice_name] = advice
+
+    def remove_advice(self, name, advice):
+        if callable(name): name = name.__name__
+        if callable(advice): advice = advice.__name__
+        del self.advice_before[name][advice]
+
+    def __getattribute__(self, name):
+        value = object.__getattribute__(self, name)
+        if callable(value) and name not in ('__init__', 'advise_before'):
+            value = apply_before(value,
+                                 self.advice_before[name].values(),
+                                 [self])
+        return value
+
+class Foo(Advisable):
+    name = 'Baz'
+    def bar(self, x): return x
+
+foo = Foo()
+def print_name(self, x): print(f'{self.name}: {x}')
+
+print(foo.bar(2))
+# 2
+
+foo.advise_before(foo.bar, print_name)
+print(foo.bar(2))
+# 4
+# 2
+
+foo.remove_advice(foo.bar, print_square)
+
+print(b.f(2))
+# 2
+```
