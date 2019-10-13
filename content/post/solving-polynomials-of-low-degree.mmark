@@ -1,6 +1,7 @@
 ---
 title: Solving polynomials of degree 2,3 and 4
 date: 2011-01-03T02:45:58+00:00
+image: "images/cubic_eqn.jpg"
 ---
 
 $$\newcommand\nth{n^{\mathrm{th}}}$$
@@ -79,7 +80,7 @@ Solving quartics is not much more tricky than solving cubics (though in fact a n
 So we can solve quadratics, cubics and quartics by taking square and cube roots. How useful is this? Is it faster and more accurate than general techniques for finding the roots of polynomials?
 
 
-What is the underlying pattern in these solutions? What polynomials of higher degree can be solved by radicals? What *ultraradicals *(solutions of equations such as  $$x^5 + x - a = 0$$ ) are needed to solve higher order polynomials? [I believe the answers to this question lie in Galois theory].
+What is the underlying pattern in these solutions? What polynomials of higher degree can be solved by radicals? What *ultraradicals* (solutions of equations such as  $$x^5 + x - a = 0$$ ) are needed to solve higher order polynomials? [I believe the answers to this question lie in Galois theory].
 
 
 Would it be more efficient to compute the roots of a quintic by hyperradicals or by a more general procedure?

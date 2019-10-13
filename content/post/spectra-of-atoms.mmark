@@ -1,6 +1,7 @@
 ---
 title: Spectra of atoms
 date: 2013-10-27T12:02:36+00:00
+image: "images/spectrum_iron.svg"
 ---
 
 
@@ -47,8 +48,3 @@ The inner radial part of the integral can be calculated by expanding the Legendr
 
 
 Thus once we have evaluated these combinatorial quantities, and combined them all to get an expression for the matrix elements of the total Hamiltonian H we can truncate it to a finite basis, and then diagonalise it computationally. It is a very interesting question as to how the truncation affects the eigenvalues.
-
-
-
-
- 

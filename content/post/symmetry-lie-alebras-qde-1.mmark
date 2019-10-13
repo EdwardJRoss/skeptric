@@ -1,6 +1,7 @@
 ---
 title: Symmetry, Lie Algebras and Differential Equations Part 1
 date: 2011-05-21T11:06:48+00:00
+image: "images/harmonic_oscillator.png"
 ---
 
 
@@ -22,7 +23,7 @@ Introducing the Hamiltonian operator  $$H=\frac{1}{2}\left(p^2+x^2\right)$$  the
  $$\begin{bmatrix} x' \\ p' \end{bmatrix} = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix} \begin{bmatrix} x \\ p \end{bmatrix}$$ .
 
 
-Following the ideas of Sophus Lie we look at the infinitesimal transformations generating this, by taking the derivative at the identity  $$\theta=0$$  this gives  $$x \to -p$$ ,  $$p \to x$$ ; in x-p space it is given by the matrix  $$\begin{bmatrix} 0 & -1 \\ 1 & 0\end{bmatrix}$$ 
+Following the ideas of Sophus Lie we look at the infinitesimal transformations generating this, by taking the derivative at the identity  $$\theta=0$$  this gives  $$x \to -p$$ ,  $$p \to x$$ ; in x-p space it is given by the matrix  $$\begin{bmatrix} 0 & -1 \\ 1 & 0\end{bmatrix}$$
 
 
 This transformation is precisely the Fourier transform:  $$f(x) \to \widehat{f}(k)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x) e^{-i k x}$$ . In particular integration by parts and differentiating under the integral respectively it follows  $$\widehat{xf(x)}=i\widehat{f}'(k)$$  and  $$\widehat{-if'(x)} = k \widehat{f}(k)$$ , so as an operator on functions  $$x \to -p$$  and  $$p \to x$$ .
@@ -65,8 +66,3 @@ The nicest choice of basis is the one in which H is the (countably infinite dime
 
 
 It is worth noting that in this derivation it wasn’t enough to have a Lie algebra, that is a Lie bracket, we also needed a multiplication over which the Lie bracket is the commutator – that is a representation.
-
-
-
-
- 

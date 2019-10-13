@@ -1,6 +1,7 @@
 ---
 title: Symmetry, Lie Algebras and Quantum Differential Equations Part 2
 date: 2011-05-21T16:00:25+00:00
+image: "images/spin_half_angular_momentum.svg"
 ---
 
 
@@ -42,8 +43,3 @@ Similar to the simply harmonic oscillator by solving a first order differential 
 
 
 Just as for the Simple Harmonic Oscillator the algebra of the angular momentum operators allowed us to find all the eigenvalues of a quadratic operator, and determine all its eigenfunctions in a particular basis. Incidentally the half-integer solutions can be realised, but not as rotations in 3 dimensions, they correspond to rotaions in spinor space – a rotation through 360 degrees in spinor space is only a rotation of 180 degrees in three dimensional space.
-
-
-
-
- 

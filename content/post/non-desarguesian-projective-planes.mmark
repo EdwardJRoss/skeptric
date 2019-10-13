@@ -1,6 +1,7 @@
 ---
 title: Non-desarguesian projective planes
 date: 2012-09-22T11:43:02+00:00
+image: "images/desargues_theorem.svg"
 ---
 
 
@@ -27,7 +28,7 @@ This second construction can in fact be extended to all projective planes. Given
 
 
 
-Then the following construction, roughly following [Wiebel ](http://www.ams.org/notices/200710/tx071001294p.pdf)(who’s following [Hall](http://www.ams.org/journals/tran/1943-054-02/S0002-9947-1943-0008892-4/S0002-9947-1943-0008892-4.pdf)), yields a projective plane by approximately the reverse of the construction above. The points are  $$R \times R$$  (the ordinary points), R and  $$\infty$$  (the projective line at infinity). The lines are  $$\{(x,y) \in R \times R | y = T(x, a, b)\} \cup \{a\}$$  for each a in R and b in R,  $$\{(c,y) | y \in R\} \cup \{\infty\}$$  for each c in R (these are the ordinary lines) and  $$R \cup \{\infty\}$$  (the line at infinity). One can check that this does in fact define a projective plane.
+Then the following construction, roughly following [Weibel](http://www.ams.org/notices/200710/tx071001294p.pdf)(who’s following [Hall](http://www.ams.org/journals/tran/1943-054-02/S0002-9947-1943-0008892-4/S0002-9947-1943-0008892-4.pdf)), yields a projective plane by approximately the reverse of the construction above. The points are  $$R \times R$$  (the ordinary points), R and  $$\infty$$  (the projective line at infinity). The lines are  $$\{(x,y) \in R \times R | y = T(x, a, b)\} \cup \{a\}$$  for each a in R and b in R,  $$\{(c,y) | y \in R\} \cup \{\infty\}$$  for each c in R (these are the ordinary lines) and  $$R \cup \{\infty\}$$  (the line at infinity). One can check that this does in fact define a projective plane.
 
 
 Two ternary rings (R, T) and (R, T’) are *comparative *if there exist permutations on R  $$\alpha, \beta, \{\phi_x\}_{x \in R}, \{\psi_x\}_{x \in R}$$  such that  $$\phi_x \circ T(x, a, b) = T'( \alpha \circ x, \beta \circ a, \psi_a \circ b)$$  for all a,b, x in R. It is easy to show comparative rings yield isomorphic projective planes.
@@ -40,8 +41,3 @@ If we add additional structure this is sometimes unique; for instance given a pr
 
 
 It’s interesting to note a generalised construction of projective planes of the first type for every division algebra over the real numbers (including the octonions). The points and lines of the space are each the 3-dimensional Hermitian idempotents of unit trace (that is 3×3 matrices P satisfying  $$P = P^\dagger$$ ,  $$P^2=P$$  so P is a projection, and trace(P)=1). A point P lies on a line Q when PQ+QP=0. It can be shown this is a projective plane (see Conway and Smith, On Quaternions and Octionions, for the details).
-
-
-
-
- 

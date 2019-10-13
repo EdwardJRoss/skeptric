@@ -1,6 +1,7 @@
 ---
 title: LaTeXing Multiple Equations
 date: 2011-03-30T03:06:03+00:00
+image: "images/latex.png"
 ---
 
 
@@ -26,8 +27,3 @@ There are many Integrated Development Environments for  $$\TeX$$  programs (like
 
 
 Incidentally there are other addons to  $$\TeX$$  around – e.g. [ConTeXt ](http://wiki.contextgarden.net/Main_Page)which appears to allow you to customise the layout of your document more easily than  $$\LaTeX$$  (which could be very useful in some situations; for instance if you want to wrap text around a figure), but at the cost of the author having to put more effort in laying out the document. As it happens, the standard way of producing multiple equations in ConTeXt seems to be as good as IEEEeqnalign. But while most scientific journals are still using  $$\LaTeX$$  so will most scientific authors.
-
-
-
-
- 

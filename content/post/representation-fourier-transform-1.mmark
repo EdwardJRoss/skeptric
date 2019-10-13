@@ -1,6 +1,7 @@
 ---
 title: "Linear representation of additive groups and the Fourier Transform: Part 1"
 date: 2011-06-29T06:36:29+00:00
+image: "images/dft.jpg"
 ---
 
 
@@ -34,7 +35,7 @@ Now since S is unitary it is normal and hence by the spectral theorem unitarily 
 The diagonalising matrix is then  $$F= \frac{1}{\sqrt{n}}\begin{bmatrix}    1 & 1 & 1 & \ldots & 1 \\    1 & \omega & \omega^2 & \ldots & \omega^{n-1} \\    1 & \omega^2 & \omega^4 & \ldots & \omega^{2(n-1)}\\    \vdots &\vdots &\vdots & \ddots &\vdots\\    1 & \omega^{n-1} & \omega^{2(n-1)} & \ldots & \omega^{(n-1)(n-1)}\end{bmatrix}$$ .
 
 
-So  $$F^\dagger S F = \mathrm{diag} (1,\omega,\omega^2,\ldots,\omega^{n-1})$$ . In fact F diagonalises every group element by multiplication:  $$F^{\dagger} S^k F = (F^{\dagger} S F)^k = \mathrm{diag}(1,\omega^k,\omega^{2k},\ldots,\omega^{(n-1)k})$$ 
+So  $$F^\dagger S F = \mathrm{diag} (1,\omega,\omega^2,\ldots,\omega^{n-1})$$ . In fact F diagonalises every group element by multiplication:  $$F^{\dagger} S^k F = (F^{\dagger} S F)^k = \mathrm{diag}(1,\omega^k,\omega^{2k},\ldots,\omega^{(n-1)k})$$
 
 
 F is precisely the [discrete Fourier transform](http://en.wikipedia.org/wiki/Discrete_Fourier_transform#Definition) (up to a choice of normalisation): if  $$v=\sum_{j=0}^{n-1} v^n e_n$$ , then  $$F(v) = \frac{1}{\sqrt{n}}\sum_{j,k=0}^{n-1} e^{(-2\pi i/n) j k} v^j e_{k}$$ .
@@ -62,8 +63,3 @@ So what have we got? We started looking at regular linear representations of the
 
 
 The power in this idea is there are many generalisations. We could have a look at more complicated groups or even more general algebraic structures. The representation theory of cyclic groups is very simple since they are abelian, there’s a lot more involved in trying to diagonalize the representations of non-abelian groups. We could then have other notions of convolutions and Fourier-type transforms. We could also look at mapping to other vector spaces or even to different geometric structures. If instead of constructing vector spaces over the complex numbers we constructed it over finite fields we would get (for the right combination of dimension of the vector space and characteristic of the field) the finite Fourier transform which is important in coding theory. One could also look at what happens to direct sums, tensor products and the like of the regular representations.
-
-
-
-
- 

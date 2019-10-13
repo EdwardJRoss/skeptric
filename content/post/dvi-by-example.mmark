@@ -1,13 +1,14 @@
 ---
 title: DVI by example
 date: 2013-08-14T04:45:28+00:00
+image: "images/dvi_xxd.png"
 ---
 
 
 The Device Independent File Format (DVI) is the output format of Knuth’s TeX82; modern TeX engines (pdfTeX, luaTeX) output straight to Adobe’s Portable document format (PDF). However TeX82 and DVI still work as well today as they did when they were written; DVI files are easily cast to postscript or PDF.
 
 
-The defining reference for DVI files is David R Fuch’s [article](http://www.tug.org/TUGboat/Articles/tb03-2/tb06software.pdf) in TUGboat Vol 3 No 2. 
+The defining reference for DVI files is David R Fuch’s [article](http://www.tug.org/TUGboat/Articles/tb03-2/tb06software.pdf) in TUGboat Vol 3 No 2.
 
 
 To find out what information is contained in a particular DVI file use Knuth’s [dvitype](http://www.ctan.org/pkg/dvitype), which outputs the operations contained in the bytecode in human readable format.
@@ -250,26 +251,26 @@ Simple example
 I typeset the following file Hello.tex
 
 
-    
+
     Hello World!
     \bye
-    
+
 
 
 and then ran commands
 
 
-    
+
     tex Hello.tex
     xxd Hello.dvi
-    
+
 
 
 which yielded
 
 
-    
-    0000000: f702 0183 92c0 1c3b 0000 0000 03e8 1b20  .......;....... 
+
+    0000000: f702 0183 92c0 1c3b 0000 0000 03e8 1b20  .......;.......
     0000010: 5465 5820 6f75 7470 7574 2032 3031 332e  TeX output 2013.
     0000020: 3038 2e31 323a 3138 3034 8b00 0000 0100  08.12:1804......
     0000030: 0000 0000 0000 0000 0000 0000 0000 0000  ................
@@ -284,15 +285,15 @@ which yielded
     00000c0: 0001 f300 4bf1 6079 000a 0000 000a 0000  ....K.`y........
     00000d0: 0005 636d 7231 30f9 0000 00a5 02df dfdf  ..cmr10.........
     00000e0: dfdf dfdf                                ....
-    
+
 Let’s walk through this byte by byte.
 
 
 ### Preamble
-    
-    f7 02 018392 c01c3b0000 000003e8 
+
+    f7 02 018392 c01c3b0000 000003e8
        1b 20 54 65 58 20 6f 75 74 70 75 74 20 32 30 31 33 2e 30 38 2e 31 32 3a 31 38 30 34
-    
+
 The first line starts with the pre opcode, followed by the version 02, numerator = 25400000, denominator = 473628672 and magnitude = 1000. This means 1 unit is  $${25400000 \over 473628672} 10^{-7}\mbox{m} = {0.0254 \over 72.27 * 2^{16}} \mbox{m}$$ . There are 72.27 [standard points](http://en.wikipedia.org/wiki/Point_%28typography%29#Traditional_American_point_system) in an inch and 2.54 cm in an inch, so a standard point is  $${72.27 \over 0.0254} \mbox{m} = 2^{16} \mbox{unit}$$ . Thus a unit is  $$2^{-16}$$  standard points; what TeX calls a scaled point (sp). The document is then scaled by 1000/1000=1.
 
 
@@ -304,99 +305,99 @@ Evidently I ran TeX at 18:04 pm on the 12th of August 2013 A.D.
 
 
 ### Beginning of page
-    
+
     8b 00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 ffffff
-    
+
 The preoperation is followed by the values in the registers count 0 through 9. By default TeX uses \count0 for the page number and doesn’t affect the other counts, so we get \count0 = 1 (first page), \count{1-9}=0. Finally since this is the first page the pointer to the previous page is -1 (ffffff).
 
 
 ### Setup
-    
+
     8d
-    9f f20000 
+    9f f20000
     8e
-    
+
 Pushes the current (h, v, w, x, y, z) onto the stack; (0, 0, 0, 0, 0), then moves v down by -917504 sp, then pops the stack resetting v; overall achieving nothing. I presume this would probably put a header in a more complex document.
 
 
-    
-    a0 028333da 
+
+    a0 028333da
     8d
-    a0 fd86cc26 
+    a0 fd86cc26
     8d
-    
+
 Move v down by 42152922 sp = 8.84 inches, pushes onto the stack (0, 42152922, 0, 0, 0, 0), then drops v down -41497562 sp, then pushes onto the stack and pushes onto the stack (0, 655360, 0, 0, 0, 0) (this is 10 standard points down from the top of the page).
 
 
-    
+
     91 140000
-    
+
 Moves h right by 1310720 sp = 20 standard points.
 
 
 ### Define font
-    
+
     f3 00 4bf16079 000a0000 000a0000
        00 05 63 6d 72 31 30
-    
+
 f3 is fnt_def1, and we set font number 0, the checksum is 4bf16079 and we the “scale size” and “design size” are both 655360 sp = 10 standard points, so it comes out at its default size of 10 points.
 The next line is the path reference: the length of the directory name is 0, the length of the file name is 5, and the file name is     cmr10.
 
 
 ### Hello world!
-    
+
     ab
-    
+
 Set the font to font 0 (cmr10)
 
 
-    
+
     48 65 6c 6c 6f
-    
+
 Typeset     Hello, advancing at each character.
 
 
-    
-    91 035555 
+
+    91 035555
     57
-    
+
 Move right 3 1/3 standard points and typeset     w, advancing.
 
 
-    
+
     91 ff2aaa
     6f 72 6c 64 21
-    
+
 We now move left by 5/6ths of a standard point (this is TeX performing kerning) and then typeset     orld!
 
 
 ### Page number
-    
+
     8e
     8e
-    9f 180000 
+    9f 180000
     8d
-    
+
 Pop twice, giving the current state (0, 42152922, 0, 0, 0, 0), so we are down about 8.84 inches; then move down another 1572864 sp = 24 standard points and push this position onto the stack.
 
 
-    
-    92 00e860a3 
+
+    92 00e860a3
     31
-    8e 
+    8e
     8c
-    
+
 Move right 15229091 sp ~= 3.2 inches which is almost half way accross the 6.5 inch width (at the end), typeset     1 then pop the stack and end the page.
 
 
 ### Postamble
-    
-    f8 0000002a 
-       018392c0 1c3b0000 000003e8 
-       029b33da 01d5c147 
-       0002 
-       0001 
-    
+
+    f8 0000002a
+       018392c0 1c3b0000 000003e8
+       029b33da 01d5c147
+       0002
+       0001
+
 Begin the postamble; the last page begins at the 42nd byte (2a).
 Restate the numerator, denominator and magnification.
 The maximum page height+depth is 43725788 sp ~= 9.23 inches, and the maximum page width is 30785863 sp ~= 6.5 inches.
@@ -404,23 +405,23 @@ The maximum stack depth is 2.
 There is 1 page.
 
 
-    
-    f3 00 4bf16079 000a0000 000a0000 
-       00 05 63 6d 72 31 30 
-    
+
+    f3 00 4bf16079 000a0000 000a0000
+       00 05 63 6d 72 31 30
+
 Repeat the font definition.
 
 
 ### Post-post amble
-    
+
     f9 000000a5 02
-    
+
 The post-postamble declares the post-amble starts at byte 165, and reiterates this is version 02 of DVI.
 
 
-    
+
     df df df df df df df
-    
+
 Finally pad with df’s; the file should be a multiple of 4 bytes.
 
 
@@ -447,8 +448,3 @@ It’s odd there are two widths w, x and two heights y and z; in fact zero would
 
 
 There’s no way to insert images, change the colour of text, and for computer viewers no way to insert hyperlinks, videos and sounds or take user input. There’s also no way to draw complex objects without either rendering them specially as fonts, or explicitly constructing them using rectangular boxes as pixels. However the instruction xxx (from TeX’s \special{}) allows us to implement these things on an ad hoc basis. So it is extremely extensible; but we have to work to make those extensions portable.
-
-
-
-
- 
