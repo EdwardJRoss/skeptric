@@ -9,6 +9,9 @@ Scraping is the art of extracting that data in a useful form.
 
 # 0. Scope out project
 
+What data do you need?
+How much?
+
 # 1. Look for resources
 
 ## Dumps
@@ -51,17 +54,21 @@ https://benbernardblog.com/web-scraping-and-crawling-are-perfectly-legal-right/
 
 * sitemap.xml
 
-* Walking tree structures
+* Walking tree structures (crawling)
 
 * Walking Search Listings
 
-* Infinite search and XHR Requests
+* Infinite search, JS and XHR Requests
 
 
 
 # 3. Learn how to get the data
 
+
 View source and XHR
+
+* Javascript in the browser
+e.g. google image search fastai
 
 * API endpoints
 
@@ -69,10 +76,20 @@ View source and XHR
 
 * BeautifulSoup/XPath
 
+
+# 4. Troubleshooting
+
+* On logins
+
+* On javascript
+
+* On useragents and proxies
+
+
 # 4. Schedule it
 
 * Rate limiting
 
-* On useragents and proxies
-
 * State, etc.
+
+* Monitoring
