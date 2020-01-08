@@ -1,0 +1,43 @@
+---
+title: "Extracting Skills from Job Ads: Part 2 - Adpositions"
+date: 2020-01-07T14:40:20+11:00
+image: "/images/job_experience_adposition.svg"
+draft: true
+---
+
+# Extracting Experience in a Field
+
+I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
+
+In the [previous post](/post/extract-skills-1-noun-phrase/) I extracted skills written in phrases like "subsea cable engineering experince".
+This worked well, but extracted a lot of qualifiers that aren't skills (like "previous experience in", or "any experience in").
+Here we will write rules to extract experience from phrases like "experience in subsea cable engineering", with much better results.
+
+![Dependency Parse](/images/job_experience_adposition.svg)
+
+
+# Extracting experience in something
+
+    def extract_adp_experience(doc, label='EXPERIENCE'):
+        for tok in doc:
+            if tok.lower_ == 'experience':
+                for child in tok.rights:
+                    if child.dep_ == 'prep':
+                        for obj in child.children:
+                            if obj.dep_ == 'pobj':
+                                yield label, obj.left_edge.i, obj.i+1
+
+
+# Types of experience
+
+    Experience in Modelling and Simulation Techniques
+    Any experience of Pioneer or Miser software would be an advantage.
+    For this role, you must have a minimum of 10 years experience in subsea engineering, pipelines design or construction.
+    Has experience within the quality department of a related company in a similar role Ideally from a mechanical or manufacturing engineering background.
+    and have experience of the technical leadership of projects to time, quality and cost objectives.
+    Experience of protection and control design at Transmission and Distribution voltages.
+    Candidates with experience in telesales, callcentre, customer service, receptionist or travel are ideal for this role
+    Experience dealing with business clients (B2B) would be preferable.
+    Previous experience working as a Chef de Partie in a one AA Rosette hotel is needed for the position.
+    The post holder must hold as a minimum Level 1 in Trampolining (British Gymnastics) and have experience in working with children, be fun, outgoing and have excellent customer service skills and be able to instruct in line with the British Gymnastics syllabus.
+    Experience of techniques such as Discrete Event Simulation and/or SD modelling Mathematical/scientific background

@@ -1,0 +1,43 @@
+---
+title: "Extract Skills 3 Conjugations"
+date: 2020-01-07T14:43:11+11:00
+draft: true
+---
+
+# Expanding Conjugations
+
+    def get_left_span(tok, label='', include=True):
+        offset = 1 if include else 0
+        idx = tok.i
+        while idx > tok.left_edge.i:
+            if tok.doc[idx - 1].pos_ in ('NOUN', 'PROPN', 'ADJ', 'X'):
+                idx -= 1
+            else:
+                break
+        return label, idx, tok.i+offset
+
+    def get_conjugations(tok):
+        new = [tok]
+        while new:
+            tok = new.pop()
+            yield tok
+            for child in tok.children:
+                if child.dep_ == 'conj':
+                    new.append(child)
+
+
+    EXP_TERMS = ['experience']
+    def extract_adp_conj_experience(doc, label='EXPERIENCE'):
+        for tok in doc:
+            if tok.lower_ in EXP_TERMS:
+                for child in tok.rights:
+                    if child.dep_ == 'prep':
+                        for obj in child.children:
+                            if obj.dep_ == 'pobj':
+                                for conj in get_conjugations(obj):
+                                    yield get_left_span(conj, label)
+
+
+## What's missing
+
+    Any experience of Pioneer or Miser software would be an advantage.
