@@ -112,6 +112,7 @@ By filtering with a blacklist of the most common qualifying words, and stop word
 * SAP
 * engineering
 
-While this is a good start, building a longer list requires. building a much longer blacklist of qualifier terms (proven, demonstrable, demonstrated, relevant, significant, practical, essential, desirable, ...)
+While this is a good start, building a longer list requires. building a much longer blacklist of qualifier terms (e.g. proven, demonstrable, demonstrated, relevant, significant, practical, essential, desirable, ...).
 The fact that these qualifier terms are so common is because job ads commonly contain phrases like "previous experience in ..." or "some experience as ...".
+
 In the [next post in the series](/post/extract-skills-2-adpositions/) we look at extracting from these types of phrases, and get much better results.
