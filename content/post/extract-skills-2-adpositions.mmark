@@ -49,9 +49,7 @@ Using spaCy's noun chunks we have to implement this backwards:
             if start_tok >= 2 and doc[start_tok - 2].lower_ == 'experience' and doc[start_tok - 1].pos_ == 'ADP':
                 yield 'EXPERIENCE', start_tok, start_tok + len(np)
 
-Both algorithms give similar results, but the second is much slower (because we're iterating over more noun chunks).
-With some care a good [spaCy matcher](https://spacy.io/usage/rule-based-matching#matcher) could be used which would be much faster.
-The lesson here is the first extraction rule you think of might not be the best one.
+Both algorithms give similar results, so there's some flexibility in how you write the extraction rules.
 
 We could try to futher extend the rules with examples where there's an extra level of indirection, such as:
 
