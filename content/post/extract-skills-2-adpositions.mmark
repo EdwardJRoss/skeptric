@@ -12,7 +12,7 @@ In the [previous post](/post/extract-skills-1-noun-phrase/) I extracted skills w
 This worked well, but extracted a lot of qualifiers that aren't skills (like "previous experience in", or "any experience in").
 Here we will write rules to extract experience from phrases like "experience in subsea cable engineering", with much better results.
 
-
+You can see the [Jupyter notebook](/notebooks/Parsing Experience from Adzuna Job Ads.html) for the full analysis.
 
 # Extracting experience in something
 

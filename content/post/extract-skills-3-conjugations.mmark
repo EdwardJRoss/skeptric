@@ -1,6 +1,6 @@
 ---
-title: "Extract Skills 3 Conjugations"
-date: 2020-01-19T09:00:00+11:00
+title: "Extracting Skills from Job Ads: Part 3 Conjugations"
+date: 2020-01-15T08:00:00+11:00
 image: "/images/job_experience_conjugation.svg"
 ---
 
@@ -10,6 +10,8 @@ I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Sala
 
 In the [previous post](/post/extract-skills-2-adpositions/) I extracted skills written in phrases like "experience in telesales" using spaCy's dependency parse, but it wouldn't extract many types of experience from a job ad.
 Here we will extend these rules to extract lists of skills (for example extracting "telesales" and "callcentre" from "experience in telesales or receptionist", which will let us analyse which experiences are related.
+
+You can see the [Jupyter notebook](/notebooks/Parsing Experience from Adzuna Job Ads.html) for the full analysis.
 
 # Expanding Conjugations
 
