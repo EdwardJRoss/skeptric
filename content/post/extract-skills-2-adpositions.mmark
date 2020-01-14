@@ -8,7 +8,7 @@ image: "/images/job_experience_adposition.svg"
 
 I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
 
-In the [previous post](/post/extract-skills-1-noun-phrase/) I extracted skills written in phrases like "subsea cable engineering experince".
+In the [previous post](/post/extract-skills-1-noun-phrase/) I extracted skills written in phrases like "subsea cable engineering experience".
 This worked well, but extracted a lot of qualifiers that aren't skills (like "previous experience in", or "any experience in").
 Here we will write rules to extract experience from phrases like "experience in subsea cable engineering", with much better results.
 
@@ -21,7 +21,7 @@ By looking at the parse trees of candidate phrases using [displaCy](https://expl
 ![Example Dependency Parse](/images/job_experience_adposition.svg)
 
 * Start at the word experience, and look for a preposition (such as in or of) dependent on it (red in the above diagram)
-* Look for the object of the preposition (blue)
+* Look for the object of the preposition (orange)
 * Return the phrase ending at that object (green)
 
 or in code:

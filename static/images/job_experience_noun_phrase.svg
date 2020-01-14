@@ -15,7 +15,7 @@
 </text>
 
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
-    <tspan class="displacy-word" fill="currentColor" x="575">experience</tspan>
+    <tspan class="displacy-word" fill="crimson" x="575">experience</tspan>
     <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NOUN</tspan>
 </text>
 

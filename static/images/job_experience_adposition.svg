@@ -62,10 +62,10 @@
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-9143380e3d6c43d59156f21557f8b7a0-0-4" stroke-width="2px" d="M245,352.0 C245,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="blue"></path>
+    <path class="displacy-arc" id="arrow-9143380e3d6c43d59156f21557f8b7a0-0-4" stroke-width="2px" d="M245,352.0 C245,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="darkorange"></path>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-9143380e3d6c43d59156f21557f8b7a0-0-4" class="displacy-label" startOffset="50%" side="left" fill="blue" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-9143380e3d6c43d59156f21557f8b7a0-0-4" class="displacy-label" startOffset="50%" side="left" fill="darkorange" text-anchor="middle">pobj</textPath>
     </text>
-    <path class="displacy-arrowhead" d="M925.0,354.0 L933.0,342.0 917.0,342.0" fill="blue"></path>
+    <path class="displacy-arrowhead" d="M925.0,354.0 L933.0,342.0 917.0,342.0" fill="darkorange"></path>
 </g>
 </svg>
