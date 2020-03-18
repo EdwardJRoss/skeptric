@@ -14,15 +14,17 @@ After considering the alternatives I ended up using [Mastering Emacs guide](http
 These use the [Presto CLI](https://prestodb.io/docs/current/installation/cli.html) and [Athena CLI](https://github.com/guardian/athena-cli) to interact with the databases; you will need to have them set up.
 To connect with emacs you need to add the files to your `load-path`, and `require` the package (`presto` or `athena`), and configure the path to the binary and the arguments.
 
-    (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-    (require 'presto)
-    ;; Configure path and arguments
-    (setq presto-cli-file-path "~/bin/presto")
-    ;; Here put whatever arguments you would use to connect through the CLI
-    (setq presto-cli-arguments '("--server"
-                                   "localhost:8889"
-                                   "--catalog"
-                                   "hive")
+```elisp
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(require 'presto)
+;; Configure path and arguments
+(setq presto-cli-file-path "~/bin/presto")
+;; Here put whatever arguments you would use to connect through the CLI
+(setq presto-cli-arguments '("--server"
+                                "localhost:8889"
+                                "--catalog"
+                                "hive")
+```
 
 Then to use it in Emacs you just invoke `M-x run-presto` to start a presto session in a buffer called `*Presto*`.
 If you're in a buffer with cursor over some SQL you can send it to be evaluated using `M-x presto-send`.
@@ -63,7 +65,7 @@ Make sure you can run your CLI from the terminal before you try to integrate wit
 Once you can connect and execute queries from the command line you want to encode that into Emacs by defining the path to the program and the arguments.
 Here's an example for Presto:
 
-```
+```elisp
 (defvar presto-cli-file-path "~/bin/presto"
   "Path to the program used by `run-presto'.")
 
@@ -76,7 +78,7 @@ Here's an example for Presto:
 
 Then we create a `run-presto` function to start the process:
 
-```
+```elisp
 (defun run-presto ()
   "Run an inferior instance of `presto-cli' inside Emacs."
   (interactive)
@@ -105,7 +107,7 @@ By default `less` is used as the pager which doesn't work well in Emacs (you'll 
 
 One solution is to turn off the pager and let Emacs terminal handle all the buffering, using the special environment variables for Presto and Athena CLIs.
 
-```
+```elisp
 (setenv "PRESTO_PAGER" "")
 (setenv "ATHENA_PAGER" "")
 ```
@@ -113,7 +115,7 @@ One solution is to turn off the pager and let Emacs terminal handle all the buff
 Unfortunately I found Emacs comint gets really slow for large results (which terminals handle well), and so if I forgot a limit on a query I could lock up Emacs fetching results.
 So I used head to only get the top 1000 results; unfortunately there's no clear sign if the results have been truncated, but for me the tradeoff was worth it.
 
-```
+```elisp
 (setenv "PRESTO_PAGER" "head -n 1000")
 (setenv "ATHENA_PAGER" "head -n 1000")
 ```
@@ -127,7 +129,7 @@ While I can copy and paste the query into the `*Presto*` or `*Athena*` buffer, i
 
 It's straightforward to send it using `comint-send-region` (which handles some magic in how newlines are sent to the comint process).
 
-```
+```elisp
 (defun presto-send ()
   "Send the current region or paragraph to Presto process."
   (interactive)
@@ -139,7 +141,7 @@ It's straightforward to send it using `comint-send-region` (which handles some m
 
 The `er/paragraph-extents` function will grab the paragraph under the cursor to send, so if your query is separated by newlines and your cursor is anywhere in it this will do the right thing.
 
-```
+```elisp
 (defun er/paragraph-extents ()
   "Return a cons cell with beginning and end of paragraph."
   (save-excursion
