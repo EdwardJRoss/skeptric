@@ -29,6 +29,9 @@ paginate = 12
 
   singleViewStyle = "casper"
 
+[permalinks]
+  post = "/:filename/"
+
 [[menu.main]]
   name = "Home"
   url = "/"

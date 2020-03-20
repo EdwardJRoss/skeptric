@@ -8,7 +8,7 @@ image: "/images/job_experience_conjugation.svg"
 I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
 
 
-In the [previous post](/post/extract-skills-2-adpositions/) I extracted skills written in phrases like "experience in telesales" using spaCy's dependency parse, but it wouldn't extract many types of experience from a job ad.
+In the [previous post](/extract-skills-2-adpositions/) I extracted skills written in phrases like "experience in telesales" using spaCy's dependency parse, but it wouldn't extract many types of experience from a job ad.
 Here we will extend these rules to extract lists of skills (for example extracting "telesales" and "callcentre" from "experience in telesales or receptionist", which will let us analyse which experiences are related.
 
 You can see the [Jupyter notebook](/notebooks/Parsing Experience from Adzuna Job Ads.html) for the full analysis.
@@ -69,7 +69,7 @@ This kind of pattern is pretty common (e.g. sales or service environment), and w
 
 # Analysing the results
 
-This allows us to extract a list of skills like in the [previous post](/post/extract-skills-2-adpositions/), but now we can also look at which terms commonly co-occur to find related skills by ranking.
+This allows us to extract a list of skills like in the [previous post](/extract-skills-2-adpositions/), but now we can also look at which terms commonly co-occur to find related skills by ranking.
 For example the top related skills for "sales" are "customer service", "marketing", and "business development".
 For common skills this wokrs pretty well:
 

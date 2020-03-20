@@ -8,7 +8,7 @@ image: "/images/job_experience_adposition.svg"
 
 I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
 
-In the [previous post](/post/extract-skills-1-noun-phrase/) I extracted skills written in phrases like "subsea cable engineering experience".
+In the [previous post](/extract-skills-1-noun-phrase/) I extracted skills written in phrases like "subsea cable engineering experience".
 This worked well, but extracted a lot of qualifiers that aren't skills (like "previous experience in", or "any experience in").
 Here we will write rules to extract experience from phrases like "experience in subsea cable engineering", with much better results.
 
@@ -108,4 +108,4 @@ Looking at the first 50,000 ads here are the top 30 extracted skills:
 It would be really interesting to see which skills occur together, but ads aren't likely to contain the phrase "experience in/with" many times, and so we're not likely to extract many skills from a single ad.
 However ads frequently list experience in long lists, for example "Experience in design, development or quality engineering".
 
-In the [next part](/post/extract-skills-3-conjugations) we will extract these phrases and investigate what skills frequently occur together.
+In the [next part](/extract-skills-3-conjugations) we will extract these phrases and investigate what skills frequently occur together.
