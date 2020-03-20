@@ -1,15 +1,35 @@
 baseURL = "https://skeptric.com/"
 languageCode = "en-us"
-title = "Skeptric"
 theme = "casper-two"
 paginate = 12
 
 [params]
+  title = "Skeptric"
+  subtitle = "by Edward Ross"
+
+  cover = "images/dumbjump.png"
+  description = "Learning about the world through critical thinking, data and programming."
   customCSS = ["css/custom.css"]
+  RSSLink = ""
+
+  twitterName = "EddingtonRoss"
+  linkedinName = "edward-ross-4909ba13a"
+
 
   githubName = "edwardjross"
+  #logo = "favicon.ico"
   orgName = "Skeptric"
   orgWebsite = "https://www.skeptric.com"
+  orgDescription = ""
 
   author = "Edward Ross"
-  authorAvatar = ""
+  authorAvatar = "images/edwardjross.jpg"
+
+  pageNotFoundTitle = "404 - Page not found"
+
+  singleViewStyle = "casper"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 200
