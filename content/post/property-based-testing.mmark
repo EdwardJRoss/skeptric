@@ -1,7 +1,7 @@
 ---
 title: "Property Based Testing - A thousand test cases in a single line"
-date: 2019-07-02T21:44:01+10:00
-draft: true
+date: 2020-03-21T21:32:51+11:00
+image: "images/example_tests.png"
 ---
 
 Property based testing lets you specify rules that a function being tested will satisfy over a wide range of inputs.
@@ -13,7 +13,7 @@ For example instead of writing a specific test case like `sort([1, 3, 2]) == [1,
 
 Writing simple, disjoint test cases that each test exactly one thing and cover most likely failure modes is difficult.
 Often there are simple properties that can succinctly replace a large number of tests.
-For example a banking application may have a complex distributed implementation, and it's hard to test all the possible failure modes.
+For example a banking application may have a complex implementation spread accross a codebase, and it's hard to test all the possible failure modes.
 However a simple property is that the amount in an account should balance against the deposits and withdrawals.
 This declarative property could be tested against a multitude of possible concurrent transactions to ensure the code is working correctly.
 
@@ -36,13 +36,17 @@ There are a few choices for test data:
 * Random data from a specified input distribution. This is how Haskell's [QuickCheck](http://hackage.haskell.org/package/QuickCheck) works
 * Enumerating over all cases from simplest to most complex - for example starting with an empty list and trying longer lists. This is how Haskell's [SmallCheck](http://hackage.haskell.org/package/smallcheck) works and is good for expensive properties.
 * Using data samples from production workloads.
-* Getting examples of likely edge cases (for example rare unicode characters, extreme floating point numbers).
+* Getting examples of likely edge cases (for example rare unicode characters, extreme floating point numbers). This is close to classic unit testing.
 
 ## Example of Property Based Testing
 
 I recently needed to find the minimum number of padding elements I would need to add to a list to divide it into sublists of a pre-defined lenth.
 
-To do this I wanted a helper function of signature in pseudo-python of: `pad_divide(numerator: int > 0, denominator: int > 0) ->  (pad, div): Tuple[int, int]`
+To do this I wanted a helper function of signature in pseudo-python of:
+
+```python
+pad_divide(numerator: int > 0, denominator: int > 0) ->  (pad, div): Tuple[int, int]
+```
 
 By definition `pad_divide` must satisfy the properties:
 
@@ -59,6 +63,7 @@ For simple cases (like above) it's possible to implement property based testing 
 
 * This type of testing originated in Haskell with [QuickCheck](http://hackage.haskell.org/package/QuickCheck) and later [SmallCheck](http://hackage.haskell.org/package/smallcheck).
 * Python has [Hypothesis](https://github.com/HypothesisWorks/hypothesis)
+* R has [Hedgehog](https://hedgehog.qa/article/r-property-testing)
 * Scala has [ScalaCheck](https://www.scalacheck.org/)
 * JavaScript has [jsverify](http://jsverify.github.io/)
 
