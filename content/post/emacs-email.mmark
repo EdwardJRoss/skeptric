@@ -57,7 +57,7 @@ If your email provider doesn't have IMAP enabled then you're probably out of luc
 If you can't get app passwords and need to use two factor authentication you may spend a *lot* of time trying to get this set up (and may have to implement the feature!).
 
 If you're on an Exchange server or on Office365 but can't access IMAP then you can use the fantastic [Davmail](http://davmail.sourceforge.net/).
-Davmail also supports CalDAV and CarDAV for calendar and contacts (more on this later).
+Davmail also supports CalDAV and CardDAV for calendar and contacts (more on this later).
 The only issue is finding the Exchange server settings can take some sleuthing (or a beer with your local sysadmin).
 As before it's best to get it working in Thunderbird before trying another synchronising tool, because it's easiest to get working there.
 
