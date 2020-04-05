@@ -71,7 +71,7 @@ To build a supervised model you need sufficiently many labelled data of a high e
 In the date parser example it was much cheaper and faster to build the rules, but it's also very unlikely to give unexpected results.
 Even Google's high profile language translator gives very *unusual* results that are hard to interpret with data far out of the training set.
 
-![Google translates gibberish from Frisian to an unrelated sentence in English]("/images/google_translate.png")
+![Google translates gibberish from Frisian to an unrelated sentence in English](/images/google_translate.png)
 
 These kinds of issues are notoriously hard to debug and fix in neural networks; whereas rules are much easier to trace and amend.
 
@@ -89,7 +89,7 @@ This kind of technique is very common in natural language processing where there
 
 The [spaCy](https://spacy.io/) library implements this kind of pipeline where it tokenizes the text (splitting the text into words), tags the parts of speech (like nouns and verbs), parses the dependencies (like saying which noun a verb refers to) and performs Named Entity Recognition (finding names of people, places, times).
 
-![spaCy pipeline](spacy_pipeline)
+![spaCy pipeline](/images/spacy_pipeline.svg)
 
 There's a great example from Ines Montani on how you could use this to [extract sales figures from earning's reports](https://support.prodi.gy/t/fact-extraction-for-earnings-news/1023/2).
 You could use the entity recogniser to find company names and money, and text matching to find dates (like Q2 2018) then writing rules with the dependency parser to find the relations between money figues, dates and company names.
