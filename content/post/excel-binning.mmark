@@ -7,7 +7,7 @@ image = "images/excel_group_example.png"
 
 Putting numeric data into *bins* is a useful technique for summarising, especially for continuous data.
 This is what underlies histograms which is a bar chart of frequency counts in each bin.
-There are two main ways of doing this in Excel with *groups* and with *vlookup*.
+There are two main ways of doing this in Excel with *groups* and with *vlookup* (you can also do this [in SQL](/sql-vlookup)).
 
 If you want equal length bins in a Pivot Table the easiest way is with groups.
 Right click on the column you want to bin and select `Group`
