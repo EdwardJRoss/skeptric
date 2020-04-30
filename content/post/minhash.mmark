@@ -1,0 +1,73 @@
++++
+tags = ["nlp", "jobs", "python"]
+title = "Near Duplicates with Minhash"
+date = "2020-04-27T20:31:55+10:00"
+image = ""
+draft = "true"
++++
+
+I'm trying to find near duplicates texts in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
+I've found that that the [Jaccard index on n-grams](/jacard-duplicates) is effective for finding these.
+Unfortunately it would take about 8 days to calculate the Jaccard index on all pairs of the 400,000 ads, and take about 640GB of memory to store it.
+While this is tractable we can find almost all pairs with a significant overlap it in half an hour in-memory using [MinHash](https://en.wikipedia.org/wiki/MinHash).
+
+MinHash is a very clever probabilistic algorithm that trades off time and memory for accuracy, and was developed at [Alta Vista for clustering similar web pages](/resources/broder97resemblance.pdf).
+The algorithm finds elements that have a large approximate Jaccard index; which we've already seen is effective for finding similar texts.
+The underlying idea is if you randomly order the items from the sets the chance that the smallest item is in both sets is equal to the number of elements in both sets divided by the number of elements in either set - which is exactly the Jaccard index.
+We can create a number of these orderings efficiently with [Universal Hashing](https://en.wikipedia.org/wiki/Universal_hashing) and only need to store the minimum element of each for each hash function.
+Then the Jaccard index between two items is approximately the number of equal minimum elements from the different hash functions.
+There is some chance of false collisions with the hash functions, but with several hash functions the impact is smaller.
+
+Finding [exact duplicates](/exact-duplicates) was easy because we were checking for equality.
+If we had a new duplicate document we could use a hash table to quickly see if we had already seen it.
+Similarly here we group our MinHashes into *bands* that we store in a hash table to find collisions.
+The details are covered well in [Chapter 3 of Mining Massive Datasets by Ullman et al.](http://www.mmds.org/) and [chapter 6 of Gakhov's Probabilistic Data Structures and Algorithms for Big Data Applicatoins](https://www.amazon.com/Probabilistic-Data-Structures-Algorithms-Applications/dp/3748190484).
+(There's actually a whole family of these *sketch* algorithms that tradeoff time and memory for precision like the [Bloom Filter](https://en.wikipedia.org/wiki/Bloom_filter) for set membership, [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) for counting distinct items, and the [Count-min sketch](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) for frequency tables.)
+
+MinHash can work really well as an online algorithm to efficiently check for near-duplicates in a large corpus, by storing and adding to these band hash tables.
+
+# How effective is MinHash
+
+
+
+# Implementation
+
+I use the excellent [datasketch library](http://ekzhu.com/datasketch/index.html) for calculating the MinHash and finding near duplicates.
+We can calculate the minhash of an arbitrary sequence of strings with this function.
+
+```
+from datasketch import MinHash, LeanMinHash
+import xxhash
+def minhash(seq:List[str], num_perm=num_perm):
+    m = MinHash(num_perm=num_perm, hashfunc=xxhash.xxh64_intdigest)
+    for s in seq:
+        m.update(s.encode('utf8'))
+    return LeanMinHash(m)
+```
+
+Note that we're using [xxhash](https://pypi.org/project/xxhash/) to hash the items because it's much faster than the default SHA1 from Python's [hashlib](https://docs.python.org/3/library/hashlib.html).
+The parameter `num_perm` corresponds is the number of different hash functions to use; setting it higher improves accuracy but runs slower; I used 128.
+It returns a [LeanMinHash](http://ekzhu.com/datasketch/documentation.html#datasketch.LeanMinHash) to save some memory.
+
+I created a convenience function to calculate MinHashes for a corpus.
+This is the time consuming step; these can be stored (e.g. with [pickle](https://docs.python.org/3/library/pickle.html)) for later search.
+This takes about 30 minutes on a single core for the 400,000 job ads (it is trivially paralellisable).
+
+```python
+def get_minhashes(corpus, n_shingle=1, preprocess=tokenize):
+    return [minhash(shingle(preprocess(text), n_shingle)) for text in corpus]
+```
+
+We can then use [`MinHashLSH`](http://ekzhu.com/datasketch/documentation.html#datasketch.MinHashLSH) to find all items with approximate Jaccard distance above some threshold.
+TO ensure we only get each pair once for each item we first search for nearby items with `query` and then add it to the collection with `insert`.
+
+```python
+def lsh_similar(minhashes, threshold):
+    lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)
+    for i, mh in enumerate(minhashes):
+        # Check if duplicate of already seen item
+        for j in lsh.query(mh):
+            yield (j, i)
+        # Add to the seen items
+        lsh.insert(i, mh)
+```
