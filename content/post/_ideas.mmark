@@ -1,0 +1,390 @@
++++
+categories = [""]
+tags = [""]
+title = "_Ideas"
+date = "2020-03-23T08:00:27+11:00"
+draft = true
++++
+
+# Sleep
+
+Importance of
+Everything is worse on little sleep (parents)
+Learning
+Longevity
+
+# Stimulants
+
+## Caffine
+Sensitivity
+
+Grumpiness, jiterriness, interruptiness
+
+Sources: Coffeee, dark chocolate, tea
+
+### Coffee
+Pollan: https://www.theatlantic.com/magazine/archive/2020/04/michael-pollan-coffee/606805/
+Balzac: http://blissbat.net/balzac.html
+
+Many forms (espresso, milky, filter/french press, italian, turkish/arabic)
+
+People defining themselves with their order
+
+Needing more - ramp up
+Culture; workplace coffee machines, catching up with people
+Alternatives; decaf (not available), tea/chai, juice, water
+
+Carsales coffee machine headache
+
+### Withdrawal
+
+Headaches
+
+
+## Exercise
+
+## sugar
+
+## Hot showers
+
+## Chilli
+
+## Fast music
+
+## Social stimulation
+
+# fastText file format
+
+JS implementation?
+
+# Optimising the wrong metric
+
+Proxy metrics
+
+Arrests
+Youtube -> Clickbait
+
+# Histogram optimisation
+
+# Sampling in shell wiht shuf
+
+shuf data | \
+head -n ${SAMPLE_SIZE} | \
+cut -d$'\t' -f1 | \
+sort | \
+uniq -c | \
+sort -nr | \
+sed -e 's/^ *//' -e 's/ /,/' | \
+awk -F',' -v total="$SAMPLE_SIZE" 'BEGIN {OFS=","} {cumsum+=$1; print $1/total * 100 "%", cumsum/total * 100 "%", $2}' |\
+head
+
+# Group by with shell
+
+a,b,sum
+
+# Comm
+
+# SRI Model
+
+# Modelling wiht limited or bad data
+
+# Association rules
+
+# Blitzmail
+
+# website categorisation
+
+# hadoop streaming
+
+Benefits of the cloud - resoruce constraints
+
+# Git submodules
+
+When should you use a submodule?
+
+
+# Lua
+
+A nice small language with some weird ends
+Counting with `#`
+There's a list somewhere
+
+# Scheme
+
+A nice small language with some interesting ends. Call/CC, macros
+
+SICP
+
+SICM
+
+# Pseudorandom numbers
+
+# Art of Insight
+
+# Graphing and visualisation
+
+# Deploying a model
+
+# J programming language
+
+# Using search to solve problems
+
+Minikanren
+
+Optimisation
+
+# Optimisation vs Model training
+
+High information scenarios
+
+# Next best offer
+
+# Clustering tex
+
+SVM
+
+CART
+
+Boosting and bagging
+
+ARIMA
+
+Neural nets
+
+
+# Running open source phone
+
+andOTP
+
+AntennaPod
+Voice
+Music
+
+Blitzmail
+
+F-Droid
+
+Fennec F-Droid
+
+K-9 Mail
+
+KeePAssDroid
+
+Kore
+
+OpenVPN for Android
+
+OsmAnd~
+UnifiedNlp
+
+primitive ftpd
+
+Soft sound
+
+Syncthing
+
+
+# Recall and precision in information retrieval
+The nomenclature is confusing: https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision
+Note that the meaning and usage of "precision" in the field of information retrieval differs from the definition of accuracy and precision within other branches of science and statistics.
+
+
+# Mail syncing on mobile phone
+
+# PII is the wrong abstraction
+
+# Define your work
+
+# What I learned from honours
+
+# Connecting to redshift with psql
+
+# User aggregation with hyperloglog
+
+
+# Flinders street foot counters since lockdown
+
+
+# caniuse for databases
+
+Or maybe a rosetta table?
+
+# CTE
+
+# Testing if two SQL tables are equal
+
+# Formatting SQL
+
+# Bad words with SQL split
+
+# Cum pct with SQL
+
+# SQL Assertions
+
+great expectations
+
+# Using images in blog posts
+
+# SQL Time since last visit
+
+# SQL New/Return/Churn
+
+# Dbplyr dates
+
+# Improvement
+
+- Add fiddles to code?
+- Add titles to tables
+- Add syntax highlighting
+
+# Experiments for burn-in/seasonal: How general are they?
+
+Christmas Button
+COVID-19
+Novelty effect
+
+
+
+# Generalizability of experiments
+People take A/B as gold but how *generalizable* is it?
+
+COVID-19: A different population
+Christmas button: A different environment
+
+# p-values
+
+# R for data science
+
+# ggformula
+
+# Central limit theorem for skew distributions
+
+# log-linear curve fitting
+
+Fitting in log is different to fitting logarithmic function
+
+# barry esseen inequality
+
+# Why a logit function?
+
+# KDE
+
+# How good is open source
+
+# Sacha Chua - Blogging
+
+https://sachachua.com
+
+https://gumroad.com/l/no-excuses-blogging
+
+Write about what you're learning
+
+> Write early, write often. Don't wait until you've figured everything out.
+
+> You're probably learning something neww eevery day.
+
+> The easiest blog post to write is the answer.
+
+> Share while you learn
+
+There's something to share everywhere trhough the proces
+
+> Don't worry about your strategy.
+
+> When you start you'll be boring
+
+It's okay to write about different things
+
+> Turn your ideas into small questions, and then answer those.
+
+> > Break that question down into smaller questions until you can actually answer it in one sitting.
+
+> Make Sharing part of the way you work
+
+# Hide-show mode
+
+# Tqdm
+
+# Daily habits
+
+# Mittens
+https://github.com/roamanalytics/mittens
+
+# SpaCy Dependency Matcher
+
+http://markneumann.xyz/blog/dependency_matcher/
+
+
+# Document clustering Paper
+
+https://aircconline.com/mlaij/V3N1/3116mlaij03.pdf
+
+# Kubeflow
+
+Pros and cons
+
+# MLFlow
+
+# Kedro
+
+# Metaflow
+
+# Difference of two confidence intervals is different to confidence interval of difference
+
+# RWalkr and suggrants and covid19
+
+
+# Packrat
+https://rstudio.github.io/packrat/
+
+# CI/CD Hugo
+
+# Minhash
+https://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html
+
+https://moultano.wordpress.com/2018/11/08/minhashing-3kbzhsxyg4467-6/
+
+
+# Post data
+
+```
+grep -L '^draft' *.mmark *.Rmd  | xargs -n1 grep -H '^date' | sed -E 's/^([^:]*).*([0-9]{4}-[0-9]{2}-[0-9]{2}).*/\2,\1/' | sort
+```
+
+Pragmatic
+
+```
+grep -L '^draft' *.mmark *.Rmd  | xargs -n1 grep -H '^date' | sed -E 's/^([^:]*).*(2020-0[3-9]-[0-9]{2}).*/\2,\1/' | grep '^2020' | wc -l
+```
+
+# Pylint
+
+https://pythonspeed.com/articles/pylint/
+
+--score=n
+--reports=n
+
+Disable
+
+        [R]efactor for a “good practice” metric violation
+        [C]onvention for coding standard violation
+        [W]arning for stylistic problems, or minor programming issues
+        [E]rror for important programming issues (i.e. most probably bug)
+        [F]atal for errors which prevented further processing
+
+
+# Python CLI
+
+https://changelog.com/posts/pynt-versus-invoke
+
+https://github.com/micheles/plac
+
+https://github.com/google/python-fire
+
+https://github.com/docopt/docopt
+
+https://click.palletsprojects.com/en/7.x/
+
+https://github.com/tiangolo/typer
+
+# Which key
