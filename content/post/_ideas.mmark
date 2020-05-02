@@ -388,3 +388,50 @@ https://click.palletsprojects.com/en/7.x/
 https://github.com/tiangolo/typer
 
 # Which key
+
+# CSV Escaping
+
+","
+
+^"
+"$
+
+"10 Things I Hate About You", 1999.
+
+740
+
+sed -E 's/([^,])"([^,])/\1""\2/g' abcnewsmetadata.csv > abcnewsmetadata_clean.csv
+
+67
+
+sed -E -e 's/([^,])"([^,])/\1""\2/g' -e 's/([^"])",([^"])/\1"",\2/g' abcnewsmetadata.csv > abcnewsmetadata_clean.csv
+
+50
+
+problems(meta)
+
+
+"1390440","StillImage",""Males don't all have Brad Pitt-like features"," said Dr Wong. - ABC News (Australian Broadcasting Corporation)",""Males don't all have Brad Pitt-like features"," said Dr Wong.","","","","0","0","55","1","10","","0","0","0","0","0","0","2011-05-04 07:43:23","","||"
+
+
+
+"contentaudio","contentphotos","contentgalleries","contentmaps","contentrelatedstories","contentfirstpublished","contentdescription","contenttopics"
+
+"contentid": "1390440",
+"contenttype": "StillImage",
+"contenttitletag": ""Males don't all have Brad Pitt-like features"," said Dr Wong. - ABC News (Australian Broadcasting Corporation)",
+"contentheadline": ""Males don't all have Brad Pitt-like features"," said Dr Wong.",
+"contentkeywords":"",
+"contentlatitude":"",
+"contentlongitude":"",
+"contentnewsfromothersites":"0",
+"contentcomments":"0",
+"contentlength":"55",
+"contentparagraphs":"1",
+"contentwords":"10",
+"contentduration":"",
+"contentvideos":"0",
+"0","0","0","0","0","2011-05-04 07:43:23","","||"
+
+
+#
