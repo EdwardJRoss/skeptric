@@ -1,0 +1,68 @@
++++
+tags = ["nlp", "jobs", "python"]
+title = "Searching for Near Duplicates with Minhash"
+date = "2020-05-06T09:31:55+10:00"
+image = ""
+draft = "true"
++++
+
+I'm trying to find near duplicates texts in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).
+In the last article I [built a collection of MinHashes](/minhash) of the 400,000 job ads in half an hour in a 200MB file.
+Now I need to efficiently search through these minhashes to find the near duplicates because brute force search through them would take a couple of days on my laptop.
+
+MinHash was designed to approach this problem as outlined in the [original paper](/resources/broder97resemblance.pdf).
+Finding [exact duplicates](/exact-duplicates) was easy because we were checking for equality.
+If we had a new duplicate document we could use a hash table to quickly see if we had already seen it.
+Similarly here we group our MinHashes into *bands* that we store in a hash table to find collisions.
+The details are covered well in [Chapter 3 of Mining Massive Datasets by Ullman et al.](http://www.mmds.org/) and [chapter 6 of Gakhov's Probabilistic Data Structures and Algorithms for Big Data Applicatoins](https://www.amazon.com/Probabilistic-Data-Structures-Algorithms-Applications/dp/3748190484).
+
+This approach of putting similar things in the same bucket is called [Locality Sensitive Hashing (LSH)](https://en.wikipedia.org/wiki/Locality-sensitive_hashing).
+There are a [whole family](https://arxiv.org/abs/1408.2927) of these for different distances, such as bit-sampling for [Hamming Distance](https://en.wikipedia.org/wiki/Hamming_distance) and [SimHash](https://en.wikipedia.org/wiki/SimHash) for [Cosine Distance](https://en.wikipedia.org/wiki/Cosine_similarity).
+
+LSH can work really well as an online algorithm to efficiently check for near-duplicates in a large corpus, by storing and adding to these band hash tables.
+
+# Picking bands and rows
+
+We have some fixed number of hashes and need to group them into bands of equal rows for LSH.
+The way we group them changes the sensitivity.
+Having few bands with many rows will only get collisions between pairs with a very high Jaccard similarity.
+Having many bands with few rows will get collisions between pairs with a very low Jaccard similarity.
+
+The probability that the signatures agree in all the rows of at least one band is given by $$ 1 - (1 - s^r)^b $$ which gives an S-shaped curve as shown in [Ullman et al](http://www.mmds.org/) below:
+
+![S-curve from Ullman et a.](/images/ullman_s_curve.png)
+
+
+
+# Implementation
+
+I'm continuing to use the [datasketch library](http://ekzhu.com/datasketch/index.html) for finding near duplicates.
+
+We can then use [`MinHashLSH`](http://ekzhu.com/datasketch/documentation.html#datasketch.MinHashLSH) to find all items with approximate Jaccard distance above some threshold.
+The underlying library lets you tune the tradeoff between false-positives and false-negatives with weights, but I'll use the default of equal weights.
+To ensure we only get each pair once for each item we first search for nearby items with `query` and then add it to the collection with `insert`.
+
+```python
+def lsh_similar(minhashes, threshold):
+    lsh = MinHashLSH(threshold=threshold, num_perm=num_perm)
+    for i, mh in enumerate(minhashes):
+        # Check if duplicate of already seen item
+        for j in lsh.query(mh):
+            yield (j, i)
+        # Add to the seen items
+        lsh.insert(i, mh)
+```
+
+I visualise this as walking accross the upper-triangle of the matrix of all pairs; in the first column there's nothing to check, in the second column you just need to check the first row, in the third column you need to check the first two rows.
+You've got every possible pair one; because the matrix of distances is symmetric and zero along the diagonal you know all the information.
+This does mean the approach is quadratic in time, but you could store the state of the LSH (so you don't need to regenerate it every time) and even use it for online processing.
+
+For the 400,000 job ad pairs it takes 2 minutes to get all pairs with a 3-Jaccard threshold of 0.9 on my laptop (compared with about 2 days via brute force).
+
+```
+similar = list(lsh_similar(minhashes, 0.9))
+```
+
+# Evaluating LSH
+
+It runs very quickly, but how do we check we're getting most of the pairs.
