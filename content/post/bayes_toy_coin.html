@@ -1,0 +1,80 @@
+---
+title: "Estimating Bias in a Coin with Bayes Rule"
+author: "Edward Ross"
+date: "2020-05-08T20:00:20+10:00"
+image: "images/posterior_8_flips.png"
+output: html_document
+---
+
+
+
+<p>I wanted to work through an example of applying Bayes rule to update model paremeters based on toy data This example comes from <a href="https://doingbayesiandataanalysis.blogspot.com/">Kruschke’s <em>Doing Bayesian Data Analysis</em></a>, Section 5.3.</p>
+<p>The model is that we have a coin and we’re trying to estimate the bias in the coin, that is the probability that it will come up heads when flipped. For simplicity we assume the bias, <code>theta</code> is a multiple of 0.1. We take a triangular prior centred at 0.5.</p>
+<pre class="r"><code># Simple model; parameter can only be a multiple of 0.1
+theta &lt;- seq(0, 1, by=0.1)
+
+
+# Prior is a triangle function
+prior &lt;- c(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.16, 0.12, 0.08, 0.04, 0)</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/triangle_prio-1.png" width="672" /></p>
+<div id="impact-of-seeing-a-head" class="section level2">
+<h2>Impact of seeing a head</h2>
+<p>Let’s consider how the model distribution changes by Bayes’ rule in the case we flip the coin once and see a head.</p>
+<p>The likelihood of getting a head given <code>theta</code>, is just <code>theta</code> (because it’s the head bias by definition)</p>
+<pre class="r"><code>likelihood &lt;- theta</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Then Bayes’ rule says the posterior is proportional to the prior and the likelihood. We can ignore the constant of proportionality by normalising it to 1.</p>
+<pre class="r"><code># Posterior given the head
+posterior &lt;- prior * likelihood
+posterior &lt;- posterior / sum(posterior)</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The posterior has moved markedly to the right, it’s more likely the coin is head biased now. The expected of bias has changed from 0.5 with the prior distribution, to 0.58 after incorporating the data of having seen one heads. The most likely value for <code>theta</code> is still 0.5.</p>
+</div>
+<div id="second-flip-of-the-coin" class="section level1">
+<h1>Second flip of the coin</h1>
+<p>After our first flip our new prior is the posterior given the first flip was heads.</p>
+<pre class="r"><code>prior &lt;- posterior</code></pre>
+<p>Suppose we flipped another heads, then we can apply Bayes’ rule again to get the posterior given two heads.</p>
+<pre class="r"><code>posterior &lt;- prior * likelihood
+posterior &lt;- posterior / sum(posterior)</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>The most likely value of <code>theta</code> is now 0.7, and the expectation value is 0.637931.</p>
+<div id="what-if-we-had-head-then-tails" class="section level2">
+<h2>What if we had head then tails?</h2>
+<p>Suppose the second flip gave tails instead of heads. Then our likelihood of tails is the likelihood of not flipping heads, <code>1 - theta</code>. Then we can get the posterior by applying Bayes’ rule as before</p>
+<pre class="r"><code>likelihood &lt;- 1 - theta
+
+posterior &lt;- prior * likelihood
+posterior &lt;- posterior / sum(posterior)</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Expectation value is 0.5, as you would expect by symmetry. Notice that the distribution is less spread around 0.5 than our original prior.</p>
+</div>
+</div>
+<div id="after-8-coin-flips" class="section level1">
+<h1>After 8 coin flips</h1>
+<p>What would our posterior look like after 8 coin flips? Let’s look at each possible result of 8 coin flips, from 0 heads and 8 tails to 8 heads and 0 tails.</p>
+<pre class="r"><code>num_flips &lt;- 8
+heads &lt;- seq(0, num_flips)
+tails &lt;- num_flips - heads</code></pre>
+<p>It would also be useful to contrast how the posterior is to if we had assumed a uniform prior.</p>
+<pre class="r"><code>uniform_prior &lt;- rep(1/11, 11)</code></pre>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Let’s combine all the scenarios in a dataframe, calculating the posterior after the 8 flips.</p>
+<pre class="r"><code>df &lt;-
+  tibble(heads=rep(heads, each=length(theta)),
+       tails=rep(tails, each=length(theta)),
+       theta=rep(theta, num_flips+1),
+       uniform_prior = rep(uniform_prior, num_flips+1),
+       triangle_prior=rep(prior, num_flips + 1)) %&gt;%
+  mutate(label = paste0(heads, &quot; heads, &quot;, tails, &quot; tails&quot;),
+         likelihood = (theta ^ heads) * ((1-theta) ^ tails)) %&gt;%
+  gather(&quot;prior_model&quot;, &quot;prior&quot;, ends_with(&#39;_prior&#39;)) %&gt;%
+  group_by(heads, prior_model) %&gt;%
+  mutate(posterior = prior * likelihood / sum(prior * likelihood)) %&gt;%
+  ungroup()</code></pre>
+<p>The likelihood is <code>theta^heads * (1-theta)^tails</code>. Notice how the most likely value for <code>theta</code> depends on the outcomes.</p>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>After 8 flips the posterior distribution for <code>theta</code> changes much more depending on the outcome. Notice that the uniform prior moves more quickly with more data, and the triangular prior is more confident when the outcomes are close to equal.</p>
+<p><img src="/post/bayes_toy_coin_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>This is just a simple example but I found running through the calculations helps me understand the idea of estimating parameter distributions rather than just estimating the most likely parameter.</p>
+</div>
