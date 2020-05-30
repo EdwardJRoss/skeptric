@@ -128,7 +128,7 @@ edges = list(zip(path, path[1:]))
 ```
 
 The first 6 job ad pairs were all for an Automotive, Motor Trade Job from "Perfect Placement UK Ltd", a recruitment firm, with some minor differences; likely using the same template for different roles (and they have the same footer).
-The seventh pair looks like an edit of the job ad was posted for a "Workshopby someone other than that recuitment firm, with mostly the same details.
+The seventh pair looks like an edit of the job ad was posted by someone other than that recuitment firm, with mostly the same details.
 The first and eighth job ad are completely different, which is quite problematic!
 
 I can think of two use cases of similar job ads.
