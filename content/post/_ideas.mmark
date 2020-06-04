@@ -402,3 +402,6 @@ Do, Defer, Delete, Delegate
 Delegating up and accross
 
 # Operation
+
+# Pandas sort: kind=mergesort for stable
+
