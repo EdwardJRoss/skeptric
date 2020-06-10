@@ -1,0 +1,170 @@
++++
+tags = [""]
+title = "Common Crawl Index Athena"
+date = "2020-06-09T20:46:52+10:00"
+image = ""
+draft = "true"
++++
+
+# General
+
+https://github.com/facebookresearch/cc_net
+
+https://commoncrawl.org/the-data/examples
+
+# Athena
+
+https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/
+
+https://github.com/commoncrawl/cc-index-table#query-the-table-in-aws-athena
+
+
+What crawls are in the data?
+
+```sql
+SELECT crawl, count(*) as n_captures
+FROM "ccindex"."ccindex"
+WHERE subset = 'warc'
+GROUP BY crawl
+ORDER BY crawl desc
+```
+
+Slow; takes ~1 min
+Free: 0kb scanned
+
+Note: `MSCK Repair Table` to get new partitions
+
+
+```sql
+SELECT COUNT(*) AS count,
+       url_host_registered_domain
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+  AND url_host_tld = 'au'
+GROUP BY  url_host_registered_domain
+HAVING (COUNT(*) >= 100)
+ORDER BY  count DESC
+```
+
+Cost 6.13MB
+
+![](/images/cc_athena_largest_au_domains.png)
+
+```sql
+SELECT *
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+  AND url_host_tld = 'au'
+  AND url_host_registered_domain = 'realestate.com.au'
+limit 10
+```
+
+* url_surtkey: URL with host name reversed
+* url: URL that is scanned
+* url_host_name: The host name
+* url_host_tld: The TLD (e.g. au)
+* url_host_2nd_last_part, ... url_host_5th_last_part: The parts of the host name separated by .
+* url_host_registry_suffix: e.g. .com.au
+* url_host_private_domain
+* url_protocol: e.g. https
+* url_port: I guess if it's blank its 89
+* url_path: The path of the URL (everything from first / to first ?)
+* url_query: Everything after query 
+* fetch_time: When the page was retrieved
+* fetch_status: The HTTP status of the request (e.g. 200 is OK)
+* content_digest: A digest to uniquely identify the content
+* content_mime_type: The type of content in the header
+* content_mime_detected: The type of content detected
+* content_charset: The characterset of the data (e.g. UTF-8)
+* content_languages: Languages declared of the content
+* warc_filename: The filename the data is in
+* warc_record_offset: Where in the file the data starts
+* warc_record_length: The length of the data
+* warc_semgment: Another indicator of the position of the data
+* crawl: The id of the crawl (e.g. CC-MAIN-YYYY-WW where YYYY is the year and WW is the ISO week of the year).
+* subset: Is this the 'warc', or 'robotstxt', or 'crawldiagnostics'
+
+Cost 9.76 MB
+
+| url_surtkey                                                                  | url                                                                                      | url_host_name         | url_host_tld | url_host_2nd_last_part | url_host_3rd_last_part | url_host_4th_last_part | url_host_5th_last_part | url_host_registry_suffix | url_host_registered_domain | url_host_private_suffix | url_host_private_domain | url_protocol | url_port | url_path                                                    | url_query | fetch_time | fetch_status | content_digest                   | content_mime_type | content_mime_detected | content_charset | content_languages | warc_filename                                                                                                 | warc_record_offset | warc_record_length | warc_segment | crawl           | subset |
+|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------|--------------|------------------------|------------------------|------------------------|------------------------|--------------------------|----------------------------|-------------------------|-------------------------|--------------|----------|-------------------------------------------------------------|-----------|------------|--------------|----------------------------------|-------------------|-----------------------|-----------------|-------------------|---------------------------------------------------------------------------------------------------------------|--------------------|--------------------|--------------|-----------------|--------|
+| au,com,realestate)/advice                                                    | https://www.realestate.com.au/advice/                                                    | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/                                                    |   | 2020-05-28 22:09:01.000 | 200 | BIVR34XTK7HJGQJ5H47GO65UBODZA6XY | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347400101.39/warc/CC-MAIN-20200528201823-20200528231823-00270.warc.gz | 898091083 | 17598 | 1590347400101.39 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-clever-storage-solutions-rental-properties      | https://www.realestate.com.au/advice/10-clever-storage-solutions-rental-properties/      | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-clever-storage-solutions-rental-properties/      |   | 2020-06-06 05:39:55.000 | 200 | 2YJSRGZHQVSE5WWKHEHPJ26RBIIQOIMP | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590348509972.80/warc/CC-MAIN-20200606031557-20200606061557-00502.warc.gz | 855590228 | 36195 | 1590348509972.80 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-features-to-look-for-when-buying-a-period-home  | https://www.realestate.com.au/advice/10-features-to-look-for-when-buying-a-period-home/  | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-features-to-look-for-when-buying-a-period-home/  |   | 2020-05-26 08:40:48.000 | 200 | V75WAUJFWLXT5VPZFCPHUEPFHAZJY6MX | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347390755.1/warc/CC-MAIN-20200526081547-20200526111547-00430.warc.gz  | 809064278 | 35882 | 1590347390755.1  | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-foodie-towns-worth-going-rural                  | https://www.realestate.com.au/advice/10-foodie-towns-worth-going-rural/                  | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-foodie-towns-worth-going-rural/                  |   | 2020-05-27 16:31:24.000 | 200 | XP4RGQCIWL5GL4O3KJG53AGRYVRXEGGV | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347394756.31/warc/CC-MAIN-20200527141855-20200527171855-00398.warc.gz | 909969420 | 35652 | 1590347394756.31 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-things-consider-buying-fixer-upper              | https://www.realestate.com.au/advice/10-things-consider-buying-fixer-upper/              | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-things-consider-buying-fixer-upper/              |   | 2020-05-27 13:38:45.000 | 200 | EZSDPRBNJIJEY4Y47C6A42T7YCDNDOSH | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347394074.44/warc/CC-MAIN-20200527110649-20200527140649-00029.warc.gz | 891295141 | 34746 | 1590347394074.44 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-things-moving-new-house                         | https://www.realestate.com.au/advice/10-things-moving-new-house/                         | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-things-moving-new-house/                         |   | 2020-06-02 18:28:54.000 | 200 | EX24KJUKOHX5GOX36QFTNVZGACZPJO2J | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347425481.58/warc/CC-MAIN-20200602162157-20200602192157-00363.warc.gz | 879272045 | 35475 | 1590347425481.58 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-tips-coping-share-house-kitchen                 | https://www.realestate.com.au/advice/10-tips-coping-share-house-kitchen/                 | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-tips-coping-share-house-kitchen/                 |   | 2020-06-02 09:15:24.000 | 200 | GWGMC36W4MHHSZ4GOQJA5AHGPY3LUUID | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347423915.42/warc/CC-MAIN-20200602064854-20200602094854-00528.warc.gz | 840946829 | 33050 | 1590347423915.42 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/10-tips-to-sharing-a-home-with-your-adult-children | https://www.realestate.com.au/advice/10-tips-to-sharing-a-home-with-your-adult-children/ | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/10-tips-to-sharing-a-home-with-your-adult-children/ |   | 2020-05-28 02:26:38.000 | 200 | FMVSRNL32GKBRPLTV755XBL43G27P7YX | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347396300.22/warc/CC-MAIN-20200527235451-20200528025451-00478.warc.gz | 873617107 | 31724 | 1590347396300.22 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/101-guide-contents-insurance                       | https://www.realestate.com.au/advice/101-guide-contents-insurance/                       | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/101-guide-contents-insurance/                       |   | 2020-06-05 11:00:50.000 | 200 | PTLEDOTFYPBVZO2AC26KUHB6SBJ6FZKG | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590348496026.74/warc/CC-MAIN-20200605080742-20200605110742-00542.warc.gz | 837847660 | 31792 | 1590348496026.74 | CC-MAIN-2020-24 | warc |
+| au,com,realestate)/advice/11-things-you-really-need-to-tell-your-landlord    | https://www.realestate.com.au/advice/11-things-you-really-need-to-tell-your-landlord/    | www.realestate.com.au | au | com | realestate | www |   | com.au | realestate.com.au | com.au | realestate.com.au | https |   | /advice/11-things-you-really-need-to-tell-your-landlord/    |   | 2020-05-31 04:37:28.000 | 200 | MWL7BHWJEGV7TU7ORULZYGBRDNIY3GQI | text/html | text/html | UTF-8 | eng | crawl-data/CC-MAIN-2020-24/segments/1590347410745.37/warc/CC-MAIN-20200531023023-20200531053023-00083.warc.gz | 867625659 | 33829 | 1590347410745.37 | CC-MAIN-2020-24 | warc |
+
+
+```sql
+SELECT url_host_tld, count(*) as urls
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+group by 1
+order by 2 desc
+```
+
+200kb
+
+
+
+```sql
+SELECT url_host_name, url_path
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+  AND url_host_tld = 'au'
+  AND regexp_like(url_path, '/careers?/')
+limit 10
+```
+
+```
+SELECT url_host_name, count(*) as num_job_pages, arbitrary(url_path) as sample_path
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+  AND url_host_tld = 'au'
+  AND regexp_like(url_path, '/job?/')
+  AND fetch_status = 200
+group by 1
+order by 2 desc
+limit 200
+```
+
+768MB (!) (~0.5c)
+6s
+
+~30k results
+
+![](/images/cc_athena_job_paths.png)
+
+
+```sql
+SELECT url, crawl, warc_filename, warc_record_offset, warc_record_length
+FROM "ccindex"."ccindex"
+WHERE crawl = 'CC-MAIN-2020-24'
+  AND subset = 'warc'
+  AND url_host_name = 'www.gumtree.com.au'
+  AND url_path like '/s-ad/%-jobs/%'
+  AND fetch_status = 200
+limit 10
+```
+
+32MB
+
+
+https://tech.marksblogg.com/petabytes-of-website-data-spark-emr.html
+
+
+	https://www.gumtree.com.au/s-ad/broadbeach/handyman/handy-man-carpenter-available-for-small-jobs/1178742750	CC-MAIN-2020-24	crawl-data/CC-MAIN-2020-24/segments/1590347387219.0/warc/CC-MAIN-20200525032636-20200525062636-00381.warc.gz	757295583	65034
+
+curl -H "range: bytes=757295583-757360617" -O https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-2020-24/segments/1590347387219.0/warc/CC-MAIN-20200525032636-20200525062636-00381.warc.gz
+
+https://dmorgan.info/posts/common-crawl-python

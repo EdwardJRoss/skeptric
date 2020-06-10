@@ -405,3 +405,34 @@ Delegating up and accross
 
 # Pandas sort: kind=mergesort for stable
 
+https://stackoverflow.com/questions/17141558/how-to-sort-a-dataframe-in-python-pandas-by-two-or-more-columns
+
+https://stackoverflow.com/questions/14941366/pandas-sort-by-group-aggregate-and-column/14946246#14946246
+
+# Teach
+
+```python
+import spacy
+import pandas as pd
+import json
+df = pd.read_feather('../data/04_secondary/ads.feather')
+
+nlp = spacy.load('en_core_web_lg')
+
+sample = df.sample(1000).FullDescription.str.replace('****', 'REDACTED', regex=False).replace('\u2022', ' . ', regex=False)
+
+f = open('job_ad_sentences.jsonl', 'w')
+
+docs = nlp.pipe(sample)
+
+for doc in tqdm(docs, total=len(sample)):
+  for sent in doc.sents:
+    json.dump({'text': str(sent)}, f)
+    f.write('\n')
+
+f.close()
+```
+
+```
+prodigy textcat.teach -l skill sentence_skill ./blank_model/ ./job_ad_sentences.jsonl
+```
