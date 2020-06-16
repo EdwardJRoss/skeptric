@@ -339,12 +339,6 @@ https://rstudio.github.io/packrat/
 
 # CI/CD Hugo
 
-# Minhash
-https://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html
-
-https://moultano.wordpress.com/2018/11/08/minhashing-3kbzhsxyg4467-6/
-
-
 # Post data
 
 ```
@@ -436,3 +430,89 @@ f.close()
 ```
 prodigy textcat.teach -l skill sentence_skill ./blank_model/ ./job_ad_sentences.jsonl
 ```
+
+# Tech since the late 90s
+
+## Wikipedia 
+
+Britanica, Encarta
+
+Wiktionary
+
+
+## Scripting: Python, Perl and Javascript
+
+Python ecosystem (Numpy, Matplotlib, Scipy)
+
+R
+
+## Dotcom crash
+
+Banner ads
+
+Rise of Advertising and Eccomerce
+
+## Difficulty of making websites
+
+## Microsoft vs Netscape
+
+Best viewed with IE
+
+Mozilla
+
+Google is the new Microsoft
+
+## Flash
+
+Adobe turned it into tracking nightmare
+
+Nothing today seems as easy to make multimedia
+
+
+## Lack of interactivity
+
+Everything HTML, simpler
+
+AJAX (too many SPA)
+
+## Linux
+
+Linux: 1991
+
+Microsoft anti free software
+
+
+
+## XML 
+
+Astronaut Architecture
+
+XML 1.0: 1998
+
+XSLT (1998-99), DSD
+
+XHTML
+SOAP
+
+(Good: SVG, RSS, Atom, Office XML!)
+
+Reaction to binary formats
+
+Ant -> Maven
+
+Now: JSON, YAML (YAML templating!)
+
+## Unicode
+
+Very good.
+Edges: Han Unification, UTF-16 & 32.
+
+## Java
+
+
+
+
+
+# Finding job data
+
+https://dmorgan.info/posts/common-crawl-python
