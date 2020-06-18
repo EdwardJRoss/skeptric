@@ -36,7 +36,7 @@ jobs:
   
     # Rclone to destination
     - name: rclone
-      uses: wei/rclone@v1
+      uses: ./.github/actions/rsync
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
