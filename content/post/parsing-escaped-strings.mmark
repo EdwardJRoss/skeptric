@@ -19,13 +19,13 @@ In an imperative (Python) implementation we can keep track of the state with a v
 ```python
 def find_unescaped_char(text, idx=0, char='"', escapechar='\\'):
     escaped = False
-    for end_idx, c in enumerate(text[idx:]):
+    for offset, c in enumerate(text[idx:]):
         if escaped:
             escaped = False
         elif c == escapechar:
             escaped = True
         elif c == char:
-            return end_idx
+            return offset + idx
 ```
 
 For example `find_unescaped_char(r'\""')` returns 2 (since the first unescaped quote is at character 2), but `find_unescaped_char(r'\\"")` also returns 2 because it's the backslash that's escaped.
