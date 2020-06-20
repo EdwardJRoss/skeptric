@@ -518,3 +518,48 @@ https://dmorgan.info/posts/common-crawl-python
 # Github actions cache 
 
 https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows
+
+
+# RDF
+
+
+
+## RDF Graph to Dictionary
+
+#### Getting relevant nodes
+
+```
+t = rdflib.term.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')
+jp = rdflib.term.URIRef('http://schema.org/JobPosting')
+def get_job_postings(G):
+    return G.subjects(t, jp)
+```
+
+```
+list(G.subject_objects(t))
+```
+
+```
+nodes = set(s for s,p,o in G if type(s) == rdflib.term.BNode)
+referred_nodes = set(o for s,p,o in G if type(o) == rdflib.term.BNode)
+root_nodes = nodes - referred_nodes
+```
+
+
+#### Graph to Dictionary
+
+```
+def graph_to_dict(G, j, seen=frozenset()):
+    d = {}
+    for k, v in G.predicate_objects(j):
+        k = k.toPython()
+        if v in seen:
+            logging.warning('Detected cycle in RDF %s', G.identifier)
+            return None
+        elif type(v) == rdflib.term.BNode:
+            v = graph_to_dict(G, v, seen.union([v]))
+        else:
+            v = v.toPython()
+        d[k] = d.get(k, []) + [v]
+    return d
+```
