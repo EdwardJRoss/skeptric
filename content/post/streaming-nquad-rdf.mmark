@@ -52,7 +52,7 @@ We can extract the crawled URL from the quad with a simple piece of logic:
 
 ```python
 import re
-RDF_QUAD_LABEL_RE = re.compile("[ \t]+<([^>]*)>[ \t].\n$")
+RDF_QUAD_LABEL_RE = re.compile("[ \t]+<([^ \t]*)>[ \t].\n$")
 def get_quad_label(s):
     return RDF_QUAD_LABEL_RE.search(line).group(1)
 ```
@@ -123,7 +123,7 @@ We can then use the [specification](https://www.w3.org/TR/n-quads/) to construct
 
 ```python
 import re
-RDF_QUAD_LABEL_RE = re.compile("[ \t]+<([^>]*)>[ \t].\n$")
+RDF_QUAD_LABEL_RE = re.compile("[ \t]+<([^ \t]*)>[ \t].\n$")
 def get_quad_label(s):
     return RDF_QUAD_LABEL_RE.search(line).group(1)
 ```
