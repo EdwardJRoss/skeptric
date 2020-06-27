@@ -563,3 +563,34 @@ def graph_to_dict(G, j, seen=frozenset()):
         d[k] = d.get(k, []) + [v]
     return d
 ```
+
+# Community Detection
+
+Reichardt and Bornholdt - Statistical Mechanics of Community Detection - https://arxiv.org/pdf/cond-mat/0603718.pdf
+
+Defines Hamiltonian spin glasses; effectively same metric as below: `\sum_{C}\sum_{i,j \in C} tA_ij - \frac{k_i k_j}{2m} `
+
+
+Lambiotte, Delvenne, and Barahona - Laplacian Dynamics and Multiscale Modular Structure in Networks - https://arxiv.org/pdf/0812.1770.pdf
+
+Defines it as a linearisation of independent, identical homogenous Poisson process (dynamics of normalised Laplacian matrix).
+Have code https://xn.unamur.be/codes.html (timescale.zip)
+Explains implementation in https://xn.unamur.be/codes/readme.pdf
+Built on Louvain method for optimising modularity
+Reimplemented in https://github.com/taynaud/python-louvain
+
+
+Louvain method: Fast unfolding of communities in large networks
+Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte, Etienne Lefebvre
+https://arxiv.org/abs/0803.0476
+Code: https://sourceforge.net/projects/louvain/
+
+
+Based on Clauset-Newman modularity: https://arxiv.org/pdf/physics/0602124.pdf Modularity and community structure in networks
+
+
+
+
+---
+
+Link Communities: https://arxiv.org/pdf/0903.3178.pdf
