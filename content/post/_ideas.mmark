@@ -588,9 +588,27 @@ Code: https://sourceforge.net/projects/louvain/
 
 Based on Clauset-Newman modularity: https://arxiv.org/pdf/physics/0602124.pdf Modularity and community structure in networks
 
-
-
-
----
-
 Link Communities: https://arxiv.org/pdf/0903.3178.pdf
+
+
+# Download
+
+curl 'http://index.commoncrawl.org/CC-MAIN-2019-47-index?url=www.peoplebank.com.au/job/*&limit=10&output=json' > data.json
+
+cat data.json | jq -r '[.filename, .offset, .length] | @csv' | sed 's/"//g' | awk -F, '{print $1, $2, $2+$3}' > lines
+
+
+### Writing WARC from cdxt:
+
+```
+time cdxt --cc --from 202002 --to 202003 --filter '=status:200' warc --prefix 202002_jobs.launchrecruitement.com.au 'jobs.launchrecruitment.com.au/job/*'
+```
+
+10 minutes: 26M
+
+--ia: 2min: 5M (remove = from filter)
+`
+```
+time cdxt --cc --from 202002 --to 202003 --filter '=status:200' --limit 10 iter --fields url,filename,length,offset 'jobs.launchrecruitment.com.au/job/*' > data.txt
+```
+
