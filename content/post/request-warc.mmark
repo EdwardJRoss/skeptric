@@ -1,0 +1,20 @@
++++
+tags = [""]
+title = "Request Warc"
+date = "2020-07-01T10:23:03+10:00"
+image = ""
+draft = true
++++
+
+Benefits: download first, process later
+Drawbacks: Storage, validation
+
+https://github.com/webrecorder/warcio
+
+```python
+from warcio.capture_http import capture_http
+import requests  # requests must be imported after capture_http
+
+with capture_http('example.warc.gz'):
+    requests.get('https://example.com/')
+```
