@@ -618,4 +618,9 @@ time cdxt --cc --from 202002 --to 202003 --filter '=status:200' --limit 10 iter 
 
 CharGrid
 
-Tutorial 2
+ACL2020 Tutorial 2
+
+
+# Stanza
+
+Comparison to SpaCy
