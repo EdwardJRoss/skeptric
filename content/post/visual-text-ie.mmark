@@ -1,0 +1,21 @@
++++
+tags = [""]
+title = "Visual Text Ie"
+date = "2020-07-09T00:39:11+10:00"
+image = ""
+draft = true
++++
+
+https://sites.google.com/view/acl-2020-multi-modal-ie
+
+[BLING-KPE](https://arxiv.org/pdf/1911.02671.pdf): size, location, font, dom (inline/block/leaf)
+
+[CharGrid](https://arxiv.org/abs/1809.08799) :SAP concur
+
+[GraphIE](https://arxiv.org/abs/1810.13083)
+
+[](/html-nlp/)
+
+[Fonduer - paper](https://arxiv.org/pdf/1703.05028.pdf)
+
+https://github.com/HazyResearch/fonduer

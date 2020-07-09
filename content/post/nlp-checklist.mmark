@@ -1,0 +1,26 @@
++++
+tags = [""]
+title = "Checklist"
+date = "2020-07-08T22:20:37+10:00"
+image = "/images/nlp_checklist.png"
+draft = true
++++
+
+https://www.aclweb.org/anthology/2020.acl-main.442.pdf
+
+https://github.com/marcotcr/checklist
+
+Introduces a methodology for testing NLP model; they suggest a test matrix to generate many types of examples, and an open source python tool to help template and generate test data, generate perturbations and run tests.
+
+They have 3 types of tests: Minimum Functionality Tests (expected input → result), Invariance (changing the text in a way that shouldn’t change the result) and Directional (changing the text in a way that should only change the result in one direction).
+
+* Vocabulary+POS 
+* Taxonomy 
+* Robustness 
+* NER
+* Fairness
+* Temporal
+* Negation
+* Coreference
+* Semantic Role Labeling
+* Logic
