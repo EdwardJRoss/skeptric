@@ -607,11 +607,10 @@ time cdxt --cc --from 202002 --to 202003 --filter '=status:200' warc --prefix 20
 10 minutes: 26M
 
 --ia: 2min: 5M (remove = from filter)
-`
+
 ```
 time cdxt --cc --from 202002 --to 202003 --filter '=status:200' --limit 10 iter --fields url,filename,length,offset 'jobs.launchrecruitment.com.au/job/*' > data.txt
 ```
-
 
 
 # Visual elements
@@ -620,7 +619,3 @@ CharGrid
 
 ACL2020 Tutorial 2
 
-
-# Stanza
-
-Comparison to SpaCy
