@@ -1,8 +1,8 @@
 +++
-tags = [""]
+tags = ["wsl"]
 title = "Getting Started with WSL2"
 date = "2020-07-20T23:42:44+10:00"
-image = "/images/win_nlp"
+image = "/images/win_ubuntu.png"
 +++
 
 I've finally started trying out Windows System for Linux version 2.
