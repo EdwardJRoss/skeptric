@@ -37,8 +37,6 @@ Under Rule Type select port and then click next.
 Select TCP Port 6000 and click next.
 Then click next through windows (allowing the connection and applying to all profiles) until the last screen, and then give it a reasonable name like "WSL2 X Access" and then Finish.
 
-![Rule Type Port](/images/windows_network_rule_type_port.png)
-
 ![Opening Port 6000](/images/windows_network_rule_type_port_6000.png)
 
 This opens up the port to the whole internet, which is a security risk.
