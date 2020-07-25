@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Embrace, Extend and Extinguish"
 date = "2020-07-18T22:07:49+10:00"
-image = "/images/viewed_chrome.png"
+feature_image = "/images/viewed_chrome.png"
 +++
 
 In the 90s Microsoft famoursly used a strategy of embracing other protocols, then adding extensions to their implementation until it's no longer compatible and utilising their market leverage to extinguish competing implementations.

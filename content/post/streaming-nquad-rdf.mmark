@@ -2,7 +2,7 @@
 tags = ["data", "python"]
 title = "Streaming n-quads as RDF"
 date = "2020-06-21T08:00:34+10:00"
-image = "/images/nquad_spec.png"
+feature_image = "/images/nquad_spec.png"
 +++
 
 The [Web Data Commons](http://webdatacommons.org/) extracts structured [RDF Data](https://en.wikipedia.org/wiki/Resource_Description_Framework) from about one monthly [Common Crawl](https://commoncrawl.org) per year.

@@ -2,7 +2,7 @@
 tags = ["emacs", "wsl"]
 title = "Using Emacs under WSL"
 date = "2020-04-16T08:05:23+10:00"
-image = "/images/blank_emacs.png"
+feature_image = "/images/blank_emacs.png"
 +++
 
 Getting Emacs to work nicely on a Windows system can be a challenge.

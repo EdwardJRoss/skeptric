@@ -2,7 +2,7 @@
 tags = ["nlp", "data", "jobs"]
 title = "Annotating Job Titles"
 date = "2020-04-01T22:06:56+11:00"
-image = "images/annotated_title.png"
+feature_image = "/images/annotated_title.png"
 +++
 
 When doing Named Entity Recognition it's important to think about how to set up the problem.

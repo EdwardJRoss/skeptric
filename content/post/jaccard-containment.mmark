@@ -2,7 +2,7 @@
 tags = ["data", "maths"]
 title = "The Problem with Jaccard for Clustering"
 date = "2020-04-15T07:43:59+10:00"
-image = "images/set_containment.png"
+feature_image = "/images/set_containment.png"
 +++
 
 The [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index) is a useful measure of similarity between two sets.

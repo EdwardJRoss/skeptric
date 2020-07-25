@@ -2,7 +2,7 @@
 tags = ["nlp"]
 title = "Rewriting A of B"
 date = "2020-06-05T22:59:21+10:00"
-image = "images/a_of_b.png"
+feature_image = "/images/a_of_b.png"
 +++
 
 When examining [words in job titles](/job-title-words) I noticed that if was common to see titles written as "head of ..." or "director of ...".

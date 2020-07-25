@@ -2,7 +2,7 @@
 tags = ["Presto", "Athena", "SQL"]
 title = "Getting most recent value in Presto with max_by"
 date = "2020-03-26T08:00:00+11:00"
-image = "images/sql_window_function.png"
+feature_image = "/images/sql_window_function.png"
 +++
 
 [Presto](https://prestodb.io) and the AWS managed alternative [Amazon Athena](https://aws.amazon.com/athena/) have some powerful [aggregation functions](https://prestodb.io/docs/current/functions/aggregate.html) that can make writing SQL much easier.

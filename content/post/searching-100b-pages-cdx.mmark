@@ -2,7 +2,7 @@
 tags = ["commoncrawl", "data"]
 title = "Searching 100 Billion Webpages Pages With Capture Index"
 date = "2020-06-11T08:00:00+10:00"
-image = "/images/cc_cdx_browser.png"
+feature_image = "/images/cc_cdx_browser.png"
 +++
 
 [Common Crawl](https://commoncrawl.org) builds an open dataset containing [over 100 billion unique items](https://commoncrawl.github.io/cc-crawl-statistics/plots/crawlsize) downloaded from the internet.

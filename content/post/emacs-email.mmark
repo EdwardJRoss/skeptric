@@ -2,7 +2,7 @@
 tags = ["email", "emacs", "linux"]
 title = "Don't manage work email with Emacs"
 date = "2020-03-24T23:05:22+11:00"
-image = "images/maildir.png"
+feature_image = "/images/maildir.png"
 +++
 
 I do a lot of work in Emacs and at the command line, and I get quite a few emails so it would be great if I could handle my emails there too.

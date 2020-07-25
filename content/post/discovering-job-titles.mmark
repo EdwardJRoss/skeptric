@@ -2,7 +2,7 @@
 tags = ["jobs", "nlp"]
 title = "Discovering Job Titles"
 date = "2020-06-09T08:00:04+10:00"
-image = "images/common_role_titles.png"
+feature_image = "/images/common_role_titles.png"
 +++
 
 A job ad title can [contain a lot of things](/job-title) like location, skills or benefits.

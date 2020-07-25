@@ -2,7 +2,7 @@
 tags = ["nlp", "python", "jobs"]
 title = "Edit Distance"
 date = "2020-04-17T08:31:53+10:00"
-image = "/images/ads_process_project_engineer.png"
+feature_image = "/images/ads_process_project_engineer.png"
 +++
 
 Edit distance, also known as [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance) is a useful way of the similarity of two sequences. 

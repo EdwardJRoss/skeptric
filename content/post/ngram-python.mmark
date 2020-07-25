@@ -2,7 +2,7 @@
 tags = ["python", "data", "nlp"]
 title = "Counting n-grams with Python and with Pandas"
 date = "2020-04-08T08:00:00+10:00"
-image = "images/job_title_bigrams.png"
+feature_image = "/images/job_title_bigrams.png"
 +++
 
 Sequences of words are useful for characterising text and for understanding text.

@@ -2,7 +2,7 @@
 tags = ["software"]
 title = "Power of Easy"
 date = "2020-05-15T15:36:27+10:00"
-image = "images/easy.jpg"
+feature_image = "/images/easy.jpg"
 +++
 
 Something being *easy* makes a huge difference in how often it is used.

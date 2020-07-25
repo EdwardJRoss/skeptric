@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Locating Addresses with G-NAF"
 date = "2020-04-30T22:05:00+10:00"
-image = "images/g-naf.png"
+feature_image = "/images/g-naf.png"
 +++
 
 A very useful open dataset the Australian Government provides is the [Geocoded National Address File (G-NAF)](https://data.gov.au/dataset/ds-dga-19432f89-dc3a-4ef3-b943-5326ef1dbecc/details).

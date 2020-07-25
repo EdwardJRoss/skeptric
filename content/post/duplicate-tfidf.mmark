@@ -2,7 +2,7 @@
 tags = ["nlp", "jobs", "python"]
 title = "Near Duplicates with TF-IDF and Jaccard"
 date = "2020-04-20T20:31:55+10:00"
-image = "images/tfidf_jaccard.png"
+feature_image = "/images/tfidf_jaccard.png"
 +++
 
 I've looked at finding near duplicate job ads using the [Jaccard index on n-grams](/jaccard-duplicates).

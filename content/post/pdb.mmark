@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Getting Started Debugging with pdb"
 date = "2020-03-29T08:00:59+11:00"
-image = "images/pdb.png"
+feature_image = "/images/pdb.png"
 +++
 
 When there's something unexpected happening in your Python code the first thing you want to do is to get more information about what's going wrong.

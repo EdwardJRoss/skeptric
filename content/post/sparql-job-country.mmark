@@ -2,7 +2,7 @@
 tags = ["jobs", "commoncrawl", "rdf"]
 title = "Extracting Australian Job Postings with SPARQL"
 date = "2020-06-26T08:00:00+10:00"
-image = "/images/sparql_australian_jobs.png"
+feature_image = "/images/sparql_australian_jobs.png"
 +++
 
 I am trying to extract Australian Job Postings from [Web Data Commons](http://webdatacommons.org/) which extracts structured data from [Common Crawl](https://commoncrawl.org/).

@@ -2,7 +2,7 @@
 tags = ["commoncrawl", "jobs"]
 title = "Extracting Job Ads from Common Crawl"
 date = "2020-06-15T08:00:00+10:00"
-image = "/images/job_ld_json.png"
+feature_image = "/images/job_ld_json.png"
 +++
 
 I've been using data from the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction) to [extract skills](/extract-skills-3-conjugations), [find near duplicate job ads](/near-duplicate-review) and [understand seniority of job titles](/job-ad-title-salary).

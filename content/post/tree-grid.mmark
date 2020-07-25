@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Representing Decision Trees on a grid"
 date = "2020-05-04T09:29:50+10:00"
-image = "images/chessboard_complex.png"
+feature_image = "/images/chessboard_complex.png"
 +++
 
 A [decision tree](https://en.wikipedia.org/wiki/Decision_tree) is a series of conditional rules leading to an outcome.

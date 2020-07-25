@@ -2,7 +2,7 @@
 tags = ["data", "nlp", "jobs"]
 title = "Finding Common Substrings"
 date = "2020-05-17T19:34:05+10:00"
-image = "images/common_substring.png"
+feature_image = "/images/common_substring.png"
 +++
 
 I've found pairs of near duplicates texts in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction) using [Minhash](/minhash-lsh).

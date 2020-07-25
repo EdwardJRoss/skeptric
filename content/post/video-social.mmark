@@ -2,7 +2,7 @@
 tags = ["life"]
 title = "Remote social catchups are less intimate"
 date = "2020-04-09T19:47:08+10:00"
-image = "images/groupcall.jpg"
+feature_image = "/images/groupcall.jpg"
 +++
 
 As an introvert I really like catching up with good friends in small groups.

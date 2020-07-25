@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Mail merge to PDF Files"
 date = "2020-06-04T18:08:02+10:00"
-image = "images/mail_merge.png"
+feature_image = "/images/mail_merge.png"
 +++
 
 A friend needed to generate a hundred contracts and their HR information system wasn't working properly.

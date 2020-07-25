@@ -2,7 +2,7 @@
 tags = ["programming"]
 title = "Powershell Debugging with Write-Warning"
 date = "2020-04-23T12:23:01+10:00"
-image = "images/write-warning.png"
+feature_image = "/images/write-warning.png"
 +++
 
 I had to debug some Powershell, without knowing anything about it.

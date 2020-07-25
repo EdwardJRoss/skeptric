@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Accelerating downloads with Multiprocessing" 
 date = "2020-06-30T08:00:00+10:00"
-image = "images/multiprocessing.png"
+feature_image = "/images/multiprocessing.png"
 +++
 
 Downloading files can often be a bottleneck in a data pipeline because network I/O is slow.

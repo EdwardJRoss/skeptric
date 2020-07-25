@@ -2,7 +2,7 @@
 tags = ["jobs", "nlp"]
 title = "Normalise Job Title Words"
 date = "2020-06-08T15:57:57+10:00"
-image = "images/normalising_job_words.png"
+feature_image = "/images/normalising_job_words.png"
 +++
 
 I'm trying to find job titles in job ads, but the same title can be written lots of different ways.

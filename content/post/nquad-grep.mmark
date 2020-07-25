@@ -2,7 +2,7 @@
 tags = ["data", "commoncrawl", "bash"]
 title = "Processing RDF nquads with grep"
 date = "2020-06-28T08:00:00+10:00"
-image = "/images/nquad_grep.png"
+feature_image = "/images/nquad_grep.png"
 +++
 
 I am trying to extract Australian Job Postings from [Web Data Commons](http://webdatacommons.org/) which extracts structured data from [Common Crawl](https://commoncrawl.org/).

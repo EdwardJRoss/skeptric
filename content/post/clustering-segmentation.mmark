@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Clustering for Segmentation"
 date = "2020-05-05T08:00:00+10:00"
-image = "images/cluster.svg"
+feature_image = "/images/cluster.svg"
 +++
 
 Dealing with thousands of different items is difficult.

@@ -2,7 +2,7 @@
 tags = ["sql", "data"]
 title = "Binning data in SQL"
 date = "2020-04-28T21:32:10+10:00"
-image = "images/excel_vlookup_example.png"
+feature_image = "/images/excel_vlookup_example.png"
 +++
 
 Generally when combining datasets you want to join them on some key.

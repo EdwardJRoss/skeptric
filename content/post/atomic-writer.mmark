@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Only write file on success"
 date = "2020-07-02T08:00:00+10:00"
-image = "/images/atomic_file_writer.png"
+feature_image = "/images/atomic_file_writer.png"
 +++
 
 When writing data pipelines it can be useful to [cache intermediate results](/caching-pipelines) to recover more quickly from failures.

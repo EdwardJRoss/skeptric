@@ -2,7 +2,7 @@
 tags = ["python", "data", "jobs"]
 title = "Tips for Extracting Data with Beautiful Soup"
 date = "2020-07-04T08:00:00+10:00"
-image = "/images/careersvic_div.png"
+feature_image = "/images/careersvic_div.png"
 +++
 
 [Beautiful soup](https://www.crummy.com/software/BeautifulSoup/) can be a useful library for extracting infomation from HTML.

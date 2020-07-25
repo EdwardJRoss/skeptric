@@ -2,7 +2,7 @@
 tags = ["python", "R"]
 title = "Cartesian Product in R and Python"
 date = "2020-05-14T14:28:44+10:00"
-image = "images/cartesian_product.svg"
+feature_image = "/images/cartesian_product.svg"
 +++
 
 You've got a couple of groups and you want to get every possible combination of them.

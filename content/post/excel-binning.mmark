@@ -2,7 +2,7 @@
 tags = ["excel"]
 title = "Excel Binning"
 date = "2020-04-24T07:58:18+10:00"
-image = "images/excel_group_example.png"
+feature_image = "/images/excel_group_example.png"
 +++
 
 Putting numeric data into *bins* is a useful technique for summarising, especially for continuous data.

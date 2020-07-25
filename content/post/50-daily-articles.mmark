@@ -2,7 +2,7 @@
 tags = ["writing"]
 title = "Writing 50 Daily Articles"
 date = "2020-05-03T22:29:15+10:00"
-image = "images/cover_image.png"
+feature_image = "/images/cover_image.png"
 +++
 
 I've been writing an article a day for 50 days now.

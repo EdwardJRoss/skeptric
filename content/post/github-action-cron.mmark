@@ -2,7 +2,7 @@
 tags = ["programming"]
 title = "Scheduling Github Actions"
 date = "2020-06-20T08:00:00+10:00"
-image = "/images/cron.png"
+feature_image = "/images/cron.png"
 +++
 
 I use [Github actions](/github-actions) to publish [daily articles](/50-daily-articles) via Hugo.

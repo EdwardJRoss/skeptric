@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Simple Models"
 date = "2020-05-16T19:31:03+10:00"
-image = "images/constant_model.png"
+feature_image = "/images/constant_model.png"
 +++
 
 My first instinct when dealing with a new problem is to try to find a complex technique to solve it.

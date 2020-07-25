@@ -2,7 +2,7 @@
 tags = ["python", "jupyter", "data", "nlp", "jobs"]
 title = "Showing Side-by-Side Diffs in Jupyter"
 date = "2020-04-12T13:19:41+10:00"
-image = "images/jupyter_diff.png"
+feature_image = "/images/jupyter_diff.png"
 +++
 
 When comparing two texts it's useful to have a side-by-side comparison highlighting the differences.

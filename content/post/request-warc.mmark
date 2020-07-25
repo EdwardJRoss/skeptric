@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Saving Requests and Responses in WARC"
 date = "2020-07-03T08:00:03+10:00"
-image = "/images/webrecorder.png"
+feature_image = "/images/webrecorder.png"
 +++
 
 When fetching large amounts of data from the internet a best practice is caching all the data.

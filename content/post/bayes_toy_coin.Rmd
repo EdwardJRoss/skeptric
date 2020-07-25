@@ -2,7 +2,7 @@
 title: "Estimating Bias in a Coin with Bayes Rule"
 author: "Edward Ross"
 date: "2020-05-08T20:00:20+10:00"
-image: "images/posterior_8_flips.png"
+image: "/images/posterior_8_flips.png"
 output: html_document
 ---
 

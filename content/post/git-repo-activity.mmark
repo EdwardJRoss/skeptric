@@ -2,7 +2,7 @@
 tags = ["programming"]
 title = "Heuristics for Active Open Source Project"
 date = "2020-06-07T08:50:10+10:00"
-image = "images/nltk_contributions.png"
+feature_image = "/images/nltk_contributions.png"
 +++
 
 When evaluating whether to use an open source project I generally want to know how active the project is.

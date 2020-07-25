@@ -2,7 +2,7 @@
 tags = ["linux"]
 title = "Disk Usage in Linux with du"
 date = "2020-03-30T19:47:03+11:00"
-image = "/images/du.png"
+feature_image = "/images/du.png"
 +++
 
 When your harddrive is filling up the `du` utility is a great way of seeing what's taking up all the space.

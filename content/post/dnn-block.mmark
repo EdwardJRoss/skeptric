@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Deep Neural Networks as a Building Block"
 date = "2020-07-11T08:00:00+10:00"
-image = "/images/symbolic-vqa.png"
+feature_image = "/images/symbolic-vqa.png"
 +++
 
 Deep Neural Networks have transformed dealing with unstructured data like images and text, making totally new things possible.

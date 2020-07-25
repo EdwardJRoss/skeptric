@@ -2,7 +2,7 @@
 tags = ["jobs", "nlp", "python", "graph"]
 title = "Minhash Sets"
 date = "2020-05-11T08:44:48+10:00"
-image = "images/different_jobs_similar_path.png"
+feature_image = "/images/different_jobs_similar_path.png"
 +++
 
 We've found pairs of near duplicates texts in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction) using [Minhash](/minhash-lsh).

@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Representing Interaction Networks"
 date = "2020-04-25T21:28:18+10:00"
-image = "images/bipartite_matrix.png"
+feature_image = "/images/bipartite_matrix.png"
 +++
 
 Behavioural data can illuminate the structure of the underlying actors.

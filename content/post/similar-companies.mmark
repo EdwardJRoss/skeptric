@@ -2,7 +2,7 @@
 tags = ["jobs", "nlp", "data", "graphs"]
 title = "Finding Duplicate Companies with Cliques"
 date = "2020-05-30T20:30:57+10:00"
-image = "images/similar_companies.png"
+feature_image = "/images/similar_companies.png"
 +++
 
 We've found [pairs of near duplicate texts](/minhash-lsh) in 400,000 job ads from the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).

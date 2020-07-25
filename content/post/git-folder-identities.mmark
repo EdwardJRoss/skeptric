@@ -2,7 +2,7 @@
 tags = ["git"]
 title = "Git Folder Identities"
 date = "2020-07-22T08:43:14+10:00"
-image = "/images/git_identities.svg"
+feature_image = "/images/git_identities.svg"
 +++
 
 Sometimes you want a different [git configuration](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration) in different contexts.

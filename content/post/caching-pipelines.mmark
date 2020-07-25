@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Caching Data Pipelines"
 date = "2020-06-29T08:00:00+10:00"
-image = "/images/donefile.png"
+feature_image = "/images/donefile.png"
 +++
 
 Data pipelines can often be thought of as a chain of pure functions passing data between them, even if they are not implemented that way.

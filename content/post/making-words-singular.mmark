@@ -2,7 +2,7 @@
 tags = ["nlp", "jobs"]
 title = "Making Words Singular"
 date = "2020-06-06T21:14:45+10:00"
-image = "images/singular_suffix.png"
+feature_image = "/images/singular_suffix.png"
 +++
 
 Trying to normalise text in [job titles](/job-title-words) I need a way to convert plural words into their singular form.

@@ -2,7 +2,7 @@
 tags = ["wsl", "linux", "emacs"]
 title = "Running an X server with WSL2"
 date = "2020-07-25T08:00:00+10:00"
-image = "/images/vcxsrv_disable_access_control.png"
+feature_image = "/images/vcxsrv_disable_access_control.png"
 +++
 
 I've recently [started working with WSL2](/wsl2-start) on my Windows machine, but have had trouble getting an X server to run.

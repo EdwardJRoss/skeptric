@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Python Inequality Chaining"
 date = "2020-04-03T07:54:42+11:00"
-image = "images/python_inequality.png"
+feature_image = "/images/python_inequality.png"
 +++
 
 In Python the comparison a <= b == c < d does the mathematically correct thing.

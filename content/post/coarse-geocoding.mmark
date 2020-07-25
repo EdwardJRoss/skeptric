@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Coarse Geocoding"
 date = "2020-06-27T08:00:01+10:00"
-image = "/images/nominatim.png"
+feature_image = "/images/nominatim.png"
 +++
 
 Sometimes you have some description of a location and want to work out where it is.

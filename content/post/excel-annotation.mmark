@@ -2,7 +2,7 @@
 tags = ["excel", "data"]
 title = "Spreadsheets as a Rough Annotation Tool"
 date = "2020-05-27T19:23:55+10:00"
-image = "images/excel_annotation.png"
+feature_image = "/images/excel_annotation.png"
 +++
 
 I needed to design some heuristic thresholds for grouping together items.

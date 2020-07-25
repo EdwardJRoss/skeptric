@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Raising Exceptions in Python Futures"
 date = "2020-07-21T21:41:16+10:00"
-image = "/images/back-to-the-future-logo.svg"
+feature_image = "/images/back-to-the-future-logo.svg"
 +++
 
 Python [`concurrent.futures`](https://docs.python.org/3/library/concurrent.futures.html) are a handy way of dealing with asynchronous execution.

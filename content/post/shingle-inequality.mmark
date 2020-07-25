@@ -2,7 +2,7 @@
 tags = ["maths", "data", "nlp"]
 title = "Jaccard Shingle Inequality"
 date = "2020-04-14T07:36:57+10:00"
-image = "/images/shingle_inequality.png"
+feature_image = "/images/shingle_inequality.png"
 +++
 
 Two similar documents are likely to have many similar phrases relative to the number of words in the document.

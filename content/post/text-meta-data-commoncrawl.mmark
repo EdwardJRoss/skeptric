@@ -2,7 +2,7 @@
 tags = ["commoncrawl", "data"]
 title = "Extracing Text, Metadata and Data from Common Crawl"
 date = "2020-06-12T08:00:00+10:00"
-image = "/images/warcinfo.png"
+feature_image = "/images/warcinfo.png"
 +++
 
 [Common Crawl](https://commoncrawl.org) builds an open dataset containing [over 100 billion unique items](https://commoncrawl.github.io/cc-crawl-statistics/plots/crawlsize) downloaded from the internet.

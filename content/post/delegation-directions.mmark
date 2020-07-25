@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Directions of Delegation"
 date = "2020-07-13T20:41:03+10:00"
-image = "/images/directions.svg"
+feature_image = "/images/directions.svg"
 +++
 
 For any actionable item there are four ways to handle it: do it, defer it, delegate it or delete it.

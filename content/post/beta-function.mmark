@@ -2,7 +2,7 @@
 tags = ["math"]
 title = "Beta Function"
 date = "2020-05-13T21:11:17+10:00"
-image = "images/beta_function_contour.png"
+feature_image = "/images/beta_function_contour.png"
 +++
 
 The [Beta Function](https://en.wikipedia.org/wiki/Beta_function) comes up in the likelihood of the [binomial distribution](/bernoulli-binomial).

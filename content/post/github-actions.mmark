@@ -2,7 +2,7 @@
 tags = ["programming"]
 title = "Using Github Actions with Hugo"
 date = "2020-05-23T21:28:43+10:00"
-image = "images/github_marketplace_hugo.png"
+feature_image = "/images/github_marketplace_hugo.png"
 +++
 
 I really like the idea of having a process triggered automatically when I push code.

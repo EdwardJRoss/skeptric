@@ -2,7 +2,7 @@
 tags = ["nlp", "python", "jobs"]
 title = "Active NER with Prodigy Teach"
 date = "2020-04-04T00:06:13+11:00"
-image = "images/prodigy_jobtitle_ab.png"
+feature_image = "/images/prodigy_jobtitle_ab.png"
 +++
 
 Active learning reduces the number of annotations you have to make by selecting for annotation the items that will have the biggest impact on model retraining.

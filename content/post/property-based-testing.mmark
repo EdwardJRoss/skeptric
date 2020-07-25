@@ -1,7 +1,7 @@
 ---
 title: "Property Based Testing - A thousand test cases in a single line"
 date: 2020-03-21T21:32:51+11:00
-image: "images/example_tests.png"
+feature_image: "/images/example_tests.png"
 ---
 
 Property based testing lets you specify rules that a function being tested will satisfy over a wide range of inputs.

@@ -2,7 +2,7 @@
 tags = ["android", "email", "FLOSS"]
 title = "Syncing Calendars and Contacts to Android with DAVx5"
 date = "2020-03-25T00:04:28+11:00"
-image = "images/davx5-logo.svg"
+feature_image = "/images/davx5-logo.svg"
 +++
 
 I find it really handy to have my calendar and contacts from my email client on my mobile phone.

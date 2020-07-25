@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Simple Metrics"
 date = "2020-06-01T19:53:31+10:00"
-image = "images/line_chart.png"
+feature_image = "/images/line_chart.png"
 +++
 
 I have a tendency to create really complex metrics. 

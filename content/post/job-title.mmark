@@ -2,7 +2,7 @@
 tags = ["nlp", "data", "jobs"]
 title = "What's in a Job Ad Title?"
 date = "2020-03-31T22:03:00+11:00"
-image = "images/job_titles.png"
+feature_image = "/images/job_titles.png"
 +++
 
 The job title should succinctly summarise what the role is about, so it should tell you a lot about the role.

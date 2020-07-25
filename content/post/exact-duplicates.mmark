@@ -2,7 +2,7 @@
 tags = ["python", "jobs", "nlp"]
 title = "Finding Exact Duplicate Text"
 date = "2020-04-13T07:56:24+10:00"
-image = "images/duplicate_ads.png"
+feature_image = "/images/duplicate_ads.png"
 +++
 
 Finding exact duplicates texts is quite straightforward and fast in Python.

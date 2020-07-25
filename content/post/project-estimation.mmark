@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Project Estimation"
 date = "2020-05-22T17:00:40+10:00"
-image = "images/blind_darts.png"
+feature_image = "/images/blind_darts.png"
 +++
 
 Estimating projects is notoriously difficult, and the larger the project the harder to estimate.

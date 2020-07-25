@@ -3,7 +3,7 @@ categories = [""]
 tags = ["data", "bash"]
 title = "Data Transformations in the Shell"
 date = "2020-03-23T21:48:51+11:00"
-image = "images/history_count.png"
+feature_image = "/images/history_count.png"
 +++
 
 There are many great tools for filtering, transforming and aggregating data like SQL, R dplyr and Python Pandas (not to mention [Excel](/using-excel.mmark)).

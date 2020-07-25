@@ -2,7 +2,7 @@
 tags = ["data", "nlp"]
 title = "Sequential Weak Labelling for NER"
 date = "2020-07-09T08:00:00+10:00"
-image = "/images/weak-seq.png"
+feature_image = "/images/weak-seq.png"
 +++
 
 The traditional way to train an NER model on a new domain is to annotate a whole bunch of data.

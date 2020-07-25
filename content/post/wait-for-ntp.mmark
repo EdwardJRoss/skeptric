@@ -2,7 +2,7 @@
 tags = ["linux"]
 title = "Waiting for System clock to synchronise"
 date = "2020-04-07T20:42:50+10:00"
-image = "images/timedatectl.png"
+feature_image = "/images/timedatectl.png"
 +++
 
 When trying to install packages with `apt` on a new Ubuntu AWS EC2 instance I had issues where the signature would fail to verify.

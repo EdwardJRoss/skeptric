@@ -2,7 +2,7 @@
 tags = ["data", "graph", "presto", "athena"]
 title = "Bridging Bipartite Graph"
 date = "2020-05-26T15:50:02+10:00"
-image = "images/bipartite_matrix.png"
+feature_image = "/images/bipartite_matrix.png"
 +++
 
 When you have behavioural data between actors and events you naturally get a bipartite graph.

@@ -2,7 +2,7 @@
 tags = ["programming"]
 title = "Using Local Github Actions"
 date = "2020-06-19T08:00:00+10:00"
-image = "/images/github_actions.png"
+feature_image = "/images/github_actions.png"
 +++
 
 I've been using Github Actions to [publish this website](/github-actions) for almost a month.

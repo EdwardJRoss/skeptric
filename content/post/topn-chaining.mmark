@@ -3,7 +3,7 @@ categories = [""]
 tags = ["python", "pandas", "R", "dplyr"]
 title = "Second most common value with Pandas"
 date = "2020-03-22T23:34:56+11:00"
-image = "images/pandas.png"
+feature_image = "/images/pandas.png"
 +++
 
 I really like [method chaining](https://towardsdatascience.com/the-unreasonable-effectiveness-of-method-chaining-in-pandas-15c2109e3c69) in Pandas.

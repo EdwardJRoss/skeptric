@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Pain gain matrix for discussing approaches"
 date = "2020-05-28T21:29:36+10:00"
-image = "images/pain_gain.png"
+feature_image = "/images/pain_gain.png"
 +++
 
 Placing options on a scatterplot of costs versus benefits is a common practice for prioritising opportunities and solutions.

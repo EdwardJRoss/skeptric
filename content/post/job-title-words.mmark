@@ -2,7 +2,7 @@
 tags = ["jobs", "nlp"]
 title = "Job Title Words"
 date = "2020-06-02T20:09:42+10:00"
-image = "images/role_words.png"
+feature_image = "/images/role_words.png"
 +++
 
 I found [NER wasn't the right tool for extracting job titles](/job-title-not-ner), and a frequency based approach is going to work better.

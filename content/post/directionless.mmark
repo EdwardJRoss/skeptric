@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Finding a direction"
 date = "2020-07-16T23:43:16+10:00"
-image = "images/decision.png"
+feature_image = "/images/decision.png"
 +++
 
 When I don't have clear goals, I'm more likely to spread myself too thin.

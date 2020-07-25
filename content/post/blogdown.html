@@ -2,7 +2,7 @@
 tags: ["R", "blog"]
 title: "From Hugo to R Blogdown"
 date: "2020-04-18T15:00:20+10:00"
-image: "images/blogdown.png" 
+image: "/images/blogdown.png"
 ---
 
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
@@ -63,7 +63,7 @@ import matplotlib.pyplot as plt
 df=pd.DataFrame([[1, 2], [3, 4], [4, 3], [2, 3]])
 fig = plt.figure(figsize=(14,8))
 for i in df.columns:
-    ax=plt.subplot(2,1,i+1) 
+    ax=plt.subplot(2,1,i+1)
     df[[i]].plot(ax=ax)
     print(i)
 

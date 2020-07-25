@@ -2,7 +2,7 @@
 tags: ["nlp", "jobs"]
 title: "Extracting Skills from Job Ads: Part 1 - Noun Phrases"
 date: 2020-01-07T09:30:08+11:00
-image: "/images/job_experience_noun_phrase.svg"
+feature_image: "/images/job_experience_noun_phrase.svg"
 ---
 
 I'm trying to extract skills from job ads, using job ads in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction). Using rules to extract noun phrases ending in experience (e.g. *subsea cable engineering experience*) we can extract many skills, but there's a lot of false positives (e.g. *previous experience*)

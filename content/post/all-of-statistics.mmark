@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "All of Statistics"
 date = "2020-04-10T21:27:32+10:00"
-image = "images/all_of_statistics.jpg"
+feature_image = "/images/all_of_statistics.jpg"
 +++
 
 For anyone who wants to learn Statistics and has a maths or physics I highly recommend [Larry Wasserman's *All of Statistics*](https://www.stat.cmu.edu/~larry/all-of-statistics/) .

@@ -2,7 +2,7 @@
 tags = ["nlp", "jobs", "python"]
 title = "Near Duplicates with Jaccard"
 date = "2020-04-19T15:56:57+10:00"
-image = "/images/jaccard_shingle_length.png"
+feature_image = "/images/jaccard_shingle_length.png"
 +++
 
 Finding *near*-duplicate texts is a hard problem, but the Jaccard index for [n-grams](https://en.wikipedia.org/wiki/N-gram) is an effective measure that's efficient on small sets.

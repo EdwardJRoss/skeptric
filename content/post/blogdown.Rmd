@@ -2,7 +2,7 @@
 tags: ["R", "blog"]
 title: "From Hugo to R Blogdown"
 date: "2020-04-18T15:00:20+10:00"
-image: "images/blogdown.png" 
+image: "/images/blogdown.png"
 ---
 
 [R blogdown](https://bookdown.org/yihui/blogdown/) gives a really easy way to post blogs containing evaluated R (and Python!) code chunks and plots.
@@ -36,7 +36,7 @@ and simply adding that to the top of my `config.toml` fixed the warning.
 I could locally generate a preview on port 4321 with:
 
 ```
-R --vanilla --slave -e 'blogdown::serve_site()' 
+R --vanilla --slave -e 'blogdown::serve_site()'
 ```
 
 # Benefits
@@ -95,7 +95,7 @@ import matplotlib.pyplot as plt
 df=pd.DataFrame([[1, 2], [3, 4], [4, 3], [2, 3]])
 fig = plt.figure(figsize=(14,8))
 for i in df.columns:
-    ax=plt.subplot(2,1,i+1) 
+    ax=plt.subplot(2,1,i+1)
     df[[i]].plot(ax=ax)
     print(i)
 

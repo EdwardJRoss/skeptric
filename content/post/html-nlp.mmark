@@ -2,7 +2,7 @@
 tags = ["data", "nlp"]
 title = "Using HTML in NLP"
 date = "2020-07-06T08:00:00+10:00"
-image = "/images/job_html.png"
+feature_image = "/images/job_html.png"
 +++
 
 Many documents available on the web have *meaningful* markup.

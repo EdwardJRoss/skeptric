@@ -2,7 +2,7 @@
 tags = ["web", "python", "javascript"]
 title = "Serving Static Assets with Python Simple Server"
 date = "2020-05-19T19:32:41+10:00"
-image = "images/cors_error.png"
+feature_image = "/images/cors_error.png"
 +++
 
 I was trying to load a local file in a HTML page and got a Cross-Origin Request Blocked error in my browser.

@@ -2,7 +2,7 @@
 tags = ["maths"]
 title = "Lessons from a mathematician on building a community"
 date = "2020-05-06T07:59:26+10:00"
-image = "images/thurston.jpg"
+feature_image = "/images/thurston.jpg"
 +++
 
 Mathematicians and software developers have a lot in common.

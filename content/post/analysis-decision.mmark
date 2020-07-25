@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Analysis Needs to Change A Decision"
 date = "2020-04-22T22:40:22+10:00"
-image = "images/decision.png"
+feature_image = "/images/decision.png"
 +++
 
 Any analysis where the results won't change a decision is worthless.

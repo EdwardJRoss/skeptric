@@ -2,7 +2,7 @@
 tags = ["jobs"]
 title = "Schemas for JobPostings in Practice"
 date = "2020-06-23T08:00:00+10:00"
-image = "/images/schema_job_posting.png"
+feature_image = "/images/schema_job_posting.png"
 +++
 
 A job posting has a description, a company, sometimes a salary, ... and what else?

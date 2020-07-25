@@ -2,7 +2,7 @@
 tags = ["emacs", "vscode"]
 title = "Considering VS Code from Emacs"
 date = "2020-05-09T08:50:50+10:00"
-image = "images/vscode.svg"
+feature_image = "/images/vscode.svg"
 +++
 
 I've been using Emacs as my primary editor for around 5 years now (after 4 years of Vim).

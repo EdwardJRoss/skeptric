@@ -1,7 +1,7 @@
 ---
 title: "Exporting data to Python with Amazon Athena"
 date: 2020-03-16T21:26:57+11:00
-image: "/images/athena.png"
+feature_image: "/images/athena.png"
 ---
 
 One necessary hurdle in doing data analysis or machine learning is loading the data.

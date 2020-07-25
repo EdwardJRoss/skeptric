@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Data Models"
 date = "2020-07-15T20:02:33+10:00"
-image = "/images/data-model.png"
+feature_image = "/images/data-model.png"
 +++
 
 Information is useful in that it helps [make better decisions](/analysis-decision).

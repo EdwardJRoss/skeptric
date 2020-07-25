@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Community detection in Graphs"
 date = "2020-05-20T22:12:25+10:00"
-image = "images/football-sbm-fit.svg"
+feature_image = "/images/football-sbm-fit.svg"
 +++
 
 People using a website or app will have different patterns of behaviours.

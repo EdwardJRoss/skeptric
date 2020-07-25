@@ -2,7 +2,7 @@
 tags = ["sql"]
 title = "Checking for Uniques in SQL"
 date = "2020-06-18T20:07:57+10:00"
-image = "/images/duplicate_rows.png"
+feature_image = "/images/duplicate_rows.png"
 +++
 
 When [checking my work](/checking) in SQL one of the first things I do is confirm a column I expect to be unique is.

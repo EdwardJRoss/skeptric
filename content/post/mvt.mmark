@@ -2,7 +2,7 @@
 tags = ["maths"]
 title = "Mean Value Theorem"
 date = "2020-07-10T08:00:00+10:00"
-image = "/images/mvt.svg"
+feature_image = "/images/mvt.svg"
 +++
 
 I remember three things from lectures in my first year of university.

@@ -2,7 +2,7 @@
 tags = ["excel"]
 title = "Excel Completion Count"
 date = "2020-06-14T08:00:00+10:00"
-image = "/images/excel_progress.png"
+feature_image = "/images/excel_progress.png"
 +++
 
 I was recently running some simple, but tedious, annotation in Excel.

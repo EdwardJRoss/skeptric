@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "4am Rule for timeseries"
 date = "2020-05-01T21:02:06+10:00"
-image = "images/4am.png"
+feature_image = "/images/4am.png"
 +++
 
 When you've got a timeseries that doesn't have a timezone attched to it the natural question is "what timezone is this data from?"

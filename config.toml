@@ -1,6 +1,6 @@
 baseURL = "https://skeptric.com/"
 languageCode = "en-us"
-theme = "casper-two"
+theme = "hugo-casper3"
 paginate = 12
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 

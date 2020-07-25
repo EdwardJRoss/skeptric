@@ -2,7 +2,7 @@
 tags = ["sql", "data"]
 title = "SQL Views for hiding business logic"
 date = "2020-04-21T22:18:46+10:00"
-image = "images/create_view.png"
+feature_image = "/images/create_view.png"
 +++
 
 The longer I work with a database the more I learn the dark corners of the dataset.

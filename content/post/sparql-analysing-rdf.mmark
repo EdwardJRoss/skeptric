@@ -2,7 +2,7 @@
 tags = ["python", "rdf", "commoncrawl", "data"]
 title = "Analytics Web Data Commons with SPARQL"
 date = "2020-06-25T08:00:00+10:00"
-image = "/images/rdf_analysis.png"
+feature_image = "/images/rdf_analysis.png"
 +++
 
 I am trying to understand how the [JobPosting schema](https://schema.org/JobPosting) is used in [Web Data Commons](http://webdatacommons.org/) structured data extracts from [Common Crawl](https://commoncrawl.org/).

@@ -2,7 +2,7 @@
 tags = ["emacs", "data"]
 title = "Pipetable to CSV"
 date = "2020-04-29T21:30:05+10:00"
-image = "images/pipetable.png"
+feature_image = "/images/pipetable.png"
 +++
 
 Sometimes I get out pipe tables in Emacs that I want to convert into a CSVto put somewhere else.

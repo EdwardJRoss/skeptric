@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Four Competencies of an Effective Analyst"
 date = "2020-05-02T22:01:02+10:00"
-image = "images/kolassa-data-scientist-venn.png"
+feature_image = "/images/kolassa-data-scientist-venn.png"
 +++
 
 Analysts tend to be natural problem solvers, good at reasoning and adept with numbers.

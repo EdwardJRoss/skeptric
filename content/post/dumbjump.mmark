@@ -2,7 +2,7 @@
 tags: ["emacs", "programming"]
 title: "Using emacs dumb-jump with evil"
 date: 2020-03-20T22:31:01+11:00
-image: "images/dumbjump.png"
+feature_image: "/images/dumbjump.png"
 ---
 
 [Dumb-jump](https://github.com/jacktasia/dumb-jump) is a fantastic emacs package for code navigation.

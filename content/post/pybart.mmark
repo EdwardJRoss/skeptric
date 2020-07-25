@@ -2,7 +2,7 @@
 tags = ["python", "nlp"]
 title = "pyBART: Better Dependencies for Information Extraction"
 date = "2020-07-07T08:00:00+10:00"
-image = "/images/pybart.png"
+feature_image = "/images/pybart.png"
 +++
 
 Dependency trees are a remarkably powerful tool for information extraction.

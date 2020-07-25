@@ -2,7 +2,7 @@
 tags = ["data"]
 title = "Metrics you can Drive"
 date = "2020-07-24T08:00:00+10:00"
-image = "/images/graph_line.png"
+feature_image = "/images/graph_line.png"
 +++
 
 Tracking a metric can help to drive dramatic improvements.

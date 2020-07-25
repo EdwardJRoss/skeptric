@@ -2,7 +2,7 @@
 tags = ["general"]
 title = "Market for Highschool Maths Textbooks"
 date = "2020-05-29T17:14:38+10:00"
-image = "images/textbook.jpg"
+feature_image = "/images/textbook.jpg"
 +++
 
 My first professional job was for [Haese mathematics](https://www.haesemathematics.com/) which is a small family-owned South Australian business that writed and publishes mathematics textbooks.

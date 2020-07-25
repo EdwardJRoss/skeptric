@@ -1,7 +1,7 @@
 ---
 title: Solving polynomials of degree 2,3 and 4
 date: 2011-01-03T02:45:58+00:00
-image: "images/cubic_eqn.jpg"
+feature_image: "/images/cubic_eqn.jpg"
 ---
 
 $$\newcommand\nth{n^{\mathrm{th}}}$$

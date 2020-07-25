@@ -2,7 +2,7 @@
 tags = ["python", "data"]
 title = "Demjson for parsing tricky Javascript Objects"
 date = "2020-07-05T08:00:00+10:00"
-image = "/images/demjson.png"
+feature_image = "/images/demjson.png"
 +++
 
 Modern Javascript web frameworks often embed the data used to render each webpage in the HTML.

@@ -2,7 +2,7 @@
 tags = ["python", "rdf"]
 title = "Adding Types to Rdflib"
 date = "2020-06-24T08:00:00+10:00"
-image = "/images/rdflib_bind.png"
+feature_image = "/images/rdflib_bind.png"
 +++
 
 I've been using [RDFLib](https://rdflib.readthedocs.io/) to [parse Job posts extracted from Common Crawl](/streaming-nquad-rdf).

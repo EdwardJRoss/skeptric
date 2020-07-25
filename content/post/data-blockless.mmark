@@ -1,7 +1,7 @@
 ---
 title: "Data Blockless: A better way to create data"
 date: 2019-10-11T15:14:09+11:00
-image: "images/lego.png"
+feature_image: "/images/lego.png"
 ---
 
 Before you can do any machine learning you need to be able to read the data, create test and training splits and convert it into the right format.

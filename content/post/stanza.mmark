@@ -2,7 +2,7 @@
 tags = ["python", "nlp"]
 title = "Stanza for NLP"
 date = "2020-07-09T08:00:00+10:00"
-image = "/images/stanza.png"
+feature_image = "/images/stanza.png"
 +++
 
 Working with unstructured text is much easier if we add structure to it.

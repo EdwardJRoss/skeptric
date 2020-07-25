@@ -2,7 +2,7 @@
 tags = ["data", "math"]
 title = "From Bernoulli to Binomial Distributions"
 date = "2020-05-12T20:50:23+10:00"
-image = "images/binomial_spread.png"
+feature_image = "/images/binomial_spread.png"
 +++
 
 Suppose that you flip a fair coin 10 times, how many heads will you get?

@@ -2,7 +2,7 @@
 tags = ["SQL", "Presto", "Athena"]
 title = "Calculating percentages in Presto"
 date = "2020-03-28T08:24:51+11:00"
-image = "images/athena_one_sixth.png"
+feature_image = "/images/athena_one_sixth.png"
 +++
 
 One trick I use all the time is calculating percentages in SQL by dividing with the count.

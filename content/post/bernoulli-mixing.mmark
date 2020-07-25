@@ -2,7 +2,7 @@
 tags = ["maths"]
 title = "A Mixture of Bernoullis is Bernoulli"
 date = "2020-04-27T08:28:18+10:00"
-image = "images/mixture_binomial.png"
+feature_image = "/images/mixture_binomial.png"
 +++
 
 Suppose you are analysing email conversion through rates.

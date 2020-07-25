@@ -2,7 +2,7 @@
 tags = ["data", "nlp"]
 title = "A Checklist for NLP models"
 date = "2020-07-12T08:00:00+10:00"
-image = "/images/nlp_checklist.png"
+feature_image = "/images/nlp_checklist.png"
 +++
 
 When training machine learning models typically you get a training dataset for fitting the model and a test dataset for evaluating the model (on small datasets techniques like cross-validation are common).

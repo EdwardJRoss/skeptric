@@ -2,7 +2,7 @@
 tags = ["nlp", "jobs", "python"]
 title = "Searching for Near Duplicates with Minhash"
 date = "2020-05-10T09:31:55+10:00"
-image = "images/minhash_s_128.png"
+feature_image = "/images/minhash_s_128.png"
 +++
 
 I'm trying to find near duplicates texts in the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction).

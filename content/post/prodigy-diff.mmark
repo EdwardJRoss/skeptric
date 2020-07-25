@@ -2,7 +2,7 @@
 tags = ["nlp", "jobs", "python", "data"]
 title = "Creating a Diff Recipe in Prodigy"
 date = "2020-04-11T12:41:54+10:00"
-image = "images/prodigy_diff.png"
+feature_image = "/images/prodigy_diff.png"
 +++
 
 I created a simple custom recipe to show diffs between two texts in Prodigy.

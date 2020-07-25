@@ -2,7 +2,7 @@
 tags = ["data", "clustering"]
 title = "Clustering for Exploration"
 date = "2020-05-25T20:53:28+10:00"
-image = "images/cluster.svg"
+feature_image = "/images/cluster.svg"
 +++
 
 Suppose you're running a website with tens of thousands of different products, and no satisfactory way to group them up.

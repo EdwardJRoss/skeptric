@@ -2,7 +2,7 @@
 tags = ["sql"]
 title = "Filling Gaps in SQL"
 date = "2020-07-14T20:09:30+10:00"
-image = "/images/cross_join.svg"
+feature_image = "/images/cross_join.svg"
 +++
 
 It's common for there to be gaps or missing values in an SQL table.

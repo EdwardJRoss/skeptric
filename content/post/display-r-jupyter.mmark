@@ -1,7 +1,7 @@
 ---
 title: "How to Display All Columns in R Jupyter"
 date: 2020-03-17T00:00:00+11:00
-image: "/images/irkernel-logo.svg"
+feature_image: "/images/irkernel-logo.svg"
 ---
 
 I like to do one-off analyses in R because [tidyverse](https://www.tidyverse.org/) makes it really easy and beautiful.

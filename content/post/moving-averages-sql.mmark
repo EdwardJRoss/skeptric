@@ -2,7 +2,7 @@
 tags = ["SQL"]
 title = "Moving Averages in SQL"
 date = "2020-03-27T08:00:43+11:00"
-image = "images/moving_average.png"
+feature_image = "/images/moving_average.png"
 +++
 
 Moving averages can help smooth out the noise to reveal the undelying signal in a dataset.

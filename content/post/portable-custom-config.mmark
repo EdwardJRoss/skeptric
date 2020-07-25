@@ -2,7 +2,7 @@
 tags = ["git", "emacs", "bash"]
 title = "Customising Portable Dotfiles"
 date = "2020-07-23T08:00:00+10:00"
-image = "/images/dotfiles.png"
+feature_image = "/images/dotfiles.png"
 +++
 
 I keep my personal configuration files in a public [dotfiles](https://github.com/EdwardJRoss/dotfiles) repository.

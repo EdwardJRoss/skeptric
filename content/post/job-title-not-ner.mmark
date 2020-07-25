@@ -2,7 +2,7 @@
 tags = ["nlp", "data", "jobs", "python"]
 title = "Not using NER for extracting Job Titles"
 date = "2020-04-06T08:03:17+10:00"
-image = "images/job_titles_common.png"
+feature_image = "/images/job_titles_common.png"
 +++
 
 I've been [trying to use Named Entity Recogniser (NER)](/ner-prodigy/) to extract [job titles from the titles of job ads](/job-title/) to better understand a collection of job ads.

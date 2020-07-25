@@ -2,7 +2,7 @@
 tags = ["jobs", "data"]
 title = "Understaning Job Ad Titles with Salary"
 date = "2020-06-10T08:00:00+10:00"
-image = "/images/adzuna_salary_chefs_cooks.png"
+feature_image = "/images/adzuna_salary_chefs_cooks.png"
 +++
 
 Different industries have different ways of distinguishing seniority in a job title.
