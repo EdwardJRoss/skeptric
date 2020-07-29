@@ -2,7 +2,7 @@
 tags = ["communication"]
 title = "Speaking Quota"
 date = "2020-07-30T08:00:00+10:00"
-image = "/images/no_talking.png"
+feature_image = "/images/no_talking.png"
 +++
 
 I often find [listening more productive than talking](/listening), but still find it easy to spend a lot of meetings talking.
