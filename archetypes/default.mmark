@@ -2,6 +2,6 @@
 tags = [""]
 title = "{{ replace .TranslationBaseName "-" " " | title }}"
 date = "{{ .Date }}"
-image = ""
+feature_image = "/images/"
 draft = true
 +++
