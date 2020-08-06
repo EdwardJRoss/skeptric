@@ -6,11 +6,13 @@ image = ""
 draft = true
 +++
 
+Using text
+
 https://sites.google.com/view/acl-2020-multi-modal-ie
 
-[BLING-KPE](https://arxiv.org/pdf/1911.02671.pdf): size, location, font, dom (inline/block/leaf)
+[BLING-KPE](https://arxiv.org/pdf/1911.02671.pdf) used visual features like size, location, and font on top of the tokens embeddings in an ELMO model to significantly improve keyphrase extraction.
 
-[CharGrid](https://arxiv.org/abs/1809.08799) :SAP concur
+A very visual approach is taken by [CharGrid](https://arxiv.org/abs/1809.08799); which is used in production in SAP Concur to recognise text in scanned receipts.
 
 [GraphIE](https://arxiv.org/abs/1810.13083)
 
