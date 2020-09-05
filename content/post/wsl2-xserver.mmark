@@ -44,7 +44,8 @@ We now need to narrow the scope so it's only open to WSL2.
 
 Find the Rule you just created in the list of Inbound Rules, right click and select "Properties"
 Click the "Scope" tab, and under "Remote IP Addresses" click Add entering "172.16.0.0/12" under port.
-This is the subnet related to WSL2.
+Then click Add again entering "192.168.0.0/16" under port.
+These are local subnets that may be used by WSL2.
 
 ![WSL Subnet](/images/windows_network_limit_wsl_subnet.png)
 
