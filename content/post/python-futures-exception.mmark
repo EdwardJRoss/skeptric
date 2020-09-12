@@ -18,7 +18,7 @@ Since most of the time is spent waiting for file I/O this has a similar speed up
 ```python
 from concurrent import futures
 with futures.ThreadPoolExecutor() as executor:
-  results = futures.wait([download(filename) for filename in filenames])
+  results = futures.wait([executor.submit(download, filename) for filename in filenames])
 ```
 
 However if there's some problem with one of the downloads we'll never actually see the error.
@@ -30,7 +30,7 @@ If we just want to raise the exception we can do it by evaluating the results:
 ```python
 from concurrent import futures
 with futures.ThreadPoolExecutor() as executor:
-  results = futures.wait([download(filename) for filename in filenames])
+  results = futures.wait([executor.submit(download, filename) for filename in filenames])
 for result in results.done:
   result.result()
 ```
