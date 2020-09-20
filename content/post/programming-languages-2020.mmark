@@ -106,13 +106,15 @@ Some interesting logic programming languages are:
 * Prolog: The most famous logic programming language. Can implement many interesting algorithms
 * [Mercury](https://mercurylang.org/): Functional logic language; a little immature
 * [Minikanren](https://en.wikipedia.org/wiki/MiniKanren): A way of embedding logic programming in languages
+* Datalog: A logic query language, a sort of alternative to SQL
 
 But there are other types of search techniques:
 
-* Mixed Integer Programming: A very efficient way of searching for some kinds of problems, as implemented in [Google's OR Tools](https://developers.google.com/optimization/introduction/overview) and taught in [Discrete Optimisation](https://www.coursera.org/learn/discrete-optimization)
+* Constraint Programming in [MiniZinc](https://www.minizinc.org/): Describing how to solve problems as optimisation under constraints. I'm also interested in the [Discrete Optimisation](https://www.coursera.org/learn/discrete-optimization) covering some of these methods.
 * [Z3 Theorem Prover](https://github.com/Z3Prover/z3): An SMT Solver
 * [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing): An effective optimisaiton method for certain problems
 * Proof Assistants: Like Coq, Agda and Idris
 
 These are all things I'm interested in, but don't know enough about.
 But I feel like one day I'll hit a problem (or I already have) that would be easy if only I knew them better.
+
