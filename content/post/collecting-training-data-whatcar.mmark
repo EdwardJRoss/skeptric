@@ -2,7 +2,7 @@
 tags = ["data", "whatcar"]
 title = "Importance of Collecting You Own Training Data"
 date = "2020-11-07T16:24:07+11:00"
-feature_image = "/images/whatchar_annotate.png"
+feature_image = "/images/whatcar_annotate.png"
 +++
 
 A couple years ago I built [whatcar.xyz](http://whatcar.xyz) which predicts the make and model of Australian cars.
