@@ -128,6 +128,3 @@ df %>%
   labs(title='Probability a random pair will be emitted from LSH',
        x='Jaccard Similarity', y = 'Probability')
 
-
-
-}
