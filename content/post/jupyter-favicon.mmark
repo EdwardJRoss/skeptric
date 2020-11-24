@@ -9,10 +9,11 @@ I often have way too many Jupyter notebook tabs open and I have to distinguish t
 What if we could change the icons to visually distinguish different notebooks?
 
 I thought I found a really easy way to set the icon in Jupyter notebooks... but it works in Firefox and not Chrome. 
-I'll go through the easy solution that may work in some browsers and the hard solution.
+I'll go through the easy solution works in more browsers and the hard solution.
 
-# Guaranteed Solution (for all webpages): Changing in Developer Console
+# More Robust Solution: Changing in Developer Console
 
+This works in at least Chrome and Firefox, but doesn't seem to work with Edge.
 If you open the developer console (in Chrome and Firefox press F12 and select console) in your browser you can change the favicon with a little Javascript; to change it to the file `favicon.ico` use:
 
 ```js
