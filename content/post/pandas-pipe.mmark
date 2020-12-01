@@ -2,7 +2,7 @@
 tags = ["python"]
 title = "Chaining with Pandas Pipe function"
 date = "2020-11-30T21:55:46+11:00"
-feature_image = "/images/"pandas_pipe.png
+feature_image = "/images/pandas_pipe.png"
 +++
 
 I often use method chaining in pandas, although certain problems like [calculating the second most common value](/topn-chaining) are hard.
