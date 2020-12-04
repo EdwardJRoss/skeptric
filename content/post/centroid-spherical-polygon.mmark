@@ -9,7 +9,7 @@ You're organising a conference of operations research analysts from all over the
 Where do you put the conference?
 
 Let's model the world as a unit sphere in 3 dimensional space, and have the N people at cartesian coordinates $$ \{ p_i\}_{i=1}^{N}$$.
-Then the point c of minimum average distance, the spherical centroid, is given by the forumula:
+Then the point c of minimum average distance, the spherical centroid (or [spherical Fréchet mean](https://en.wikipedia.org/wiki/Fr%C3%A9chet_mean)), is given by the forumula:
 
 $$ c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}} $$
 
