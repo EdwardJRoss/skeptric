@@ -36,7 +36,7 @@ Any line containing a point and the translation (or more generally an injective 
 Given two scalar multiplications  $$\alpha$$  and  $$\beta$$  we define their sum on a translation T by  $$(\alpha + \beta)(T) = \alpha(T) \beta(T)$$  and their product by  $$\alpha \times \beta (T) = \alpha (\beta T)$$ , define 0 to be the scalar multiplication sending all translations to the identity, and 1 to be the identity scalar multiplication.
 
 
-**Theorem: **The scalar multiplications form a division ring under the multiplications given above if and only if  $$d > 2$$ .
+**Theorem:** The scalar multiplications form a division ring under the multiplications given above if and only if  $$d > 2$$ .
 
 
 Then we can go ahead and choose any point, which we call the origin, and d other points which, with the origin, span the space. We denote the d translations from the origin to the other points by  $$v_1, \ldots, v_d$$ . Then any vector can be uniquely written  $$(k_1, \ldots, k_d) = k_1 (v_1) + \ldots k_d(v_d)$$  for unique  $$k_1, \ldots k_d$$  in the space. Now given there is a unique translation from the origin to any point, we can identify a vector with its action on the origin. Thus we obtain a **coordinitisation** of the space; a correspondence with  $$K^d$$  for some division ring K. This is of course not cannonical; our choice of the d + 1 points were arbitrary.
@@ -48,7 +48,7 @@ It is interesting to note how such geometric axioms (although carefully chosen) 
 What about d = 1 and 2? For d=1 there is no hope, since axiom 3 is trivial and we could just take the line with n points for n not a power of a prime number. Since there is no division ring with n elements the theorem could not be true.
 
 
-The case d = 2 turns out to be quite interesting. In dimensions at least 3 we can prove **D****esargues theorem**. This has two parts:
+The case d = 2 turns out to be quite interesting. In dimensions at least 3 we can prove **Desargues theorem**. This has two parts:
 
 
 1. Let p, q, r be parallel lines, and let P, P’ be distinct points on p, Q, Q’ be distinct points on q and R, R’ be distinct points on R. If PQ is parallel to P’Q’ and QR is parallel to Q’R’ then PR is parallel to P’R’.
