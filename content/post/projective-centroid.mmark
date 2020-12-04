@@ -2,7 +2,7 @@
 tags = ["data","maths"]
 title = "Centroid for Cosine Similarity"
 date = "2020-12-04T18:17:28+11:00"
-feature_image = "/images/"
+feature_image = "/images/projective_unit.png"
 +++
 
 [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) is often used as a similarity measure in machine learning.
