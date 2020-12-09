@@ -51,3 +51,5 @@ But if we slightly perturb the points then in general there should be a unique m
 However there could also be a maximum distance point (since the sphere is bounded) and that would also satisfy the equation.
 I would expect if we start close to the minimum then the iterative process will converge to the minimum, and that the projection of the geometric average (what you get if you set c = 0 initially) will be almost always close to the minimum.
 I don't have proof on this, but a few computations suggests that the approach can work well in practice.
+
+To see a concrete implementation of this in code, have a look at the post [calculating centroid on a sphere](/calculate-centroid-on-sphere).
