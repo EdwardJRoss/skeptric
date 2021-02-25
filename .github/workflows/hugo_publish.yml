@@ -43,4 +43,4 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: sync public ${{ secrets.RCLONE_DEST }}
+        args: sync public ${{ secrets.RCLONE_DEST }} --exclude datasets/*
