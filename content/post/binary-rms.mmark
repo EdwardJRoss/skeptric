@@ -16,7 +16,7 @@ This is much more useful than the binary prediction of whether they will buy the
 
 One way to evaluate the prediction of the probabilities of the outcomes is via *likelihood*.
 For a [bernoulli distribution](/bernoulli-binomial) with constant, but unknown, probability p, the probability of getting a positive is p and a negative is (1 - p).
-Suppose we've taken N draws and got S positive cases, the likelihood of this result for a given p is $$ L(p) = p^S (1 - p)^(N-S) $$.
+Suppose we've taken N draws and got S positive cases, the likelihood of this result for a given p is $$ L(p) = p^S (1 - p)^{N-S} $$.
 Then we're trying to work out what the probability p is given the data.
 One way to answer this is to pick the value of p which is most likely, which happens to be S/N (i.e. the average number of positive cases, as you would expect).
 
