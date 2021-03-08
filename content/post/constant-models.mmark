@@ -13,13 +13,14 @@ For categorical predictions just evaluate every possible category to choose as t
 For continuous predictions with a [convex](https://en.wikipedia.org/wiki/Convex_function) loss function you can use bisection, starting with the smallest and largest values of the predictor.
 For common loss functions the best constant model is a familiar [measure of central tendency](https://en.wikipedia.org/wiki/Central_tendency#Solutions_to_variational_problems).
 
-| Loss Function | Best constant | Minimum Value  |
-| ------------- |---------------| ---------------|
-| Accuracy      | Mode | Maximum proportion |
-| Root Mean Squared Error | Mean | Standard Deviation |
-| Mean Absolute Error | Median | [MAD median](https://en.wikipedia.org/wiki/Average_absolute_deviation#Mean_absolute_deviation_around_the_median) |
-| Mean Weighted Absolute Error | Quantile |  |
-| Maximum Absolute Error | Midrange | Half the range |
+| Loss Function                | Best constant   | Minimum Value                                                                                                    |
+| -------------                | --------------- | ---------------                                                                                                  |
+| Accuracy                     | Mode            | Maximum proportion                                                                                               |
+| Cross Entropy                | Proportion      |                                                                                                                  |
+| Root Mean Squared Error      | Mean            | Standard Deviation                                                                                               |
+| Mean Absolute Error          | Median          | [MAD median](https://en.wikipedia.org/wiki/Average_absolute_deviation#Mean_absolute_deviation_around_the_median) |
+| Mean Weighted Absolute Error | Quantile        |                                                                                                                  |
+| Maximum Absolute Error       | Midrange        | Half the range                                                                                                   |
 
 This is useful to know when using piecewise constant models (like decision trees) because on each piece they will use these best constants.
 The rest of this article will explain these examples in detail and end with a general family of loss functions that covers many use cases.
@@ -32,6 +33,19 @@ The best constant model predicts the most common category (the mode), and the ac
 
 A claim like a model is 85% accurate may sound impressive, but if the most common category covers 83% of cases it's probably not a great achievement.
 There are different metrics (like [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)) and sampling methods (like balanced resampling) that can remove this advantage to predicting common cases, but just being aware of the best constant accuracy is helpful in understanding how much better a model is performing.
+
+# Cross Entropy
+
+A more discerning metric for categorical data is the cross-entropy.
+If `P` is a `N x C` matrix of the probabilities of each of the `C` categories and `y` are the actual categories, as a one-hot encoded `C x N` matrix, then the probability for the actual category is `pred_prob = apply(P * y, 1, sum)`.
+The cross-entropy is just the sum of the logs of the predicted probabilities for the actual categories, `sum(log(pred_prob))`.
+
+The best constant `1 x C` vector here is where each category is just the number of times it occured divided by the total number of occurances.
+That is `apply(y, 2, sum) / sum(y)`; and the value is then just the log of the probability of the outcome.
+
+In the special case of binary classification, when `C` is 2, we can just focus on the case of positive outcomes.
+Then given a 0-1 encoded `y`, the best constant is `p = sum(y)/length(y)`, and the cross-entropy is `length(y) * (p * log(p) + (1-p) * log(1-p))`.
+
 
 # Root Mean Squared Error
 
