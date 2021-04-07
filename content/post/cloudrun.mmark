@@ -1,0 +1,94 @@
++++
+tags = [""]
+title = "Getting Started with Google CloudRun"
+date = "2021-04-05T14:03:17+10:00"
+feature_image = "/images/"
+draft = true
++++
+
+Note that all Cloud Run services have a stable HTTPS URL.
+
+https://old.reddit.com/r/googlecloud/comments/kaa5ew/we_burnt_72k_testing_firebase_cloud_run_and/
+
+ Billing and metrics are delayed. Accept this fact, and plan your project around it. All platforms (AWS / GCP etc.) have this issue, simply because it's too expensive to calculate billing in real time, and services can scale rapidly!
+
+ Use "Google Cloud Monitoring"
+ 
+ 
+Do not use Cloud Run with default settings. Set max_instances = 1 when you're deploying a service for the first, even tenth time! Unless the service needs to scale, keep the instances low. Had we begun with this, our cost in worst case scenario would have been $72 only (72000/ 1000 max instances)
+
+
+# 
+
+Note: Delays
+
+https://cloud.google.com/billing/docs/how-to/notify
+
+
+# Pricing
+https://cloud.google.com/run/pricing
+
+https://cloud.google.com/vpc/network-pricing#internet_egress
+
+Cloud Run (fully managed) charges you only for the resources you use, rounded up to the nearest 100 millisecond.
+
+Free Tier:
+
+2 vCPU days per month
+
+4 GiB day per month
+
+1 GiB egress within North America
+
+
+
+Tier 2
+
+30c per GiB day
+
+$2.90 per vCPU day
+
+Egress: https://cloud.google.com/vpc/network-pricing#internet_egress
+
+Australia: $0.19/GB
+Rest of the world: $0.12/GB
+
+Unless a container instance must be kept idle due to the minimum number of container instances configuration setting, it will not be kept idle for longer than 15 minutes.
+
+## Monitoring
+
+https://cloud.google.com/monitoring/api/metrics_gcp#gcp-run
+
+Network?
+
+
+# Limits
+
+Network??
+
+## Max instances
+
+https://cloud.google.com/run/docs/configuring/max-instances
+
+Default: 1000 (allowable: 1-1000)
+
+## Memory
+
+Per container
+
+https://cloud.google.com/run/docs/configuring/memory-limits
+
+Cloud Run container instances that exceed their allowed memory limit are terminated.
+
+Default: 256 MiB
+
+ (Standing Memory) + (Memory per Request) * (Service Concurrency)
+ 
+(Up to 8)
+
+## Cpu
+
+https://cloud.google.com/run/docs/configuring/cpu
+
+By default Cloud Run container instances are allocated 1 CPU instance
+(1, 2 or 4)
