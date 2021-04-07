@@ -20,7 +20,7 @@ More generally the coefficient for $$\alpha$$ confidence at $$\beta$$ power is $
 
 As a side note you shouldn't skimp on power.
 If your study is underpowered you're much more likely to overestimate the effect size or even get the sign wrong when you do find a significant result.
-Andrew Gelman and John Carlin's paper [Beyond Power Caalculations](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf) go into the detail; essentially because a significant result has to be 2 standard deviations from the mean, if you're unlucky enough to see a spurious "statistically significant" result, the apparent effect size will always be far too large.
+Andrew Gelman and John Carlin's paper [Beyond Power Calculations](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf) go into the detail; essentially because a significant result has to be 2 standard deviations from the mean, if you're unlucky enough to see a spurious "statistically significant" result, the apparent effect size will always be far too large.
 
 And do you really want to minimise type 1 errors anyway?
 When you're making decisions you typically want to make the best decisions subject to constraints, and often less precise estimates of effects is good enough (it's easy for the effect size to be below practical significance).
