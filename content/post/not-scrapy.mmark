@@ -21,6 +21,7 @@ With the default settings you will rescrape the pages every time (which may not 
 You can [enable a job queue](https://docs.scrapy.org/en/latest/topics/jobs.html), which as a side effect keeps a list of visited pages that it doesn't revisit.
 But you want to revisit the category pages; you can do this by [setting a custom DUPEFILTER_CLASS](https://docs.scrapy.org/en/latest/topics/settings.html#dupefilter-class) or passing `dont_filter` as `True` in the Requests.
 However you really only want to revisit the category pages after some time interval; there doesn't seem to be an easy way to do this and maybe you need to manage the state yourself in your spiders using an external database (which could be error prone!).
+After spending quite a bit of time looking into this I stumbled across the [DeltaFetch middleware](https://www.zyte.com/blog/scrapy-tips-from-the-pros-july-2016/) which sounds like it can handle this case (by not returning items on the category pages, but on the product pages).
 
 Rather than providing functionality Scrapy seems to lock you into using their tooling.
 Extracting data from a webpage is inherently experimental and iterative.
