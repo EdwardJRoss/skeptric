@@ -42,7 +42,7 @@ response.css('title::text').get()
 Scrapy assumes you're wanting to do everything; from getting URLs to parsing and processing at once.
 But as I outlined in [web scraping architecture](/select-fetch-extract-watch), I think it's a lot safer to download the data as WARC and then separately extract and normalise the data; moreover this is a great way to write test cases.
 If you make a mistake in your extraction code you can raise an error that brings down the scraper.
-It's possible to do this in Scrapy, either with a custom downloader middleware, or by directly invoking the `parse` methods from the spiders, but its clunky which makes reprocessing hard.
+It's possible to do this in Scrapy, either with a [custom downloader middleware](https://stackoverflow.com/a/27178219), or by directly invoking the `parse` methods from the spiders, but its clunky which makes reprocessing hard.
 It sounds like [web-poet](https://web-poet.readthedocs.io/en/stable/) aims to help separate the extraction from I/O, but it's in early stages.
 
 I think there are a lot of cases where Scrapy is a really good choice.
