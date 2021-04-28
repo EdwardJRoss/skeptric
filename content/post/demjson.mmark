@@ -7,7 +7,7 @@ feature_image = "/images/demjson.png"
 
 Modern Javascript web frameworks often embed the data used to render each webpage in the HTML.
 This means an easy way of extracting data is capturing the string representation of the object [with a pushdown automoton](/parsing-escaped-strings) and then parsing it.
-Python's inbuilt `json.loads` is effective, but won't handle very dynamic Javascript, but [demjson](https://github.com/dmeranda/demjson) will.
+Python's inbuilt `json.loads` is effective, but won't handle very dynamic Javascript, but [demjson](https://github.com/dmeranda/demjson) will (another, much faster alternative is [Chompjs](/chompjs).
 
 The problem shows up when using `json.loads` as the following obscure error:
 
