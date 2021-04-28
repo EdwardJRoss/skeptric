@@ -102,6 +102,8 @@ docker push gcr.io/{PROJECT_ID}/myproject
 ```
 
 The push took me several minutes to upload the image.
+Note that whether you use the container registry of cloud it will create artifacts in a Google Cloud Storage bucket, and the container images can be quite large.
+Make sure you delete these, or apply lifecycle rules, if you really want to keep costs down.
 
 ## Deploying in Cloud Run
 
