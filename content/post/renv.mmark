@@ -209,3 +209,10 @@ renv::install('blogdown')
 
 
 No Blogdown in renv.lock
+
+
+Command line:
+
+```
+R --no-save -e 'renv::init()'
+```
