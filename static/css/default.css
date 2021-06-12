@@ -109,3 +109,7 @@ header {
     font-size: 14px;
     font-style: italic;
 }
+::-moz-selection,
+::selection {
+ color: black;
+}
