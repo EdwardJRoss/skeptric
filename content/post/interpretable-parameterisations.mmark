@@ -41,7 +41,7 @@ One way to write this is $$ Y(t) = \frac{A \left(C + e^{-Bt}\right)^{1/\nu} + J}
 
 Wikipedia puts it in a much more interpretable form: $$ Y(t) = A + { K-A \over (1 + Q e^{-Bt}) ^ {1 / \nu} $$, where A is the lowest value it can reach and K is the highest value, and Q is the initial value at t=0.
 The other values; the growth rate B, the shape factor $$ \nu $$ are harder to interpret.
-However you could further reparameterise these for a usecase; maybe there's two other points on the curve that mean something and we could use these instead of B and $$ \nu $$.
+However you could further reparameterise these for a use case; maybe there's two other points on the curve that mean something and we could use these instead of B and $$ \nu $$.
 Or suppose this represents the number of people that would churn from a product at a given price, and when multiplying by the price we get the profit.
 Then the price at which profit is optimised, and the optimal profit (perhaps relative to the current profit) are great, meaningful parameters.
 
