@@ -29,7 +29,7 @@ Using these kinds of rules we can quickly generate a table of logarithms.
 | e      | 0.43 | $$ e^3 \approx 20 $$          |
 
 So for example suppose we want to calculate $$ 9 ! = 9 \times 8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 $$.
-The log is approximately the sum of the corresponding values in the log column; whith is 5.56.
+The log is approximately the sum of the corresponding values in the log column; with is 5.56.
 So the answer is around $$ 10^{5.56} $$, which looking in the table is around $$ 4 \times 10^5 $$; this is within 10% of the correct answer.
 
 Another way to do this is with [Stirling's approximation](https://en.wikipedia.org/wiki/Stirling%27s_approximation) $$ log 9! \approx 9 (\log 9 - \log e)  + \frac{1}{2} \log(2 \pi \times 9) $$.

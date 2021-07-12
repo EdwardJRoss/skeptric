@@ -7,7 +7,7 @@ feature_image: "/images/lego.png"
 Before you can do any machine learning you need to be able to read the data, create test and training splits and convert it into the right format.
 Fastai has a generic [data block API](https://docs.fast.ai/data_block.html) for doing these tasks.
 However it's quite hard to extend to new data types.
-There's a few classes to implement; Items, ItemLists, LabelLists and the Preprocessors which are obfuscated through a complex inheritence and dispatch heirarchy.
+There's a few classes to implement; Items, ItemLists, LabelLists and the Preprocessors which are obfuscated through a complex inheritance and dispatch hierarchy.
 I spent two weeks of evenings trying to implement a combined image and tabular data for the [Petfinder.my Adoption Prediction Kernel](https://www.kaggle.com/c/petfinder-adoption-prediction), and only [managed to combine the data sources](https://www.kaggle.com/edwardjross/neural-network-tabuler-vision-fastai-poc) because fastai's [Sylvain Guggers released a MixedItemList](https://forums.fast.ai/t/custom-itemlist-getting-forkingpickler-broken-pipe/39086/10).
 
 However it's possible to make data preparation straightforward and easy to extend, using a generalisation of the `ListContainer` from [fastai part2 v3](https://nbviewer.jupyter.org/github/fastai/course-v3/blob/master/nbs/dl2/06_cuda_cnn_hooks_init.ipynb#A-Hooks-class).

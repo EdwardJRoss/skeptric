@@ -6,7 +6,7 @@ feature_image = "/images/reference_set_venn.png"
 +++
 
 Suppose you have a long standing heart condition, and are considering undergoing a surgical procedure that could alleviate the procedure, but has its own set of risks.
-You happen to have a good friend who's a statististican at the hospital you're being seen at and can get you historical frequencies of complications.
+You happen to have a good friend who's a statistician at the hospital you're being seen at and can get you historical frequencies of complications.
 However she asks you what reference set do you want to use?
 
 Do you want complications related to just the specific procedure treating your condition, or for all procedures on that area of the heart for a variety of conditions?

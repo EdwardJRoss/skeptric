@@ -63,6 +63,6 @@ This first look at the data gives an idea of an approach.
 We can expand acronyms, normalise spelling variants, and then try to match on a type.
 There are still some challenges like how to deal with slashes (e.g. fitter/turner), multiple types together, and things that are a type depending on context like assistant or head.
 There's still a challenge with how to normalise something like "director of marketing and finance" or an overly specific role title like "financial planning and analysis manager".
-But these problems are managable, and more the edge cases than the common cases.
+But these problems are manageable, and more the edge cases than the common cases.
 
 For more details see the [Jupyter notebook](https://github.com/EdwardJRoss/job-advert-analysis/blob/master/notebooks/Extracting%20Role%20Title%20Words.ipynb).

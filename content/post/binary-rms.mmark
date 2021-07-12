@@ -20,7 +20,7 @@ Suppose we've taken N draws and got S positive cases, the likelihood of this res
 Then we're trying to work out what the probability p is given the data.
 One way to answer this is to pick the value of p which is most likely, which happens to be S/N (i.e. the average number of positive cases, as you would expect).
 
-Instead of the likelihood, the log-likihood is often used.
+Instead of the likelihood, the log-likelihood is often used.
 It has a maximum at the same point as the likelihood, but because probabilities are multiplicative, log-probabilities are additive and so it's often simpler and more numerically stable.
 For the Bernoulli distribution example above the log likelihood is $$ l(p) = S \log(p) + (N-S) \log(1-p) $$.
 This log likelihood can also be used as a *measure* of how good our model is; since it's minimum is the most likely model.
@@ -51,7 +51,7 @@ Precisely it's
 $$ l(\mu, \sigma) = -n \log \sigma - \frac{n S^2}{2 \sigma^2} - \frac{n(\bar{X} - \mu)}{2 \sigma^2} $$
 
 where $$ \bar{X} = \frac{1}{N} \sum_{i=1}^{N} X_i $$ is the sample mean and $$ S = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (X_i - \bar{X})^2} $$ is the sample standard deviation.
-So fot a given $$\sigma$$ the log likelihood only depends on the mean square error.
+So for a given $$\sigma$$ the log likelihood only depends on the mean square error.
 
 As the number of trials increases the binomial distribution gets close to a normal distribution (but slower for more extreme p).
 So using the mean square error isn't crazy, for large samples you'll get reasonable results, but it's not as appropriate as the cross entropy.

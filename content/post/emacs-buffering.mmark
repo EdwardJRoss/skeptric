@@ -37,7 +37,7 @@ I found using [Windows Terminal](https://github.com/microsoft/terminal) that I'd
 This is likely because I'm using a lot of dynamic features (like relative line numbers, matching bracket highlighting, etc.).
 I could always fix it by using `redraw-frame`, and maybe I should have added a hook to run that after every cursor move (I'm not sure if there would be any performance implications though).
 
-The other issue is without a shared clipboard I would always have to copy by higlighting the text with my mouse and typing `C-S-c`, and for pasting I would use `S-Insert`.
+The other issue is without a shared clipboard I would always have to copy by highlighting the text with my mouse and typing `C-S-c`, and for pasting I would use `S-Insert`.
 However because it didn't know I was pasting it would reformat the text (and I don't know what the equivalent of Vim's `:set paste` is).
 
 I probably could have configured it to work, but it's much nicer under Xming with a clipboard shared with Windows and a fully functional GUI.

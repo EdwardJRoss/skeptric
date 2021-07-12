@@ -15,13 +15,13 @@ Only once you've proved a solution do you invest in large annotation (and only i
 
 There are always ways to get rough labels.
 Heuristics based on domain knowledge.
-Rule based methods from the dependency parse (which are marvelously accurate with modern neural dependency parsers).
+Rule based methods from the dependency parse (which are marvellously accurate with modern neural dependency parsers).
 Taking an external labelled dataset and modelling the labels onto your dataset.
 Using complementary data, such as behavioural data (think matrix factorisation) to map the data onto a space.
 
 Once you have rough labels you can then refine them.
 You can use data programming to merge data from multiple noise labellers to get proposed labels.
-You can train models using the probabalistic labels to get an initial classifier.
+You can train models using the probabilistic labels to get an initial classifier.
 You can then use active learning to quickly improve performance, and get to a model good enough to check viability.
 
-I don't believe there are any good resources on how to do this whole process from end to end, but it's very valuable to be able to take unlabeled text and within a few days have a process for extracting meaningful information from it.
+I don't believe there are any good resources on how to do this whole process from end to end, but it's very valuable to be able to take unlabelled text and within a few days have a process for extracting meaningful information from it.

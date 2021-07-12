@@ -15,7 +15,7 @@ There's often a way to infer gross location, for example through an IP lookup or
 
 For example the Australian Broadcast Corporation [released hourly data of web activity from 2016](https://data.gov.au/dataset/ds-dga-316060ae-e49d-4e39-949a-ed3fdaede18d/details).
 However in the data description it doesn't mention what time zone the data is in.
-A quick plot of the web pagview volume for 1 day in May shows the trough is at 3am and it likely corresponds to the main timezone for Australia: Australian Eastern Standard Time.
+A quick plot of the web pageview volume for 1 day in May shows the trough is at 3am and it likely corresponds to the main timezone for Australia: Australian Eastern Standard Time.
 
 ![Pageviews by Hour is minimum at 3-4am](/images/4am.png)
 

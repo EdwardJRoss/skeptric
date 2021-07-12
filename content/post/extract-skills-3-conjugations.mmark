@@ -72,7 +72,7 @@ This kind of pattern is pretty common (e.g. sales or service environment), and w
 
 This allows us to extract a list of skills like in the [previous post](/extract-skills-2-adpositions/), but now we can also look at which terms commonly co-occur to find related skills by ranking.
 For example the top related skills for "sales" are "customer service", "marketing", and "business development".
-For common skills this wokrs pretty well:
+For common skills this works pretty well:
 
 | Core Skill | Closest Skill | Second Closest Skill | Third Closest Skill |
 | ----- | -------- | -------- | -------- |
@@ -99,7 +99,7 @@ For common skills this wokrs pretty well:
 This is very informative, for example:
 
 * if you want a career in marketing it's useful to have sales skills, which are close to customer service skills, which are often found in retail and hospitality
-* The backend programming lanuages (Java, C++, C) cluster together, separately from the frontend languages (CSS, HTML, JavaScript, PHP)
+* The backend programming languages (Java, C++, C) cluster together, separately from the frontend languages (CSS, HTML, JavaScript, PHP)
 * Excel often ends up in a list of Windows Office technologies; but is especially useful for people who are using SAP
 
 
@@ -108,7 +108,7 @@ This is because we're extracting skills in a very specific way, and so we're mis
 Another consequence of our extraction method is we get related skills that are phrased in the same way because they often occur together in a list, for example "planning", "managing" and "delivering".
 This is good because it mitigates there being multiple ways a skill could be written; admistration, administrating, admin, and Administration could all the same thing.
 
-There's a lot more we could do here to look at the network of related skills, or disambiguate broad skills like "design" based on their context, if we could retreive more skills from a job ad.
+There's a lot more we could do here to look at the network of related skills, or disambiguate broad skills like "design" based on their context, if we could retrieve more skills from a job ad.
 Unfortunately it rapidly becomes much more difficult to write rules to extract skills phrased in different ways.
 In particular this job ad data has had some formatting removed (like lists) that makes it even harder to use a rule based approach.
 In a follow up series we will investigate using the rule based extraction to help seed a predictive model to extract skills.

@@ -13,7 +13,7 @@ df.to_csv(f's3://{bucket}/{key}')
 ```
 
 Under the hood Pandas uses [`fsspec`](https://filesystem-spec.readthedocs.io/en/latest/) which lets you work easily with remote filesystems, and abstracts over [s3fs](https://s3fs.readthedocs.io/) for Amazon S3 and [gcfs](https://gcsfs.readthedocs.io) for Google Cloud Storage (and other backends such as (S)FTP, SSH or HDFS).
-In particular s3fs is very handy for doing simple file operations in S3 because boto is ofteh quite [subtly complex](https://stackoverflow.com/questions/54314563/how-to-get-more-than-1000-objects-from-s3-by-using-list-objects-v2) to use.
+In particular s3fs is very handy for doing simple file operations in S3 because boto is often quite [subtly complex](https://stackoverflow.com/questions/54314563/how-to-get-more-than-1000-objects-from-s3-by-using-list-objects-v2) to use.
 
 Sometimes managing access credentials can be difficult, [s3fs uses botocore credentials](https://s3fs.readthedocs.io/en/latest/#credentials), trying first environment variables, then configuration files, then IAM metadata.
 But you can also specify an AWS Profile manually, and you can pass this (and [other arguments](https://s3fs.readthedocs.io/en/latest/api.html#s3fs.core.S3FileSystem)) through pandas using the `storage_options` keyword argument:

@@ -19,7 +19,7 @@ We need to increase our sample size so that two standard deviations occurs at th
 More generally the coefficient for $$\alpha$$ confidence at $$\beta$$ power is $$ z_{1 - \alpha / 2} z_{1 - \beta} $$, or in R `qnorm(1-(1-alpha)/2) + qnorm(1-(1-beta))`.
 
 As a side note you shouldn't skimp on power.
-If your study is underpowered you're much more likely to overestimate the effect size or even get the sign wrong when you do find a significant result.
+If your study is under-powered you're much more likely to overestimate the effect size or even get the sign wrong when you do find a significant result.
 Andrew Gelman and John Carlin's paper [Beyond Power Calculations](http://www.stat.columbia.edu/~gelman/research/published/retropower_final.pdf) go into the detail; essentially because a significant result has to be 2 standard deviations from the mean, if you're unlucky enough to see a spurious "statistically significant" result, the apparent effect size will always be far too large.
 
 And do you really want to minimise type 1 errors anyway?

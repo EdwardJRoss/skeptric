@@ -13,7 +13,7 @@ But how do you find for a particular webpage in petabytes of data?
 Common Crawl provides two types of indexes for this: the [Common Crawl Capture Index (CDX)](https://index.commoncrawl.org/) and the [Columnar Index](https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/).
 This article talks about the CDX Index Server and a future article will talk about the more powerful columnar index.
 
-Common Crawl tries to do a broad search, getting a wide sample of the web rather than a deep sample of a few webistes, and respects [robots.txt](https://en.wikipedia.org/wiki/Robots_exclusion_standard) so not every page will be in there.
+Common Crawl tries to do a broad search, getting a wide sample of the web rather than a deep sample of a few websites, and respects [robots.txt](https://en.wikipedia.org/wiki/Robots_exclusion_standard) so not every page will be in there.
 It's useful to know whether Common Crawl even contains the information you're looking before you start, and the index will tell you where to look.
 
 This article covers [using the web interface](#using-the-web-interface) for quickly checking what's there, [using cdx_toolkit](#cdx-toolkit) to get and download results from the command line or Python, and [using the index and fetching with HTTP requests](#using-the-index-directly) for custom usecases.
@@ -82,7 +82,7 @@ cdxt --cc --from 202002 --to 202005 \
 ```
 
 A bunch of `None`s get printed to the screen and produces a file `DATAISBEAUTIFUL-000000.extracted.warc.gz`.
-A WARC is essentially the HTML preceeded by some headers containing metadata about the request and the response.
+A WARC is essentially the HTML preceded by some headers containing metadata about the request and the response.
 It's simple enough that you could parse it manually, or you could use the Python [warcio library](https://github.com/webrecorder/warcio).
 
 ![Sample of WARC Output](/images/cc_cdxt_warc.png)
@@ -185,7 +185,7 @@ The JSON records look the same as
 | com,reddit)/ | 20200526165552 | 879974740 |    200 | eng       | OSGHIVCFBI47ZSNMLG574K6SBZJ3LTBC |  39146 | text/html     | crawl-data/CC-MAIN-2020-24/segments/1590347391277.13/warc/CC-MAIN-20200526160400-20200526190400-00335.warc.gz      | UTF-8   | text/html | https://www.reddit.com/ |      nan |
 | com,reddit)/ | 20200527211917 | 858583595 |    200 | eng       | UHM2VERG5OUOELJFD7O25JVUBZVDPDLU |  35751 | text/html     | crawl-data/CC-MAIN-2020-24/segments/1590347396163.18/warc/CC-MAIN-20200527204212-20200527234212-00335.warc.gz      | UTF-8   | text/html | https://www.reddit.com/ |      nan |
 
-Of course you can also query the endpoin directly with curl to get the JSON lines:
+Of course you can also query the endpoint directly with curl to get the JSON lines:
 
 ```sh
 curl 'https://index.commoncrawl.org/CC-MAIN-2020-24-index?url=reddit.com&limit=10&output=json'

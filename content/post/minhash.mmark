@@ -102,7 +102,7 @@ def get_minhashes(corpus, n_shingle=1, preprocess=tokenize):
 ```
 
 This takes about 30 minutes on a single core for the 400,000 job ads (it is trivially paralellisable).
-The ouput pickle file is 200MB, so it's about 0.5kB per job ad (where we're essentially representing the ad as a bag of tokens).
+The output pickle file is 200MB, so it's about 0.5kB per job ad (where we're essentially representing the ad as a bag of tokens).
 
 ```
 i = 3

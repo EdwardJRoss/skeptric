@@ -11,7 +11,7 @@ This way you can efficiently explore the whole manifold of solutions.
 
 I recently came across a problem where I needed to fit a curve subject to some constraints.
 It was bounded, it's product with another function needed to have a unique maximum in some range and its average had to be a certain value.
-These could be written out as a series of constraints, but it seemed that the problem was severely underconstrained.
+These could be written out as a series of constraints, but it seemed that the problem was severely under-constrained.
 
 One way I thought of to solve it was by an exhaustive search.
 By cutting up the x and y axis into N and M pieces respectively then there are $$ M^N $$ possible piecewise linear curves, and each could be evaluated against those constraints.

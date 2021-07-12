@@ -22,7 +22,7 @@ The model is that a fair spin is equally likely to land anywhere on the circumfe
 So by symmetry the probability of an outcome is proportional to the length of the arc it subtends on the circle.
 This also happens to be proportional to the angle of the arc, which is proportional to the area of the arc.
 
-Another more elaborate example would be a sphere with labeled regions that can spin on both axes, and a pin pointing to a point on the sphere (say the topmost).
+Another more elaborate example would be a sphere with labelled regions that can spin on both axes, and a pin pointing to a point on the sphere (say the topmost).
 Then if it spins freely in any direction the probability of landing on any point is proportional to the surface area on the sphere.
 
 You could cut the sphere in half and flatten it into two circles.

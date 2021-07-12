@@ -26,7 +26,7 @@ When doing user research they found out that people actually really enjoy select
 They changed their process to make the customer feel more involved with the creation process, while still using the same algorithms to automate the boring bits (selecting the best photo from near duplicates, sizing photos appropriately, laying them out in the right order in the book).
 
 When they couldn't find the created date of photos the algorithm would dump them at the back of the photo book (in otherwise chronological order)
-During user research they found this disjointed arrangement showcked people and made them lose trust; they then went back and checked the rest of the book to see if it made any other mistakes.
+During user research they found this disjointed arrangement shocked people and made them lose trust; they then went back and checked the rest of the book to see if it made any other mistakes.
 
 When building a data driven product you still (unsurprisingly) have to focus on the whole experience.
 Automating away the things that make people engage with and value your product is a bad idea, and sometimes giving a bad prediction can make them lose all trust.

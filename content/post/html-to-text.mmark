@@ -14,7 +14,7 @@ Unfortunately this just turns *every* tag into the argument, whether it is block
 This means for a lot of compact HTML it changes the meaning.
 
 The pragmatic answer I've ended up with is to convert the text to Markdown with `html2text`, parse the Markdown back into HTML, and then converting that HTML to text.
-This is rediculously inefficient, but lets me offload the procesing logic to external tools and does a good enough job.
+This is ridiculously inefficient, but lets me offload the processing logic to external tools and does a good enough job.
 
 The final solution looks like this:
 

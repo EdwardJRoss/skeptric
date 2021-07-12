@@ -53,7 +53,7 @@ Now WSL2, and only WSL2, is able to send network traffic to Windows on port 6000
 
 # Enable public access from an X11 Server
 
-For the X11 Server it appears as if the traffic is coming from elsewhere so we have to enable publich access.
+For the X11 Server it appears as if the traffic is coming from elsewhere so we have to enable public access.
 Using [VcXsrv](https://sourceforge.net/projects/vcxsrv/) via XLaunch this means checking the "Disable access control" on the "Extra settings" page.
 
 ![Disable Access Control](/images/vcxsrv_disable_access_control.png)
@@ -84,7 +84,7 @@ Now you should be able to run applications.
 I used this for Emacs 26 under WSL2, and it works perfect after [disabling double buffering](/emacs-buffering).
 
 Once it's configured you can run it directly from Powershell running `bash -c 'source ~/.bashrc; emacs'`.
-Note that if you exported the dispaly variables in a [local config file](/portable-custom-config) like `.bashrc.local` you have to source that file instead.
+Note that if you exported the display variables in a [local config file](/portable-custom-config) like `.bashrc.local` you have to source that file instead.
 
 You could put this all together into a single shortcut that starts the display and executes the application:
 

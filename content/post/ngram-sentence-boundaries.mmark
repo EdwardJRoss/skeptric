@@ -5,8 +5,8 @@ date = "2021-01-20T19:04:33+11:00"
 feature_image = "/images/ngram-sentence-probabilities.png"
 +++
 
-An N-gram language model guesses the next possible word by looking at how frequently is has previously occured after the previous N-1 words.
-I think this is how my mobile phone suggests completions of text; if I type "I am" it suggests "glad", "not" or "very" which are likely occurances.
+An N-gram language model guesses the next possible word by looking at how frequently is has previously occurred after the previous N-1 words.
+I think this is how my mobile phone suggests completions of text; if I type "I am" it suggests "glad", "not" or "very" which are likely occurrences.
 To make everything add up you have to have special markers for the start and end of the sentence, and the I think the best way is to make them *the same marker*.
 
 I'm reading through the December 30, 2020 draft of [Speech and Language Processing, by Jurafsky and Martin](https://web.stanford.edu/~jurafsky/slp3/), in particular Chapter 3 *N-gram Language Models*.

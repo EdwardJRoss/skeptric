@@ -44,7 +44,7 @@ from IPython.display import HTML, display
 display(HTML('<link rel="icon" type="image/png" href="/path/to/icon.ico">'))
 ```
 
-For R you have to use the relevent `display_html` function.
+For R you have to use the relevant `display_html` function.
 
 ```
 IRdisplay::display_html(favicon)
@@ -52,5 +52,5 @@ IRdisplay::display_html(favicon)
 
 Unfortunately none of these seem to work in Google Chrome (which Google Analytics tells me there's a 70% chance you're using it right now).
 I'm not sure why I can't change the favicon from Jupyter in Chrome; not even executing the javascript in a cell seems to work.
-It would be nice to have a cross-browser way to do it within a notebook, because then it could be wrapped in a funciton that gets a random favicon for easy reuse.
+It would be nice to have a cross-browser way to do it within a notebook, because then it could be wrapped in a function that gets a random favicon for easy reuse.
 

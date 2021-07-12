@@ -28,7 +28,7 @@ We could combine the implementations by separating out the checking logic into a
 
 Another opportunity would be to completely inline `DrawPixel` so we can keep the FrameBuffer pointer in a register rather than reloading it at each pixel.
 But this trades off modularity for speed; we have to duplicate the pixel drawing logic which increases the code complexity and gives more places to get things wrong.
-There are potential other opportunities for optimisation, but they require breaking other things such as the ABI making it harder to interoperate with other code.
+There are potential other opportunities for optimisation, but they require breaking other things such as the ABI making it harder to inter-operate with other code.
 
 Ultimately there are often engineering tradeoffs for optimisation; we give up other desirable properties of code like generalisability, modularity or safety.
 And almost always we want to focus on those - writing a safe and easy to maintain system is hard enough in the good cases.

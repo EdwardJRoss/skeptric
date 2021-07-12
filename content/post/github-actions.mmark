@@ -30,7 +30,7 @@ It has good documentation including a sample on how to publish to Github pages.
 A great feature is that I can specify the Hugo version, so my website won't be broken immediately by changes to Hugo.
 
 However I don't use Github Pages and I've been syncing the output with [rclone](https://rclone.org/). 
-I couldn't figue out how to do this directly, so I went back to the marketplace to find [github action for rclone](https://github.com/marketplace/actions/github-action-for-rclone).
+I couldn't figure out how to do this directly, so I went back to the marketplace to find [github action for rclone](https://github.com/marketplace/actions/github-action-for-rclone).
 I could store my rclone configuration as a Github secret called RCLONE_CONF (under Settings > Secrets) and then inject it into the Github workflow file using `${{ secrets.RCLONE_CONF }}`.
 
 This is where I stopped to think; can the action author steal my secrets?

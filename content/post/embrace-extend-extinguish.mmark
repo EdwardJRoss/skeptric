@@ -5,15 +5,15 @@ date = "2020-07-18T22:07:49+10:00"
 feature_image = "/images/viewed_chrome.png"
 +++
 
-In the 90s Microsoft famoursly used a strategy of embracing other protocols, then adding extensions to their implementation until it's no longer compatible and utilising their market leverage to extinguish competing implementations.
+In the 90s Microsoft famously used a strategy of embracing other protocols, then adding extensions to their implementation until it's no longer compatible and utilising their market leverage to extinguish competing implementations.
 While "EEE" is normally associated with Microsoft many of the software titans use it as an effective strategy to further their existing dominance into new markets.
 
 Embracing a technology with an existing market is an effective way to quickly gain adoption.
-There are huge numbers of people sending and recieving emails with SMTP/POP/IMAP, distributing and receiving podcasts via RSS, and publishing and viewing websites via HTML/CSS/Javascript.
+There are huge numbers of people sending and receiving emails with SMTP/POP/IMAP, distributing and receiving podcasts via RSS, and publishing and viewing websites via HTML/CSS/Javascript.
 If you want to break into one of these markets with both producers and consumers starting with an existing technology allows you to acquire both sides of the market.
 
 Extending a technology on a shared platform helps the market leader lock in existing customers.
-Adding extensions that are difficult to implement for technical, social or legal reasons means that it's harder for existing users to migrate away from the impelmentation.
+Adding extensions that are difficult to implement for technical, social or legal reasons means that it's harder for existing users to migrate away from the implementation.
 When users start requiring these extensions it means that other users must migrate to the extended implementation if they want to continue to communicate.
 
 Embracing a technology allows breaking into an existing market, and when there is enough market share extending drives more users towards the platform through network effects.
@@ -27,7 +27,7 @@ Because Windows had such market dominance many developers were willing to build 
 While Microsoft didn't win the Internet, the same opportunity can be seen now with Google Chrome which has dominance of the browser market (outside of the substantial iOS market); all that's needed are compelling extensions the competitors can't emulate.
 
 Amazon Web Services has its own related mechanism of devouring open source served products.
-AWS pioneered a very effective method of billing for access to infrastructed and managed services.
+AWS pioneered a very effective method of billing for access to infrastructure and managed services.
 Because services are billed in small increments using a new service does not trigger a procurement process.
 The micro purchasing decisions end up in the hands of developers, and they actively educate them on best practices that involve a large number of services, which makes products hard to migrate.
 They also have minimal charges for data ingress, but hefty fees for data egress making it cheap to migrate to but expensive to offload processing to other cloud providers.
@@ -43,7 +43,7 @@ However they extend this between iOS devices to have extra features and a differ
 Because Apple is the market leader in mobile it pushes people towards iOS, and it makes it harder for people to switch away from iOS; they end up losing their history and missed messages in the transition until they can work out how to switch it off.
 
 It's not just for software giants either.
-The messaging client Slack orginally embraced other chat protocols like IRC by providing gateways/bridges.
+The messaging client Slack originally embraced other chat protocols like IRC by providing gateways/bridges.
 They would enable you to send and receive messages between Slack and IRC.
 This meant they could get users using other chat clients to communicate on their platform without the friction of forcing them to switch.
 At the same time they built many extensions that weren't available on existing protocols, and so encouraged migration to Slack itself.

@@ -35,7 +35,7 @@ It is interesting that according to [Cordani’s monograph on the Kepler Problem
 the eigenfunctions in these coordinates are some sort of hypergeometric functions. From a physical perspective it is also interesting that these mean the Kepler problem remains separable under certain perturbations (but the spectrum can no longer be derived algebraically): spherical coordinates are invariant under spherical perturbations and if the particle is charged interaction with a constant magnetic field; parabolic coordinates are invariant under perturbation by a constant force along the z-axis, and if the particle is charged interaction with a constant electric field; confocal elliptic coordinates are invariant under perturbation by another central force at the other focus, this corresponds to Euler’s restricted 3-body problem; I’m not sure about conical coordinates.
 
 
-In fact as shown in Morse and Feschbach – Methods of Theoretical Physics the Helmholtz/Diffusion equation  $$\nabla^2 \psi = \lambda \psi$$  (which for  $$\lambda < 0$$  is the Schrodinger equation for a free particle) in 3 dimensions is seperable in **11 coordinate systems**. There is some relationship between the separability, symmetry, conserved quantities and special functions, I will outline some special cases:
+In fact as shown in Morse and Feschbach – Methods of Theoretical Physics the Helmholtz/Diffusion equation  $$\nabla^2 \psi = \lambda \psi$$  (which for  $$\lambda < 0$$  is the Schrodinger equation for a free particle) in 3 dimensions is separable in **11 coordinate systems**. There is some relationship between the separability, symmetry, conserved quantities and special functions, I will outline some special cases:
 
 
 

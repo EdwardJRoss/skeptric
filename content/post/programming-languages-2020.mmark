@@ -71,7 +71,7 @@ I'll have to research more deeply here.
 ## Alternatives
 
 * Erlang is the language that Elixir is built on, but it abstracts a lot of the syntactic sugar away. [Learn You Some Erlang](https://learnyousomeerlang.com/) is meant to be a great resource for both.
-* Go allows a lot of concurrency through Goroutines, and has tiny cross-platform binaries, but I don't think I'd learn as much about resillience.
+* Go allows a lot of concurrency through Goroutines, and has tiny cross-platform binaries, but I don't think I'd learn as much about resilience.
 * Node.JS allows a lot of asynchronous work through callbacks, but I'm not really convinced that this style is easy to program in.
 
 # Efficient: C
@@ -112,7 +112,7 @@ But there are other types of search techniques:
 
 * Constraint Programming in [MiniZinc](https://www.minizinc.org/): Describing how to solve problems as optimisation under constraints. I'm also interested in the [Discrete Optimisation](https://www.coursera.org/learn/discrete-optimization) covering some of these methods.
 * [Z3 Theorem Prover](https://github.com/Z3Prover/z3): An SMT Solver
-* [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing): An effective optimisaiton method for certain problems
+* [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing): An effective optimisation method for certain problems
 * Proof Assistants: Like Coq, Agda and Idris
 
 These are all things I'm interested in, but don't know enough about.

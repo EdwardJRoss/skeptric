@@ -63,8 +63,8 @@ if tag in ["strong", "b"] and not self.ignore_emphasis:
         self.stressed = True
 ```
 
-When there's not a preceeding space one is added.
-However *this* inserted space in the output should count as preceeding, but it doesn't, and so another space is added.
+When there's not a preceding space one is added.
+However *this* inserted space in the output should count as preceding, but it doesn't, and so another space is added.
 
 Since this is the only usage of `preceding_data` a safe workaround is to append a space to `self.preceding_data`.
 There are many other ways we could possibly preserve the state if altering this may break existing code.

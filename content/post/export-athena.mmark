@@ -91,7 +91,7 @@ There's a lot that could be done to make this faster or more convenient:
 
 * The queries could be executed without blocking using the [AsynchronousCursor](https://github.com/laughingman7743/PyAthena#asynchronouscursor)
 * S3 files could be downloaded in parallel, which may be faster
-* The files don't need to be directly downloaded when pasing a S3 path to Pandas or using [s3fs](https://github.com/dask/s3fs) (this is usually slower)
+* The files don't need to be directly downloaded when parsing a S3 path to Pandas or using [s3fs](https://github.com/dask/s3fs) (this is usually slower)
 * The files could be concatenated together into a single outfile
 
 ## Choosing an export format
@@ -107,7 +107,7 @@ There's a lot that could be done to make this faster or more convenient:
 Avro can represent almost all Athena/Presto datatypes (except Map) and has excellent support through fastavro.
 The only major drawback is that it doesn't have native pandas support, but is very easy to convert.
 
-JSON format is also a good choice as it can represtent nested structures and all the basic types (strings, integers, double precision floats, boolean and nulls).
+JSON format is also a good choice as it can represent nested structures and all the basic types (strings, integers, double precision floats, boolean and nulls).
 It won't preserve the types of some of the more complex datatypes like timestamps, and can't handle binary data.
 
 Parquet can represent preserve all the datatypes, and as a column store is efficient for both Presto/Athena and Pandas.

@@ -10,7 +10,7 @@ However there's [a plethora](https://jamstack.org/generators/) of site generator
 However I've got a simple recommendation: if you're writing a blog use Jekyll (if you don't want to use something like Wordpress).
 
 Static website generators compile input assets into a set of static HTML, CSS and Javascript files that can be deployed almost anywhere.
-They can do useful things like render formating in pages, create indexes, RSS feeds, optimise images and minify assets.
+They can do useful things like render formatting in pages, create indexes, RSS feeds, optimise images and minify assets.
 However different generators are built in different programming languages, have different features and conventions for assets, and different plugins.
 
 I'm going to say if you don't know what to choose for a blogpost go with Jekyll.

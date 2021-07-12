@@ -23,7 +23,7 @@ I would worry I then need to somehow remove phrases containing common words that
 They then further group these together using [edit distance](/levenshtein), so "manager" and "manger" would go together, as would "C# developer" and "C developer" (which should be different role titles).
 I definitely miss unusually phrased job titles with my method (e.g. "Engineering role"), but I get less false positives.
 
-The implementation of my approach is very straightforward, I use a regular expression to find a role word (or an exception) with up to four preceeding words.
+The implementation of my approach is very straightforward, I use a regular expression to find a role word (or an exception) with up to four preceding words.
 Four is roughly where I see diminishing returns on looking for longer role lengths, five would be another to try.
 
 ```python
@@ -41,7 +41,7 @@ Or "Assistant Head of Planning and Building Control" gets normalised to "plannin
 But it's simple to implement so is a useful starting point.
 
 Looking through the roles there were a few ambiguous ones like "head", "senior", "officer" and "specialist" that were fine if they were part of a longer title, (e.g "finance head" or "semi senior"; which is apparently an accounting thing) but on their own were normally the result of a bad normalisation.
-After filtering these out I got a list of 1000 viable role titles that occured in at least 20 ads.
+After filtering these out I got a list of 1000 viable role titles that occurred in at least 20 ads.
 Some of these include seniority (like "head chef") or work type (like "part time cleaner"), but are a very useful starting point for further analysis, such as of [salary](/job-ad-title-salary).
 
 For further details see the [Jupyter notebook](https://github.com/EdwardJRoss/job-advert-analysis/blob/master/notebooks/Extracting%20Role%20Titles%20and%20Analysing%20with%20Salary.ipynb).

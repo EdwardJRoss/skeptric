@@ -5,7 +5,7 @@ date = "2020-08-16T20:53:44+10:00"
 feature_image = "/images/python_lambda.svg"
 +++
 
-Python is a very versitile multiparadigm language with a great ecosystem of libraries.
+Python is a very versatile multiparadigm language with a great ecosystem of libraries.
 However it is *not* a functional programming lanugage, as I know some people have described it.
 While you can write it in a functional style it goes against common practice, and has some practical issues.
 
@@ -25,7 +25,7 @@ However this also makes it very hard to understand execution, and there's always
 It is always possible to write pure functions in Python, which is [useful for testing](/property-based-testing) and makes the programs easier to understand.
 But this requires a lot of discipline and is not the default way to write functions.
 
-Python does have first class fuctions and support for higher order functions; however it's unusual to use them extensively and you will hit some barriers if you do.
+Python does have first class fictions and support for higher order functions; however it's unusual to use them extensively and you will hit some barriers if you do.
 Python allows easy creation of functions with `def` or with `lambda`, and they can always be passed as arguments.
 Python provides `map` in the standard language, and [functools](https://docs.python.org/3/library/functools.html) provides more like `partial` (currying), `reduce` and there are more complete libraries like [toolz](https://toolz.readthedocs.io/en/latest/api.html).
 
@@ -33,7 +33,7 @@ However composing higher order functions is unusual in Python, and you're much m
 Probably because of this the tooling is weaker too.
 Functions defined at inner levels, or returned from functions can't be pickled, and this can lead to issues with [multiprocessing](/multiprocess-download).
 The resulting functions lose all associated information, such as docstrings and the name of the functions they came from, which makes them very hard to understand compared with explicit functions.
-Finally when something goes wrong you end up having to [debug](/pdb) these undocumented functions and the stack trace becomes very hard to interpret; it's really hard to determine where the error occured.
+Finally when something goes wrong you end up having to [debug](/pdb) these undocumented functions and the stack trace becomes very hard to interpret; it's really hard to determine where the error occurred.
 
 While you can use Python as a functional language, the same way you can use Java as a functional language, it's not really one.
 Whereas I'd say Numpy, Pytorch and Tensorflow are real array programming DSLs in Python, I haven't seen anything I'd want to work with in Python.

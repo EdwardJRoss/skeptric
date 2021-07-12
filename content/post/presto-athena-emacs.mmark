@@ -179,7 +179,7 @@ I haven't worked out how to work around this so I've got used to this, and tend 
 Also history is lost between invocations.
 
 Presto will show the progress of the query as it executes.
-In the terminal this will only happen in a single paragrah as the cursor is moved around with ANSI control sequences, and the text is overwritten on update.
+In the terminal this will only happen in a single paragraph as the cursor is moved around with ANSI control sequences, and the text is overwritten on update.
 However Emacs can't deal with these (in fact these are the ones that we filtered out above), and so we will get a new paragraph for every update.
 For a long running query the comint buffer can fill up with these updates.
 It should be possible to remove this noise in the comint mode, but I haven't worked out how.
@@ -190,7 +190,7 @@ When AWS credentials expire I have to delete the `*Athena*` buffer, update the c
 
 Sometimes I want to export the output into another program for sharing.
 My workflow is to copy the results into a scratch buffer.
-I'll then `regexp-replace` ` +| +` with `,`, and then remove the leading whitespace and delete the line that sepeates the header (which works fine unless the row could contain a pipe!).
+I'll then `regexp-replace` ` +| +` with `,`, and then remove the leading whitespace and delete the line that seperates the header (which works fine unless the row could contain a pipe!).
 Then I can copy this CSV into another program.
 It would be nice to have an integrated way of doing this (this is one thing [JetBrains Datagrip](https://www.jetbrains.com/datagrip) seems more convenient for).
 

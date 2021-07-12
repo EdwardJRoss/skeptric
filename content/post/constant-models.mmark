@@ -40,7 +40,7 @@ A more discerning metric for categorical data is the cross-entropy.
 If `P` is a `N x C` matrix of the probabilities of each of the `C` categories and `y` are the actual categories, as a one-hot encoded `C x N` matrix, then the probability for the actual category is `pred_prob = apply(P * y, 1, sum)`.
 The cross-entropy is just the sum of the logs of the predicted probabilities for the actual categories, `sum(log(pred_prob))`.
 
-The best constant `1 x C` vector here is where each category is just the number of times it occured divided by the total number of occurances.
+The best constant `1 x C` vector here is where each category is just the number of times it occurred divided by the total number of occurrences.
 That is `apply(y, 2, sum) / sum(y)`; and the value is then just the log of the probability of the outcome.
 
 In the special case of binary classification, when `C` is 2, we can just focus on the case of positive outcomes.

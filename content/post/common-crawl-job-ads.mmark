@@ -19,7 +19,7 @@ We're going to find job ads by using a simple heuristic; many job ads have `/job
 This is going to miss a lot of jobs; some companies use something like `/job-listing`, some put it all on the `/careers/` page, some use something else entirely.
 But using this heuristic most things we find are likely to be job ads, and not articles about jobs or career development.
 
-I also want to start by focussing on Australian job ads, because I live in Australia it's the most relevant to me and the easiest for me to interpret.
+I also want to start by focusing on Australian job ads, because I live in Australia it's the most relevant to me and the easiest for me to interpret.
 I'll do this by only searching for `.au` domains, or for subdomains starting with `au.` (as some multinational companies do this to localise).
 This isn't perfect either; many multinational websites put Australian jobs on their careers website that isn't Australian, but again most of the jobs we'll find are Australian.
 
@@ -63,7 +63,7 @@ with open('test.html', 'wb') as f:
 ```
 
 Some of the paths turned out to be job search listings rather than a job ad.
-These would be useful for seeing how the market has changed over time, but for my purposes I just focussed on Job Ads.
+These would be useful for seeing how the market has changed over time, but for my purposes I just focused on Job Ads.
 Also some websites don't have any job pages in Common Crawl because it's disallowed in robots.txt.
 
 # Extracting job ad data

@@ -29,4 +29,4 @@ Running `sed 's/\(^  *\| *|\|(.*\) */,/g'` gives:
 
 I can delete the divider and then use as a CSV.
 Even better I can run this same regular expression in Vim or Emacs Evil mode as an Ex command.
-This won't work if the data contains parantheses or pipes, but is useful for quick extracts.
+This won't work if the data contains parentheses or pipes, but is useful for quick extracts.

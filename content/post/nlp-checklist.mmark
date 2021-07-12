@@ -26,5 +26,5 @@ They provide a lot of tooling to help generate tests, as well as rewrite tests i
 Simply having and running tests like "this simple text should almost certainly to this category" (with some probability) is a very good failsafe for a model.
 It doesn't replace metrics, but it can catch serious errors in the dataset and help show things not captured in the headline metrics.
 
-From now on I'm going to specificy at least minimum functionality tests for any model I build.
+From now on I'm going to specify at least minimum functionality tests for any model I build.
 I need to look into their tool in more detail to see whether it is worth using.

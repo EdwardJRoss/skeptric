@@ -6,7 +6,7 @@ feature_image = "/images/shingle_inequality.png"
 +++
 
 Two similar documents are likely to have many similar phrases relative to the number of words in the document.
-In particular if you're concerned with plagarism and copyright, getting the same data through multiple sources, or finding versions of the same document this approach could be useful.
+In particular if you're concerned with plagiarism and copyright, getting the same data through multiple sources, or finding versions of the same document this approach could be useful.
 In particular [MinHash](https://en.wikipedia.org/wiki/MinHash) can quickly find pairs of items with a high [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which we can run on sequences of *w* tokens.
 A hard question is what's the right number for *w*?
 If you use bags (instead of sets) it turns out that increasing the sequence length decreases the Jaccard index (unless it's 1 or 0).
@@ -31,7 +31,7 @@ For example [from the MinHash paper](https://www.cs.princeton.edu/courses/archiv
 
 As a set the 4-grams are the unordered distinct terms ["a rose is a", "rose is a rose", "is a rose is"].
 As a bag we can tread it as the set [("a rose is a", 1), ("rose is a rose", 1), ("is a rose is", 1), ("a rose is a", 2), ("rose is a rose", 2)].
-Then we can calculate unions and intersections between bags the same way as sets and the Jaccard index $$ J(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \cup B \rvert} $$ and tcontainment $$ C(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \rvert} $$ are well defined.
+Then we can calculate unions and intersections between bags the same way as sets and the Jaccard index $$ J(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \cup B \rvert} $$ and containment $$ C(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \rvert} $$ are well defined.
 
 Another useful representation for bags are as mappings from the item to its frequency (which is 0 if the item is not in the bag).
 So in this case it would be `{"a rose is a": 2, "rose is a rose": 2, "is a rose is": 1}`.
@@ -98,7 +98,7 @@ Plugging in our previous cardinality equality, the intersection inequality, and 
 $$ J_k \geq \frac{\lvert S_{k+1} \cap T_{k+1} \rvert + 1}{\lvert S_{k+1} \cup T_{k+1} \rvert + 1} $$
 
 Finally note that $$ \frac{N+1}{U+1} \geq \frac{N}{U} $$ with equality if and only if *N* equals *U*.
-So $$ J_k \geq J_{k+1} $$ and equlity can occur only if the intersection is the same as the union; that is $$ J_{k+1} $$ is 1 or 0.
+So $$ J_k \geq J_{k+1} $$ and equality can occur only if the intersection is the same as the union; that is $$ J_{k+1} $$ is 1 or 0.
 
 This also applies to containment: 
 

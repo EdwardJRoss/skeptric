@@ -7,12 +7,12 @@ feature_image = "/images/embedding.png"
 
 Categorical objects with a large number of categories are quite problematic for modelling.
 While many models can work with them it's really hard to learn parameters across many categories without doing a lot of work to get extra features.
-If you've got a related dataset containing these categories you may be able to meaningfuly *embed* them in a low dimensional vector space which many models can handle.
+If you've got a related dataset containing these categories you may be able to meaningfully *embed* them in a low dimensional vector space which many models can handle.
 
 Categorical objects occur all the time in business settings; products, customers, groupings and of course words.
 For models like linear or logistic regression or nearest neighbours the way to deal with these is by one-hot encoding.
-This means you end up with as many parameters as there are categories, and this can quickly become unweildly.
-You end up having to do a bunch of preprocessing to normalise similar things, maybe even building custom heirarchies, and throwing away infrequent items because you don't have enough data.
+This means you end up with as many parameters as there are categories, and this can quickly become unwieldy.
+You end up having to do a bunch of preprocessing to normalise similar things, maybe even building custom hierarchies, and throwing away infrequent items because you don't have enough data.
 In some cases this can work quite well as a starting point; but you lose the long tail which often has a lot of interesting information.
 
 Tree based methods like gradient boosting trees and random forests can directly handle categorical data.

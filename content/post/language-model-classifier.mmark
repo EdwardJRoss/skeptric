@@ -18,7 +18,7 @@ Then using Bayes' Rule we have:
 $$ \mathbb{P}(M_i \vert T) = \frac{\mathbb{P}(T \vert M_i) \mathbb{P}(M_i)}{\sum_{i=1}^{N} \mathbb{P}(T \vert M_i)} $$
 
 So to calculate the class we find the model that maximised the probability of the text under that language model multiplied by the probability of that model being appropriate.
-Assuming that the classes in the training copora are representative of the data at inference time this would just be the fraction of all data in that class.
+Assuming that the classes in the training corpora are representative of the data at inference time this would just be the fraction of all data in that class.
 
 In many ways for an N-gram language model this seems similar to naive Bayes, but requires more effort to calculate and I don't believe it would give better results.
 But it's something worth considering.

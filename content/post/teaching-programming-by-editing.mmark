@@ -7,7 +7,7 @@ feature_image = "/images/learning_to_code.jpg"
 
 I've had a few discussions with people, especially analysts, about how to learn programming.
 Generally I encourage them to find a project they want to accomplish and try to learn programming on the way.
-However I really struggle to find resources to recommend because they tend to spend a lot of time teaching programming concepts from stratch.
+However I really struggle to find resources to recommend because they tend to spend a lot of time teaching programming concepts from scratch.
 I wonder if a better way to teach these things would be to start with code that's close to what they want to accomplish, and get them to edit it.
 
 When someone asks me for advice on what resources to recommend, I carefully consider their background and where they want to get to.
@@ -28,7 +28,7 @@ Some people want to transition into a software engineering career, and that will
 However I get frustrated that the vast majority of learning to program materials spend a lot of time on dry theory.
 There are typically chapters on every different type of programming construct (types, string, conditionals, loops, vectors, objects, ...), with little motivation as to *why* they study them.
 
-There's a learning concept called the [Whole Game](https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators) which focusses on teaching by getting people to actually play the game rather than just learn the rules.
+There's a learning concept called the [Whole Game](https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators) which focuses on teaching by getting people to actually play the game rather than just learn the rules.
 By getting students to do a small version of what they're trying to accomplish, and getting them to learn themselves, is extremely motivating.
 I've seen this myself in the [fastai](https://www.fast.ai) course where I learned this concept.
 
@@ -45,11 +45,11 @@ This is a basic example, but I really think if someone is really motivated to bu
 And it would enable them to better learn how to solve related problems.
 When they start hitting some limits they might start wondering how the model actually works, and that could lead to much deeper learning.
 
-Depending on the level experience you may want to hide some of the complex logic (one of the wonderous things about programming is that you can do this through functions).
+Depending on the level experience you may want to hide some of the complex logic (one of the wondrous things about programming is that you can do this through functions).
 How you hide the complexity, and how much you hide, depends on where you want the student to focus.
 This means thinking a bit about where they are, and how they can learn in small steps.
 Also it's really hard to do this - I find sitting with someone as they work through the problem can be really helpful because they'll hit issues you didn't even think of.
-Some gentle encouragement, hints, or ocassionally fixing weird problems can be very helpful in getting them through the process.
+Some gentle encouragement, hints, or occasionally fixing weird problems can be very helpful in getting them through the process.
 But as much as possible you want them to drive their own learning.
 
 I haven't seen this idea of teaching programming by editing code to be widely taught.

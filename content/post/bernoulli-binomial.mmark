@@ -23,7 +23,7 @@ Concretely if there's 30% chance of someone opening an email you sent (p=0.3), t
 Let's label the outcome of the Bernoulli Trial by the random variable *Y*.
 Mathematically we would write the last paragraph as the pair of equations $$ P(Y=1) = p $$ and $$ P(Y=0) = 1-p $$.
 There's a mathematical trick to write these as a single equation: anything to the power of 1 is itself and anything to the power of 0 is 1 (except [sometimes 0](https://en.wikipedia.org/wiki/Zero_to_the_power_of_zero)).
-So we can rewrite the equationas as $$ P(Y=1) = p^1(1-p)^0 $$ and $$ P(Y=0) = p^0(1-p)^1 $$.
+So we can rewrite the equations as $$ P(Y=1) = p^1(1-p)^0 $$ and $$ P(Y=0) = p^0(1-p)^1 $$.
 Then we can combine them as $$ P(Y=y) = p^y(1-p)^{1-y} $$ for *y* either 0 or 1.
 This bit of arithmetic is a convenient trick.
 

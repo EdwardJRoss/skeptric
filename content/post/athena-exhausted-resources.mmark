@@ -23,5 +23,5 @@ I talked to someone else who had similar problems, and it sounds like it may hav
 But I'll never really know and this is the risk.
 
 A managed service with no levers like Athena, or Google BigQuery, is extremely convenient to run data pipelines with.
-But the problem is that if your data grows or the service changes your pieline might hit the limits and you may have to interrupt your service and either rewrite your pipeline or migrate to another service.
+But the problem is that if your data grows or the service changes your pipeline might hit the limits and you may have to interrupt your service and either rewrite your pipeline or migrate to another service.
 It's worth considering this risk and it may be worth investing in a solution that allows you to scale up the infrastructure such as Spark.

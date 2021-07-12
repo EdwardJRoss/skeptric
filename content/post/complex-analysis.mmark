@@ -12,7 +12,7 @@ The techniques are also often useful for [evaluating integrals](https://en.wikip
 
 Most of mathematical analysis, topology and measure theory is about [inapplicable abtruse examples](/sunk-cost-pure-maths).
 This is to the extent that there's a whole book on [Counterexamples in Topology](https://en.wikipedia.org/wiki/Counterexamples_in_Topology).
-Curiously in complex analysis all these strange examples like nowhere-differentiable functions are inadmissable, and leave well-behaved functions with useful techniques to handle them.
+Curiously in complex analysis all these strange examples like nowhere-differentiable functions are inadmissible, and leave well-behaved functions with useful techniques to handle them.
 
 Complex numbers start with adding solutions i and -i to the equation $$ x^2 = -1 $$.
 It turns out that when you extend real (or algebraic) numbers with this then it is enough to *factorise* any polynomial into linear factors.
@@ -31,7 +31,7 @@ So having one complex derivative means it's infinitely differentiable and the de
 Even with real analytic functions like $$ \frac{1}{1 + x^2} $$ complex analysis can shed light on why the radius of convergence of the power series about 0 is 1 (because the complex extension diverges at i and -i).
 
 Extending to ratios of holomorphic functions gives [meromorphic functions](https://en.wikipedia.org/wiki/Meromorphic_function) which have [Laurent Series](https://en.wikipedia.org/wiki/Laurent_series) $$ f(z) = \sum_{n=-\infty}^{\infty} a_n (z - c)^n $$.
-In fact the Cauchy Integral Formula relates the Laurent series at a point with the values around any curve $$ \gamma $$ surrounding that point via the countour integral:
+In fact the Cauchy Integral Formula relates the Laurent series at a point with the values around any curve $$ \gamma $$ surrounding that point via the contour integral:
 
 $$ a_n=\frac{1}{2\pi i} \oint_{\gamma}\,\frac{f(z)}{(z-c)^{n+1}}\,dz $$
 
@@ -56,4 +56,4 @@ The "niceness" of the structure of the complex plane is likely related to its al
 I don't know of many uses of these structural ideas, except in understanding 2-dimensional harmonic functions (e.g. in 2d fluid mechanics and electrostatics).
 
 Complex analysis is, strangely, more practical than real analysis.
-The tools like laurent Series, countour integrals and the Gamma Function pop up in surprisingly many applications.
+The tools like laurent Series, contour integrals and the Gamma Function pop up in surprisingly many applications.

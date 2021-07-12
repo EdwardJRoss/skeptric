@@ -7,7 +7,7 @@ feature_image = "/images/sporadic_groups.svg"
 
 Groups can be thought of a mathematical realisation of symmetry.
 For example the symmetric groups are all possible permutations of n elements.
-Or the dihedral groups are the symmetrics of a regular polygon.
+Or the dihedral groups are the symmetries of a regular polygon.
 A questions mathematicians ask is what kinds of groups are there?
 
 One way to tackle this is to try to decompose them.
@@ -33,7 +33,7 @@ However we do have all the material we need to generate all groups.
 In particular with the [universal embedding theorem](https://en.wikipedia.org/wiki/Universal_embedding_theorem) says that all groups are subgroups of a wreath product.
 
 I don't know of any concrete applications of these kinds of classification.
-That being said prime numbers (which are isomorphic to the cyclic groups) have applications in cryptography (such as RSA) *because* they are hard to solve and eary to modify.
+That being said prime numbers (which are isomorphic to the cyclic groups) have applications in cryptography (such as RSA) *because* they are hard to solve and easy to modify.
 
 Howver overall it's better to focus on the groups as they appear.
 In your application are you expecting some strange symmetry related to an unusual group.

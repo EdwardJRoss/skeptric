@@ -16,7 +16,7 @@ At the time torchvision was new and it was relying on nightly builds, which prob
 It seemed the easiest way forward was to upgrade to the most recent version of fastai and Pytorch.
 
 Updating to the latest version of fastai was straightforward, but getting a CPU build of Pytorch is a bit trickier.
-Because I'm just serving the Pytorch model there's little advantage of running on a GPU because it will only be scoring one image at a time; it can't batch them up to evalaute in parallel on the GPU.
+Because I'm just serving the Pytorch model there's little advantage of running on a GPU because it will only be scoring one image at a time; it can't batch them up to evaluate in parallel on the GPU.
 For [technical reasons](https://github.com/pytorch/pytorch/issues/26340) the CPU build of Pytorch isn't on PyPI.
 However it is hosted by Pytorch, and [as discussed in a Pytorch issue](https://github.com/pytorch/pytorch/issues/29745) it can be added to the `requirements.txt` by adding `--find-links`.
 Interestingly [you can't specify pip to use an external source in `setup.py`](https://stackoverflow.com/questions/57689387/equivalent-for-find-links-in-setup-py) without passing a flag, so you would need a custom install script.
@@ -35,10 +35,10 @@ While a lot of people will recommend using [LFS](https://git-lfs.github.com/) fo
 LFS (or other external storage) would matter with lots of changing large files; it makes it easy to checkout just the most recent version than the whole history, which can save on bandwidth, but for this case it's not worth the hassle.
 
 Now when I tried to run it I got an error about `tfms` getting multiple arguments.
-A quick google of the error message revealed a [fast.ai forum post](https://forums.fast.ai/t/transform-got-multiple-values-for-argument-tfms-lesson-2/37975/3A) which worked around the problem by changing `tfms` to `ds_tfms` (this kind of thing is why I verison locked fastai in the first place).
+A quick google of the error message revealed a [fast.ai forum post](https://forums.fast.ai/t/transform-got-multiple-values-for-argument-tfms-lesson-2/37975/3A) which worked around the problem by changing `tfms` to `ds_tfms` (this kind of thing is why I version locked fastai in the first place).
 After that it worked locally.
 
-All up it took me about half an hour to get it working locally, but only because I could make educated guesses about why a lot of the errors were occuring.
+All up it took me about half an hour to get it working locally, but only because I could make educated guesses about why a lot of the errors were occurring.
 But I still had to update it on the server, which surprisingly took me just as long.
 
 Even though I had a Docker container I was running on the server via a virtualenv.

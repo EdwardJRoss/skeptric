@@ -12,12 +12,12 @@ As a preprocessing step to [job title discovery](/discovering-job-titles) I need
 The process I use is simple:
 
 1. [rewrite](rewrite-of) terms containing of, e.g. "Director of Sales" to "Sales Director" 
-2. Expand puntuation with whitespace; e.g. "Receptionist/Administrator" to "Receptionist / Administrator"
+2. Expand punctuation with whitespace; e.g. "Receptionist/Administrator" to "Receptionist / Administrator"
 3. [Singularize](/making-words-singular) each word; e.g. "Cleaners" to "Cleaner"
 4. Expand known acronyms; e.g. "DBA" becomes "Database Administrator"
 5. Lowercase the text; e.g. "iOS Developer" becomes "ios developer"
 6. Replace common variants and misspellings; e.g. "Adviser" becomes "Advisor"
-7. Replace muliple whitespace with a single space
+7. Replace multiple whitespace with a single space
 
 In code this looks like:
 

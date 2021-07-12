@@ -14,7 +14,7 @@ I hacked it together in a week, and it was featured on the [2019 fast.ai course]
 I'm now looking at making some usability and data capture improvements.
 
 Originally when you select the car photo to classify it opens up a file selector.
-On desktop this makes sense, but on a mobile device you probably want to take a photgraph straight away (at least as default).
+On desktop this makes sense, but on a mobile device you probably want to take a photograph straight away (at least as default).
 How can you open up a camera for a photo?
 
 I found a [Stackoverflow answer](https://stackoverflow.com/a/44264339) that gives a simple solution; adding `capture="camera"` to the input element accepting images.
@@ -25,7 +25,7 @@ The post claims it works on Android from 4.0 and iPhone OS6 and newer, and on te
 However it doesn't give references for this so I dug a bit deeper.
 
 The capture attribute it covered in [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture), which links to [the specification](https://w3c.github.io/html-media-capture/#the-capture-attribute).
-In fact by the specificaiton the only valid values of capture are "user" (self-view camera), "environment" (viewing out from the phone), "left" and "right".
+In fact by the specification the only valid values of capture are "user" (self-view camera), "environment" (viewing out from the phone), "left" and "right".
 Anything else goes to the implementation specific default; so in this case the solution works by accident.
 It would be better to explicitly define the outward camera for photographing a car:
 

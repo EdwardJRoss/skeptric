@@ -16,7 +16,7 @@ They don't verify terms and conditions of every website they visit, at most chec
 However they don't share this data.
 
 [Common Crawl](https://commoncrawl.org) is an organisation that does the same thing as the tech giants (although on a smaller scale), but releases their data in the open (the [Internet Archive Wayback Machine](https://archive.org/web) is another example).
-The scraped websites [HTML and metdata is available](/text-meta-data-commoncrawl), they have a useful [columnar index](/common-crawl-index-athena) of the pages they've captured, and I've used it to build a reasonable [sample of job ads](/common-crawl-job-ads).
+The scraped websites [HTML and metadata is available](/text-meta-data-commoncrawl), they have a useful [columnar index](/common-crawl-index-athena) of the pages they've captured, and I've used it to build a reasonable [sample of job ads](/common-crawl-job-ads).
 This dataset has been immensely beneficial in Natural Language Processing, and is often used in Information Extraction and large Language Models; for example it's a large part of [RoBERTa](https://arxiv.org/abs/1907.11692).
 Larger datasets would be even more useful; OpenAI curated their own web crawl for the powerful [GPT-2](https://openai.com/blog/better-language-models/).
 
@@ -33,7 +33,7 @@ These points are useful in considering whether you should publish your [own web 
 ## Availability of Lawyers
 
 The reality of laws is that they need to be enforced.
-Copyright enfringement is only becomes a practical issue when you receive a letter from a lawyer.
+Copyright infringement is only becomes a practical issue when you receive a letter from a lawyer.
 If you need to defend yourself in court, even if you're in the right, it could be a huge cost in legal fees.
 
 Common Crawl is a non-profit organisation trying to archive the web.

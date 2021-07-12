@@ -20,7 +20,7 @@ Then when the model didn't fit particularly well I was left stuck trying to work
 If I were to try it again I would start by using domain knowledge to get the most likely few features and build a simpler model based on that, and incrementally build an understanding of the problem, before investing in gathering a large quantity of data.
 I think there's still a place for these kinds of models and techniques like feature importance for discovering new angles to approach a problem, but it's worth ruling out simpler approaches first.
 
-In reality an embarassingly large number of business problems can be solved adequately with the right average or a linear model.
+In reality an embarrassingly large number of business problems can be solved adequately with the right average or a linear model.
 They're cheap to implement, explain and maintain and are robust in their domain.
 In core business areas with high leverage, where a small improvement adds lot of business value, then it's generally worth improving these with more complex techniques.
 But these will come with a much higher ongoing cost to implement, run, validate and maintain.

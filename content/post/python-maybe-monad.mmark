@@ -21,7 +21,7 @@ def parse_optional_date(date):
     return parse_date(date)
 ```
 
-This is pretty straightforward to do, but it means that whenever you are writing or using a funciton you have to think about how it handles None.
+This is pretty straightforward to do, but it means that whenever you are writing or using a function you have to think about how it handles None.
 Do you want it to be an error, or to pass through?
 
 The approach generally taken in Haskell is that it should be an error, but you can get this behaviour using the Maybe monad.

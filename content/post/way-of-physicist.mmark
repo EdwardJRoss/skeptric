@@ -30,7 +30,7 @@ This connection is a model, which I'll call a *conceptual model* to distinguish 
 Even when using a blackbox algorithmic model it's important to have a conceptual model of the underlying process.
 The process may be broken down into several algorithmic models.
 
-A good conceptual model will identify the key drivers of the outcomes, outlinining the key relationships.
+A good conceptual model will identify the key drivers of the outcomes, outlining the key relationships.
 It's always useful to consult with domain experts who understand that process well, because they often have a good intuition of what is important.
 
 ## Solve the models analytically or computationally
@@ -40,7 +40,7 @@ Physics textbooks primarily focus on problems that can be solved from first prin
 However it is possible to come up with ballpark estimates, and solve "easy cases".
 
 A large part of the trick to solving models is coming up with models that are solvable.
-Models should be as *parsimonious* as possible, focussing on the most significant effects first.
+Models should be as *parsimonious* as possible, focusing on the most significant effects first.
 If you put in too many effects you lose the insight, and can't see the forest from the trees.
 
 Physics has a really good selection of models that are simple, but insightful.

@@ -17,7 +17,7 @@ Unfortunately you can't turn it off in Markdown; you'll just need to replace eve
 The backslash turns off the LaTeX rendering and you'll just get dollar signs.
 A little annoying to remember, but straightforward to work around.
 
-I often dispaly HTML in Jupyter notebooks using [`IPython.display.HTML`](https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML), and using [`IPython.display.display`](https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display) as the equivalent of print.
+I often display HTML in Jupyter notebooks using [`IPython.display.HTML`](https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML), and using [`IPython.display.display`](https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display) as the equivalent of print.
 Unfortunately the HTML also interprets dollar signs as Mathjax, but again you can turn this off by escaping the dollar signs with a backslash.
 Since this is what you will almost always want you can wrap it in a function:
 

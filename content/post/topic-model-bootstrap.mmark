@@ -24,7 +24,7 @@ If many topics contain a mixture of concepts then try increasing the number of t
 If many topics contain similar concepts then try decreasing the number of topics.
 
 LDA is a bag of words model, so it's important to normalise words to their root form (e.g. removing inflections).
-Sometimes, espeically with very short texts, you will get the same theme represented across multiple topics when people use different words to describe the same concept.
+Sometimes, especially with very short texts, you will get the same theme represented across multiple topics when people use different words to describe the same concept.
 This can be handled by building a grouping over the topics, and then summing (or perhaps averaging) the topic scores over the group.
 
 Once you've got to a reasonable output you can label each of the topics (or groups of topics), and you've got an initial classification and classifier.

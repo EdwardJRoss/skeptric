@@ -9,7 +9,7 @@ Sometimes you have a long sequence you want to break into smaller sized chunks.
 This is generally because you want to use some downstream process that can only handle so much data at a time.
 This is common in stochastic gradient descent in deep learning where you are constrained by the memory on the GPU.
 But this is also useful for API calls that can take a list, but can't handle all the data at once.
-Or for processing large datasets in batches without exhausing memory, potentially feeding them to other processes.
+Or for processing large datasets in batches without exhausting memory, potentially feeding them to other processes.
 
 For example suppose we have the sequence `seq = [1, 2, 3, 4, 5, 6, 7]` and we want to batch it up in size 3.
 Then we expect the result `[[1,2,3], [4,5,6], [7]]`.

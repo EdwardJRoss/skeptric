@@ -11,7 +11,7 @@ My current solution is Cloud Compute (e.g. Digital Ocean or Linode) which has lo
 Unfortunately once every couple of months it goes down; so I have to monitor it and get the server running again (which can take me a few days to get to if I'm busy).
 I've looked at switching to a hosted Application Platforms like [Heroku](https://www.heroku.com/), [Digital Ocean App Platform](https://www.digitalocean.com/products/app-platform/) and [Google App Engine](https://cloud.google.com/appengine); but they're quite a bit more expensive, and not worth it for hobby projects.
 There are also Hosted Kubernetes solutions but they're also more expensive and require learning a bunch of Kubernetes.
-[Google Cloud Run](https://cloud.google.com/run) is a recent alternative which seems to be the best of all worlds - runs off of containers, has miniscule costs for low traffic applications, and handles all the operations for you.
+[Google Cloud Run](https://cloud.google.com/run) is a recent alternative which seems to be the best of all worlds - runs off of containers, has minuscule costs for low traffic applications, and handles all the operations for you.
 The only downside is the maximum cost is quite large, and it has to be managed.
 
 | Service           | Min Cost | Max Cost     | Operation | Management |
@@ -28,7 +28,7 @@ You can configure the memory (up to 8GB) and the CPUs (up to 4), scale from 0 to
 The main limitation is that the service must not have any local mutable state; state needs to be managed in an external database or object store.
 This is very convenient for Machine Learning Inference, which tend to have complex dependencies (which can be handled with containers), moderate memory requirements and no state.
 
-There may be some other alternatives; there are machine learning specific platforms with infefence like AWS Sagemaker and Google's AI Platform, but they tend to try to force you into a certain way of doing things and it's hard to go outside their supported tools (although it's possible with Sagemaker to use a custom Docker container).
+There may be some other alternatives; there are machine learning specific platforms with inference like AWS Sagemaker and Google's AI Platform, but they tend to try to force you into a certain way of doing things and it's hard to go outside their supported tools (although it's possible with Sagemaker to use a custom Docker container).
 AWS Lambda recently announced [container support](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) which makes it much easier to [deploy machine learning endpoints](https://aws.amazon.com/blogs/machine-learning/using-container-images-to-run-tensorflow-models-in-aws-lambda/), but it requires a bit more work to set up (I'd be interested in how the costs and performance compares).
 
 This article will explore how I migrated [whatcar.xyz](http://www.whatcar.xyz) to Google Cloud Run, while trying to manage the risk of costs.
@@ -38,7 +38,7 @@ This article will explore how I migrated [whatcar.xyz](http://www.whatcar.xyz) t
 One of the issues with big cloud vendors is it's really difficult to ascertain costs, because they break it down into lots of small fees for a variety of services.
 There's also a real risk of costs spiralling out of control, like the [story of spending $72,000 in a couple of days](https://old.reddit.com/r/googlecloud/comments/kaa5ew/we_burnt_72k_testing_firebase_cloud_run_and/) with firebase and cloud run.
 
-[Google Cloud Run's pricing](https://cloud.google.com/run/pricing) is in the rediculous units of dollars per vCPU second and GiB second; I find these really hard to process until I change the unit.
+[Google Cloud Run's pricing](https://cloud.google.com/run/pricing) is in the ridiculous units of dollars per vCPU second and GiB second; I find these really hard to process until I change the unit.
 At the time of writing the Tier 1 pricing is:
 
 * $2 per vCPU-day, with the first 2 vCPU-days free per month
@@ -140,5 +140,5 @@ All I had to do was increase the memory available to the instances, because the 
 # Summary
 
 Google Cloud Run seems to be a really nice way to run hobby Machine Learning APIs and stateless websites requiring compute (and of course state could be managed through an external data store like Google Firebase or an SQL Database).
-Configuration is managable, for low usage it's crazy cheap and it just works even handling mapping to your own (sub)domains.
-The only downside is managing the risk of costs blowing out if something goes wrong, but with a bit of configuration it seems managable.
+Configuration is manageable, for low usage it's crazy cheap and it just works even handling mapping to your own (sub)domains.
+The only downside is managing the risk of costs blowing out if something goes wrong, but with a bit of configuration it seems manageable.

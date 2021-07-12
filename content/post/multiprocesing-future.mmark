@@ -33,7 +33,7 @@ with ProcessPoolExecutor(max_workers=8) as p:
 ```
 
 The main difference is `map`, like the inbuilt Python function, wants each argument as a separate list, where `starmap` wants a list of argument lists.
-We use the standar via `*zip(*)` trick to convert between the two forms.
+We use the standard via `*zip(*)` trick to convert between the two forms.
 
 Then moving from processes to threads is as simple as replacing the `ProcessPoolExecutor` with a `ThreadPoolExecutor`.
 Interestingly when using this with the Pyathena library I found that the `ThreadPoolExecutor` didn't seem to result in a concurrency speedup (it was as slow as executing the queries serially).

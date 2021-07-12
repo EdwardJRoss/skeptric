@@ -31,7 +31,7 @@ We use our hashes to create *b* bands each containing *r* rows (where their prod
 We then collect all items that have the same hash accross all *r* rows for any band, which is a simple lookup.
 This can be used to get the probability a pair will occur in the same band:
 
-* The probability that a given row is the same is the Jaccard similairty *s* (as discussed in the [previous article on MinHash](/minhash))
+* The probability that a given row is the same is the Jaccard similarity *s* (as discussed in the [previous article on MinHash](/minhash))
 * The probability that a given band of *r* rows agree is $$ s^r $$, because they are each independent
 * The probability that a given band of *r* rows do not agree is $$ 1 - s^r $$
 * The probability that the *r* rows don't agree for any of the *b* bands is $$ (1 - s^r)^b $$ because they are independent
@@ -69,7 +69,7 @@ We need to pick *r* and *b* with a product at most 128 (so for example 16 and 8 
 
 Because we can always filter out false negatives but can't retrieve false positives the target should be to remove the bulk of texts with a very small overlap.
 When we [looked at the 4-Jaccard near duplicates](/jaccard-duplicates) they were similar above about 0.5, and very different below 0.05, so we want to capture this threshold.
-So ideally for ads with a similarity below 0.05 there should be a very small chance (say 0.1%) that they get included and for ads with similarity about 0.5 theree should be a high chance (say 99%) that they are included.
+So ideally for ads with a similarity below 0.05 there should be a very small chance (say 0.1%) that they get included and for ads with similarity about 0.5 there should be a high chance (say 99%) that they are included.
 
 Looking some different values for *b* and *r* shows the tradeoffs:
     
@@ -126,11 +126,11 @@ For the 400,000 job ad pairs it takes 15 minutes to get all pairs with 42 bands 
 similar_all = list(lsh_similar(minhashes, 42, 3))
 ```
 
-If we look at the frequency of results against the 3-Shingle Jaccard Similarity we see there's a spike around 0.25 near the threshold of the S-curve (the S-curve has been overlayed in orange).
+If we look at the frequency of results against the 3-Shingle Jaccard Similarity we see there's a spike around 0.25 near the threshold of the S-curve (the S-curve has been overlaid in orange).
 This is to be expected as the number of pairs grows very steeply with decreasing similarity.
 There's a small spike near 0 where the probability is very low, but the number of pairs is quite large.
 
 ![Frequency of LSH pairs by 3-Jaccard Similarity](/images/minhash_lsh_frequency.png)
 
 Now we have the pairs we need to work out how to interpret and use them.
-If you want to produce S-curve plots, these were producted using [this R script](/resources/minhash_s_curves.R).
+If you want to produce S-curve plots, these were produced using [this R script](/resources/minhash_s_curves.R).

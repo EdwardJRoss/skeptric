@@ -13,7 +13,7 @@ I started with the minimum because the maximum is often an inspirational nubmer 
 
 The way I approached this was:
 
-* Look for anomolies (e.g. salaries where minimum is more than the maximum)
+* Look for anomalies (e.g. salaries where minimum is more than the maximum)
 * For salaries with a period (e.g. hourly, daily, or annual) look at the range of common salaries
 * Remove any data with wrong ranges due to issues in the data or in the parsing
 * For salaries without a period, infer the period from the range (ignoring when it's ambiguous)

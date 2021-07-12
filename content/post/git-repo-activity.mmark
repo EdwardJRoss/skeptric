@@ -6,7 +6,7 @@ feature_image = "/images/nltk_contributions.png"
 +++
 
 When evaluating whether to use an open source project I generally want to know how active the project is.
-A project doesn't need to be active to be useable; mature and stable projects don't need to change much to be reliable.
+A project doesn't need to be active to be usable; mature and stable projects don't need to change much to be reliable.
 But if a project has problems or missing essential features, or is in an evolving ecosystem (like any web project or kernel drivers), it's important to know how fast it changes.
 The easiest heuristic is to look at how much activity there has been on the repository over time, and this is really easy on Github's contributors tab.
 
@@ -20,7 +20,7 @@ Almost all the contributions have been made by a single person, and there are no
 It's unlikely this will get fixed by itself.
 Searching the issues (both open and closed) shows this problem is an [open issue with no responses](https://github.com/sloria/TextBlob/issues/281). 
 Looking at the open pull requests there are a few reasonable looking requests that have no comments.
-From the closed pull requests the primary author has been doing basic maintenence work but no enhancements.
+From the closed pull requests the primary author has been doing basic maintenance work but no enhancements.
 If I submitted a change for this complex task there's a low chance it would be included into the library.
 
 None of this is a criticism of TextBlob or its author.
@@ -31,8 +31,8 @@ Rich Hickey's [Open Source is Not About You](https://gist.github.com/richhickey/
 
 TextBlob's singular is based on the [inflect library's](https://github.com/jazzband/inflect) `singularize_noun` function, which is documented to only work on singular nouns.
 There's an [open issue](https://github.com/jazzband/inflect/issues/76) about it, but as in the thread it is working as documented.
-Unlike TextBlob which is a general purpose tool, inflect is a very focussed library that just doe one thing, inflect English words.
-As such it wouldn't need much maintenence to be useful once it is stable, since English doesn't change much.
+Unlike TextBlob which is a general purpose tool, inflect is a very focused library that just doe one thing, inflect English words.
+As such it wouldn't need much maintenance to be useful once it is stable, since English doesn't change much.
 
 ![Inflect Contribution](/images/inflect_contributions.png)
 

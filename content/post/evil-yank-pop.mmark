@@ -6,10 +6,10 @@ feature_image = "/images/vim_registers.png"
 +++
 
 I use Vim keybindings in Emacs through [Evil Mode](https://github.com/emacs-evil/evil) and [Evil Collection](https://github.com/emacs-evil/evil-collection/).
-Often I'll copy something, make some edits, and then want to pase the text.
+Often I'll copy something, make some edits, and then want to paste the text.
 The problem is that the edits changed what was on the register and I want to recover that text.
 
-In Vim (and Evil mode) I can type `:reg` to see what's in the registers, find the value I want to pase, commit the register to memory (for example `8`), exit and then paste that register (`"8p` from normal mode, `C-r 8` from insert mode).
+In Vim (and Evil mode) I can type `:reg` to see what's in the registers, find the value I want to paste, commit the register to memory (for example `8`), exit and then paste that register (`"8p` from normal mode, `C-r 8` from insert mode).
 This is a bit painful and breaks the flow.
 If I'm copying from in Vim/Emacs and thinking ahead I can copy to a certain register (say a `"y<motion>`), and then paste back with that same register, but I don't find that at all natural.
 To find out more about Vim registers either type `:h registers` or read [Brian Storti's article on it](https://www.brianstorti.com/vim-registers/).
@@ -22,7 +22,7 @@ Vim (but not Evil) also supports this [through the redo-register](https://stacko
 
 I still find the Vim and Evil mechanisms a bit clunky because it requires switching keybindings.
 But the [Counsel completions](https://github.com/abo-abo/swiper#counsel) for Emacs contains `counsel-yank-pop` which opens the completions in an Ivy minibuffer.
-This is great because you can select a completion either by naviagating with up and down arrows (or `C-p` and `C-n` keys), or by typing a part of the text you want and then selecting it to paste with `Enter`.
+This is great because you can select a completion either by navigating with up and down arrows (or `C-p` and `C-n` keys), or by typing a part of the text you want and then selecting it to paste with `Enter`.
 I find this a much easier way to retrieve text from long ago.
 I've bound this to `gp` in normal mode and `Ctrl-Shift-r` in insert mode.
 

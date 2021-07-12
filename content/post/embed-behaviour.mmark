@@ -28,7 +28,7 @@ For example people who view, watch (save), and buy many of the same items are li
 But this doesn't work for all sorts of purchases; maybe you need to filter it by search behaviour.
 Items that are likely to be clicked on by the same search term are likely to be similar in a more contextual sense.
 Items that are often posted together by the same person are similar in a different sense.
-Items that contain similar text descriptions or a similar photgraph are similar in yet another way.
+Items that contain similar text descriptions or a similar photograph are similar in yet another way.
 You could do this for individual items, categories of items, or aspects of items.
 You could even use this [to make categories of items](/cluster-exploration).
 

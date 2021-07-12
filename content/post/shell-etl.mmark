@@ -8,7 +8,7 @@ feature_image = "/images/history_count.png"
 
 There are many great tools for filtering, transforming and aggregating data like SQL, R dplyr and Python Pandas (not to mention [Excel](/using-excel.mmark)).
 But sometimes when I'm working on a remote server I want to quickly extract some information from a file without switching to one of these environments.
-The standard unix tools like `uniq`, `sort`, `sed` and `awk` can do blazing fast transformations on text files that don't fit in memory and are easy to chain together.
+The standard UNIX tools like `uniq`, `sort`, `sed` and `awk` can do blazing fast transformations on text files that don't fit in memory and are easy to chain together.
 I've used it for getting summaries of hundreds of GB of compressed CSVs, and it works pretty well!
 They're slightly awkward to work with, have limited features, and they will break when the data doesn't quite match the standard form, but for a quick diagnostic summary they can be really useful.
 
@@ -52,7 +52,7 @@ ls ~/tmp
 df -h
 ```
 
-Let's try to extract the commands and not the arugments; we use `cut` a little like `select` in SQL, but we have to specify how the columns are separated.
+Let's try to extract the commands and not the arguments; we use `cut` a little like `select` in SQL, but we have to specify how the columns are separated.
 We set the delimiter (`-d`) to a ' ' and the fields to select is the first field `-f1`.
 Note that in bash you can specify a tab separated file with `-d$'\t'`.
 

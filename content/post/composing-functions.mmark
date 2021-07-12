@@ -1,5 +1,5 @@
 +++
-tags = ["progamming", "python", "r"]
+tags = ["programming", "python", "r"]
 title = "Composing Functions"
 date = "2020-12-06T19:53:54+11:00"
 feature_image = "/images/magrittr.png"
@@ -17,9 +17,9 @@ df_clean = df_raw[(df_raw['colour'] == 'blue') & (df_raw['price'] > 50)]
 df_clean.loc[df_clean['price'].isna(), 'price'] = df_clean['price'].mean()
 ```
 
-There are so much repitition here it's easy to make a mistake.
+There are so much repetition here it's easy to make a mistake.
 On the first line `df_raw` is typed *3* times, a typo putting in a different dataframe will lead to subtle runtime errors that are hard to pick up; I've debugged them in my own code many times.
-The second line has a similar problm where `df_clean` is typed 3 times (if `df_raw` was put ther by accident it could lead to an error).
+The second line has a similar problem where `df_clean` is typed 3 times (if `df_raw` was put there by accident it could lead to an error).
 There's also other Pandas traps here; forgetting the brackets on the first line will lead to an error due to the precedence of &, and I don't know whether the second line actually changes `df_raw` (I may see some warning about that, and then if I want to preserve `df_raw` I'll put a `.copy()` in.
 
 In R dplyr it's much cleaner and you can't accidentally type the wrong thing because we're chaining (here using the magrittr `%>%`, but soon we will be able to use `|>`):

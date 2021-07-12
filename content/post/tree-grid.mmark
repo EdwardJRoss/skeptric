@@ -9,10 +9,10 @@ A [decision tree](https://en.wikipedia.org/wiki/Decision_tree) is a series of co
 When stated as a chain of if-then-else rules it can be really hard to understand what is going on.
 If the number of dimensions and cutpoints is relatively small it can be useful to visualise on a grid to understand the tree.
 
-Decision trees are often represented as a heirarchy of splits.
+Decision trees are often represented as a hierarchy of splits.
 Here's an example of a classification tree on Titanic survivors.
 
-![CART Tree represented as a heirarchy](/images/CART_tree_titanic_survivors.png)
+![CART Tree represented as a hierarchy](/images/CART_tree_titanic_survivors.png)
 
 This is useful but if there are a large number of splits, even on a few dimensions the trees can get quite large.
 The tree can also be linearised into a series of if else rules (so each following rule applies only to cases not already classified).
@@ -44,7 +44,7 @@ The order matters here, switching them around gives a different result:
 
 ![Orange if letter >= C, Blue if Letter < D](/images/chessboard_c.png)
 
-First one can be written more preciseful with the rules:
+First one can be written more precisely with the rules:
 
 * Blue if letter < D
 * Orange if letter >= D
@@ -87,7 +87,7 @@ However this is very clear on a grid:
 ![Complex rules on chessboard grid](/images/chessboard_complex.png)
 
 While this example might seem artificial, I've actually used this technique with great success on trees with 4 dimensions.
-With higher dimensions you have to make facets (like in the titanic example above), but if these groups don't have too many cuts the visualisaiton is readable.
+With higher dimensions you have to make facets (like in the titanic example above), but if these groups don't have too many cuts the visualisation is readable.
 You can also clearly see the boundaries between groups which can be informative in a classificaition (though with high dimensions you have to eyeball this across facets).
 
 These diagrams are relatively simple to construct.

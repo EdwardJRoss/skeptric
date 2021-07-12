@@ -29,5 +29,5 @@ However the CI tests fail (but only in the Python 3.9 environment, not in Python
 The maintainer agrees we can workaround by limiting Pandas to <1.2 for now until the tests are fixed.
 Luckily I'm familiar with Github actions [from publishing this website](/github-actions) and so I quickly see how to make this change and get the tests passing.
 
-At the end of the day a straighforward change ends up taking a couple of hours because I had to work around an unrelated test was failing due to a change in another package.
+At the end of the day a straightforward change ends up taking a couple of hours because I had to work around an unrelated test was failing due to a change in another package.
 This could have been caught earlier, at the time of the upstream change, if the tests ran regularly (say weekly).

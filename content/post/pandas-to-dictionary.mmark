@@ -29,7 +29,7 @@ To profile the function `func` with arguments `args` I could run `%prun func(arg
 ```
 
 I didn't find this terribly illuminating, but it seemed to be spending a disproportionate time in Pandas and guessing datatypes, which really should not have been a difficult problem.
-Because I had a few lines of Python functions it wasn't immediately obvious where this was occuring, so I ran the line profiler, installing it from a Jupyter notebook with `pip install line_profiler` and loading the Jupyter extension with `%load_ext line_profiler`.
+Because I had a few lines of Python functions it wasn't immediately obvious where this was occurring, so I ran the line profiler, installing it from a Jupyter notebook with `pip install line_profiler` and loading the Jupyter extension with `%load_ext line_profiler`.
 Then I could look at the lines taking the most time with the function using `%lprun -f func func(args)`, to find 99% of the time was spent in the following line:
 
 ```python

@@ -5,7 +5,7 @@ date = "2020-10-25T21:29:43+11:00"
 feature_image = "/images/github_workflow_run.png"
 +++
 
-I have been publishing this webiste using [Github Actions with Hugo](/github-actions) on push [and on a daily schedule](/github-action-cron).
+I have been publishing this website using [Github Actions with Hugo](/github-actions) on push [and on a daily schedule](/github-action-cron).
 I recently received an error notification via email from Github, and wanted to check whether it was an intermittent error.
 Unfortunately I couldn't find anyway to rerun it manually; I would have to push again or wait.
 Fortunately there's a way to *enable* manual reruns with `workflow_dispatch`.

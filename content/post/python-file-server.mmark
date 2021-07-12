@@ -34,6 +34,6 @@ Trying to request a file from HTTP gives this error because it has [security imp
 The simplest workaround is to serve "test.json" from a server.
 This is trivial with Python's [inbuilt HTTP server](https://docs.python.org/3/library/http.server.html).
 Just go to the directory contianing the HTML and Json files in a shell and type `python3 -m http.server` to start a server.
-Then you can open the HTML file at `http://localhost:8080/<filename.html>` (or if you call it `index.html` you don't need the exentsion) and it will be able to load in the JSON file.
+Then you can open the HTML file at `http://localhost:8080/<filename.html>` (or if you call it `index.html` you don't need the extension) and it will be able to load in the JSON file.
 
 In production you would be running this behind a robust HTTP server like Nginx or Apache, but for quickly testing locally Python's inbuilt server is useful.

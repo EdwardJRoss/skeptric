@@ -43,7 +43,7 @@ We will strip off newlines, because they won't be shown in HTML output.
         self.output(data.strip('\n'))
 ```
 
-The output method is one we need to add ourself; we can append the output to internal state in a list called `outdata`.
+The output method is one we need to add ourselves; we can append the output to internal state in a list called `outdata`.
 We add to a list rather than append to a string because Python strings are immutable which means we'd need to create a whole new string object when we append a single character which is very inefficient if the string gets large.
 
 ```python

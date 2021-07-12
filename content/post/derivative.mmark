@@ -36,7 +36,7 @@ It's pretty straightforward to prove: $$ g(f(v + h)) \approx g(f(v) + df_v(h)) \
 A short notational way to put this is $$ d(f\circ g)_{v} = dg_{f(v)} \circ df_v $$.
 
 This is a really useful tool for calculating derivatives in practice.
-It can be efficently implemented in [Automatic Differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) available in libraries like Tensorflow and Pytorch.
+It can be efficiently implemented in [Automatic Differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) available in libraries like Tensorflow and Pytorch.
 
 The standard rules for calculating derivatives can be obtained from the chain rule.
 For example the multiplication rule is $$ d(f \cdot g)_v = g(v) df_v + f(v) dg_v $$.
@@ -49,7 +49,7 @@ Then the multiplication rule immediately follows from the chain rule.
 
 Note that the definition of the derivative doesn't explicitly refer to the coordinates.
 There are always multiple ways to coordinatise a space, but the tangent at a point is always the same thing. 
-The inpute image in the image classificaiton problem could also be represented as a series of cosine waves with different frequencies, as is done in JPEG images.
+The input image in the image classification problem could also be represented as a series of cosine waves with different frequencies, as is done in JPEG images.
 The choice of coordinates is called a basis; it's computationally important but not important for calculating a derivative.
 
 One practical use for this is gradient descent.

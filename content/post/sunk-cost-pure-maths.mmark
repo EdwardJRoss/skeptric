@@ -21,7 +21,7 @@ The [Weirstrass function](https://en.wikipedia.org/wiki/Weierstrass_function) wh
 The [Cantor function](https://en.wikipedia.org/wiki/Cantor_function) which has derivative zero almost everywhere, but is monotonically increasing.
 [Space filling curves](https://en.wikipedia.org/wiki/Space-filling_curve) which wind in themselves so tightly they can fill a rectangle.
 The [Banach Tarski](https://en.wikipedia.org/wiki/Banach%E2%80%93Tarski_paradox) construction of decomposing a ball into 5 pieces that can be rearranged into two copies of the original ball.
-All these constructions have one feature in common; they involve cutting space up into infinitessimal chunks.
+All these constructions have one feature in common; they involve cutting space up into infinitesimal chunks.
 
 Any real measurement can only have a finite precision.
 You can't measure whether an object has irrational length with a ruler.
@@ -36,11 +36,11 @@ However the [epsilon-delta](https://en.wikipedia.org/wiki/(%CE%B5,_%CE%B4)-defin
 
 When I read the first chapters of Wasserman's [*All of Statistics*](/all-of-statistics) I translated them into measure theory.
 I could rigorously prove most of the theorems on the sound footing of a probability measure.
-However by focussing on rigour I lost a lot of the *statistical* insight.
+However by focusing on rigour I lost a lot of the *statistical* insight.
 Understanding what the models mean for real situations is much more useful than proving theorems about abstract measures.
 Then you can use your intuition about the processes underlying your analysis to draw conclusions more easily.
 
-Another problem of pure mathematics is focussing too much on being *beautiful*.
+Another problem of pure mathematics is focusing too much on being *beautiful*.
 I love how beautiful defining division rings with [*geometric axioms*](/geometry-of-division-rings) seems.
 However it's an illusion; any small change to the axioms can look just as beautiful but yield a useless theory or exotic objects like [Non-desarguesian planes](/non-desarguesian-projective-planes).
 I had to spend a long time unlearning this notion of compact beauty as a programmer.

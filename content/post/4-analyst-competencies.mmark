@@ -29,9 +29,9 @@ For an analytics professional it makes sense to build out some strength in each 
 The bread and butter of analytics is understanding what impact actions have on metrics of interest.
 This requires having a model of the system, knowing the interactions and understanding measurement.
 The models can range from informal sketches to fully specified statistical models.
-Interactions in the measurement can be managed by understanding the order of magnitude of effects or through statistical testing or causality modeling.
+Interactions in the measurement can be managed by understanding the order of magnitude of effects or through statistical testing or causality modelling.
 
-Sometimes these techniques can be overemphasised and the focus can be more on the cool new modeling technique (say, deep reinforcement learning) than how effectively it solves the problem.
+Sometimes these techniques can be overemphasised and the focus can be more on the cool new modelling technique (say, deep reinforcement learning) than how effectively it solves the problem.
 In practice a core of simple techniques can be effective and efficient for a wide range of problems.
 Sometimes for highly valuable problems more advanced techniques can pay huge dividends, but they are often time consuming to implement, harder to communicate and maintain and don't always work out.
 
@@ -57,7 +57,7 @@ Technology enables complex analyses, handling large or diverse datasets, automat
 At minimum you need to be able to access and analyse relevant data, and even when it's collected manually this normally requires some technology.
 Generally there's some amount of data cleaning, integrating different datasets and performing calculations and creating visualisations.
 
-Specific techonlogies are often disproportionately represented in job ads for analysts.
+Specific technologies are often disproportionately represented in job ads for analysts.
 Typically you can learn to use different systems, especially ones that built specifically for analysts.
 Some are specific to problem solving techniques, like [Stan](https://mc-stan.org/), or to a particular domain, like Google Analytics or Adobe Analytics to web and mobile applications.
 When communicating with other people you may be better off using technologies that are familiar to them; [Excel](/using-excel) is popular.
@@ -93,4 +93,4 @@ In both of these cases understanding their objectives and being able to clearly 
 These competencies are very broad and you could spend a lifetime learning any one of them.
 Whether you're [building systems or influencing decisions](https://towardsdatascience.com/ode-to-the-type-a-data-scientist-78d11456019) understanding how all these pieces fit in your objectives, and how to mitigate the deficiencies is important.
 You can always work with experts in statistics, business, technology or communication to get things done.
-But you'll have to have enough overlap to understand what actually needs to be done and coney why it is important.
+But you'll have to have enough overlap to understand what actually needs to be done and convey why it is important.

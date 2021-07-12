@@ -5,9 +5,9 @@ date = "2020-03-27T08:00:43+11:00"
 feature_image = "/images/moving_average.png"
 +++
 
-Moving averages can help smooth out the noise to reveal the undelying signal in a dataset.
+Moving averages can help smooth out the noise to reveal the underlying signal in a dataset.
 As they lag behind the actual signal they tradeoff timeliness for increased precision in the underlying signal.
-You could use them for reporting metrics or for alerting in cases where it's more important to be sure ther is a change than it is to catch any change early.
+You could use them for reporting metrics or for alerting in cases where it's more important to be sure there is a change than it is to catch any change early.
 It's typically better to have a 7 day moving average than weekly reporting for important metrics because you'll see changes earlier.
 There are a few ways to implement this in SQL with different tradeoffs, and a few traps to avoid.
 
@@ -37,7 +37,7 @@ The rest of the article will go through the options and how to work around commi
 # Calculating a moving average
 
 Suppose you have the daily number of pageviews for a new website you're developing.
-To remove some of the noise you want to calcuate a 3 day moving average (although in real life 7 day would be better because it smooths out weekend effects).
+To remove some of the noise you want to calculate a 3 day moving average (although in real life 7 day would be better because it smooths out weekend effects).
 Here is an example of the output:
 
 | date       | pageviews | moving_average |
@@ -199,7 +199,7 @@ ORDER BY date
 
 ## Adding weights
 
-Because we're manually writing each part of the moving average it's possible to add weights; say we wanted to use the weights (0.6, 0.24, 0.16) to emphasise the more recent datapoints.
+Because we're manually writing each part of the moving average it's possible to add weights; say we wanted to use the weights (0.6, 0.24, 0.16) to emphasise the more recent data points.
 It's as simple as inserting the weights into the query:
 
 ```SQL
@@ -223,7 +223,7 @@ However writing each lag is tedious for large windows, which the next approach s
 
 # Moving Averages with Self Joins
 
-Using self joins is in some senses the simplest, most reliable and versitile.
+Using self joins is in some senses the simplest, most reliable and versatile.
 Not every SQL database supports window functions, but they should support JOIN.
 However you may opt for one of the other options for performance reasons, or for convenience in a quick analysis.
 

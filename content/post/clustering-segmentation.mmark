@@ -37,7 +37,7 @@ To do this we need to define what "similar" is.
 The general way of doing this is to combine distances as a weighted average of features (this is described well in [Elements of Statistical Learning (2nd ed.)](https://web.stanford.edu/~hastie/ElemStatLearn/) section 14.3).
 
 First you need a notion of distance for each feature in the similarity measure.
-For example you might have a notion of distances between states (maybe 1 if they share a border or 0 otherwise), and industries (based on subject matter expertise; for example you might curate your own heirarchy).
+For example you might have a notion of distances between states (maybe 1 if they share a border or 0 otherwise), and industries (based on subject matter expertise; for example you might curate your own hierarchy).
 Otherwise you could just say the distance is 1 if they are the same and 0 if they are different (see [Gower's formula](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/daisy.html) for a fairly general dissimilarity function).
 For annual spend the distance could be the absolute difference between them.
 
@@ -53,7 +53,7 @@ We could then use [regression trees](https://en.wikipedia.org/wiki/Decision_tree
 
 # Clustering Algorithm
 
-There are lots of clustering algorithms such as [k-medioids](https://en.wikipedia.org/wiki/K-medoids) (the [k-means](https://en.wikipedia.org/wiki/K-means) equivalent for non-Euclidean distances) and [heirarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering), or more exotic ones like [self-organising maps](https://en.wikipedia.org/wiki/Self-organizing_map).
+There are lots of clustering algorithms such as [k-medoids](https://en.wikipedia.org/wiki/K-medoids) (the [k-means](https://en.wikipedia.org/wiki/K-means) equivalent for non-Euclidean distances) and [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering), or more exotic ones like [self-organising maps](https://en.wikipedia.org/wiki/Self-organizing_map).
 
 You can try a few different algorithms but this is normally the easy bit; the hard part is evaluating it.
 

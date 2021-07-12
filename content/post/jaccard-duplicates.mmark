@@ -9,7 +9,7 @@ Finding *near*-duplicate texts is a hard problem, but the Jaccard index for [n-g
 I've tried it on the [Adzuna Job Salary Predictions Kaggle Competition](https://www.kaggle.com/c/job-salary-prediction) with good success.
 This works pretty well at finding near-duplicates and even ads from the same company; although by itself it can't detect duplicates.
 
-I've looked before at using the [edit distance](/levenshtein) which looks for the minimum number of changes to transform one text to another, but it's slow to calcuate.
+I've looked before at using the [edit distance](/levenshtein) which looks for the minimum number of changes to transform one text to another, but it's slow to calculate.
 Instead we treat each document as a bag of n-grams (for some fixed *n*), and calculate the Jaccard index between them.
 So two documents will be similar if they contain the same phrases of length *n* tokens, irrespective of order.
 
@@ -23,7 +23,7 @@ For the ads I took a random sample of 2000 ads (producing just under 2 million p
 
 ![Jaccard histogram for 1-grams to 4-grams](/images/jaccard_shingle_length.png)
 
-The histogram gets much more separated at *n=2*, then a little bit more at *n=3* and is very simiar at *n=4*.
+The histogram gets much more separated at *n=2*, then a little bit more at *n=3* and is very similar at *n=4*.
 For somewhere to start I looked to see how the ads changes with length around *n=4*, looking at sets of 5 ads at different cutoffs.
 
 For Jaccard similarities near 0.5 (around 6 ads per million pairs) and higher the ads are almost identical.

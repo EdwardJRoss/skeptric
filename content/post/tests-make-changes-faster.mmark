@@ -42,13 +42,13 @@ I could reduce the time taken by sampling the input dataset (although this may m
 
 Over time my team refactored this code into small functions in Python that processed the data and could be independently tested (in this case the data was small enough to fit in memory).
 We could run unit tests in seconds that validated or invalidated a change.
-They also were useful documentation for onboarding people to the project about what the code actually did.
+They also were useful documentation for on-boarding people to the project about what the code actually did.
 It meant we went from taking months to make a substantial change being able to break it into small pieces that took days.
 While big, slow integration tests have value, it's the quick small unit tests that really help make faster changes.
 
 ## Overfitting Tests
 
-Tests tha make the code harder to change are bad tests.
+Tests that make the code harder to change are bad tests.
 If you're testing a lot of things together, spending a long time setting up, and testing the details of the implementation then the test is likely overfit to the code and hard to change.
 
 I once wanted to make changes to an in-house scheduling system that allowed us to prioritise tasks.
@@ -57,7 +57,7 @@ The change was relatively straightforward, but updating the tests took as long a
 
 The reason was the tests I had to change were many dozens of lines long.
 It effectively mocked another in-house system in painstaking detail, created a bunch of data and tested exactly what the output would be like for a particular flow of events.
-I then had to propogate the prioritisation field through the system and work through how it changed the set of interactions at each step in the process.
+I then had to propagate the prioritisation field through the system and work through how it changed the set of interactions at each step in the process.
 I eventually made it all work, but it was painful and took a long time to get reviewed.
 
 
@@ -77,7 +77,7 @@ Then things like types can help verify you've put them together correctly and yo
 
 
 A common problem I've seen in data science code is system calls to get the current date, with the underlying assumption that the date won't change (which can be false in a long running process, leading to strange bugs).
-Making the date an explicit parameter makes it clearer where dates are being used, and forces someone reading the code to think about how the dates flow throuh the code.
+Making the date an explicit parameter makes it clearer where dates are being used, and forces someone reading the code to think about how the dates flow through the code.
 It also happens to make the code easier to test, and to understand.
 
 

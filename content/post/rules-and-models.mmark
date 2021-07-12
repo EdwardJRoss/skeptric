@@ -6,11 +6,11 @@ feature_image = "/images/google_translate.png"
 +++
 
 Over the past decade *deep neural networks* have revolutionised dealing with unstructured data.
-Problems like identifying what [objects are in a video](https://pjreddie.com/darknet/yolo/) through [generating realistic text](https://transformer.huggingface.co/) to [translating speech between languages](https://ai.googleblog.com/2019/05/introducing-translatotron-end-to-end.html) that were intractible are now used in real-time production systems.
+Problems like identifying what [objects are in a video](https://pjreddie.com/darknet/yolo/) through [generating realistic text](https://transformer.huggingface.co/) to [translating speech between languages](https://ai.googleblog.com/2019/05/introducing-translatotron-end-to-end.html) that were intractable are now used in real-time production systems.
 You might think that today all problems on text, audio an images should be solved by training end-to-end neural networks.
 However rules and pipelines are still extremely valuable in building systems, and can leverage the information extracted from the black-box neural networks.
 
-Media coverage in natual language processing focuses on the new massive models like [BERT](https://github.com/google-research/bert), [GPT-2](https://openai.com/blog/better-language-models/) and [Turing-NLG](https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/) trained using tens of thousands of GPU hours on massive web crawls.
+Media coverage in natural language processing focuses on the new massive models like [BERT](https://github.com/google-research/bert), [GPT-2](https://openai.com/blog/better-language-models/) and [Turing-NLG](https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/) trained using tens of thousands of GPU hours on massive web crawls.
 This kind of hype made me think that training a single deep neural network, with the right architecture, is the right solution for almost any supervised learning problem.
 However there's lots of good reasons to also use interpretable handcrafted rules, simpler models and pipelines.
 
@@ -44,17 +44,17 @@ It seems like Taprecruit has a list of different rules of things that will stron
 It then directly makes recommendations based on these rules like "add a programming language to a Software Engineer job title".
 Under the hood there could be some sophisticated models to detect when the rules apply, what suggestions to make, and to give overall scores.
 
-The rule based strategy lets you suggest the kinds of changes hirers will make, and those that you have strong evidence that will make an impact based on expertise, independent research, or modeling.
+The rule based strategy lets you suggest the kinds of changes hirers will make, and those that you have strong evidence that will make an impact based on expertise, independent research, or modelling.
 It also lets you explain the suggestions in context which makes them more likely to be adopted.
 You may miss some things that a black box model will find, but the rules approach leads to a product that can actually help a hirer.
-The managment of creating hundreds of these sorts of rules has a much better payoff than trying to build a complex neural network that adheres to many subtle constraints.
+The management of creating hundreds of these sorts of rules has a much better payoff than trying to build a complex neural network that adheres to many subtle constraints.
 
 
 
 # Adding real world knowledge
 
 Another benefit of rule based approaches is they let you add real world knowledge which can improve data efficiency, or even encode things that can't be seen in the model.
-In the job advertisement example the model may not have known what changes a hirer would make when writing an ad (and obtaining this data might be very expensive), but a knowledgable human might be able to hypothesise and collect qualitative data to support this.
+In the job advertisement example the model may not have known what changes a hirer would make when writing an ad (and obtaining this data might be very expensive), but a knowledgeable human might be able to hypothesise and collect qualitative data to support this.
 Adding this real world knowledge can make models much more effective and simple to implement.
 
 As a simple example if you wanted to extract human readable dates (like "5th of April, 2020") you could get dates annotated in thousands of documents and build a complex machine learning model to tag the spans of text.
@@ -92,7 +92,7 @@ The [spaCy](https://spacy.io/) library implements this kind of pipeline where it
 ![spaCy pipeline](/images/spacy_pipeline.svg)
 
 There's a great example from Ines Montani on how you could use this to [extract sales figures from earning's reports](https://support.prodi.gy/t/fact-extraction-for-earnings-news/1023/2).
-You could use the entity recogniser to find company names and money, and text matching to find dates (like Q2 2018) then writing rules with the dependency parser to find the relations between money figues, dates and company names.
+You could use the entity recogniser to find company names and money, and text matching to find dates (like Q2 2018) then writing rules with the dependency parser to find the relations between money figures, dates and company names.
 Text classification could be used to help find the relevant sentences, or to tag whole paragraphs based on the header, to help make the process faster with less false positives.
 While perhaps you could build a deep neural network to do this, it would require a lot of annotation, experimentation with models, expensive equipment, and may just not work.
 

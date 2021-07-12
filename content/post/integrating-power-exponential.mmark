@@ -5,7 +5,7 @@ date = "2021-03-02T18:32:51+11:00"
 feature_image = "/images/integral_power_exponential.png"
 +++
 
-When working with distributions that were powers of exponentials, of which the normal and exponential distributions are special cases, I had to calcuate the integrals of exponentials.
+When working with distributions that were powers of exponentials, of which the normal and exponential distributions are special cases, I had to calculate the integrals of exponentials.
 It's possible to transform these into expressions involving the Gamma function.
 Specifically I found that for all positive p:
 

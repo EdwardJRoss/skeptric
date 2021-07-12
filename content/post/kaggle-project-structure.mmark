@@ -31,7 +31,7 @@ It's easy to get stuck with a mediocre implementation if you don't set a clear s
 If you start with a solution you'll start building your evaluation around the structure of your solution.
 This makes it harder to test alternative solutions later on, and the evaluation may even get stuck to implementation details.
 
-When the solution is in production you can then evaluate your metrics online and reconcile them with your offline test metrics (which may be different if you inadvertantly had a data leak!)
+When the solution is in production you can then evaluate your metrics online and reconcile them with your offline test metrics (which may be different if you inadvertently had a data leak!)
 Then it can be refined and optimised over time as it becomes more obvious what's important in production.
 But you can keep the same project structure for future improvement cycles.
 

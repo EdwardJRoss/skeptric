@@ -9,11 +9,11 @@ Suppose you've got two dice; what's the probability the sum of their rolls will 
 You simply look at all the ways the values of the dice could sum to 4 (e.g. 1 and 3, 2 and 2 or 1 and 4), and add up their probabilities (in this case each is 1/36, so totalling 3/36 or 1/12).
 You could use a [probability square](/probability-square) to visualise this calculation.
 
-This is the general proceduce to sum two independent random variables.
+This is the general procedure to sum two independent random variables.
 You've got two random variables X and Y; in the example above the dice.
 They each have some probability distribution function $$f_X$$ and $$f_Y$$ which encode how probable any particular outcome is.
 For the dice the probability distribution function is just $$ f_X(x) = \frac{1}{6},\, x \in \{1,2,3,4,5,6\} $$ (that is the probability of any number between 1 and 6 is one-sixth).
-Then the probability distribution of their sum is then $$ f_{X+Y}(x) = \sum_{y+z=x} f_X(y) f_Y(z) $$; that is for each pair of outcomes that sum up to x we multiply the probability of them occuring.
+Then the probability distribution of their sum is then $$ f_{X+Y}(x) = \sum_{y+z=x} f_X(y) f_Y(z) $$; that is for each pair of outcomes that sum up to x we multiply the probability of them occurring.
 In our dice example we calculated $$ f_{X+Y}(4) = \frac{1}{12} $$; we could repeat the calcuation for all numbers between 2 and 12 to get the full probability distribution function.
 
 The sum above can be rewritten in a slightly different form using a change of variables; $$ f_{X+Y}(x) = \sum_{y} f_X(y) f_Y (x - y) =: (f_X * f_Y)(x) $$.

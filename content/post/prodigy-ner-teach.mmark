@@ -23,7 +23,7 @@ prodigy ner.teach \
 It then presented many example annotations showing the model confidence and asked me to reject or accept them.
 This binary system was a lot quicker than manual annotation, and put me in a different mindset for evaluation.
 It showed a score of model confidence and seemed to focus on where the model was most confident (near 1.0), uncertain (near 0.5) and least confidence (near 0.0).
-Some of the least confident ones were tedious to annotate as it would highlight things that seemed rediculous like punctuation (but maybe that really helps train the model?).
+Some of the least confident ones were tedious to annotate as it would highlight things that seemed ridiculous like punctuation (but maybe that really helps train the model?).
 After I'd done around 700 annotations I tried retraining the existing annotations, with a 20% evaluation set to product a output model `./job_titles_1`:
 
 ```

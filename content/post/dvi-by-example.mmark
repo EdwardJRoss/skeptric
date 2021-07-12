@@ -36,7 +36,7 @@ The file is encoded as a series of 8-bit bytes; the first byte is an *operation*
 Internally there are a number of state parameters; the current font f (a 4-byte signed integer), the position and spacing variables (h, v, w, x, y, z) (each a 4-byte signed integer) and a stack of position and spacing variables. (h, v) represents the point h units to the right and v units down from the top left corner of the page. w, x are horizontal spacing parameters and y, z are vertical spacing parameters. The units are determined in the file itself.
 
 
-Below are the operations, I will use the notation n[4] to represent a parameter of 4 bytes, and curly braces {} to represent a range of commands.I will use characters a, b, c, … to represent signed integers; i, j, k, l, m, n, … to represent unsigned integers; p, q, … to repesent pointers and A, B, … to represent characters and X to represent a custom (user implemented) type. These types have been inferred and not checked, so use with caution.
+Below are the operations, I will use the notation n[4] to represent a parameter of 4 bytes, and curly braces {} to represent a range of commands.I will use characters a, b, c, … to represent signed integers; i, j, k, l, m, n, … to represent unsigned integers; p, q, … to represent pointers and A, B, … to represent characters and X to represent a custom (user implemented) type. These types have been inferred and not checked, so use with caution.
 
 
 <table>

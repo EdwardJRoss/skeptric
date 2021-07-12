@@ -16,7 +16,7 @@ One approach is to train a classifier on a modern transformer such as RoBERTa.
 But maybe performing *domain adaptation* by further training the language model on a large amount of text from the news domain, such as the [realnews dataset](https://github.com/rowanz/grover), before training the classifier will improve results.
 Or we could perform *task adaptation* by further training the language model on the Hyperpartisan News dataset before training the classifier could improve results.
 
-In Don't Stop Pretraining they pick 8 classificaiton tasks from 4 different domains; News, Reviews, Biomedical and Computer Science.
+In Don't Stop Pretraining they pick 8 classification tasks from 4 different domains; News, Reviews, Biomedical and Computer Science.
 They show in each case that performing domain adaptation (DAPT) for RoBERTa gives a better classifier (and adapting to an irrelevant domain gives a worse classifier).
 They also show that task adaptation (TAPT) also generally results in a better classifier.
 And the best results consistently come from performing DAPT and then TAPT.

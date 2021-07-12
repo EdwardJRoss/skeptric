@@ -6,7 +6,7 @@ feature_image = "/images/search_session.jpg"
 +++
 
 You don't need a lot of data to prove a point.
-People often think statistics requries big expensive datasets that cost a lot to acquire.
+People often think statistics requires big expensive datasets that cost a lot to acquire.
 However in relatively unexplored spaces a small amount of data can have high yield in [changing a decision](/analysis-decision).
 
 I've been working on some problems around web sessionisation.
@@ -37,7 +37,7 @@ In this case we used the opposite of invariance: we isolated the cases where the
 We could then annotate them and again found the same rule worked better in most cases.
 
 This kind of approach won't detect small differences, but we didn't need it to.
-All we needed was enough information to make a decision, and to get an idea of how much was left to gain from futher improvements.
+All we needed was enough information to make a decision, and to get an idea of how much was left to gain from further improvements.
 This was an effective way of ending weeks of debate in a few days.
 
 It's surprising how often these kinds of simple data collection methods for decision making are overlooked.

@@ -6,7 +6,7 @@ feature_image = "/images/nquad_spec.png"
 +++
 
 The [Web Data Commons](http://webdatacommons.org/) extracts structured [RDF Data](https://en.wikipedia.org/wiki/Resource_Description_Framework) from about one monthly [Common Crawl](https://commoncrawl.org) per year.
-These contain a vast amount of structured infomation about local businesses, hostels, job postings, products and many other things from the internet.
+These contain a vast amount of structured information about local businesses, hostels, job postings, products and many other things from the internet.
 Python's [RDFLib](https://rdflib.readthedocs.io/en/stable/) can read the n-quad format the data is stored in, but by default requires reading all of the millions to billions of relations into memory.
 However it's possible to process this data in a streaming fashion allowing it to be processed much faster.
 
@@ -69,7 +69,7 @@ with gzip.open('afile.nquads.gz', 'rt') as f:
 
 # What's an n-quad?
 
-The data is stored in RDF n-quads which is specified in a [W3C reccomendation](https://www.w3.org/TR/n-quads/).
+The data is stored in RDF n-quads which is specified in a [W3C recommendation](https://www.w3.org/TR/n-quads/).
 Each line represents a relation of the form: "subject predicate object graphlabel ."
 
 For example the line below:
@@ -131,7 +131,7 @@ def get_quad_label(s):
 Ideally we would use RDFLib nquad parser directly to do it, but it mainly uses stateful objects [internally](https://github.com/RDFLib/rdflib/blob/master/rdflib/plugins/parsers/nquads.py) and hides the quad structure so we end up having to do some contortions to use it.
 It uses a similar but [more conservative expression](https://github.com/RDFLib/rdflib/blob/master/rdflib/plugins/parsers/ntriples.py#L27) for a URI.
 
-Now we can identify the lables we can group together the lines that have the same label, on the assumption that they are sequential (they seem to be in the Web Commons data).
+Now we can identify the labels we can group together the lines that have the same label, on the assumption that they are sequential (they seem to be in the Web Commons data).
 We could always ensure this by sorting the *reversed* lines (e.g. in bash `rev | sort | rev`).
 
 ```python

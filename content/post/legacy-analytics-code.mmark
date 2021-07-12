@@ -5,7 +5,7 @@ draft: true
 ---
 
 The idea of working with code written by a data scientist sends chills down the spine of many software engineers.
-Most data scientists, staisticians and data analysts are extremely good at quickly manipulating data and experimenting with different approaches to a problem.
+Most data scientists, statisticians and data analysts are extremely good at quickly manipulating data and experimenting with different approaches to a problem.
 Fewer of them are skilled on writing software that is easy to maintain and deploy.
 Common software development practices like automated builds, tests and modular code are rarely adhered to in data science code.
 However it **is** possible to work effectively with them by producing reproducible runs, instrumenting metrics and creating diff scripts.
@@ -61,7 +61,7 @@ The most common reasons code may not run are:
 
 ## Environment
 
-Environmental assumptions: (/home/user/dnewman), datetime 2019-12-15, OSX
+Environmental assumptions: (/home/user/rperkins), datetime 2019-12-15, OSX
 
 Restoring dependencies: Changelogs and release history, git log, bisections
 
@@ -120,7 +120,7 @@ However by using
 
 
 For exploratory code, like a one-off analysis, this is sensible -
-When the code is a one-off analysis or experimenting to see whether a problem is solv
+When the code is a one-off analysis or experimenting to see whether a problem is solvable.
 
 Imagine that
 

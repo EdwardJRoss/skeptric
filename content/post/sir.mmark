@@ -22,7 +22,7 @@ These organisms replicate and multiply inside an infected host.
 The organisms can then be transmitted to other individuals and infect them.
 The way they spread depends on the disease; HIV requires direct exchange of bodily fluids, but you can get influenza from someone coughing near you as infected droplets get into your mouth, nose or eyes.
 
-When someone gets an infectous disease typically they have an immune response that fights of the infection.
+When someone gets an infectious disease typically they have an immune response that fights of the infection.
 The human body has millions of different types of antibodies that can each lock onto a specific molecule of a foreign substance, like a lock and key.
 When they bind to that molecule they start a process of destroying that molecule, and send signals to create more copies of themselves.
 
@@ -45,7 +45,7 @@ Incidentally allergies are when the antibodies start binding to a benign substan
 
 The SIR model is a family of mathematical models for representing the spread of disease through a population.
 The model is named after the three stages an individual can be in; susceptible, infectious and removed.
-A susceptible can contract the disease from an infected indivdual.
+A susceptible can contract the disease from an infected individual.
 An infectious has the disease and can spread it to susceptibles.
 A removed can't become infectious; they are immune to the disease.
 
@@ -70,7 +70,7 @@ This model is of course very simple.
 People don't go running around contacting people at random; they tend to gather in cliques such as neighbours, co-commuters, work colleagues and family.
 And when they get the disease typically there's an incubation period before they become infectious; it doesn't happen immediately.
 You also can't have a fraction of a person infected.
-But it's in the right ballpark, and will give rougly the right form of the dynamics without trying to model all these extra complicated factors.
+But it's in the right ballpark, and will give roughly the right form of the dynamics without trying to model all these extra complicated factors.
 
 In summary we have three equations about how much each proportion changes each day:
 
@@ -102,7 +102,7 @@ This is because all a susceptible person can do is become infectious.
 When there are no infectious people left then the number of susceptible people doesn't change; which makes sense since there's no way they can get infected (obviously the initial source of infection is beyond this model!).
 
 Also note the more susceptible people there are, the faster they decrease.
-If the number of infectious people is constant then susceptibles drop off expoentially like $$ e^{-bi} $$.
+If the number of infectious people is constant then susceptibles drop off exponentially like $$ e^{-bi} $$.
 If the number of infectious people is growing then it will drop off even faster.
 This is why infectious diseases are so scary; they can spread exponentially through a population.
 
@@ -132,7 +132,7 @@ Some fraction of infectious individuals will need to be hospitalised or they cou
 So to minimise harm hospitals should have enough staff and beds to cover this fraction of the infectious individuals at peak.
 
 So if initially $$ R_0 s \ll 1 $$ then the infection will die out quickly.
-However if $$ R_0 s > 1 $$ then the infection will grow exponentially (and susceptibles will decrease expeonentially) until $$ R_0 s = 1 $$ and then it will start to die out.
+However if $$ R_0 s > 1 $$ then the infection will grow exponentially (and susceptibles will decrease exponentially) until $$ R_0 s = 1 $$ and then it will start to die out.
 In the second case we have an epidemic and a large fraction of the population will have contracted the disease.
 
 ## Basic Reproduction Number
@@ -154,7 +154,7 @@ It's notable that it's the product $$ R_0 s $$ that matters.
 If the basic reproduction number is 4, but much less than a quarter of the population is susceptible then the disease won't spread.
 This is the phenomenon of [Herd immunity](https://en.wikipedia.org/wiki/Herd_immunity).
 Essentially the removed individuals act as a buffer that extinguishes the disease before it can move too far.
-This is why immunisation can be so effective; if you can just get most of the community you can eradiacate the disease.
+This is why immunisation can be so effective; if you can just get most of the community you can eradicate the disease.
 
 # Fitting the model
 
@@ -167,10 +167,10 @@ Even if the doctor does choose to administer a test, it may come through as a fa
 The only cases we can detect are the tests that came back positive.
 
 We can only ever see the tip of the iceberg of an infectious disease, and many people will be infectious that we won't have on record.
-This could be systematic; for example in areas underserved by doctors, or for a doctor who chooses not to administer a type of test.
+This could be systematic; for example in areas under-served by doctors, or for a doctor who chooses not to administer a type of test.
 This means that fitting a model is more than just throwing some equations in, but requires careful thinking of how the data was collected and what evidence there is to its completeness.
 
-Because these diseases spread exponentially, missing a few cases at the start means severely underestmating the scale of an epidemic.
+Because these diseases spread exponentially, missing a few cases at the start means severely underestimating the scale of an epidemic.
 Unfortunately there aren't any magic bullets here; the best thing to do is contact tracing of the cases you have to try to catch as many as you can.
 This can be really hard in practice though; even if individuals are willing they may not recall everyone they've been in contact with.
 
@@ -183,7 +183,7 @@ And even then it may be hard to see through the noise and instability.
 
 The SIR model I've presented here is very simple, and I doubt any epidemiologist is using it for real problems.
 
-SIR apperently originated in [Kermack-McKendrick Theory](https://en.wikipedia.org/wiki/Kermack%E2%80%93McKendrick_theory) which modelled different recory times and transmission rates for different age groups.
+SIR apperently originated in [Kermack-McKendrick Theory](https://en.wikipedia.org/wiki/Kermack%E2%80%93McKendrick_theory) which modelled different recovery times and transmission rates for different age groups.
 Similarly you could think of other covariates that impact transmission and estimate parameters for them separately.
 
 There are different mechanisms by which people lose immunity (or the pathogen mutates) which is covered in the SIRS model, which has a pathway from removed back to susceptible.
@@ -191,7 +191,7 @@ You could also add other states, such as a carrier state for people who are stil
 Some of these variations are listed in the [Wikipedia page on comparmental models](https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology).
 
 You could also be more specific in how the disease spreads and recovery happens.
-This could be an agent based model on some probabalistic contact network.
+This could be an agent based model on some probabilistic contact network.
 Most contact networks aren't uniform and have some highly connected individuals (who can spread the disease very far), and many low connection individuals.
 You could even look at specific high-risk areas like public transport.
 

@@ -42,13 +42,13 @@ The dip is related to the difference between the greatest area between the PDFs 
 In a sense it measure the greatest depth and width change from a unimodal distribution.
 
 In practice we only have a finite sample from the distribution.
-The statistic is calculated on the *empirical* CDF; that is a step function with a step up of 1/N wherever there is a datapoint for each of the N datapoints).
+The statistic is calculated on the *empirical* CDF; that is a step function with a step up of 1/N wherever there is a datapoint for each of the N data points).
 They use the analogy of trying to fit a string around a deformation of the empirical CDF.
 I won't go into the [computational details](https://www.jstor.org/stable/2347485) here, but this can be calculated efficiently.
 
 Finally to work out significance they need to pick a "null" model.
 They choose a uniform distribution; that is one with a flat CDF.
-This makes intuitive sense because adding arbitrarily small noice to a uniform distribution could turn it into a multimodal distribution.
+This makes intuitive sense because adding arbitrarily small noise to a uniform distribution could turn it into a multimodal distribution.
 It's going to be quite hard to judge if a uniform distribution is multimodal; harder than most general cases.
 
 If you need to do multimodal detection it's worth considering Hartigan's dip test.

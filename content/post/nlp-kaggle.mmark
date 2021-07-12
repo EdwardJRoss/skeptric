@@ -13,7 +13,7 @@ draft: true
 
 | [CPROD1](https://www.kaggle.com/c/cprod1/) | Research | $10,000 | 29 teams | F1 score | NER: Detect product mentions |
 
-| [Predict Closed Questions on Stack Overflow](https://www.kaggle.com/c/predict-closed-questions-on-stack-overflow) | Featured | $20,000 | 161 Teams | Multiclass lograithmic loss |
+| [Predict Closed Questions on Stack Overflow](https://www.kaggle.com/c/predict-closed-questions-on-stack-overflow) | Featured | $20,000 | 161 Teams | Multiclass logarithmic loss |
 
 
 | [Job Salary Prediction](https://www.kaggle.com/c/job-salary-prediction) | Featured | $6,000 | 289 Teams | MAE | 3465

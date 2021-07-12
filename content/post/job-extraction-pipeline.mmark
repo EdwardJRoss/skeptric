@@ -9,7 +9,7 @@ I've been trying to [extract job ads from Common Crawl](/common-crawl-job-ads).
 However I was stuck for some time on how to actually write transforms for all the different data sources.
 I've finally come up with an architecture that works; download, extract and normalise.
 
-I need a way to extract the job ads from hetrogeneous sources that allows me to extract different kinds of data, such as the title, location and salary.
+I need a way to extract the job ads from heterogeneous sources that allows me to extract different kinds of data, such as the title, location and salary.
 I got stuck in code for a long time trying to do all this together and getting a bit confused about how to make changes.
 So I spent some time thinking through how to do it, and then it was straightforward to implement.
 

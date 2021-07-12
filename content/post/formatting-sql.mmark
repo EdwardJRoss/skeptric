@@ -22,7 +22,7 @@ sqlformat -k upper -r -s -o formatted.sql query.sql
 
 The command line is useful for batch changing SQL files, but often I want to change an SQL query inside a Python or R file.
 This works great, even if you're using parameters, f-strings in Python or glue in R, it seems to do a good job.
-It's straightfoward to run on a region of SQL in Vim (or Emacs Evil) [using a filter command](https://vim.fandom.com/wiki/Append_output_of_an_external_command#Using_a_filter_command), or in Emacs [by executing a shell command](https://www.masteringemacs.org/article/executing-shell-commands-emacs), just make sure you pass `-` as the file so it reads from stdin.
+It's straightforward to run on a region of SQL in Vim (or Emacs Evil) [using a filter command](https://vim.fandom.com/wiki/Append_output_of_an_external_command#Using_a_filter_command), or in Emacs [by executing a shell command](https://www.masteringemacs.org/article/executing-shell-commands-emacs), just make sure you pass `-` as the file so it reads from stdin.
 
 For Emacs I've written a small function to SQL format a region; being careful not to clobber the final newline of the region.
 A nice improvement would be to customise the arguments.

@@ -88,7 +88,7 @@ error: Item "None" of "Optional[PageElement]" has no attribute "find"
 This makes a good point; what if the page *doesn't* have an `h1`?
 I have to do something, perhaps in this case I know my pages will contain a `h1` and so this isn't a problem.
 The same is true for the `b` inside the `h1`, but this is more common, and maybe we have a default action here.
-I can either supress the type error with an explicit assertion (for the `h1`) or explicitly handle the `None` case (for the `b`):
+I can either suppress the type error with an explicit assertion (for the `h1`) or explicitly handle the `None` case (for the `b`):
 
 ```python
 h1_tag = soup.find("h1")

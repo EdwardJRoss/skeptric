@@ -8,7 +8,7 @@ feature_image = "/images/double_tick.svg"
 A challenge of data analytics is that the *data* can change as well as the code.
 The systems producing and collecting data are often changed and can lead to missing or corrupt data.
 These can easily corrupt reports and machine learning systems.
-Worst of all the data may be lost permenantly.
+Worst of all the data may be lost permanently.
 So if you're going to use some data it's important to check the data regularly to catch the worst kind of mistakes as early as possible.
 
 The right tests will depend on your scenario, but there are a lot of common ones in SQL.

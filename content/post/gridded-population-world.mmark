@@ -19,9 +19,9 @@ Canada is similar, with some population pockets in the south.
 There's a huge empty strip through the north of Africa, and in the south west.
 Similarly the majority of Russia in the east, down through Mongolia and north eastern China are sparse.
 
-The extreme high end of density is 1000 persons per square kilometer, or around 1000 square meters per person.
+The extreme high end of density is 1000 persons per square kilometre, or around 1000 square meters per person.
 This gives around 30 meters by 30 meters per person, including housing, streets and shopping areas.
 I personally find that difficult to understand.
 
 It would be great to gradually upsample this data to get a better idea of larger regions for estimates.
-There are [tutorials](https://www.qgistutorials.com/en/docs/3/raster_styling_and_analysis.html) and [videos](https://vimeo.com/257285422) on working wih this data in QGIS.
+There are [tutorials](https://www.qgistutorials.com/en/docs/3/raster_styling_and_analysis.html) and [videos](https://vimeo.com/257285422) on working with this data in QGIS.

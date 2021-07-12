@@ -18,7 +18,7 @@ Then you can efficiently search through these hashes using [Locality Sensitive H
 
 There are a few choices you need to make with Locality Sensitive Hashing.
 You need to choose your tokens and the shingle length to use.
-In generaly this depends on your application and the types of corruptions you would expect to see.
+In generally this depends on your application and the types of corruptions you would expect to see.
 For job ads 3 or more words seems to have very different behaviour to 1 or 2 words; in retrospect I would pick a bigger number like 7 to reduce false positives.
 In general [increasing shingle length decreases (weighted) Jaccard index](/shingle-inequality).
 
@@ -50,7 +50,7 @@ One technique that I didn't try is the [all-pair-binary algorithm](https://githu
 The paper claims to be able to find exact sets of near-duplicate items faster than MinHash.
 It would be interesting to validate their claim, and see whether it holds under these conditions.
 
-For more detail see the [Detecting duplicate job ads notebok](/notebooks/Detecting duplicate job ads.html) ([raw](/notebooks/Detecting duplicate job ads.ipynb)).
+For more detail see the [Detecting duplicate job ads notebook](/notebooks/Detecting duplicate job ads.html) ([raw](/notebooks/Detecting duplicate job ads.ipynb)).
 The notebook is quite long because a lot of it is looking at individual examples of job ads to gain an understanding of the data.
 This is an unfortunate consequence of using the same document for exploration and presentation; it's too much text for a casual reader, but was necessary for me to understand the data.
 To compensate for that I've added a table of contents with links to each section.

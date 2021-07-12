@@ -18,7 +18,7 @@ Longevity
 ## Caffine
 Sensitivity
 
-Grumpiness, jiterriness, interruptiness
+Grumpiness, jitteriness, interruptiness
 
 Sources: Coffeee, dark chocolate, tea
 
@@ -66,7 +66,7 @@ Youtube -> Clickbait
 
 # Histogram optimisation
 
-# Sampling in shell wiht shuf
+# Sampling in shell with shuf
 
 shuf data | \
 head -n ${SAMPLE_SIZE} | \
@@ -86,7 +86,7 @@ a,b,sum
 
 # SRI Model
 
-# Modelling wiht limited or bad data
+# Modelling with limited or bad data
 
 # Association rules
 
@@ -96,7 +96,7 @@ a,b,sum
 
 # hadoop streaming
 
-Benefits of the cloud - resoruce constraints
+Benefits of the cloud - resource constraints
 
 # Git submodules
 
@@ -281,13 +281,13 @@ Write about what you're learning
 
 > Write early, write often. Don't wait until you've figured everything out.
 
-> You're probably learning something neww eevery day.
+> You're probably learning something new every day.
 
 > The easiest blog post to write is the answer.
 
 > Share while you learn
 
-There's something to share everywhere trhough the proces
+There's something to share everywhere through the process
 
 > Don't worry about your strategy.
 
@@ -573,7 +573,7 @@ Defines Hamiltonian spin glasses; effectively same metric as below: `\sum_{C}\su
 
 Lambiotte, Delvenne, and Barahona - Laplacian Dynamics and Multiscale Modular Structure in Networks - https://arxiv.org/pdf/0812.1770.pdf
 
-Defines it as a linearisation of independent, identical homogenous Poisson process (dynamics of normalised Laplacian matrix).
+Defines it as a linearisation of independent, identical homogeneous Poisson process (dynamics of normalised Laplacian matrix).
 Have code https://xn.unamur.be/codes.html (timescale.zip)
 Explains implementation in https://xn.unamur.be/codes/readme.pdf
 Built on Louvain method for optimising modularity

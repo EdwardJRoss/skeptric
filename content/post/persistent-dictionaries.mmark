@@ -21,4 +21,4 @@ You could even use it as a simple task queue between processes.
 You can then back up the state simply by backing up the files (as long as they're not being written to).
 
 There are many cases when you'll want a more robust solution, like persisting to a more versatile database like Postgres (or even using SQLite directly), or maintaining a proper task queue like Celery on Redis or RabbitMQ.
-But all this infrastucture has a lot of overhead; for many cases it's just easier to use file-base databases through a dictionary interface.
+But all this infrastructure has a lot of overhead; for many cases it's just easier to use file-base databases through a dictionary interface.

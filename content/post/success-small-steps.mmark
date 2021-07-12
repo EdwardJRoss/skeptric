@@ -10,7 +10,7 @@ I get in over my head and lose motivation.
 A lot of times I've succeeded it's by starting small and slowly building up a roll of successes.
 
 When I was in highschool I tried to build a simulation of the solar system for a project.
-I wasn't satisfied with building ellipses, I wanted to take into account all the N-body interations.
+I wasn't satisfied with building ellipses, I wanted to take into account all the N-body interactions.
 It started off alright, but quickly I was out of my depth trying to model all the bodies and got the code in a broken state I couldn't recover.
 I ended up with pages of code that didn't work at all.
 If I had started smaller with building a single elliptic orbit, and then another, before even considering multibody interactions I would at least have had a good state to revert to, and would have been more likely to succeed with the complex problem.

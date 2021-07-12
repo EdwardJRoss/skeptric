@@ -20,7 +20,7 @@ The right hand side is the "right direction"; the slope of the straight line pat
 The left hand side is the direction you're going at the instant c; the tangent to the path.
 
 For the analogy to work you have to be able to model your path as a function of one variable; in particular this means you can never cross your own path, otherwise there's no way to make an x-axis.
-This wouldn't be true for many drunkards walks, and in higher dimensions the generalization isn't as straightforward.
+This wouldn't be true for many drunkards walks, and in higher dimensions the generalisation isn't as straightforward.
 
 But this is beside the point; the story was compelling enough to make me remember the mean value theorem years later and ask questions on whether it applies to higher dimensions.
 Similarly the vibrational modes of water and understanding of torque have stuck with me.

@@ -10,7 +10,7 @@ It was built mainly with externally sourced data and so only works sometimes, un
 To make it better I've started collecting my own training data.
 
 External data sources are extremely convenient for training a model as they can often be obtained much more cheaply than curating your own data.
-But the data will almost always be different to what you are actually performaning inference on, and so you're relying on a certain amount of generalisation.
+But the data will almost always be different to what you are actually performing inference on, and so you're relying on a certain amount of generalisation.
 While techniques like data augmentation can reduce the gap ultimately the best way to train a very good model is to also add your own labelled data.
 
 Using external data gets a good start, but it doesn't work as well on out of domain data.
@@ -32,7 +32,7 @@ I can then manually collect and label data on my phone; it's ideal to do this at
 
 I'm going to continue collecting training data and test whether it can make the model better.
 One limitation of collecting all the data on my mobile phone is I may overfit to the lens of my camera; it may not generalise well to other cameras.
-It may also overfit to cars in my survey area, I may inadvertantly capture those cars or types of cars, many times over.
+It may also overfit to cars in my survey area, I may inadvertently capture those cars or types of cars, many times over.
 Ideally I'd get lots of annotations from different people on different devices in different locations, and if I had a commercial application I would pay for these.
 
 This model definitely works in cases other than car classification.

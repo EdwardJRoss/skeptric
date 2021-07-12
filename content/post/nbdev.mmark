@@ -15,8 +15,8 @@ It's natural in Jupyter notebooks to see what happens when you run a piece of co
 
 There are lots of rough edges with making Jupyter notebooks reproducible and easy to diff, like the order of execution and numbers in cells.
 Nbdev provides tools that make all this easy, and allows you to sync code *two ways* between notebooks and python source files.
-This means you can make code changes in an IDE and then sync it back to the notbeooks.
-However there are still some limitations here (espically being consistent with the documentations) and I suspect a large refactor would be considerably harder.
+This means you can make code changes in an IDE and then sync it back to the notebooks.
+However there are still some limitations here (especially being consistent with the documentations) and I suspect a large refactor would be considerably harder.
 
 
 # Literate Code
@@ -33,10 +33,10 @@ I ran into a few problems running nbdev with the settings file, and syncing code
 ## settings.ini
 
 There's a `settings.ini` file that contains fields used for generating the documentation, setup.py and some other things.
-In the templace there are a bunch of fields commented out and it's not immediately obvious which ones you need to fill in, and what you should put there.
+In the template there are a bunch of fields commented out and it's not immediately obvious which ones you need to fill in, and what you should put there.
 
 The first time I ran `nbdev_build_lib` to tangle the code from the notebooks I got `KeyError: 'copyright'`.
-I then uncommended and updated the copyright setting to `copyright = 2021 Edward Ross`, only to see in the documentation:
+I then uncommented and updated the copyright setting to `copyright = 2021 Edward Ross`, only to see in the documentation:
 
 > Copyright: 2021 Edward Ross 2021
 

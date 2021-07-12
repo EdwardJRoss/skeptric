@@ -27,4 +27,4 @@ I decided each should contain a single Datasource class that contains the action
 Really an object in Python is just some syntactic sugar around a dictionary, but the sugar of inheritance and `.` access is sweet.
 I called each of the classes `Datasource` with the idea that the choices of datasources could become configurable with minimal boilerplate; they're just distinguished by the module name.
 
-I'm still not sure that I've got it *right*, but having the extractors in separate files makes it much more managable to see what's going on and I can continue to improve the structure as the code evolves.
+I'm still not sure that I've got it *right*, but having the extractors in separate files makes it much more manageable to see what's going on and I can continue to improve the structure as the code evolves.

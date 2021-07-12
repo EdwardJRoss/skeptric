@@ -9,7 +9,7 @@ The computer networks that make up the internet are complex and handling an imme
 So sometimes when you make a request it will fail intermittently, and you want to try until it succeeds.
 This is easy in `requests` using `urllib3` `Retry`.
 
-I was trying to download data from Common Crawl's S3 exports, but ocassionally the process would fail due to a network or server error.
+I was trying to download data from Common Crawl's S3 exports, but occasionally the process would fail due to a network or server error.
 My process would keep the successful downloads using [an AtomicFileWriter](/atomic-writer), but I'd have to restart the process.
 Here's what the new code looks like:
 

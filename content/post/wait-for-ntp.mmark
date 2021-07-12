@@ -10,7 +10,7 @@ The reason was the system clock was far in the past and so it looked like the si
 I created a workaround to wait for the system clock to synchronise that solved the problem and could be useful when starting a new machine with time sensitive issues.
 
 ```bash
-# Wait for ntp to stabalise, so package signatures can be verified
+# Wait for ntp to stabilise, so package signatures can be verified
 while [[ $(timedatectl status | grep 'System clock synchronized' | grep -Eo '(yes|no)') = no ]]; do
     sleep 2
 done
@@ -32,5 +32,5 @@ RTC in local TZ: no
 The script above looks for the `System clock synchronized` line and will wait as long as that line has `no` in it.
 If it changes to `yes` (or if it can't find that line or the words `yes` or `no` in that line) then the script will coninue.
 
-Putting this at the top of my script before runing `apt update` and `apt install` commands I ran as soon as an EC2 instance fixed the signature verification issues I had.
+Putting this at the top of my script before running `apt update` and `apt install` commands I ran as soon as an EC2 instance fixed the signature verification issues I had.
 

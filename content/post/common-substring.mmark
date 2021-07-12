@@ -100,5 +100,5 @@ def proper_substrings(a):
     return proper
 ```
 
-Note that this impelmentation is awfully slow; the operations in calcualting `proper_substrings(naive_common_substrings(a, b))` is quadratic in the length of `a` and roughly linear in the length of `b`.
+Note that this implementation is awfully slow; the operations in calcualting `proper_substrings(naive_common_substrings(a, b))` is quadratic in the length of `a` and roughly linear in the length of `b`.
 But it's good for a sanity check on some simple strings, and using it I find the `difflib` captures most of the common substrings on the job ads I tried.

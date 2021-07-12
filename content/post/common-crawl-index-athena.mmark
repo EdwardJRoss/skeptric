@@ -15,7 +15,7 @@ For these usecases Common Crawl provide a columnar index to the WARC files, whic
 Even the index parquet files are 300 GB per crawl so you may want to process them with Spark or AWS Athena (which is a managed version of [Apache Presto](https://prestodb.io/)).
 
 Common Crawl have a [guide to setting up access to the index in Athena](https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/), and a [repository containing examples of Athena queries and Spark jobs](https://github.com/commoncrawl/cc-index-table) to extract information from the index.
-This article will explore some examples of querying this data wiht Athena, assuming you have created the table `ccindex` as per the Common Crawl setup instructions.
+This article will explore some examples of querying this data with Athena, assuming you have created the table `ccindex` as per the Common Crawl setup instructions.
 You can run them through the AWS web console, through [an Athena CLI](https://skeptric.com/presto-athena-emacs/#setting-up-command-line-interfaces) or in [Python with pyathena](https://github.com/laughingman7743/PyAthena) or [R with RAthena](https://dyfanjones.github.io/RAthena/)
 
 # Keeping Athena costs low
@@ -57,13 +57,13 @@ The crawls contain the year and ISO week of the crawl (so e.g. `CC-MAIN-2020-24`
 There are 3 kinds of subsets, as described [in the 2016 release](http://commoncrawl.org/2016/)
 
 * warc - The actual web archive files containing all the data of successful requests (200 ok)
-* crawldiagnostics - Contains resonses like 404 file not found, redirects, 304 not modified, etc.
+* crawldiagnostics - Contains responses like 404 file not found, redirects, 304 not modified, etc.
 * robotstxt - Contains the [robots.txt](https://en.wikipedia.org/wiki/Robots_exclusion_standard) that would impact what pages the crawl accessed
 
 At the time of writing it looks like there's something wrong with the most recent index, it contains 280 million captures, when [the dataset should countail 2.75 billion](https://commoncrawl.org/2020/06/may-june-2020-crawl-archive-now-available/).
 However the 2020-16 one looks correct.
 
-Note that when new crawls are added you have to first run `MSCK Repair Table` to be able to access them (this rescanse the partitions).
+Note that when new crawls are added you have to first run `MSCK Repair Table` to be able to access them (this re-scans the partitions).
 
 ## What's in the columnar index
 
@@ -80,7 +80,7 @@ The columns are
 * url_host_private_domain
 * url_protocol: e.g. https
 * url_port: The port accesed, it seems to be blank for default ports (80 for http, 443 for https).
-* url_path: The path of the URL (everything from thh first `/` to the query parameter starting at `?`)
+* url_path: The path of the URL (everything from the first `/` to the query parameter starting at `?`)
 * url_query: Query parameter; everything after the `?`
 * fetch_time: When the page was retrieved
 * fetch_status: The HTTP status of the request (e.g. 200 is OK)

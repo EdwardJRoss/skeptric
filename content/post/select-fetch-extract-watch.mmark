@@ -43,7 +43,7 @@ Select is the most robust phase to failure; the most common reasons it would fai
 
 Fetch is about actually retrieving the data over the network.
 There can be all sorts of issues in doing this, and sometimes you only get one shot - especially if you're monitoring changes over time.
-Because of this I recommend serialising everything in the Web Archive format so you keep your data; this is easy to do with [Python's requsts library](/request-warc) or with [Scrapy](https://github.com/odie5533/WarcMiddleware).
+Because of this I recommend serialising everything in the Web Archive format so you keep your data; this is easy to do with [Python's requests library](/request-warc) or with [Scrapy](https://github.com/odie5533/WarcMiddleware).
 
 The issues here are fairly common across use cases, and well written about elsewhere.
 You need to make sure you're being respectful; understanding the robots.txt, setting an appropriate User Agent, making requests at a rate that adds little load to the server and slowing the rate when there are server issues or the response time increases.
@@ -56,10 +56,10 @@ But I think of it as a backup; you can delete old ones over time as you're more 
 # Extract
 
 Extracting is getting the data out of your responses.
-If you're doing a wide crawl then the WARC is probably as much extraction as you can do, if you're hitting a well structued API the extraction may already be done in the JSON response.
+If you're doing a wide crawl then the WARC is probably as much extraction as you can do, if you're hitting a well structured API the extraction may already be done in the JSON response.
 But it's very common to have to parse data out of HTML, or at least transform some JSON.
 
-For monitoring part of a single page this could be a CSS selector that selects the content to be monitored, and potentially normalising irrelevent changes (e.g. whitespace in the markup).
+For monitoring part of a single page this could be a CSS selector that selects the content to be monitored, and potentially normalising irrelevant changes (e.g. whitespace in the markup).
 This could fail if the structure of the page changes so much the section disappears.
 
 A product page is more complicated and the best way to extract the required fields depends on how the page is structured.
@@ -75,7 +75,7 @@ Watch is monitoring your pipeline to make sure when it's broken you know, before
 For visiting product pages or a web crawl you could watch the select step to make sure you're getting, and fetching, new items at an expected rate.
 
 For all use cases it's useful monitoring the response status codes; if you're getting too many bad codes something is going wrong and you want to raise an alert.
-It's also worth doing some sanity checks on the data; the response size should be variable within a certian range (a common failure case is getting empty or error pages).
+It's also worth doing some sanity checks on the data; the response size should be variable within a certain range (a common failure case is getting empty or error pages).
 
 For extract you can monitor the percentage of fetches that don't extract cleanly and pass validations; they can alert you to a change in the page structure, or even errors with fetching.
 

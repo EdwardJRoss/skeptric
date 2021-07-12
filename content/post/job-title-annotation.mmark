@@ -16,10 +16,10 @@ To do this we need to annotate many examples of a job title, which means we need
 
 
 We definitely don't want the location of the job, the name of the company or the working conditions (like "Part Time", "Excellent Tips"); these are separate pieces of information.
-However the seniority and industry *may* sometimes be relevent, and hard to separate.
+However the seniority and industry *may* sometimes be relevant, and hard to separate.
 
 For example a "Pharmaceutical Sales Representative" may be a different type of job to a general "Sales Representative" because it requires different qualifications and skills.
-You could make arugments that the job title for "Subsea Cabling Engineer" could be "Subsea Cabling Engineer", "Cabling Engineer" or just "Engineer".
+You could make arguments that the job title for "Subsea Cabling Engineer" could be "Subsea Cabling Engineer", "Cabling Engineer" or just "Engineer".
 These distinctions are very subtle and require a lot of world knowledge - not a good fit for a NER algorithm.
 The best thing to do is try to capture the longest role title (like "Subsea Cabling Engineer") and then further break it down with post-processing.
 

@@ -40,7 +40,7 @@ In Placeholder most of this work is done by the function `normalize` in `/lib/an
 This function does a lot; I'll just show a few transformations to give an idea of what it is doing.
 
 
-All the seperating punctuation is stripped away.
+All the separating punctuation is stripped away.
 
 ```js
   // remove certain punctuation
@@ -92,7 +92,7 @@ Then take the span from the first to last word and if that's in the gazetteer th
 Then continue to tokenize the rest of the text.
 
 For example consider "Port of Spain Trinidad and Tobago".
-This isn't in the gazetter, not if "Port of Spain Trinidad and", or "Port of Spain Trinidad", but "Port of Spain" is and so that's our first token.
+This isn't in the gazetteer, not if "Port of Spain Trinidad and", or "Port of Spain Trinidad", but "Port of Spain" is and so that's our first token.
 Then to tokenize "Trinidad and Tobago" that is in our gazetteer and so is a token.
 So we get two tokens "Port of Spain" and "Trinidad and Tobago".
 

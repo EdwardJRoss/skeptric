@@ -18,7 +18,7 @@ We need to find the right balance between the two of them.
 What is meaningful is something close to [Markdown](https://daringfireball.net/projects/markdown/).
 At a text span level it supports links, two kinds of emphasis (`em` and `strong`), and inline code (which is less relevant in general text).
 At a block level it supports paragraphs, 6 levels of headers, lists (ordered and unordered), quote and code blocks and horizontal rules.
-This is likely much more nuanced than is typcially used but it's a reasonable compromise for generic internet content.
+This is likely much more nuanced than is typically used but it's a reasonable compromise for generic internet content.
 
 It's possible to extract Markdown from HTML with [html2text](https://github.com/Alir3z4/html2text) or the excellent [Pandoc](https://pandoc.org/).
 Depending on the downstream task you will probably want to use the markup in different ways.
@@ -31,8 +31,8 @@ The target may depend on what you're trying to do, but should produce a better r
 For language modelling you could encode the markup as special tokens.
 For a rules based tokenizer there are a number of straightforward ways to do this.
 An example for emphasis we could use HTML-esque `<em>` and `</em>` tokens.
-Or we could preceed every token in the span with `<em>`.
-We could even do something strange like preceed the whole section by `<em> 5` where 5 is the number of tokens in the span.
+Or we could precede every token in the span with `<em>`.
+We could even do something strange like precede the whole section by `<em> 5` where 5 is the number of tokens in the span.
 Typically it's only whole words that are emphasised; if only part of a token is you would have to decide whether to use that information or discard it (depending on how often it occurs and how meaningful it is).
 It would be worth experimenting to see what works best for a language model.
 

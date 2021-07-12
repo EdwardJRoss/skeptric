@@ -6,7 +6,7 @@ feature_image = "/images/google_analytics_skeptric.png"
 +++
 
 I started regularly writing this website to get better at writing, to build a portfolio and share my learnings.
-Because of this I haven't been focussed on building an audience or looking at analytics.
+Because of this I haven't been focused on building an audience or looking at analytics.
 However now I've been writing continuously for 6 months I'd see if I learned anything interesting from looking at Google Analytics.
 
 I installed Google Analytics a couple of weeks ago on the website to see how people are actually viewing my site.
@@ -25,10 +25,10 @@ Writing more of these kinds of articles is useful, but isn't likely to build ret
 The most visited pages are all solving problems that people are likely to search for, and indeed I searched before writing them.
 The top visited page is [Running an X Server with WSL2](/wsl2-xserver) which is a common problem, and I put together a few solutions to get a working answer.
 Similarly other top pages from search are [Integer Division in Presto](/presto-integer-division), [converting HTML to text](/html-to-text), [exporting data from Amazon Athena](/export-athena), [calculating moving averages in SQL](/moving-averages-sql), and [ngrams in Python and Pandas](/ngram-python).
-Each of these focussed on a specific technology and solving a well-defined problem.
+Each of these focused on a specific technology and solving a well-defined problem.
 
 There are definitely similar articles that I find useful that don't make it to the top.
-I've gone back to [turning of LaTeX in Jupyter](/jupyter-nolatex), [displaying all columns in R Jupyter](/display-r-jupyter) and [showing side-by-side digffs in Python](/python-diffs) a number of times but they get no hits.
+I've gone back to [turning of LaTeX in Jupyter](/jupyter-nolatex), [displaying all columns in R Jupyter](/display-r-jupyter) and [showing side-by-side diffs in Python](/python-diffs) a number of times but they get no hits.
 I'm not sure if it's because these are unusual problems, or I've used strange words to describe them, or if there's better content available.
 I'm glad I wrote them since I find them useful but I wonder if there were better ways to describe them to make them appear in searches.
 

@@ -16,7 +16,7 @@ As a contributor it can be tempting to complete a product to a nice finish, but 
 Instead if you leave obvious gaps for other people to fill it helps them get involved, understand the work and feel ownership.
 Some successful open source projects do this by tagging issues as "good first issue", and leaving them for other people to tackle.
 
-The mathematican [William Thurston](https://en.wikipedia.org/wiki/William_Thurston) wrote about his experience of "completing" in his excellent article [On proof and progress in mathematics](https://arxiv.org/abs/math/9404236):
+The mathematician [William Thurston](https://en.wikipedia.org/wiki/William_Thurston) wrote about his experience of "completing" in his excellent article [On proof and progress in mathematics](https://arxiv.org/abs/math/9404236):
 
 > At that time, foliations had become a big center of attention among geometric topologists, dynamical systems people, and differential geometers.
 > I fairly rapidly proved some dramatic theorems...
@@ -28,8 +28,8 @@ The mathematican [William Thurston](https://en.wikipedia.org/wiki/William_Thurst
 > People told me (not as a complaint, but as a compliment) that I was killing the field.
 > Graduate students stopped studying foliations, and fairly soon, I turned to other interests as well.
 >
-> I do not think that the evacuation occurred because the territory was intellectually exhausted - there were (and still are) many interesting questions that remainand that are probably approachable.
-> Since those years, there have been interesting developments carried out by the few people who stayed in the field or who entered the field, and there have also been important developments in neighboring areas that I think would have been much accelerated had mathematicians continued to pursue foliation theory vigorously.
+> I do not think that the evacuation occurred because the territory was intellectually exhausted - there were (and still are) many interesting questions that remained that are probably approachable.
+> Since those years, there have been interesting developments carried out by the few people who stayed in the field or who entered the field, and there have also been important developments in neighbouring areas that I think would have been much accelerated had mathematicians continued to pursue foliation theory vigorously.
 >
 > Today, I think there are few mathematicians who understand anything approaching the state of the art of foliations as it lived at that time, although there are some parts of the theory of foliations, including developments since that time, that are still thriving.
 
@@ -51,7 +51,7 @@ This is why it's very impressive when there's a thriving open source project tha
 Thurston also talks about how he learned from his experience on foliations, and when he worked on 3-manifolds he took a different approach.
 He spent a number of years understanding the field before he proved a major result and made a [conjecture](https://en.wikipedia.org/wiki/Geometrization_conjecture).
 He taught the underlying ideas to his graduate class, and started providing the notes to a mailing list that grew to 1200 people (which is very large in mathematics!).
-He presented seminars and workshops, helping the community understand the "infrastucture" in the proof that spanned different areas of mathematics.
+He presented seminars and workshops, helping the community understand the "infrastructure" in the proof that spanned different areas of mathematics.
 This then helped grow the field by giving the tools and space for other people to make in-roads into the field and publish their own papers (and eventually led to solving a [100 year old problem](https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture)).
 
 > There has been and there continues to be a great deal of thriving mathematical activity.

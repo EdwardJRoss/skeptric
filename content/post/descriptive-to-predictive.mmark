@@ -7,7 +7,7 @@ feature_image = "/images/forecasting.gif"
 
 The starting point for an analysis is often summary statistics, such as the mean or the median.
 For some of these you're going to want it more precisely, more timely or cut by thinner segments.
-When the data gets too volatile to report on it's a good time to reframe the descriptive statistics as a predictive problem.
+When the data gets too volatile to report on it's a good time to re-frame the descriptive statistics as a predictive problem.
 
 Businesses often have a lot of reporting around important metrics cut by key segments.
 Monthly average revenue per customer by industry.
@@ -19,7 +19,7 @@ Where do we need to recruit more salespeople?
 What stock do we need to increase the supply of?
 Should we keep spending on our marketing campaign to drive consideration?
 
-You can reframe these descriptive statistics as predictive problems.
+You can re-frame these descriptive statistics as predictive problems.
 The mean and median are the constants that minimise mean squared error and mean absolute error respectively.
 For example the weekly average sales per salesperson by territory could be considered the model: `sales ~ week x territory`.
 That is we treat each week and territory as independent and fit a [constant model](/constant-models) to each.

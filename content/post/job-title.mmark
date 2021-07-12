@@ -28,7 +28,7 @@ But they also typically have other information:
 * Company names: "Nevill Crest and Gun", "The Refectory"
 
 To capture the job ad title we want to try to remove these, but it's difficult because there's no easy way to identify all of these categories.
-They're also not quite mututally exclusive.
+They're also not quite mutually exclusive.
 
 # What is a job title?
 
@@ -75,7 +75,7 @@ Even once we've found a role title it's hard to fit it into the constellation of
 
 Common acronyms can be expanded to see that a "RGN" is the same as a "Registered General Nurse", and similar things can be normalised to it.
 
-But is a "groundworker" similar to a "gardender"?
+But is a "groundworker" similar to a "gardener"?
 A "reward Analyst" is likely more similar to a "marketing analyst" than an "infrastructure analyst"
 Understanding the roles requires a lot of additional knowledge about the roles, and will require actually looking into the ad text.
 But just *having* the role titles would be a useful start.
@@ -85,9 +85,9 @@ But just *having* the role titles would be a useful start.
 While we're not *totally* clear on what a role title is, we need to start making some progress to extract them.
 
 Some advertisers do write very generic ad titles like "Project Manager" which are close to job titles.
-The more advertisers that have the exact same ad title the more likely it is that it's a generic job title not containing specifics about the role like locaiton and conditions.
+The more advertisers that have the exact same ad title the more likely it is that it's a generic job title not containing specifics about the role like location and conditions.
 
-I extracted all job ad titles that occured in at least 10 advertisers.
+I extracted all job ad titles that occurred in at least 10 advertisers.
 This cutoff sound high, but because Adzuna aggregates ads from different job boards and they sometimes have different names for the same advertiser at a lower cutoff there were many examples of the same job.
 We could lowercase the titles to get more examples, but I was interested in how casing was actually used.
 

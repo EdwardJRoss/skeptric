@@ -21,7 +21,7 @@ This clustering could help with targeting and recommending products to customers
 The bipartite graph could also be represented by its [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix).
 The adjacency matrix underlies a lot of the algorithms for community detection such as [Spectral clustering](https://en.wikipedia.org/wiki/Spectral_clustering).
 Because there are no connections between customers and customers and products and products the matrix is 0 on these diagonal blocks.
-Because the graph is undirected the adjacency matrix is symmetrix.
+Because the graph is undirected the adjacency matrix is symmetric.
 
 ![Adjacency matrix of Bipartite Graph](/images/bipartite_matrix.png)
 

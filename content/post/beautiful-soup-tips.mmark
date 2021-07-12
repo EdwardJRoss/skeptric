@@ -5,7 +5,7 @@ date = "2020-07-04T08:00:00+10:00"
 feature_image = "/images/careersvic_div.png"
 +++
 
-[Beautiful soup](https://www.crummy.com/software/BeautifulSoup/) can be a useful library for extracting infomation from HTML.
+[Beautiful soup](https://www.crummy.com/software/BeautifulSoup/) can be a useful library for extracting information from HTML.
 Unfortunately there's a lot of little issues I hit working with it to extract data from a careers webpage using Common Crawl.
 The library is still useful enough to work with; but the issues make me want to look at alternatives like [lxml](https://lxml.de) (via [html5-parser](https://html5-parser.readthedocs.io)).
 
@@ -13,7 +13,7 @@ The source data can be obtained at the end of the article.
 
 # Use a good HTML parser
 
-Python has an inbuild `html.parser`, but it often misparses HTML.
+Python has an inbuilt `html.parser`, but it often misparses HTML.
 You're better off using html5lib (or maybe html5-parser).
 
 For example with this document I tried to extract the description with `html.parser`.
@@ -60,7 +60,7 @@ The webpage contained a lot of examples of key value pairs marked up like this:
 <p class="txt-info location txt-one-line"><span class="txt-bold">Location: </span>Geelong</p>
 ```
 
-The pairs all occured with a class of `txt-info` so could be extracted using the CSS selector `soup.select('.txt-info')` returning a list of these.
+The pairs all occurred with a class of `txt-info` so could be extracted using the CSS selector `soup.select('.txt-info')` returning a list of these.
 The key is always in a `txt-bold` class and so can be retrieved with `.select_one('.txt-bold')`.
 To get everything the value to the right of the key we can use `.next_siblings` which generates the sequence `['Geelong']`.
 

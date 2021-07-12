@@ -9,7 +9,7 @@ The traditional way to train an NER model on a new domain is to annotate a whole
 Techniques like active learning can speed this up, but especially neural models with random weights require a ton of data.
 A more modern approach is to take a large pretrained NER model and fine tune it on your dataset.
 This is the approach of [AdaptaBERT](https://github.com/xhan77/AdaptaBERT) ([paper](https://arxiv.org/pdf/1904.02817.pdf)), using BERT.
-However this takes a large amount of GPU compute and finnicky regularisation techniques to get right.
+However this takes a large amount of GPU compute and finicky regularisation techniques to get right.
 
 There is another approach in the middle between: weak labelling.
 This is where you take a bunch of sources of labels that are individually not great, such as heuristic rules, or maybe other models and datasets.

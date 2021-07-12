@@ -112,11 +112,11 @@ for _ in tqdm(range(100_000)):
     seen_domains.update([dom])
 ```
 
-The domain of the graph is extracted wiht a simple function:
+The domain of the graph is extracted with a simple function:
 
 ```python
 def graph_domain(graph):
     return urllib.parse.urlparse(graph.identifier).netloc 
 ```
 
-You can view the [whole labourious analysis in Jupyter](https://nbviewer.jupyter.org/github/EdwardJRoss/job-advert-analysis/blob/master/notebooks/JobPosting%20RDF%20-%202019%20Web%20Data%20Commons%20Schema%20Analysis.ipynb).
+You can view the [whole laborious analysis in Jupyter](https://nbviewer.jupyter.org/github/EdwardJRoss/job-advert-analysis/blob/master/notebooks/JobPosting%20RDF%20-%202019%20Web%20Data%20Commons%20Schema%20Analysis.ipynb).

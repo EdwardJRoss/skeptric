@@ -17,7 +17,7 @@ I use this in Emacs via [magit](https://magit.vc/manual/magit/Stashing.html) whi
 
 The only downside of this is it won't let me pop the stash until the file is at the latest commit.
 This means if I want to combine the changes in a single commit I have to commit, then pop the stash and amend the commit.
-Not awful, just a little finnicky.
+Not awful, just a little finicky.
 But it's a pretty safe way to work.
 
 Another alternative to stashes is branches.

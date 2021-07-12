@@ -6,7 +6,7 @@ feature_image: "/images/callbacks.png"
 
 Creating state of the art deep learning algorithms often requires changing the details of the training process.
 Whether it's scheduling hyperparameters, running on multiple GPUs or plotting the metrics it requires changing something in the training loop.
-However constantly modifying the core training loop everytime you want to add a feature, and adding a switch to enable it, quickly becomes unmaintainable.
+However constantly modifying the core training loop every time you want to add a feature, and adding a switch to enable it, quickly becomes unmaintainable.
 The solution [fast.ai developed](https://www.fast.ai/) is to add points where custom code can be called that modifies the state of training, which they call [callbacks](https://docs.fast.ai/callbacks.html).
 
 However there's a similar concept from the early 90's in Emacs Lisp called [advising functions](https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html#Advising-Functions), and in the Common Lisp Object System as [method combination](http://www.gigamonkeys.com/book/object-reorientation-generic-functions.html#the-standard-method-combination).
@@ -21,7 +21,7 @@ Fastai callbacks allow for adding a [wide variety of functionality](https://docs
 
 ![Many different functionalities can be included in callbacks](/images/callback_matrix.png)
 
-This is done by having places in the trianing loop code that can "call back" to external code.
+This is done by having places in the training loop code that can "call back" to external code.
 
 ![Callbacks hook in between different stages of model](/images/callbacks.png)
 
@@ -233,7 +233,7 @@ if advice(*args):
     function(*args)
 ```
 
-But the most intesting examples compose with the function being called.
+But the most interesting examples compose with the function being called.
 
 ```python
 # Filter Args

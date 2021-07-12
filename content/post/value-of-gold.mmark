@@ -5,7 +5,7 @@ date = "2020-09-25T08:00:00+10:00"
 feature_image = "/images/envelope.png"
 +++
 
-How much is one cubic centimeter of gold worth?
+How much is one cubic centimetre of gold worth?
 
 # Esitmating with a ring
 
@@ -40,7 +40,7 @@ My ring finger is about 1cm across, so has a radius of about 5mm.
 A ring is typically around 2mm thick.
 So the area of the annulus, looking at the ring top down, is $$ \pi \left((5+2 \rm{mm})^2 - (5 \rm{mm})^2\right) \approx 3 \times (49 - 25)\rm{mm}^2 $$, so approximately 75 mm<sup>2</sup>.
 
-The height of a ring is roughly twice it's thicknesss; call it 4mm.
+The height of a ring is roughly twice it's thickness; call it 4mm.
 So the volume of the ring is about 300 mm<sup>3</sup>.
 
 Now a 14 carat gold is 14/24 gold by weight, the rest being other cheaper harder metals.
@@ -79,7 +79,7 @@ graph BT;
 
 ## Putting it together
 
-Combining our two estimates gives $250 for 0.15 cm<sup>3</sup> of gold, so about $2000 per cubic centimeter.
+Combining our two estimates gives $250 for 0.15 cm<sup>3</sup> of gold, so about $2000 per cubic centimetre.
 
 {{<mermaid>}}
 graph BT;
@@ -94,8 +94,8 @@ Using that a 14 carat ring is $300 is a great way of using pedestrian knowledge 
 But I can look up buying gold bars directly.
 
 I can see a gold bar online of 255mm by 85mm by 35mm for just over a million dollars.
-The volume of this bar is about 25cm by 8cm by 4cm which is about 800 cubic centimeters.
-So my estimated cost would be $2000/cubic centimeter by 800 cubic centimeters which is $1.6 million.
+The volume of this bar is about 25cm by 8cm by 4cm which is about 800 cubic centimetres.
+So my estimated cost would be $2000/cubic centimetre by 800 cubic centimetres which is $1.6 million.
 
-So it looks like I overestimated the value by about 60%, it's closer to $1300 per cubic centimeter.
+So it looks like I overestimated the value by about 60%, it's closer to $1300 per cubic centimetre.
 But this is a pretty good outcome for such crude assumptions.
