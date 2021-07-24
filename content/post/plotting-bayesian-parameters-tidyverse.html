@@ -1,0 +1,44 @@
+---
+tags: ["R", "tidyverse"]
+title: "Plotting Bayesian Parameter Distributions with R Tidyverse"
+date: "2021-07-23T20:00:20+10:00"
+feature_image: "/post/plotting-bayesian-parameters-tidyverse_files/figure-html/unnamed-chunk-2-1.png"
+---
+
+
+
+<p>I’m currently reading <a href="https://avehtari.github.io/ROS-Examples/">Regression and Other Stories</a> which contains lovely plots of coefficients and their distributions.
+What really impressed me is how easily I could solve this with the few concepts in the <a href="https://www.tidyverse.org/">tidyverse</a>.</p>
+<p>Suppose we’ve got an rstanarm model like this:</p>
+<pre class="r"><code>model &lt;- rstanarm::stan_glm(Petal.Width ~ Sepal.Length + Sepal.Width + Species, 
+                            data=iris,
+                            refresh=0)</code></pre>
+<p>We can access all the coefficients from the posterior draws using <code>as.matrix</code>.
+With a few standard transformations we can plot the distribution of each of the coefficients.</p>
+<pre class="r"><code>library(magrittr)
+
+model %&gt;%
+# Convert it to a data frame of coefficients
+as.data.frame() %&gt;% 
+# Remove the intercept and standard deviation estimates
+dplyr::select(-`(Intercept)`, -`sigma`) %&gt;% 
+# Pivot into long form, one row per variable and estimate
+tidyr::pivot_longer(dplyr::everything()) %&gt;% 
+# Reorder the variables for plotting in order of descending (median) value
+dplyr::mutate(name = forcats::fct_reorder(name, dplyr::desc(value))) %&gt;% #
+# Draw a violin plot, with 20th and 80th percentiles marked
+ggformula::gf_violin(value ~ name, draw_quantiles=c(0.2, 0.8)) +
+# Draw the variables on the vertical axis
+ggplot2::coord_flip() +
+# Chang the theme
+ggplot2::theme_minimal()</code></pre>
+<p><img src="/post/plotting-bayesian-parameters-tidyverse_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>While this is simpler and prettier with Bayesplot, I think it really shows the flexibility of the tidyverse.</p>
+<pre class="r"><code>bayesplot::mcmc_areas(model, 
+                      regex_pars=c(&quot;Sepal.Length&quot;, &quot;Sepal.Width&quot;, &quot;Species.*&quot;))</code></pre>
+<p><img src="/post/plotting-bayesian-parameters-tidyverse_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The least flexible piece in this is <code>ggplot2</code>.
+If I want to use a density plot rather than a violin plot, the only way I can work out how to do this is with faceting which makes the plots too small and hard to compare.
+I need to write <a href="https://stackoverflow.com/questions/52034747/plot-only-one-side-half-of-the-violin-plot">custom code</a> to only plot the top halves of the violin.
+And whenever I use a bar graph in ggplot2 I always have to reread how to use stat.
+Nevertheless there’s sufficient existing plots to plot almost anything, and the environment is remarkably flexible for solving data problems like this.</p>
