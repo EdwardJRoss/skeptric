@@ -10,7 +10,7 @@ feature_image = "/images/regex_hypothesis.png"
 The difficulty is generating good random data that will thoroughly exercise your code.
 For text data you can do this by generating text, in particular with regular expressions.
 
-Using Hypothesis and the library [rstr](https://github.com/leapfrogonline/rstr) this can be done as follows:
+While you could easily do this with hypothesis [from_regex strategy](https://hypothesis.readthedocs.io/en/latest/data.html#hypothesis.strategies.from_regex) you could roll your own with Hypothesis and the library [rstr](https://github.com/leapfrogonline/rstr) as follows:
 
 ```python
 from hypothesis.strategies import composite, randoms
