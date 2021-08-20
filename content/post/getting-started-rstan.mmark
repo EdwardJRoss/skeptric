@@ -7,7 +7,9 @@ feature_image = "/images/mtcars_linear.png"
 
 I wanted to fit a Bayesian Tobit model, but I couldn't find one (probably because I didn't know how to look).
 So I decided to build one in Stan, which I had never used before.
+This article is the first in a series showing how I got there.
 I used the Methods Consultants [Introduction to Stan in R](https://blog.methodsconsultants.com/posts/introduction-to-stan-in-r/) to get started.
+A broader (but shallow) introduction is the *Methods Bites* [Applied Bayesian Statistics Using Stan and R](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/applied-bayesian-statistics/).
 
 A simple place to start is a linear model $$ y \sim N(\alpha + X \beta, \sigma) $$ (often written, equivalently, as $$ y \sim \alpha + X \beta + \epsilon $$, where $$ \epsilon \sim N(0, \sigma) $$.
 We can write out the model in Stan explicitly as follows and save it to `linear_flat.stan`:
@@ -30,6 +32,8 @@ model {
   y ~ normal(alpha + X * beta, sigma); // target density
 }
 ```
+
+Note that another way we [could have written the model](https://mc-stan.org/docs/2_18/reference-manual/sampling-statements-section.html) is in terms of how it increments the log probability `target += normal_lpdf(y | alpha + X * beta, sigma)`, but for simple cases like this I find the sampling statement `y ~ normal(alpha + X * beta, sigma)` much clearer.
 
 We can then construct some data in R and fit the model using `rstan::stan` (assuming "linear_flat.stan" is in the working directory):
 
