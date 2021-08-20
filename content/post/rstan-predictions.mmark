@@ -70,7 +70,8 @@ predict.my_linstan <- function(object, newdata=NULL) {
     coefs <- apply(coef_matrix, 2, median)
     
     # Calculate b * x
-    apply(coefs[colnames(mm)] * mm, 1, sum)
+    preds <- (mm %*% coefs[colnames(mm)])[,1]
+    unlist(preds)
 }
 ```
 
