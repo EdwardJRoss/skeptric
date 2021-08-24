@@ -7,7 +7,7 @@ feature_image = "/images/mtcars_linear.png"
 
 I wanted to fit a Bayesian Tobit model, but I couldn't find one (probably because I didn't know how to look).
 So I decided to build one in Stan, which I had never used before.
-This article is the first in a series showing how I got there; this one builds a linear model in Stan and makes it useable from R using formula syntax, then next we [add priors to the model](/stan-linear-priors), [make model predictions from R](/rstan-predictions), and then handle censored values with [Tobit regression](stan-tobit).
+This article is the first in a series showing how I got there; this one builds a linear model in Stan and makes it useable from R using formula syntax, then next we [add priors to the model](/stan-linear-priors), [make model predictions from R](/rstan-predictions), and then handle censored values with [Tobit regression](/stan-tobit).
 I used the Methods Consultants [Introduction to Stan in R](https://blog.methodsconsultants.com/posts/introduction-to-stan-in-r/) to get started.
 A broader (but shallow) introduction is the *Methods Bites* [Applied Bayesian Statistics Using Stan and R](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/applied-bayesian-statistics/).
 
