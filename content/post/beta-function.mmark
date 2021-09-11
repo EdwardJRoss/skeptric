@@ -9,7 +9,7 @@ The [Beta Function](https://en.wikipedia.org/wiki/Beta_function) comes up in the
 Understanding its properties is useful for understanding the binomial distribution.
 
 The beta function is given by $$ B(a, b) = \int_0^1 p^{a-1}(1-p)^{b-1} \rm{d}p $$ for a and b positive.
-If you have $N$ flips of a coin of which $k$ turn heads the likelihood is proportional to $$ p^{k}(1-p)^{N-k} $$ for the probability *p* between 0 and 1.
+If you have $$N$$ flips of a coin of which $$k$$ turn heads the likelihood is proportional to $$ p^{k}(1-p)^{N-k} $$ for the probability *p* between 0 and 1.
 So the beta function can be seen as the normaliser of the likelihood, with $$ a = k + 1 $$ and $$ b = N - k + 1 $$ (or inversely $$ k = a - 1 $$ and $$ N   =  a + b - 2 $$).
 
 The integral can be evaluated directly when b is 1: $$ B(a, 1) = \int_0^1 p^{a-1} = \frac{1}{a} $$.
