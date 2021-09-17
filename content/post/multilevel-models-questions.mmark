@@ -66,6 +66,11 @@ How does the performance compare between them, and how can they be implemented i
 I wonder whether heirarchical shrinkage would be useful in tree based models (and perhaps make their estimates more stable along with less variable selection like [ctrees](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf)).
 In general heirarhcical shrinkage can be added to Bayesian models by having higher level distributions of the parameters, does it make sense to do this in practice?
 
+## How does shrinkage vary with distribution?
+
+It would make sense that the higher the interclass deviation and the smaller the intraclass deviation the more shrinkage there should be to the group parameters.
+Does this happen? Can we quantify this?
+
 # Next steps
 
 I'll start reading some basic papers on the topic to get an understanding of these questions and try to set up some analysis to help answer them.
