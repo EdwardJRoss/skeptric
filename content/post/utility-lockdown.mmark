@@ -3,6 +3,7 @@ tags = ["policy", "maths"]
 title = "Utility of lockdown in an Epidemic"
 date = "2021-09-27T11:00:56+10:00"
 feature_image = "/images/covid19_cemetary_brazil.jpg"
+draft = true
 +++
 
 My city of Melbourne, Australia will have had 235 days of lockdown in response to COVID-19 when it is planned to slowly reopen on October 26th.
