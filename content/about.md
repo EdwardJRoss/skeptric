@@ -1,6 +1,10 @@
-# Edward Ross
++++
+title = "About Skeptric"
+date = "2021-10-18"
+author = "Edward Ross"
++++
 
-I'm a Data Scientist, Writer and Lifelong Learner.
+This is the personal writings of Edward Ross; Data Scientist, Writer and Learner.
 
 ## Things I've built
 
@@ -26,3 +30,7 @@ I sometimes keep examples of tutorials and books I've worked through
 * [Exercises from *Regression and Other Stories*](https://github.com/EdwardJRoss/regression_stories)
 * [Baking Pi Tutorial for building a Baremetal OS on Raspberry Pi](https://github.com/EdwardJRoss/regression_stories)
 * [Some NLP algorithms inspired bu Jurefsky's *Speech and Language Processing*, 3rd edition](https://github.com/EdwardJRoss/mlzero)
+
+# Contact
+
+You can email me at webmaster@skeptric.com
