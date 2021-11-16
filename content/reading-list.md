@@ -77,6 +77,7 @@ Here's a [good comparison](https://www.greaterwrong.com/posts/5EqGPCKvm6m9XC7JJ/
 * (Free) [Bayesian Methods for Hackers - Davidson Pylon](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
 * (Free) [Bayesian Data Ananlysis (3rd Edition)- Gelman, et al](http://www.stat.columbia.edu/~gelman/book/) (and [Aki Vehtari's course](https://avehtari.github.io/BDA_course_Aalto/))
 * [Doing Bayesian Data Analysis - Kruschke](http://doingbayesiandataanalysis.blogspot.com/)
+* (Free) [Model Based Machine Learning - Winn, et al](https://mbmlbook.com/)
 * (Free) [Michael Betancourt's Writings](https://betanalpha.github.io/writing/)
 * [Probability Theory: The Logic of Science - Jaynes](https://www.cambridge.org/core/books/probability-theory/9CA08E224FF30123304E6D8935CF1A99) ([PDF](https://bayes.wustl.edu/etj/prob/book.pdf))
 
@@ -102,7 +103,36 @@ Here's a [good comparison](https://www.greaterwrong.com/posts/5EqGPCKvm6m9XC7JJ/
 * (Free) [The Art of Insight in Science and Engineering - Sanjoy Mahajan](https://mitpress.mit.edu/books/art-insight-science-and-engineering)
 * [How to Measure Anything - Hubbard](https://www.howtomeasureanything.com/3rd-edition/)
 
+
+# Problem Solving
+
+## Mathematical
+
+* [How to Solve It - Pólya](https://en.wikipedia.org/wiki/How_to_Solve_It) 
+* [Mathematics and Plausible Reasoning - Pólya](https://www.amazon.com/gp/product/0691025096)
+* [An Introduction To Mathematical Modeling - Bender](https://www.amazon.com.au/Introduction-Mathematical-Modeling-EDWARD-BENDER/dp/048641180X/)
+* [Model Building in Mathematical Programming - Williams](https://www.amazon.com.au/dp/1118443330) (OR)
+
+## General (unchecked)
+
+* [Bulletproof Problem Solving - Conn and Mclean](https://www.amazon.com.au/Bulletproof-Problem-Solving-Changes-Everything/dp/1119553024)
+* [The Thinkers Toolkit - Jones](https://www.amazon.com.au/Thinkers-Toolkit-Powerful-Techniques-Problem-ebook/dp/B002PYFW4S)
+
+It would be good to have something about Problem Discovery and Definition
+
+# Design
+
+* [Non-designers Design Book - Williams](https://www.amazon.com.au/Non-Designers-Design-Book-Robin-Williams/dp/0133966151)
+* [The Design of Everyday Things - Norman](https://www.amazon.com.au/Design-Everyday-Things-Revised-Expanded/dp/0465050654/)
+* (Unchecked) [Don't Make Me Think - Krug](https://www.amazon.com.au/Dont-Make-Think-Steve-Krug/dp/0321344758)
+
 # Optimisation
 
 * (Free) [Discrete Optimisation Course - Hentenryck](https://www.coursera.org/learn/discrete-optimization)
 * (Free) [Convex Optimisation - Boyd](https://web.stanford.edu/~boyd/cvxbook/)
+
+# Software Project Management
+
+* [Rapid Development - McConnell](https://www.amazon.com.au/Rapid-Development-Steve-McConnell/dp/1556159005)
+* [Mythical Man Month - Brooks](https://www.amazon.com.au/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959)
+* [The Manager's Path - Fournier](https://www.amazon.com.au/Manager`s-Path-Camille-Fournier/dp/1491973897)
