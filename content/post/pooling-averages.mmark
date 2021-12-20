@@ -1,0 +1,110 @@
++++
+tags = [""]
+title = "Pooling Averages"
+date = "2021-12-20T09:05:05+11:00"
+feature_image = "/images/"
+draft = true
++++
+
+# Introduction
+
+Calculating averages by group is easy; for each group you simply add up all the values and divide by the number of members in a group.
+This is used all the time in data analysis for understanding the typical characteristics of groups.
+
+However for small groups this estimate of their average can have a high variance leading to less reliable estimates.
+When you sort groups by their average value the most extreme groups are typically the smallest groups.
+A small group is more likely to be skewed by pure chance; rolling an average of 1 is much more likely on 2 dice than 20.
+Because there tend to be many more small groups there's likely to be a few of them much above the average.
+
+Zipf's law
+Sample mean ~ 1/sqrt(N)
+
+A typical workaround is to pick a threshold sample size, and exclude any groups with less than than that many data points.
+There is an inherent trade-off with this approach; if the threshold is set too high most of the groups won't have an average, but if the threshold is set too low the small groups will still have unreliable averages.
+An alternative approach is *partial pooling* where we moderate our estimates of individual groups with that of other groups.
+This is particularly useful where the variation within groups is large compared with the variation between groups.
+
+## Case Study: Premium Ads on SEEK
+
+All the theory is the same whether we're talking about baseball batting averages, school classroom testing results, or anything else.
+To illustrate the effect I'll use a real life example from SEEK; calculating the percentage of ads for a role that are Premium.
+
+SEEK currently has three types of ads; Classic ads which are an efficient way to find talent, StandOut ads which help hirers promote their brand by showing a cover image and selling points, and Premium ads which have a prioirity listing to help reach more candidates.
+Premium ads help hirers fill urgent or harder-to-fill roles by exposing them more to candidates.
+However candidate attention is limited, and if all ads were premium they wouldn't have any value, so we need to manage the proportion of premium ads to make sure we're delivering value to our customers.
+
+Picture from here:
+https://talent.seek.com.au/products/jobads/
+
+Be careful about pricing language:
+https://help.seek.com.au/s/article/What-is-the-cost-of-a-Premium-ad
+
+This is a very simple case of averaging: each ad is premium (1) or not (0) and the proportion of premium ads is just the average.
+The challenge is that there are thousands of possible roles someone could be hiring for, and many role titles only have a few ads.
+So when we're trying to calculate the percentage of premium ads for a Moxy Operator in Perth, a Cloud Architect in Auckland, or a Guest Service Agent in Newcastle it can be hard to estimate.
+For example if there have only been 5 ads posted the only possible estimates are 0%, 20%, 40%, 60%, 80%, or 100% - when the actual probability of an ad being premium is something else entirely.
+
+To compare different approaches for calculating the averages we'll need some data to calculate on, and a quality metric that tells us how close our estimate is to the *true* value.
+Since we don't know the true probability we can take a small random sample of the data to calculate averages on, and then compare it to the actual values for the rest of the data.
+This is the same as taking a training set and a validation set in machine learning.
+To evaluate how close we are we calculate the *mean squared error* on the validation data; for example if Moxy Operator's in Perth has an estimated premium rate of 7% and a given advertisement is premium then we add $$\frac{(1-0.07)^2}{N} \approx \frac{0.865}{N}$$ to the total (the *micro average*).
+In this case since it's a binary classification problem the logistic loss (or equivalently binary cross entropy) is more appropriate, but they are approximately the same and the differences don't matter here.
+This metric has the advantage of being comparable across groupings; when comparing with similar groupings we could also calculate the mean squared error of the groups themselves (the *macro average*).
+
+TODO: Worked example
+
+## No pooling - group averages
+
+No pooling is the standard way of calculating the averages, it has low bias and high variance.
+We just calculate the average percentage for each group.
+
+Some high examples
+Some low examples
+
+## Complete pooling
+
+The idea of *pooling* is to calculate the average of a group using information from other groups.
+Complete pooling means treating each data point equally, meaning all groups are the same, that is we just calculate the overall average premium percentage.
+
+Problems:
+* not insightful
+* high bias and low variance
+
+## Regrouping and averaging
+
+One way to reduce the variance of no pooling would be to make bigger groups.
+How to do this depends on the problem, but any heirarchical structure in the groups that relates to the objective could be used to form larger groups.
+More generally a clustering technique could be used to find similar groups; for example by looking at cross application behaviour I can tell that many candidates who apply for Front End Developer also apply for React Developer roles and so it could make sense to calculate the premium percentage for these together (since hirers are competing for the same candidate attention).
+
+Classification - example
+
+## Partial Pooling
+
+Partial pooling interpolates between complete pooling when there is no data to no pooling when there is lots of data.
+Instead of assuming each group is totally independent, as in the no-pooling case, we assume that each groups true probability is drawn from a probability distribution.
+
+This can be easily motivated by a Bayesian approach, following chapters 6 and 7 of [Computer Age of Statistical Inference](https://web.stanford.edu/~hastie/CASI/).
+
+### Empirical Bayes
+
+### James-Stein Estimate
+
+## Embeddings
+
+## Extensions
+
+Time series.
+
+Mixed Effects Models: p ~ classification x location + role x location
+
+
+In SQL you can do this with `avg` and `group by`, in Excel you might use the average in a pivot table.
+
+
+
+
+Efron, B., & Morris, C. (1975). Data analysis using Stein's estimator and its generalizations. Journal of the American Statistical Association, 70(350), 311-319 (link to pdf)
+http://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf
+
+Efron, B., & Morris, C. (1974). Data analysis using Stein's estimator and its generalizations. R-1394-OEO, The RAND Corporation, March 1974
+https://www.rand.org/pubs/reports/R1394.html
