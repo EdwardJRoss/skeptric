@@ -55,3 +55,8 @@ So for a given $$\sigma$$ the log likelihood only depends on the mean square err
 
 As the number of trials increases the binomial distribution gets close to a normal distribution (but slower for more extreme p).
 So using the mean square error isn't crazy, for large samples you'll get reasonable results, but it's not as appropriate as the cross entropy.
+
+## Further reading
+
+This barely scratches the surface of loss functions for classification; [Wikipedia has an article](https://en.wikipedia.org/wiki/Loss_functions_for_classification) that covers other kinds of loss such as exponential loss, tangent loss, hinge loss, and savage loss.
+It would be great to understand more about how these all differ and how to choose between them in a particular application.
