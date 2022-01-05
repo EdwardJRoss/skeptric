@@ -1,110 +1,112 @@
 +++
 tags = [""]
-title = "Pooling Averages"
+title = "Better than Average Statistics"
 date = "2021-12-20T09:05:05+11:00"
 feature_image = "/images/"
 draft = true
 +++
 
-# Introduction
+# Better than Average Statistics
 
-Calculating averages by group is easy; for each group you simply add up all the values and divide by the number of members in a group.
-This is used all the time in data analysis for understanding the typical characteristics of groups.
+Small groups are a big pain when calculating averages.
+Some will float to the top and others sink to the bottom of most rankings; not because they're actually more extreme, but because they have more random variation.
+Often there are many small groups (as in [Zip's Law](https://en.wikipedia.org/wiki/Zipf%27s_law)), and the sampling error in estimating the mean roughly halves when the sample size quadruples.
+When the variation within the small groups is larger than the true variation between groups, then by chance some of the small groups will have the largest and smallest averages.
+Generally when the variation within small groups is too big the average isn't really representative of the group.
 
-However for small groups this estimate of their average can have a high variance leading to less reliable estimates.
-When you sort groups by their average value the most extreme groups are typically the smallest groups.
-A small group is more likely to be skewed by pure chance; rolling an average of 1 is much more likely on 2 dice than 20.
-Because there tend to be many more small groups there's likely to be a few of them much above the average.
+There are better ways to calculate averages when the variation within groups is too large.
+Re-framing the descriptive act of calculating averages as a predictive machine learning problem enables comparing a wide variety of approaches.
+The groups themselves can be changed, and by merging together small groups the estimate's variance can be reduced, at the cost of increasing its bias.
+Information can be pooled between groups; instead of treating each group as independent, the estimates on larger groups can inform the estimates on smaller groups.
+Taking this further, if the groups can be meaningfully embedded in some vector space and the average can be calculated as a regression on the embeddings, which allows larger groups to further inform smaller groups.
 
-Zipf's law
-Sample mean ~ 1/sqrt(N)
+At SEEK we've used these techniques to improve our understanding of the employment marketplace and better inform decisions.
 
-A typical workaround is to pick a threshold sample size, and exclude any groups with less than than that many data points.
-There is an inherent trade-off with this approach; if the threshold is set too high most of the groups won't have an average, but if the threshold is set too low the small groups will still have unreliable averages.
-An alternative approach is *partial pooling* where we moderate our estimates of individual groups with that of other groups.
-This is particularly useful where the variation within groups is large compared with the variation between groups.
+# Averages as Machine Learning
 
-## Case Study: Premium Ads on SEEK
+An average is a machine learning model.
+It doesn't seem like a machine learning model; you just sum the values and divide by the count.
+But averages are related to *constant models*, the model that returns the same prediction for all inputs.
+In particular assuming that each data point is a constant plus a random error from a normal distribution, then the best estimate for the constant minimised the Mean Squared Error loss.
+And the constant that minimises mean squared error is the mean; that is the mean is the parameter of the constant model under a normal error distribution.
+This can be generalised to other kinds of averages such as the median, and the proportion of positive results in a binary outcome as in the table below (and can be further extended through transformations such as taking logarithms).
 
-All the theory is the same whether we're talking about baseball batting averages, school classroom testing results, or anything else.
-To illustrate the effect I'll use a real life example from SEEK; calculating the percentage of ads for a role that are Premium.
-
-SEEK currently has three types of ads; Classic ads which are an efficient way to find talent, StandOut ads which help hirers promote their brand by showing a cover image and selling points, and Premium ads which have a prioirity listing to help reach more candidates.
-Premium ads help hirers fill urgent or harder-to-fill roles by exposing them more to candidates.
-However candidate attention is limited, and if all ads were premium they wouldn't have any value, so we need to manage the proportion of premium ads to make sure we're delivering value to our customers.
-
-Picture from here:
-https://talent.seek.com.au/products/jobads/
-
-Be careful about pricing language:
-https://help.seek.com.au/s/article/What-is-the-cost-of-a-Premium-ad
-
-This is a very simple case of averaging: each ad is premium (1) or not (0) and the proportion of premium ads is just the average.
-The challenge is that there are thousands of possible roles someone could be hiring for, and many role titles only have a few ads.
-So when we're trying to calculate the percentage of premium ads for a Moxy Operator in Perth, a Cloud Architect in Auckland, or a Guest Service Agent in Newcastle it can be hard to estimate.
-For example if there have only been 5 ads posted the only possible estimates are 0%, 20%, 40%, 60%, 80%, or 100% - when the actual probability of an ad being premium is something else entirely.
-
-To compare different approaches for calculating the averages we'll need some data to calculate on, and a quality metric that tells us how close our estimate is to the *true* value.
-Since we don't know the true probability we can take a small random sample of the data to calculate averages on, and then compare it to the actual values for the rest of the data.
-This is the same as taking a training set and a validation set in machine learning.
-To evaluate how close we are we calculate the *mean squared error* on the validation data; for example if Moxy Operator's in Perth has an estimated premium rate of 7% and a given advertisement is premium then we add $$\frac{(1-0.07)^2}{N} \approx \frac{0.865}{N}$$ to the total (the *micro average*).
-In this case since it's a binary classification problem the logistic loss (or equivalently binary cross entropy) is more appropriate, but they are approximately the same and the differences don't matter here.
-This metric has the advantage of being comparable across groupings; when comparing with similar groupings we could also calculate the mean squared error of the groups themselves (the *macro average*).
-
-TODO: Worked example
-
-## No pooling - group averages
-
-No pooling is the standard way of calculating the averages, it has low bias and high variance.
-We just calculate the average percentage for each group.
-
-Some high examples
-Some low examples
-
-## Complete pooling
-
-The idea of *pooling* is to calculate the average of a group using information from other groups.
-Complete pooling means treating each data point equally, meaning all groups are the same, that is we just calculate the overall average premium percentage.
-
-Problems:
-* not insightful
-* high bias and low variance
-
-## Regrouping and averaging
-
-One way to reduce the variance of no pooling would be to make bigger groups.
-How to do this depends on the problem, but any heirarchical structure in the groups that relates to the objective could be used to form larger groups.
-More generally a clustering technique could be used to find similar groups; for example by looking at cross application behaviour I can tell that many candidates who apply for Front End Developer also apply for React Developer roles and so it could make sense to calculate the premium percentage for these together (since hirers are competing for the same candidate attention).
-
-Classification - example
-
-## Partial Pooling
-
-Partial pooling interpolates between complete pooling when there is no data to no pooling when there is lots of data.
-Instead of assuming each group is totally independent, as in the no-pooling case, we assume that each groups true probability is drawn from a probability distribution.
-
-This can be easily motivated by a Bayesian approach, following chapters 6 and 7 of [Computer Age of Statistical Inference](https://web.stanford.edu/~hastie/CASI/).
-
-### Empirical Bayes
-
-### James-Stein Estimate
-
-## Embeddings
-
-## Extensions
-
-Time series.
-
-Mixed Effects Models: p ~ classification x location + role x location
+| Average    | Loss Function Minimised                                      | Error Distribution                                            | Minimum Loss                                                                                                     |
+|------------|--------------------------------------------------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Mean       | Mean Squared Error                                           | Normal                                                        | Standard Deviation                                                                                               |
+| Median     | Mean Absolute Error                                          | [Laplace](https://en.wikipedia.org/wiki/Laplace_distribution) | [MAD median](https://en.wikipedia.org/wiki/Average_absolute_deviation#Mean_absolute_deviation_around_the_median) |
+| Proportion | [Cross Entropy](https://en.wikipedia.org/wiki/Cross_entropy) | Binomial                                                      |                                                                                                                  |
 
 
-In SQL you can do this with `avg` and `group by`, in Excel you might use the average in a pivot table.
+Averages on groups can also be viewed as a machine learning problem.
+In fact calculating the mean by group is equivalent to linear regression on the groups as categorical variables, and the proportion is equivalent to logistic regression.
+As in the single average case we can pick the related loss function and calculate it elementwise (which could be called the micro-loss).
+This allows comparing statistics between different groupings, since the loss function only depends on the points.
+However in some applications the groups really matter and should have an equal weight, in which case the loss should be calculated on each group separately and averaged (which could be called the macro-loss).
+
+# Making Larger Groups
+
+When someone is placing a job ad on SEEK it's useful to know how many people typically apply for that sort of job.
+It helps the hirer with their recruitment strategy (should they place a premium ad or consider proactive sourcing), and it helps SEEK to make sure each ad gets a fair share of attention from candidates who may apply.
+Ideally we could calculate the average number of applicants for each possible role title and location, but there are thousands of potential role titles and many combinations are uncommon.
+There are very few Data Scientist roles in Bundaberg or Metallurgist roles in Canberra (if any), and so the averages will be unstable (or unavailable).
+
+One solution is falling back to larger groups when there's not enough data for a stable estimate.
+There is a trade-off between the error due to variance (which is related to the variation within groups) and bias (which is related to the variation between groups).
+One extreme is to use the whole market average for every group; every role is the same and would get the same amount of applications.
+The other is to calculate each group average individually; even if there's only one job ad in that group.
+We can balance the two by using the group average for groups above a certain threshold size, and the market average for groups below that threshold.
+Then the threshold itself is a hyperparameter we can tune to minimise loss in a hold-out set.
+
+There are lots of different ways of making groups and fallback strategies.
+When the data has an underlying hierarchical structure this makes a natural fallback sequence for groups; cities occur within states, and states occur within countries.
+Groups can also be formed from the underlying data for example by clustering on related attributes; for example if candidates who apply for one kind of role tend to apply for another then those roles could be grouped together.
+A decision tree can be used to automatically construct relevant groups from the data.
+The more static a model is the easier it is to explain and debug underlying data issues.
+The data driven models can create groupings with a smaller loss, but need to be updated as the market changes (which may completely change the group structure); while a role may have been getting a similar number of applicants in both Melbourne and Perth in 2019, the effects of COVID restrictions would have significantly changed that in 2020 and 2021.
+
+There are not many off the shelf libraries for fallback models.
+There are lots of great libraries for decision trees, and in particular [ctree](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R implements [Conditional Inference Trees](https://www.tandfonline.com/doi/abs/10.1198/106186006X133933) which overcome the selection bias and overfitting issues in decision trees.
+A different approach for handling small groups is to use a [Rare Label Encoder](https://feature-engine.readthedocs.io/en/1.2.x/api_doc/encoding/RareLabelEncoder.html) to combine the small groups into an "Other" group and then perform a linear regression with [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) or [statsmodels](https://www.statsmodels.org/stable/regression.html).
+However we've found empirically that for small groups falling back to a larger group gave better estimates than creating an "other" group, and have built a SEEK internal scikit-learn model for handling custom fallbacks.
+
+While changing the groupings creates interpretable models, it cleaves a sharp division between groups.
+Once the groups are formed they are treated completely independently.
 
 
+# Pooling data
+
+Suppose there's a role we've never seen before (for example COVID testers), what's our best guess for the number of applications it will receive.
+Without knowing how it relates to other roles a reasonable guess is the overall market average.
+As we start getting some observations, seeing how many applications these jobs receive, the market average becomes less relevant.
+In the fallback model we cut over to the group average once we reached some threshold; but instead of a sharp transition would it be possible to smoothly interpolate between the two?
+
+Instead of treating each groups mean as independent, we could model them as random variables themselves drawn from a normal distribution, with its own mean and standard deviation (related to the variation between groups).
+Then before having any data, our best estimate of the mean number of people applying for the new role would be the mean of this distribution.
+But as we get some observations the best estimate starts pulling towards the observations, until we have enough observations.
+This neatly handles the small group problem by shrinking the unstable estimates of small groups towards the overall mean; and determines the amount to shrink from the data itself.
+
+This approach is called a multilevel model or a mixed effects model, and is very flexible.
+The model proposed above is very simple; each observation comes from a normally distributed group with a mean drawn from a larger group.
 
 
-Efron, B., & Morris, C. (1975). Data analysis using Stein's estimator and its generalizations. Journal of the American Statistical Association, 70(350), 311-319 (link to pdf)
-http://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf
+lme4, https://www.statsmodels.org/stable/mixed_linear.html
+brms, Stan, PyMC
+Empirical Bayes
 
-Efron, B., & Morris, C. (1974). Data analysis using Stein's estimator and its generalizations. R-1394-OEO, The RAND Corporation, March 1974
-https://www.rand.org/pubs/reports/R1394.html
+
+# Embeddngs
+
+Behavioural embeddings: cross-apply.
+Linguistic embeddings: title similarity.
+Co-occurance embeddings: skills that co-occur across roles (TF-IDF)
+
+For running these evaluations I've found Logistic Regression with a L2 regularisation (i.e. logistic ridge regression) works quite well.
+In scikit learn this is the default for [`sklearn.linear_model.LogisticRegression`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) and you just need to tune the regularisation parameter C (you can do this automatically with cross-validation using [`LogisticRegressionCV`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegressionCV.html)), and it can handle large sparse term-frequency matrices using [`scipy.sparse.csr_matrix`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html).
+Regularisation allows use of large dimensional embedding matrices without over-fitting.
+
+# Further reading
+
+
+The original paper showing inadmissibility is [Inadmissibility of the usual estimator for the mean of a multivariate normal distribution](https://projecteuclid.org/download/pdf_1/euclid.bsmsp/1200501656) by Stein (1956).
+This was followed with the explicit estimator in [Estimation with Quadratic Loss](https://projecteuclid.org/ebook/Download?urlId=bsmsp%2F1200512173&isFullBook=False) by James and Stein (1961).
