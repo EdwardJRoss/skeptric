@@ -39,6 +39,7 @@ To understand this connection Chapter 1 of Efron's [Large-Scale Inference](https
 It walks through how starting with the model $$\theta \sim N(0, A)$$ and $$X \vert \theta \sim N(\theta, 1)$$ the James-Stein estimator can be recovered, and then how it can be extended to estimate the mean or standard deviation.
 It also explains *limited translation estimators* where we shrink less, which gives a higher risk but less biased estimator.
 A similar (but briefer) explanation is in Chapter 7 of [Computer Age of Statistical Inference](https://web.stanford.edu/~hastie/CASI/) which also covers the connection with ridge regression.
+A great more general tutorial is Casella's [An Introduction to Empirical Bayes Data Analysis](https://www.biostat.jhsph.edu/~fdominic/teaching/bio656/labs/labs09/Casella.EmpBayes.pdf).
 
 # But why does it work?
 
