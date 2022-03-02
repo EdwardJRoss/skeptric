@@ -1,112 +1,331 @@
 +++
-tags = [""]
+tags = ["statistics"]
 title = "Better than Average Statistics"
-date = "2021-12-20T09:05:05+11:00"
-feature_image = "/images/"
+date = "2022-12-20T09:05:05+11:00"
+feature_image = "/images/likelihood_heirarchical_pooling.png"
 draft = true
 +++
 
 # Better than Average Statistics
 
-Small groups are a big pain when calculating averages.
-Some will float to the top and others sink to the bottom of most rankings; not because they're actually more extreme, but because they have more random variation.
-Often there are many small groups (as in [Zip's Law](https://en.wikipedia.org/wiki/Zipf%27s_law)), and the sampling error in estimating the mean roughly halves when the sample size quadruples.
-When the variation within the small groups is larger than the true variation between groups, then by chance some of the small groups will have the largest and smallest averages.
-Generally when the variation within small groups is too big the average isn't really representative of the group.
+There are more accurate ways to calculate group averages than adding the values and dividing by the count separately.
+The groups are rarely truly independent, and by calculating each of them separately discards relevant information.
+Using information about how the groups are related can almost always lead to better estimates.
+Even when the groups are independent shrinking the averages closer together leads to a more accurate overall estimate, by reducing the variance more than the increase in bias.
 
-There are better ways to calculate averages when the variation within groups is too large.
-Re-framing the descriptive act of calculating averages as a predictive machine learning problem enables comparing a wide variety of approaches.
-The groups themselves can be changed, and by merging together small groups the estimate's variance can be reduced, at the cost of increasing its bias.
-Information can be pooled between groups; instead of treating each group as independent, the estimates on larger groups can inform the estimates on smaller groups.
-Taking this further, if the groups can be meaningfully embedded in some vector space and the average can be calculated as a regression on the embeddings, which allows larger groups to further inform smaller groups.
+*Emphasise actionable insights*
 
-At SEEK we've used these techniques to improve our understanding of the employment marketplace and better inform decisions.
+Averages are a crucial tool for understanding groups, comparing differences, and observing trends over time.
+At SEEK averages help us understand what is happening in the employment marketplace.
+What's the average salary for a Project Manager in Sydney?
+How many applications would a hirer receive for a Solar Electrician in the Gold Coast.
+What percentage of Software Engineers are shortlisted when they apply?
+What's the probability that this kind of role will be placed?
+These summaries help us run a fair and efficient marketplace.
+
+Averages give a single simple number summary 
+Understanding the number of applications a role will get helps hirers choose a sourcing strategy, and understand whether they've written a good ad.
+These help us understand the value we're delivering and help us pace ads so everyone gets fair value.
+
+The improvements from pooling averages is substantial.
+The smaller the group, the higher the variance.
+In many applications there is a long tail of very small groups.
+Thestandard estimates on this group are very variable.
+When sorting by average value often the small groups will end up at the top and the bottom, because of this higher variance.
+There are statistical workarounds
+
+Group averages are ubiquitous in analytics.
+
+Whether through pivot tables or a `Group By` statement
+
+
+
+produces a better estimate, as shown by the [James-Stein Estimator](https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator).
+
+For large groups this is a good estimate, but as the size of the group halves the variance doubles.
+The smallest groups often have very unreliable estimates, and in many applications there is a long tail of small groups.
+
+
+A group of half the size will have about twice the variance, and in many applications there is a long tail of small groups.
+The estimates on these small groups can have very high variance, and the error can be reduced by shrinking them towards the mean.
+
+For very small groups this estimate of the average tends to have a high variance.
+
+This estimate of the average can be very poor for small groups, because the variance tends to be higher.
+
+Shrinking these estimates towards the overall group av
+
+
+
+When the variation within a group is much larger than the variation between groups
+
+Something about within group vs. between group variance
+
+## Show me the money
+
+A simple example illuminates how these different approaches to calculating averages work.
+When a hirer posts a job ad on SEEK they can choose to show the salary range for the role.
+For some kinds of roles it is very common to show the salary, and for other kinds of roles it's not.
+We're going to calculcate how likely it is for a hirer to show the salary range for each role.
+
+| Role Title             | Population Salary Shown |
+|------------------------|-------------------------|
+| Dentist                | 13%                     |
+| Enrolled Nurse         | 21%                     |
+| Dental Hygienist       | 22%                     |
+| Registered Nurse       | 22%                     |
+| General Practitioner   | 23%                     |
+| Medical Receptionist   | 27%                     |
+| Dental Assistant       | 28%                     |
+| Dental Receptionist    | 29%                     |
+| Chiropractor           | 31%                     |
+| Physiotherapist        | 38%                     |
+| Occupational Therapist | 40%                     |
+| Chiropractic Assistant | 43%                     |
+
+Above is a sample of 12 roles with the percentage of advertisers who show salary on the role over a year.
+For example choosing a random advertiser who hires dentists, then choosing a random dentist ad from that hirer, there is a 13% chance the salary will be displayed.
+This is just an estimate of the true probability but with the number of advertisers on SEEK the uncertainty is within a few percent.
+We will treat this as the true platonic probability, and try to estimate it from a small sample of 450 advertisers.
+
+
+| Role Title             | Sample Ads | Sample Ads with Salary | Population Salary Shown |
+|------------------------|------------|------------------------|-------------------------|
+| Dentist                | 30         | 4                      | 13%                     |
+| Enrolled Nurse         | 7          | 1                      | 21%                     |
+| Dental Hygienist       | 2          | 1                      | 22%                     |
+| Registered Nurse       | 47         | 9                      | 22%                     |
+| General Practitioner   | 20         | 7                      | 23%                     |
+| Medical Receptionist   | 130        | 39                     | 27%                     |
+| Dental Assistant       | 105        | 41                     | 28%                     |
+| Dental Receptionist    | 27         | 6                      | 29%                     |
+| Chiropractor           | 0          | 0                      | 31%                     |
+| Physiotherapist        | 50         | 23                     | 38%                     |
+| Occupational Therapist | 28         | 16                     | 40%                     |
+| Chiropractic Assistant | 4          | 2                      | 43%                     |
+
+The sample has 30 Dentist job ads, from different advertisers, 4 of which have salary.
+The simple average 4/30 is around 13% which happens to be very close to the whole population probability.
+For an enrolled nurse the simple average of 1/7 is 14% which is substantially lower than the probability of 21%.
+Because the sample is so small the estimates have high variation.
+
+Comparing the accuracy of different estimates in representing the population requires a metric.
+For this example we will use the Root Mean Squared Average (RMSE) for each group because it is easy to interpret as the typical percentage point error. 
+The logistic loss (or equivalently binary cross entropy) is more appropriate for a binary outcome, but in this specific case it doesn't change the outcomes.
+
+In this example there are only 12 groups, but in many applications real at SEEK we have tens of thousands or more.
+The techniques of pooling work much better the more groups there are, but 12 is enough to show the impact and make it easy to follow.
+The groups also have very high variance; the higher the variance within groups relative to the variance between groups, the better these techniques work.
+
+# Baseline Averages
+
+In any machine learning problem it is always good to start with a simple baseline.
+The simplest baseline here is a constant, and the best constant is the proportion of ads with salary shown.
+That is the 149 ads with salary shown, divided by 450 ads in the sample, which is 33%.
+
+| Role Title             | Overall Sample Average | Population Salary Shown | Error |
+|------------------------|------------------------|-------------------------|-------|
+| Dentist                | 33%                    | 13%                     | 20%   |
+| Enrolled Nurse         | 33%                    | 21%                     | 12%   |
+| Dental Hygienist       | 33%                    | 22%                     | 11%   |
+| Registered Nurse       | 33%                    | 22%                     | 11%   |
+| General Practitioner   | 33%                    | 23%                     | 10%   |
+| Medical Receptionist   | 33%                    | 27%                     | 6%    |
+| Dental Assistant       | 33%                    | 28%                     | 5%    |
+| Dental Receptionist    | 33%                    | 29%                     | 4%    |
+| Chiropractor           | 33%                    | 31%                     | 2%    |
+| Physiotherapist        | 33%                    | 38%                     | -5%   |
+| Occupational Therapist | 33%                    | 40%                     | -7%   |
+| Chiropractic Assistant | 33%                    | 43%                     | -10%  |
+
+Squaring the errors and calculating the mean gives an RMSE of 9.8%.
+This estimate is about 10 percentage points from the population values, which matches the table above.
+
+The other obvious baseline is calculating the average for each group individually.
+This is difficult for chiropractors where there are no ads in the sample; there is no average to calculate.
+A reasonable value to impute is the overall sample average of 33%; it's a better guess than 0%, 50% or 100%.
+
+| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Population Salary Shown | Error |
+|------------------------|------------|------------------------|---------------|-------------------------|-------|
+| Dentist                | 30         | 4                      | 13%           | 13%                     | 0%    |
+| Enrolled Nurse         | 7          | 1                      | 14%           | 21%                     | -7%   |
+| Dental Hygienist       | 2          | 1                      | 50%           | 22%                     | 28%   |
+| Registered Nurse       | 47         | 9                      | 19%           | 22%                     | -3%   |
+| General Practitioner   | 20         | 7                      | 35%           | 23%                     | 12%   |
+| Medical Receptionist   | 130        | 39                     | 30%           | 27%                     | 3%    |
+| Dental Assistant       | 105        | 41                     | 39%           | 28%                     | 11%   |
+| Dental Receptionist    | 27         | 6                      | 22%           | 29%                     | -7%   |
+| Chiropractor           | 0          | 0                      | *33%*         | 31%                     | *2%*  |
+| Physiotherapist        | 50         | 23                     | 46%           | 38%                     | 8%    |
+| Occupational Therapist | 28         | 16                     | 57%           | 40%                     | 17%   |
+| Chiropractic Assistant | 4          | 2                      | 50%           | 43%                     | 7%    |
+
+
+Squaring the errors and calculating the mean gives an RMSE of 11.4%.
+Because many of the samples are small the variance in the estimates is very high, giving a worse estimate than the overall average.
+In particular for a Dental Hygienist there are only 2 ads, 1 with salary and so the sample estimate of 50% is much too high.
+
+The two baselines are different extremes of the [bias-variance tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff).
+The overall average is the lowest variance estimate, all predictions are the same, but the estimates are biased away from their true values to the overall average.
+The group average is the lowest bias estimate, but the variance is high, especially in small groups, and it gives a worse estimate than the overall average.
+A better estimate would be something between the two, lowering the variance in the group average.
+
+# Fallback Method
+
+The fallback method uses the overall average for small groups.
+When calculating the group average we had to impute the average for a Chiropractor, with no ads, as the overall average.
+But for a small group like a Dental Hygienist with only 2 ads the overall average is a better estimate as well.
+Assigning any group below some threshold size to the overall average reduces the largest part of the variance.
+
+The threshold could be chosen through statistical heuristics.
+Ideally the variance within groups would be balanced against the variance between groups.
+The variance between the groups can be estimated as the standard deviation of the group averages, which is 15%.
+Including the small groups, where the variance is unstable, inflates the between group standard deviation so this will be an overestimate.
+To estimate the binomial sample with standard deviation $$\sigma$$ requires a sample size of $$n=\frac{p(1-p)}{\sigma^2}$$.
+Using the overall average $$p=0.33$$ and $$\sigma=0.15$$ which gives a sample size of 10, or a bit larger.
+Alternatively cross-validation could be used to estimate the threshold; in this case it's not too sensitive.
+
+| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Fallback Average | Population Salary Shown | Fallback Error (Group Average Error) |
+|------------------------|------------|------------------------|---------------|------------------|-------------------------|--------------------------------------|
+| Dentist                | 30         | 4                      | 13%           | 13%              | 13%                     | 0%                                   |
+| Enrolled Nurse         | 7          | 1                      | 14%           | *33%*            | 21%                     | 12% (-7%)                            |
+| Registered Nurse       | 47         | 9                      | 19%           | 19%              | 22%                     | -3%                                  |
+| Dental Hygienist       | 2          | 1                      | 50%           | *33%*            | 22%                     | 11% (28%)                            |
+| General Practitioner   | 20         | 7                      | 35%           | 35%              | 23%                     | 12%                                  |
+| Medical Receptionist   | 130        | 39                     | 30%           | 30%              | 27%                     | 3%                                   |
+| Dental Assistant       | 105        | 41                     | 39%           | 39%              | 28%                     | 11%                                  |
+| Dental Receptionist    | 27         | 6                      | 22%           | 22%              | 29%                     | -7%                                  |
+| Chiropractor           | 0          | 0                      |               | *33%*            | 31%                     | 2%                                   |
+| Physiotherapist        | 50         | 23                     | 46%           | 46%              | 38%                     | 8%                                   |
+| Occupational Therapist | 28         | 16                     | 57%           | 57%              | 40%                     | 17%                                  |
+| Chiropractic Assistant | 4          | 2                      | 50%           | *33%*            | 43%                     | -10% (7%)                            |
+
+The RMSE of the fallback average is 8.1%, substantially lower than the overall average RMSE of 9.8% and the group average of 11.4%.
+The error in Dental Hygienist is significantly reduced using the fallback, and the errors for Enrolled Nurse and Chiropractic Assistant are slightly increased.
+Together this leads to a net benefit and a better estimate.
+
+Another common approach is to group all the small groups in an "Other" group, and estimating it separately.
+In this specific example it doesn't make much difference; but in use cases at SEEK we've seen it does considerably worse.
+
+The change in the estimate across the threshold is very sharp.
+For groups below the threshold size all the specific data from that group is ignored.
+For groups above the threshold size all the data from other groups is ignored.
+A better approach would be to interpolate between the two extremes.
+
+# Partial Pooling Model
+
+A simple way to balance the information from each group and the information between groups is a weighted average.
+In each group we have $$n$$ ads, $$k$$ of which have salary shown, given a group proportion of $$p=k/n$$.
+For a group with no data the proportion should be $$P$$ (close to the overall average), and there's some effective number of ads $$N$$.
+Then the estimate for the group is the weighted average:
+
+$$ \frac{N P + np}{N+n} $$
+
+So when there are no ads the estimated average is $$P$$, and as the number of ads increases it gets closer to $$p$$.
+
+The values for $$N$$ and $$P$$ can be estimated by a statistical model.
+The probability of an ad having salary from a group are assumed to be drawn from a common distribution, rather than independently.
+In particular it's assumed to be a [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) peaked at $$P$$, with strength $$N+2$$.
+The likelihood of the data under any given $$P$$ and $$N$$ can be calculated.
+The best choice is the values for which the actual data is most likely.
+
+
+![Likelihood at different values of N and P](/images/likelihood_heirarchical_pooling.png)
+
+For a given value of $$N$$ and $$P$$ we can estimate how likely the actual data is.
+Instead of each group being an independent binomial, 
+
+| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Hierarchical Model | Population Salary Shown | Hierarchical Error |
+|------------------------|------------|------------------------|---------------|--------------------|-------------------------|--------------------|
+| Dentist                | 30         | 4                      | 13%           | 27%                | 13%                     | 14%                |
+| Enrolled Nurse         | 7          | 1                      | 14%           | 29%                | 21%                     | 8%                 |
+| Dental Hygienist       | 2          | 1                      | 50%           | 31%                | 22%                     | 9%                 |
+| Registered Nurse       | 47         | 9                      | 19%           | 27%                | 22%                     | 5%                 |
+| General Practitioner   | 20         | 7                      | 35%           | 31%                | 23%                     | 8%                 |
+| Medical Receptionist   | 130        | 39                     | 30%           | 30%                | 27%                     | 3%                 |
+| Dental Assistant       | 105        | 41                     | 39%           | 35%                | 28%                     | 7%                 |
+| Dental Receptionist    | 27         | 6                      | 22%           | 29%                | 29%                     | 0%                 |
+| Chiropractor           | 0          | 0                      | 33%           | 30%                | 31%                     | -1%                |
+| Physiotherapist        | 50         | 23                     | 46%           | 35%                | 38%                     | -3%                |
+| Occupational Therapist | 28         | 16                     | 57%           | 36%                | 40%                     | -4%                |
+| Chiropractic Assistant | 4          | 2                      | 50%           | 31%                | 43%                     | -12%               |
+
+
+
+
+
+http://www.probabilaball.com/2015/05/beta-binomial-empirical-bayes.html
+
 
 # Averages as Machine Learning
 
-An average is a machine learning model.
-It doesn't seem like a machine learning model; you just sum the values and divide by the count.
-But averages are related to *constant models*, the model that returns the same prediction for all inputs.
-In particular assuming that each data point is a constant plus a random error from a normal distribution, then the best estimate for the constant minimised the Mean Squared Error loss.
-And the constant that minimises mean squared error is the mean; that is the mean is the parameter of the constant model under a normal error distribution.
-This can be generalised to other kinds of averages such as the median, and the proportion of positive results in a binary outcome as in the table below (and can be further extended through transformations such as taking logarithms).
-
-| Average    | Loss Function Minimised                                      | Error Distribution                                            | Minimum Loss                                                                                                     |
-|------------|--------------------------------------------------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| Mean       | Mean Squared Error                                           | Normal                                                        | Standard Deviation                                                                                               |
-| Median     | Mean Absolute Error                                          | [Laplace](https://en.wikipedia.org/wiki/Laplace_distribution) | [MAD median](https://en.wikipedia.org/wiki/Average_absolute_deviation#Mean_absolute_deviation_around_the_median) |
-| Proportion | [Cross Entropy](https://en.wikipedia.org/wiki/Cross_entropy) | Binomial                                                      |                                                                                                                  |
+Calculating a group average is a regression problem where all the predictors are categorical.
+Treating group averages as a statistical inference problem rather than a descriptive procedure of adding values and dividing counts can lead to significantly more accurate results.
+Typical measures of central tendancy such as the mean, median and proportion can be reframed as the problem of estimating a value measured with independent random errors from a particular statistical error distribution.
+This is equivalent to finding the estimate that minimises the related loss function, the negative log likelihood of the error distribution.
 
 
-Averages on groups can also be viewed as a machine learning problem.
-In fact calculating the mean by group is equivalent to linear regression on the groups as categorical variables, and the proportion is equivalent to logistic regression.
-As in the single average case we can pick the related loss function and calculate it elementwise (which could be called the micro-loss).
-This allows comparing statistics between different groupings, since the loss function only depends on the points.
-However in some applications the groups really matter and should have an equal weight, in which case the loss should be calculated on each group separately and averaged (which could be called the macro-loss).
+| Measure of Centrality | Statistical Error Distribution                                | Loss Function                                                | Loss at Average Value                                                                                            |
+|-----------------------|---------------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Mean                  | Normal                                                        | Mean Squared Error                                           | Standard Deviation                                                                                               |
+| Median                | [Laplace](https://en.wikipedia.org/wiki/Laplace_distribution) | Mean Absolute Error                                          | [MAD median](https://en.wikipedia.org/wiki/Average_absolute_deviation#Mean_absolute_deviation_around_the_median) |
+| Proportion            | Binomial                                                      | [Cross Entropy](https://en.wikipedia.org/wiki/Cross_entropy) |                                                                                                                  |
 
-# Making Larger Groups
+Treating all of the categorical predictors as independent will overfit the small groups when their variance is high.
+Calculating the proportion of jobs that showed salary for each group led to very poor estimates on small groups.
+Falling back to the overall average on small groups reduced the error by decreasing variance significantly for a small increase in bias; this is similar to the common practice of putting small groups together into an "Other" category.
+Modelling the proportions as random variables drawn from a common distribution regularised the estimates and resulted in the best estimators on this data.
 
-When someone is placing a job ad on SEEK it's useful to know how many people typically apply for that sort of job.
-It helps the hirer with their recruitment strategy (should they place a premium ad or consider proactive sourcing), and it helps SEEK to make sure each ad gets a fair share of attention from candidates who may apply.
-Ideally we could calculate the average number of applicants for each possible role title and location, but there are thousands of potential role titles and many combinations are uncommon.
-There are very few Data Scientist roles in Bundaberg or Metallurgist roles in Canberra (if any), and so the averages will be unstable (or unavailable).
+These ideas can be generalised to more complex settings than a single categorical predictor.
+At SEEK we're interested in understanding the employment market across roles, locations, customer segments, and time.
+The intersection of all of these factors is very sparse and so modelling to reduce the uncertainty is even more valuable.
 
-One solution is falling back to larger groups when there's not enough data for a stable estimate.
-There is a trade-off between the error due to variance (which is related to the variation within groups) and bias (which is related to the variation between groups).
-One extreme is to use the whole market average for every group; every role is the same and would get the same amount of applications.
-The other is to calculate each group average individually; even if there's only one job ad in that group.
-We can balance the two by using the group average for groups above a certain threshold size, and the market average for groups below that threshold.
-Then the threshold itself is a hyperparameter we can tune to minimise loss in a hold-out set.
+Fallback methods can be generalised to a heirarchy of categories.
+For example whether a hirer will show salary depends on the role and location, but location may be less important.
+Then a fallback model could first try to estimate based on both role and location, and when there's not enough data fallback to role, and for uncommon roles fallback to the overall average.
+These are straightforward to interpret, and can significantly reduce the variance.
+A more data driven, but less interpretable, approach would be to use decision trees to form groups with similar outcomes.
+This can be combined with time series methods at each level to handle seasonality and trends.
 
-There are lots of different ways of making groups and fallback strategies.
-When the data has an underlying hierarchical structure this makes a natural fallback sequence for groups; cities occur within states, and states occur within countries.
-Groups can also be formed from the underlying data for example by clustering on related attributes; for example if candidates who apply for one kind of role tend to apply for another then those roles could be grouped together.
-A decision tree can be used to automatically construct relevant groups from the data.
-The more static a model is the easier it is to explain and debug underlying data issues.
-The data driven models can create groupings with a smaller loss, but need to be updated as the market changes (which may completely change the group structure); while a role may have been getting a similar number of applicants in both Melbourne and Perth in 2019, the effects of COVID restrictions would have significantly changed that in 2020 and 2021.
+Partial pooling methods can be generalised to more general mixed effects models, also known as multilevel models.
+Whether a type of job will display salary can be modelled as a mixed effects logistic regression.
+This can be fit using, among other methods, Restricted Maximum Likelihood methods (such as in [lme4](https://cran.r-project.org/web/packages/lme4/index.html)) which are fast, or Markov Chain Monte Carlo methods (such as in [Stan](https://mc-stan.org/) or [PyMC](https://docs.pymc.io/)) which are flexible but can be slow on large datasets.
+These can be extended to handle dependent data, such as multiple jobs posted by the same hirer, changes over time and adjusting for a non-representative sample.
 
-There are not many off the shelf libraries for fallback models.
-There are lots of great libraries for decision trees, and in particular [ctree](https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf) in R implements [Conditional Inference Trees](https://www.tandfonline.com/doi/abs/10.1198/106186006X133933) which overcome the selection bias and overfitting issues in decision trees.
-A different approach for handling small groups is to use a [Rare Label Encoder](https://feature-engine.readthedocs.io/en/1.2.x/api_doc/encoding/RareLabelEncoder.html) to combine the small groups into an "Other" group and then perform a linear regression with [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) or [statsmodels](https://www.statsmodels.org/stable/regression.html).
-However we've found empirically that for small groups falling back to a larger group gave better estimates than creating an "other" group, and have built a SEEK internal scikit-learn model for handling custom fallbacks.
+Incorporating additional data sources can further improve the models.
+The models discussed so far treat all role titles the same, and only distinguish them by the number of samples in the group.
+However some roles are more similar than others, and this information can be used to create better models.
+For example whether a role has a salary shown depends partly on the policies of the employer.
+So two roles that are commonly posted by the same kinds of employer may have a similar likelihood to have the salary shown.
+This similarity can be represented as a matrix of how likely an employer is to have advertised for one kind of role, given they have advertised for another.
+These can then be used to form clusters of similar roles that can be used as a feature in the models.
 
-While changing the groupings creates interpretable models, it cleaves a sharp division between groups.
-Once the groups are formed they are treated completely independently.
+![Heatmap showing likelihood of a hirer advertising a job for a role given they have advertised a job for another role](/images/role_cross_advertise.png)
 
+Additional data sources can also be used as embeddings.
+The external data can be used to form categorical embeddings; representing each category as a dense vector.
+These can then be used as continuous predictors in a large number of models; from linear and logistic regression to boosted trees and neural networks.
+This is a form of transfer learning.
+The similarity matrix above is a form of embedding, and can be visualised by projecting into a two dimensional space.
 
-# Pooling data
+![Two dimensional embedding of roles based on cross-advertisement](/images/embedding_cross_advertising)
 
-Suppose there's a role we've never seen before (for example COVID testers), what's our best guess for the number of applications it will receive.
-Without knowing how it relates to other roles a reasonable guess is the overall market average.
-As we start getting some observations, seeing how many applications these jobs receive, the market average becomes less relevant.
-In the fallback model we cut over to the group average once we reached some threshold; but instead of a sharp transition would it be possible to smoothly interpolate between the two?
+# Calculating better averages
 
-Instead of treating each groups mean as independent, we could model them as random variables themselves drawn from a normal distribution, with its own mean and standard deviation (related to the variation between groups).
-Then before having any data, our best estimate of the mean number of people applying for the new role would be the mean of this distribution.
-But as we get some observations the best estimate starts pulling towards the observations, until we have enough observations.
-This neatly handles the small group problem by shrinking the unstable estimates of small groups towards the overall mean; and determines the amount to shrink from the data itself.
-
-This approach is called a multilevel model or a mixed effects model, and is very flexible.
-The model proposed above is very simple; each observation comes from a normally distributed group with a mean drawn from a larger group.
-
-
-lme4, https://www.statsmodels.org/stable/mixed_linear.html
-brms, Stan, PyMC
-Empirical Bayes
-
-
-# Embeddngs
-
-Behavioural embeddings: cross-apply.
-Linguistic embeddings: title similarity.
-Co-occurance embeddings: skills that co-occur across roles (TF-IDF)
-
-For running these evaluations I've found Logistic Regression with a L2 regularisation (i.e. logistic ridge regression) works quite well.
-In scikit learn this is the default for [`sklearn.linear_model.LogisticRegression`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) and you just need to tune the regularisation parameter C (you can do this automatically with cross-validation using [`LogisticRegressionCV`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegressionCV.html)), and it can handle large sparse term-frequency matrices using [`scipy.sparse.csr_matrix`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html).
-Regularisation allows use of large dimensional embedding matrices without over-fitting.
+The usual way of calculating group averages, summing the values and dividing by the count, can give very bad estimates on small groups.
+The best generic way of handling this is with an empirical Bayes mdoel.
+To tease out more information we can use machine learning.
 
 # Further reading
 
 
 The original paper showing inadmissibility is [Inadmissibility of the usual estimator for the mean of a multivariate normal distribution](https://projecteuclid.org/download/pdf_1/euclid.bsmsp/1200501656) by Stein (1956).
 This was followed with the explicit estimator in [Estimation with Quadratic Loss](https://projecteuclid.org/ebook/Download?urlId=bsmsp%2F1200512173&isFullBook=False) by James and Stein (1961).
+
+
+https://www.tandfonline.com/doi/abs/10.1080/01621459.1972.10481215
+Limiting the Risk of Bayes and Empirical Bayes Estimators—Part II: The Empirical Bayes Case
+Efron and Morris (1970)
+
+Efron, B., & Morris, C. (1975). Data analysis using Stein's estimator and its generalizations. Journal of the American Statistical Association, 70(350), 311-319 (link to pdf)
+http://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf
