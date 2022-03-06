@@ -2,107 +2,80 @@
 tags = ["statistics"]
 title = "Better than Average Statistics"
 date = "2022-12-20T09:05:05+11:00"
-feature_image = "/images/likelihood_heirarchical_pooling.png"
+feature_image = "/images/partial_pooling.png"
 draft = true
 +++
 
 # Better than Average Statistics
 
-There are more accurate ways to calculate group averages than adding the values and dividing by the count separately.
-The groups are rarely truly independent, and by calculating each of them separately discards relevant information.
-Using information about how the groups are related can almost always lead to better estimates.
-Even when the groups are independent shrinking the averages closer together leads to a more accurate overall estimate, by reducing the variance more than the increase in bias.
+Averages by group are the standard tool for summarising groups, comparing groups, and showing changes over time.
+At SEEK averages help us facilitate an efficient employment marketplace by informing our customers about the market, and to deliver fair value to our customers.
+We show the typical salary for a role to both hirers and candidates to inform them of the market rates and set their expectations.
+We help candidates find potential career paths in [SEEK Career Advice](https://www.seek.com.au/career-advice) using average rates of career transitions from SEEK profiles.
+We help hirers with their talent and sourcing strategies by providing [SEEK Employment Reports](https://www.seek.com.au/about/news/seek-employment-reports/) which shows how the average supply of jobs and candidate applications is changing over time.
 
-*Emphasise actionable insights*
+There are more accurate ways to calculate group averages than adding up the values and dividing by the count in each group separately.
+The groups are usually related in some way and calculating the averages separately discards relevant information.
+Using information about how the groups are related can almost always lead to better estimates, which in turn leads to better decisions.
+Even when the groups are independent, shrinking the averages closer together leads to a more accurate overall estimate by reducing the overall variance.
 
-Averages are a crucial tool for understanding groups, comparing differences, and observing trends over time.
-At SEEK averages help us understand what is happening in the employment marketplace.
-What's the average salary for a Project Manager in Sydney?
-How many applications would a hirer receive for a Solar Electrician in the Gold Coast.
-What percentage of Software Engineers are shortlisted when they apply?
-What's the probability that this kind of role will be placed?
-These summaries help us run a fair and efficient marketplace.
+Averages can be improved by shrinking the estimates on small groups.
+In a group with few observations it's much more likely that the group estimate will be far from the true average.
+The sample variance halves as the group size doubles, and so the estimates on the small groups are unstable.
+Adjusting these estimates to be closer to the averages from other groups reduces the variance substantially, at the cost of a small increase in bias.
+The magnitude of the adjustment depends on the variation within the group relative to the variation between groups; the smaller the group the more it should be shrunk.
+In many applications there is a long tail of small groups and the overall accuracy can be improved substantially.
 
-Averages give a single simple number summary 
-Understanding the number of applications a role will get helps hirers choose a sourcing strategy, and understand whether they've written a good ad.
-These help us understand the value we're delivering and help us pace ads so everyone gets fair value.
+A simple way to adjust for small groups is to estimate them all with the overall average across all data points.
+Groups below some threshold size, the small groups, are all estimated with the overall average.
+Groups above the threshold size are estimated by their independent group average.
+This is very simple to implement and can produce better estimates, but is a rough heuristic.
 
-The improvements from pooling averages is substantial.
-The smaller the group, the higher the variance.
-In many applications there is a long tail of very small groups.
-Thestandard estimates on this group are very variable.
-When sorting by average value often the small groups will end up at the top and the bottom, because of this higher variance.
-There are statistical workarounds
+A more principled and effective way to adjust for group size is to represent them as a hierarchical model.
+Instead of treating each group average as independent, they are modelled as being drawn from some common distribution.
+Each data point from one group informs the common distribution, which adjusts the estimates for data from other groups.
+The estimates for smaller groups, where there is less information, end up closer to the centre of this distribution.
+This leads to substantially better estimates, and is generally a better default way to calculate averages.
 
-Group averages are ubiquitous in analytics.
+Even better estimates can potentially be obtained with more complex models, at the cost of developing these models and less transparency.
+Reframing the problem of calculating averages on groups as a machine learning problem enables more sophisticated approaches.
+When there are multiple groupings these can be treated as separate predictors in a fallback or heirarchical model.
+Related data sources can inform relationships between the groups which can be incorporated into the model.
+These methods can tease out subtle relationships that enable more fine grained comparisons between groups.
 
-Whether through pivot tables or a `Group By` statement
+The best method to calculate averages on groups depends on the use case.
+When there is low variance in the groups the simplest model of calculating individual group averages works well.
+When there is high variance and small groups using more complex approaches can lead to better estimates.
+The complexity worth having to achieve better accuracy depends on how much that accuracy will inform better outcomes.
+This can be demonstrated with an example from SEEK's marketplace.
 
-
-
-produces a better estimate, as shown by the [James-Stein Estimator](https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator).
-
-For large groups this is a good estimate, but as the size of the group halves the variance doubles.
-The smallest groups often have very unreliable estimates, and in many applications there is a long tail of small groups.
-
-
-A group of half the size will have about twice the variance, and in many applications there is a long tail of small groups.
-The estimates on these small groups can have very high variance, and the error can be reduced by shrinking them towards the mean.
-
-For very small groups this estimate of the average tends to have a high variance.
-
-This estimate of the average can be very poor for small groups, because the variance tends to be higher.
-
-Shrinking these estimates towards the overall group av
-
-
-
-When the variation within a group is much larger than the variation between groups
-
-Something about within group vs. between group variance
 
 ## Show me the money
 
-A simple example illuminates how these different approaches to calculating averages work.
-When a hirer posts a job ad on SEEK they can choose to show the salary range for the role.
-For some kinds of roles it is very common to show the salary, and for other kinds of roles it's not.
-We're going to calculcate how likely it is for a hirer to show the salary range for each role.
+When an employer posts a job ad on SEEK they can choose whether to show the salary range for the role.
+For some kinds of roles it is very common to show the salary, and for other kinds it's not.
+We're going to calculate how likely it is for a hirer to show the salary range for each role.
 
-| Role Title             | Population Salary Shown |
-|------------------------|-------------------------|
-| Dentist                | 13%                     |
-| Enrolled Nurse         | 21%                     |
-| Dental Hygienist       | 22%                     |
-| Registered Nurse       | 22%                     |
-| General Practitioner   | 23%                     |
-| Medical Receptionist   | 27%                     |
-| Dental Assistant       | 28%                     |
-| Dental Receptionist    | 29%                     |
-| Chiropractor           | 31%                     |
-| Physiotherapist        | 38%                     |
-| Occupational Therapist | 40%                     |
-| Chiropractic Assistant | 43%                     |
-
-Above is a sample of 12 roles with the percentage of advertisers who show salary on the role over a year.
+Below is a sample of 12 roles with the percentage of advertisers who show the salary on SEEK.
 For example choosing a random advertiser who hires dentists, then choosing a random dentist ad from that hirer, there is a 13% chance the salary will be displayed.
-This is just an estimate of the true probability but with the number of advertisers on SEEK the uncertainty is within a few percent.
-We will treat this as the true platonic probability, and try to estimate it from a small sample of 450 advertisers.
+This is just an estimate of the true probability, but it's within a few percentage points because of the large number of advertisers on SEEK.
+We'll then try to estimate the this probability from a small sample of 450 job ads.
 
 
-| Role Title             | Sample Ads | Sample Ads with Salary | Population Salary Shown |
-|------------------------|------------|------------------------|-------------------------|
-| Dentist                | 30         | 4                      | 13%                     |
-| Enrolled Nurse         | 7          | 1                      | 21%                     |
-| Dental Hygienist       | 2          | 1                      | 22%                     |
-| Registered Nurse       | 47         | 9                      | 22%                     |
-| General Practitioner   | 20         | 7                      | 23%                     |
-| Medical Receptionist   | 130        | 39                     | 27%                     |
-| Dental Assistant       | 105        | 41                     | 28%                     |
-| Dental Receptionist    | 27         | 6                      | 29%                     |
-| Chiropractor           | 0          | 0                      | 31%                     |
-| Physiotherapist        | 50         | 23                     | 38%                     |
-| Occupational Therapist | 28         | 16                     | 40%                     |
-| Chiropractic Assistant | 4          | 2                      | 43%                     |
+| Role Title             | Population Salary Shown | Sample Ads | Sample Ads with Salary |
+|------------------------|-------------------------|------------|------------------------|
+| Dentist                | 13%                     | 30         | 4                      |
+| Enrolled Nurse         | 21%                     | 7          | 1                      |
+| Dental Hygienist       | 22%                     | 2          | 1                      |
+| Registered Nurse       | 22%                     | 47         | 9                      |
+| General Practitioner   | 23%                     | 20         | 7                      |
+| Medical Receptionist   | 27%                     | 130        | 39                     |
+| Dental Assistant       | 28%                     | 105        | 41                     |
+| Dental Receptionist    | 29%                     | 27         | 6                      |
+| Chiropractor           | 31%                     | 0          | 0                      |
+| Physiotherapist        | 38%                     | 50         | 23                     |
+| Occupational Therapist | 40%                     | 28         | 16                     |
+| Chiropractic Assistant | 43%                     | 4          | 2                      |
 
 The sample has 30 Dentist job ads, from different advertisers, 4 of which have salary.
 The simple average 4/30 is around 13% which happens to be very close to the whole population probability.
@@ -112,15 +85,17 @@ Because the sample is so small the estimates have high variation.
 Comparing the accuracy of different estimates in representing the population requires a metric.
 For this example we will use the Root Mean Squared Average (RMSE) for each group because it is easy to interpret as the typical percentage point error. 
 The logistic loss (or equivalently binary cross entropy) is more appropriate for a binary outcome, but in this specific case it doesn't change the outcomes.
+For some applications it makes sense to weight the error, for example by volume, but we will treat each group as equally important.
 
 In this example there are only 12 groups, but in many applications real at SEEK we have tens of thousands or more.
-The techniques of pooling work much better the more groups there are, but 12 is enough to show the impact and make it easy to follow.
-The groups also have very high variance; the higher the variance within groups relative to the variance between groups, the better these techniques work.
+The techniques here work much better the more groups there are, but 12 is enough to show the impact and make it easy to follow.
+These group estimates have very high variance which makes these techniques particularly effective.
+In contrast when estimating average salary, which may vary by 20% within a role, but between roles can vary from $20 an hour to over $100 an hour, there is little benefit in shrinking the estimates.
 
 # Baseline Averages
 
 In any machine learning problem it is always good to start with a simple baseline.
-The simplest baseline here is a constant, and the best constant is the proportion of ads with salary shown.
+The best constant model is the proportion of ads with salary shown.
 That is the 149 ads with salary shown, divided by 450 ads in the sample, which is 33%.
 
 | Role Title             | Overall Sample Average | Population Salary Shown | Error |
@@ -145,20 +120,20 @@ The other obvious baseline is calculating the average for each group individuall
 This is difficult for chiropractors where there are no ads in the sample; there is no average to calculate.
 A reasonable value to impute is the overall sample average of 33%; it's a better guess than 0%, 50% or 100%.
 
-| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Population Salary Shown | Error |
-|------------------------|------------|------------------------|---------------|-------------------------|-------|
-| Dentist                | 30         | 4                      | 13%           | 13%                     | 0%    |
-| Enrolled Nurse         | 7          | 1                      | 14%           | 21%                     | -7%   |
-| Dental Hygienist       | 2          | 1                      | 50%           | 22%                     | 28%   |
-| Registered Nurse       | 47         | 9                      | 19%           | 22%                     | -3%   |
-| General Practitioner   | 20         | 7                      | 35%           | 23%                     | 12%   |
-| Medical Receptionist   | 130        | 39                     | 30%           | 27%                     | 3%    |
-| Dental Assistant       | 105        | 41                     | 39%           | 28%                     | 11%   |
-| Dental Receptionist    | 27         | 6                      | 22%           | 29%                     | -7%   |
-| Chiropractor           | 0          | 0                      | *33%*         | 31%                     | *2%*  |
-| Physiotherapist        | 50         | 23                     | 46%           | 38%                     | 8%    |
-| Occupational Therapist | 28         | 16                     | 57%           | 40%                     | 17%   |
-| Chiropractic Assistant | 4          | 2                      | 50%           | 43%                     | 7%    |
+| Role Title             | Group Average | Population Salary Shown | Error |
+|------------------------|---------------|-------------------------|-------|
+| Dentist                | 13%           | 13%                     | 0%    |
+| Enrolled Nurse         | 14%           | 21%                     | -7%   |
+| Dental Hygienist       | 50%           | 22%                     | 28%   |
+| Registered Nurse       | 19%           | 22%                     | -3%   |
+| General Practitioner   | 35%           | 23%                     | 12%   |
+| Medical Receptionist   | 30%           | 27%                     | 3%    |
+| Dental Assistant       | 39%           | 28%                     | 11%   |
+| Dental Receptionist    | 22%           | 29%                     | -7%   |
+| Chiropractor           | *33%*         | 31%                     | *2%*  |
+| Physiotherapist        | 46%           | 38%                     | 8%    |
+| Occupational Therapist | 57%           | 40%                     | 17%   |
+| Chiropractic Assistant | 50%           | 43%                     | 7%    |
 
 
 Squaring the errors and calculating the mean gives an RMSE of 11.4%.
@@ -168,11 +143,15 @@ In particular for a Dental Hygienist there are only 2 ads, 1 with salary and so 
 The two baselines are different extremes of the [bias-variance tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff).
 The overall average is the lowest variance estimate, all predictions are the same, but the estimates are biased away from their true values to the overall average.
 The group average is the lowest bias estimate, but the variance is high, especially in small groups, and it gives a worse estimate than the overall average.
-A better estimate would be something between the two, lowering the variance in the group average.
+The group average makes its largest errors on smaller groups, wheras the overall average makes errors independent of the size of the group.
+A better estimate would be somewhere between the two extremes.
+
+![Squared error of group average vs overall average](/images/group_vs_overall_average_squared_error.png)
+
 
 # Fallback Method
 
-The fallback method uses the overall average for small groups.
+The fallback method uses the overall average for small groups, and the group average for large groups.
 When calculating the group average we had to impute the average for a Chiropractor, with no ads, as the overall average.
 But for a small group like a Dental Hygienist with only 2 ads the overall average is a better estimate as well.
 Assigning any group below some threshold size to the overall average reduces the largest part of the variance.
@@ -185,27 +164,11 @@ To estimate the binomial sample with standard deviation $$\sigma$$ requires a sa
 Using the overall average $$p=0.33$$ and $$\sigma=0.15$$ which gives a sample size of 10, or a bit larger.
 Alternatively cross-validation could be used to estimate the threshold; in this case it's not too sensitive.
 
-| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Fallback Average | Population Salary Shown | Fallback Error (Group Average Error) |
-|------------------------|------------|------------------------|---------------|------------------|-------------------------|--------------------------------------|
-| Dentist                | 30         | 4                      | 13%           | 13%              | 13%                     | 0%                                   |
-| Enrolled Nurse         | 7          | 1                      | 14%           | *33%*            | 21%                     | 12% (-7%)                            |
-| Registered Nurse       | 47         | 9                      | 19%           | 19%              | 22%                     | -3%                                  |
-| Dental Hygienist       | 2          | 1                      | 50%           | *33%*            | 22%                     | 11% (28%)                            |
-| General Practitioner   | 20         | 7                      | 35%           | 35%              | 23%                     | 12%                                  |
-| Medical Receptionist   | 130        | 39                     | 30%           | 30%              | 27%                     | 3%                                   |
-| Dental Assistant       | 105        | 41                     | 39%           | 39%              | 28%                     | 11%                                  |
-| Dental Receptionist    | 27         | 6                      | 22%           | 22%              | 29%                     | -7%                                  |
-| Chiropractor           | 0          | 0                      |               | *33%*            | 31%                     | 2%                                   |
-| Physiotherapist        | 50         | 23                     | 46%           | 46%              | 38%                     | 8%                                   |
-| Occupational Therapist | 28         | 16                     | 57%           | 57%              | 40%                     | 17%                                  |
-| Chiropractic Assistant | 4          | 2                      | 50%           | *33%*            | 43%                     | -10% (7%)                            |
+![Comparing squared error of Fallback with Group Average and Overall Average](/images/fallback_average_squared_error.png)
 
 The RMSE of the fallback average is 8.1%, substantially lower than the overall average RMSE of 9.8% and the group average of 11.4%.
 The error in Dental Hygienist is significantly reduced using the fallback, and the errors for Enrolled Nurse and Chiropractic Assistant are slightly increased.
 Together this leads to a net benefit and a better estimate.
-
-Another common approach is to group all the small groups in an "Other" group, and estimating it separately.
-In this specific example it doesn't make much difference; but in use cases at SEEK we've seen it does considerably worse.
 
 The change in the estimate across the threshold is very sharp.
 For groups below the threshold size all the specific data from that group is ignored.
@@ -232,30 +195,19 @@ The best choice is the values for which the actual data is most likely.
 
 ![Likelihood at different values of N and P](/images/likelihood_heirarchical_pooling.png)
 
-For a given value of $$N$$ and $$P$$ we can estimate how likely the actual data is.
-Instead of each group being an independent binomial, 
+This gives most likely values of $$P=30\%$$ and $$N=100$$.
+Notice that the most likely probablity is a little different to the overall average of 33%.
+The overall average finds the centre of the groups weighted by size, whereas $$P$$ is the centre of the groups weighted equally.
+Partial pooling then shrinks the estimates towards $$P=30\%$$, weighting this prior estimate by $$N=100$$.
+A Dental Assistant, with 105 ads, shrinks around halfway between the group average and 30%.
+A Dental Hygenist with 2 ads shrinks almost all the way to 30%.
 
-| Role Title             | Sample Ads | Sample Ads with Salary | Group Average | Hierarchical Model | Population Salary Shown | Hierarchical Error |
-|------------------------|------------|------------------------|---------------|--------------------|-------------------------|--------------------|
-| Dentist                | 30         | 4                      | 13%           | 27%                | 13%                     | 14%                |
-| Enrolled Nurse         | 7          | 1                      | 14%           | 29%                | 21%                     | 8%                 |
-| Dental Hygienist       | 2          | 1                      | 50%           | 31%                | 22%                     | 9%                 |
-| Registered Nurse       | 47         | 9                      | 19%           | 27%                | 22%                     | 5%                 |
-| General Practitioner   | 20         | 7                      | 35%           | 31%                | 23%                     | 8%                 |
-| Medical Receptionist   | 130        | 39                     | 30%           | 30%                | 27%                     | 3%                 |
-| Dental Assistant       | 105        | 41                     | 39%           | 35%                | 28%                     | 7%                 |
-| Dental Receptionist    | 27         | 6                      | 22%           | 29%                | 29%                     | 0%                 |
-| Chiropractor           | 0          | 0                      | 33%           | 30%                | 31%                     | -1%                |
-| Physiotherapist        | 50         | 23                     | 46%           | 35%                | 38%                     | -3%                |
-| Occupational Therapist | 28         | 16                     | 57%           | 36%                | 40%                     | -4%                |
-| Chiropractic Assistant | 4          | 2                      | 50%           | 31%                | 43%                     | -12%               |
+![Partial Pooling shrinks group averages towards the centre](/images/partial_pooling.png)
 
+The RMSE of Partial Pooling is 7.3%, a full 2.5 percentage points lower than the overall average, and 0.8 percentage points lower than the fallback method.
+It does particularly well for large numbers of ads where it always beats the worst of the group average and the overall average.
 
-
-
-
-http://www.probabilaball.com/2015/05/beta-binomial-empirical-bayes.html
-
+![Partial Pooling has lower mean error than Group or Overall Average](/images/partial_pooling_squared_error.png)
 
 # Averages as Machine Learning
 
@@ -329,3 +281,9 @@ Efron and Morris (1970)
 
 Efron, B., & Morris, C. (1975). Data analysis using Stein's estimator and its generalizations. Journal of the American Statistical Association, 70(350), 311-319 (link to pdf)
 http://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf
+
+
+
+Approximate Bayesian Inference in Conditionally Independent Hierarchical Models (Parametric Empirical Bayes Models)
+https://www.tandfonline.com/doi/abs/10.1080/01621459.1989.10478825
+RE Kass, D Steffey - Journal of the American Statistical Association, 1989 - Taylor & Francis
