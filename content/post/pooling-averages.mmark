@@ -209,6 +209,55 @@ It does particularly well for large numbers of ads where it always beats the wor
 
 ![Partial Pooling has lower mean error than Group or Overall Average](/images/partial_pooling_squared_error.png)
 
+This technique was popularised by Efron and Morris in the 1970s, for example in [Data Analysis Using Stein's Estimator and its Generalizations](https://www.tandfonline.com/doi/abs/10.1080/01621459.1975.10479864).
+In particular when estimating the means of normally distributed groups with equal variance, they showed it reduced to the [James-Stein estimator](https://en.wikipedia.org/wiki/James%E2%80%93Stein_estimator).
+This is a better estimator than separate group means even when there are 4 or more groups; this indicates the technique is beneficial even when the groups are not closely related.
+Despite it's computational efficiency and general usefulness it doesn't seem to be widely used.
+Some good introductions to these techniques are George Casella's [An Introduction to Empirical Bayes Data Analysis](https://www.jstor.org/stable/2682801), David Robinson's [Introduction to Empirical Bayes](http://varianceexplained.org/r/empirical-bayes-book/), and Chapter 7 of Efron and Hastie's [Computer Age of Statistical Inference](https://web.stanford.edu/~hastie/CASI/).
+The underlying mathematics is explained in Kass and Steffey's [Approximate Bayesian Inference in Conditionally Independent Hierarchical Models](https://www.tandfonline.com/doi/abs/10.1080/01621459.1989.10478825).
+
+This modelling approach relates the groups to each other, but treats them all the same way.
+But we know that a Dentist and a Dental Assistant have a different kind of relationship to a Dentist and a Physiotherapist.
+There isn't much information in this data to inform that relationship.
+To model these kinds of relations requires using additional data.
+
+# Clustering
+
+Whether a role has a salary shown depends partly on the policies of the employer.
+So two roles that are commonly posted by the same kinds of employer may have a similar likelihood to have the salary shown.
+This similarity can be represented as a matrix of how likely an employer is to have advertised for one kind of role, given they have advertised for another.
+These can then be used to form clusters of similar roles that can be used as a feature in the models.
+Below is a heatmap showing this data with dark boxes around the k-means clusters with k=5 groups.
+
+![Heatmap showing likelihood of a hirer advertising a job for a role given they have advertised a job for another role](/images/role_cross_advertise.png)
+
+These clusters could be used in any of the previous models.
+The averages could be calculated separately on each cluster, which has a bias-variance tradeoff between the two extremes of the individual groups and the overall average.
+The fallback model can be extended to use the clusters as another layer between the individual groups and the overall average.
+The partial pooling model could pool the role titles towards each cluster, and optionally the clusters to their centre.
+
+These variations all do worse than partial pooling on this dataset.
+This could be because the underlying cross-advertising data doesn't align with the outcome of showing salary, because the type of clustering used didn't capture the relationships adequately, or because there are too few groups in the dataset.
+There's an art to choosing the appropriate kinds of clustering that improves the model results.
+
+Clustering requires making a hard division between different clusters.
+This makes it more interpretable, but removes information near the boundaries of the clusters.
+For example Registered Nurses are more likely to be employed in the same organisation as a General Practioner than a Chiropractor even though they ended up in different clusters.
+A more flexible way is using the numerical information directly.
+
+# Embeddings
+
+The similarity between roles can be used directly as features for another machine learning method.
+This is the idea of categorical embeddings; representing each category as a dense vector.
+These can then be used as continuous predictors in a large number of models; from linear and logistic regression to boosted trees and neural networks.
+This can be seen as a form of transfer learning.
+The cross-advertising similarity matrix is a form of embedding, and can be visualised by projecting into a two dimensional space.
+
+![Two dimensional embedding of roles based on cross-advertisement](/images/embedding_cross_advertising.png)
+
+Using the embeddings directly in a penalised logistic regression worked very poorly here, doing worse than the overall average.
+This may be again because the embeddings did not capture the relationship, or the model used was not appropriate to extract it.
+
 # Averages as Machine Learning
 
 Calculating a group average is a regression problem where all the predictors are categorical.
@@ -228,62 +277,19 @@ Calculating the proportion of jobs that showed salary for each group led to very
 Falling back to the overall average on small groups reduced the error by decreasing variance significantly for a small increase in bias; this is similar to the common practice of putting small groups together into an "Other" category.
 Modelling the proportions as random variables drawn from a common distribution regularised the estimates and resulted in the best estimators on this data.
 
-These ideas can be generalised to more complex settings than a single categorical predictor.
+Partial pooling is a general technique that reduces the variance on small groups by setting an appropriate prior.
+This generally outperforms other simple methods of calculating averages and should be considered a baseline.
+It can be efficiently calculated using Empirical Bayes methods.
+
+
+When there is additional related data, or more predictors, more complex models can be built.
+Additional data can be used to cluster or embed the groups and be used in more complex models.
+Partial pooling can be generalised to multilevel heirarchical models, also known as mixed effects models.
+However this complexity leads to many choices in how the data is used, and how the models are built.
+It also makes the resulting models less interpretable.
+For this small dataset I couldn't use the cross-advertising data to improve the estimates.
+
+Even when you've got a lot of data it's worth considering these techniques.
+It lets you examine smaller slices of the data, which can lead to more complex comparisons.
 At SEEK we're interested in understanding the employment market across roles, locations, customer segments, and time.
 The intersection of all of these factors is very sparse and so modelling to reduce the uncertainty is even more valuable.
-
-Fallback methods can be generalised to a heirarchy of categories.
-For example whether a hirer will show salary depends on the role and location, but location may be less important.
-Then a fallback model could first try to estimate based on both role and location, and when there's not enough data fallback to role, and for uncommon roles fallback to the overall average.
-These are straightforward to interpret, and can significantly reduce the variance.
-A more data driven, but less interpretable, approach would be to use decision trees to form groups with similar outcomes.
-This can be combined with time series methods at each level to handle seasonality and trends.
-
-Partial pooling methods can be generalised to more general mixed effects models, also known as multilevel models.
-Whether a type of job will display salary can be modelled as a mixed effects logistic regression.
-This can be fit using, among other methods, Restricted Maximum Likelihood methods (such as in [lme4](https://cran.r-project.org/web/packages/lme4/index.html)) which are fast, or Markov Chain Monte Carlo methods (such as in [Stan](https://mc-stan.org/) or [PyMC](https://docs.pymc.io/)) which are flexible but can be slow on large datasets.
-These can be extended to handle dependent data, such as multiple jobs posted by the same hirer, changes over time and adjusting for a non-representative sample.
-
-Incorporating additional data sources can further improve the models.
-The models discussed so far treat all role titles the same, and only distinguish them by the number of samples in the group.
-However some roles are more similar than others, and this information can be used to create better models.
-For example whether a role has a salary shown depends partly on the policies of the employer.
-So two roles that are commonly posted by the same kinds of employer may have a similar likelihood to have the salary shown.
-This similarity can be represented as a matrix of how likely an employer is to have advertised for one kind of role, given they have advertised for another.
-These can then be used to form clusters of similar roles that can be used as a feature in the models.
-
-![Heatmap showing likelihood of a hirer advertising a job for a role given they have advertised a job for another role](/images/role_cross_advertise.png)
-
-Additional data sources can also be used as embeddings.
-The external data can be used to form categorical embeddings; representing each category as a dense vector.
-These can then be used as continuous predictors in a large number of models; from linear and logistic regression to boosted trees and neural networks.
-This is a form of transfer learning.
-The similarity matrix above is a form of embedding, and can be visualised by projecting into a two dimensional space.
-
-![Two dimensional embedding of roles based on cross-advertisement](/images/embedding_cross_advertising)
-
-# Calculating better averages
-
-The usual way of calculating group averages, summing the values and dividing by the count, can give very bad estimates on small groups.
-The best generic way of handling this is with an empirical Bayes mdoel.
-To tease out more information we can use machine learning.
-
-# Further reading
-
-
-The original paper showing inadmissibility is [Inadmissibility of the usual estimator for the mean of a multivariate normal distribution](https://projecteuclid.org/download/pdf_1/euclid.bsmsp/1200501656) by Stein (1956).
-This was followed with the explicit estimator in [Estimation with Quadratic Loss](https://projecteuclid.org/ebook/Download?urlId=bsmsp%2F1200512173&isFullBook=False) by James and Stein (1961).
-
-
-https://www.tandfonline.com/doi/abs/10.1080/01621459.1972.10481215
-Limiting the Risk of Bayes and Empirical Bayes Estimators—Part II: The Empirical Bayes Case
-Efron and Morris (1970)
-
-Efron, B., & Morris, C. (1975). Data analysis using Stein's estimator and its generalizations. Journal of the American Statistical Association, 70(350), 311-319 (link to pdf)
-http://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf
-
-
-
-Approximate Bayesian Inference in Conditionally Independent Hierarchical Models (Parametric Empirical Bayes Models)
-https://www.tandfonline.com/doi/abs/10.1080/01621459.1989.10478825
-RE Kass, D Steffey - Journal of the American Statistical Association, 1989 - Taylor & Francis
