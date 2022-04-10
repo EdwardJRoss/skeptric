@@ -1,5 +1,5 @@
 +++
-tags = ["nlp", "python"]
+tags = ["nlp", "python", "ner"]
 title = "Training a Stanford NER Model in Python"
 date = "2022-04-07T21:17:40+10:00"
 feature_image = "/images/recipe_ner_reproduction_stanford_nlp.png"
