@@ -285,13 +285,13 @@ The response includes information telling you what went wrong (`r.text`):
 
 ## Retrieving Content
 
-The CDX queries return a `filename` which is on S3 and accessible at [https://commoncrawl.s3.amazonaws.com/](https://commoncrawl.s3.amazonaws.com/).
+The CDX queries return a `filename` which is on S3 and accessible at [https://data.commoncrawl.org/](https://data.commoncrawl.org/).
 They also contain a `offset` and `length` which tells you where in bytes the record data is and how long it is.
 We can use a [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) to get just this data (since each whole file is around 1GB).
 
 ```python
 record = records[0]
-prefix_url = 'https://commoncrawl.s3.amazonaws.com/'
+prefix_url = 'https://data.commoncrawl.org/'
 data_url = prefix_url + record['filename']
 start_byte = int(record['offset'])
 end_byte = start_byte + int(record['length'])

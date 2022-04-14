@@ -17,7 +17,7 @@ Here's what the new code looks like:
 ```
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-CC_DATA_URL = 'https://commoncrawl.s3.amazonaws.com/'
+CC_DATA_URL = 'https://data.commoncrawl.org/'
 RETRY_STRATEGY = Retry(
     total=5,
     backoff_factor=1

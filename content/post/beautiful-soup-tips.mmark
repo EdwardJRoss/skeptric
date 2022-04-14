@@ -125,7 +125,7 @@ If you want to rerun any of this script you can download the data from Common Cr
 
 
 ```sh
-curl -H "Range: bytes=403742602-403762161" https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-2020-16/segments/1585371656216.67/warc/CC-MAIN-20200406164846-20200406195346-00353.warc.gz |\
+curl -H "Range: bytes=403742602-403762161" https://data.commoncrawl.org/crawl-data/CC-MAIN-2020-16/segments/1585371656216.67/warc/CC-MAIN-20200406164846-20200406195346-00353.warc.gz |\
   gzip -dc |\
   tail -n +35 >\
 data.html

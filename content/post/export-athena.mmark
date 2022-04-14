@@ -13,7 +13,7 @@ They can query data accross data files directly in S3 (and HDFS for Presto) and 
 They've got a very powerful query language and can process large volumes of data quickly in memory accross a cluster of commodity machines.
 For this reason many tech companies like Facebook, Uber and Netflix use Presto/Athena as a core way to access their data platform.
 
-The most workflow I've found for exporting data from Athena or Presto into Python is:
+The most effective workflow I've found for exporting data from Athena or Presto into Python is:
 
 * Writing SQL to filter and transform the data into what you want to load into Python
 * Wrapping the SQL into a [Create Table As Statement (CTAS)](https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html) to export the data to S3 as Avro, Parquet or JSON lines files.
@@ -22,9 +22,11 @@ The most workflow I've found for exporting data from Athena or Presto into Pytho
 This is very robust and for large data files is a very quick way to export the data.
 I will focus on Athena but most of it will apply to Presto using [presto-python-client](https://github.com/prestodb/presto-python-client) with some minor changes to DDLs and authentication.
 
-There is another way, directly reading the output of a query as a CSV from S3, but there are some limitations.
+There is another way, directly reading the output of an Athena query as a CSV from S3, but there are some limitations.
 
 I have a [sample implementation](https://gist.github.com/EdwardJRoss/66561eb91049d9838db71403bd07c950) showing how to query avro with `query_avro` and using the CSV trick with `query`.
+
+Note that since this article was originally written Athena has added an [unload](https://docs.aws.amazon.com/athena/latest/ug/unload.html) command for exporting a query result as a file type, and [AWS Data Wrangler](https://github.com/awslabs/aws-data-wrangler) now has convenient wrappers for quickly exporting data from Athena by using a CTAS or unload query in the background.
 
 # Athena Fast Export workflow
 

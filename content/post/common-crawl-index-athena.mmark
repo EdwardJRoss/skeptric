@@ -250,10 +250,10 @@ LIMIT 5
 | https://raw.githubusercontent.com/cwoodruff/ChinookDatabase/master/Scripts/Chinook_SqlServer.sql                                                                  | crawl-data/CC-MAIN-2020-16/segments/1585370506673.7/warc/CC-MAIN-20200402045741-20200402075741-00421.warc.gz  | 652805559          | 652898120          |
 
 
-We can then use this to retrieve the WARC for the first record; we just prepend `https://commoncrawl.s3.amazonaws.com/` to the filename and only get the relevant bytes with the [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+We can then use this to retrieve the WARC for the first record; we just prepend `https://data.commoncrawl.org/` to the filename and only get the relevant bytes with the [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
 ```
-curl https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-2020-16/segments/1585370493684.2/warc/CC-MAIN-20200329015008-20200329045008-00304.warc.gz \
+curl https://data.commoncrawl.org/crawl-data/CC-MAIN-2020-16/segments/1585370493684.2/warc/CC-MAIN-20200329015008-20200329045008-00304.warc.gz \
     -H "range: bytes=689964496-689966615" > sql_sample.warc.gz
 ```
 
