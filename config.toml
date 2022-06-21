@@ -33,6 +33,11 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [permalinks]
   post = "/:filename/"
 
+# Required for nb2hugo outputs of dataframes
+# https://discourse.gohugo.io/t/raw-html-getting-omitted-in-0-60-0/22032/2
+[markup.goldmark.renderer]
+  unsafe= true
+
 [menu]
     [[menu.main]]
         name = "Home"
