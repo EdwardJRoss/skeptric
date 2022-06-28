@@ -1,6 +1,6 @@
 +++
 title = "Hacker News Dataset EDA"
-tags = ["python", "machine-learning"]
+tags = ["python", "machine-learning", "hnbooks"]
 date = "2022-06-21T21:00:00+10:00"
 feature_image = "/images/hackernews_eda.png"
 +++

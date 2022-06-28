@@ -1,5 +1,5 @@
 +++
-tags = ["nlp", "ner", "books"]
+tags = ["nlp", "ner", "hnbooks"]
 title = "Side Project Outline: Book Title NER"
 date = "2022-06-20T08:00:00+10:00"
 feature_image = "/images/hn_books.png"
