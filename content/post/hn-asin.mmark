@@ -5,7 +5,7 @@ date = "2022-06-22T22:12:21+10:00"
 feature_image = "/images/extracting_asins.png"
 +++
 
-I'm currently working on a proejct [to extract books from Hacker News](/book-title-ner-outline).
+I'm currently working on a project [to extract books from Hacker News](/book-title-ner-outline).
 After exporting all 2021 posts from the Google Bigquery dataset in a [Kaggle Notebook](https://www.kaggle.com/code/edwardjross/hackernews-2021-export/notebook) and doing an [exploratory data analysis](/hackernews-dataset-eda) I'm looking for methods to extract books.
 
 One way to extract books is using Amazon links.
