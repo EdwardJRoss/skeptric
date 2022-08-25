@@ -128,7 +128,7 @@ def sentencetransformer_to_tensorflow(model_path: str) -> tf.keras.Model:
     token_type_ids = tf.keras.Input(shape=(None,), dtype=tf.int32)
 
     # 2. Get the Hidden State
-    hidden_state = tf_model(
+    hidden_state = tf_model.bert(
         input_ids=input_ids,
         attention_mask=attention_mask,
         token_type_ids=token_type_ids,
@@ -187,22 +187,10 @@ tf_model = sentencetransformer_to_tensorflow(output_dir.name)
 tf_model
 ```
 
-    WARNING:tensorflow:The parameters `output_attentions`, `output_hidden_states` and `use_cache` cannot be updated when calling a model.They have to be set to True/False in the config object (i.e.: `config=XConfig.from_pretrained('name', output_attentions=True)`).
-    WARNING:tensorflow:AutoGraph could not transform <bound method Socket.send of <zmq.Socket(zmq.PUSH) at 0x7fcc30158100>> and will run it as-is.
-    Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
-    Cause: module, class, method, function, traceback, frame, or code object was expected, got cython_function_or_method
-    To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
-    WARNING: AutoGraph could not transform <bound method Socket.send of <zmq.Socket(zmq.PUSH) at 0x7fcc30158100>> and will run it as-is.
-    Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
-    Cause: module, class, method, function, traceback, frame, or code object was expected, got cython_function_or_method
-    To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
-    WARNING:tensorflow:The parameter `return_dict` cannot be set in graph mode and will always be set to `True`.
 
 
 
-
-
-    <keras.engine.functional.Functional at 0x7fcb2a7b00d0>
+    <keras.engine.functional.Functional at 0x7f9105a35eb0>
 
 
 
@@ -224,6 +212,41 @@ assert np.isclose(tf_model(tf_tokens).numpy(),
 ```
 
 The rest of this article goes through how this translation works step-by-step, which could be useful if you wanted to expand this to different SentenceTransformer models.
+
+### Checking we can save and load the model
+
+A final check is that we can save and load the model to get the same result.
+
+You may have noticed in the code above for step 2 we called `tf_model.bert`, rather than just `tf_model.` This is [requried to save a TFBertModel](https://github.com/huggingface/transformers/issues/3627#issuecomment-646390974). If you're not using something bert based you may need to use a different method (such as `.transformer`)
+
+
+```python
+with TemporaryDirectory() as tf_output_dir:
+    tf_model.save(tf_output_dir)
+    tf_model_2 = tf.keras.models.load_model(tf_output_dir)
+    
+assert np.isclose(tf_model_2(tf_tokens).numpy(),
+                  model.encode(input_text),
+                  atol=1e-5).all()
+```
+
+    WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+
+
+    WARNING:absl:Found untraced functions such as embeddings_layer_call_fn, embeddings_layer_call_and_return_conditional_losses, encoder_layer_call_fn, encoder_layer_call_and_return_conditional_losses, pooler_layer_call_fn while saving (showing 5 of 545). These functions will not be directly callable after loading.
+
+
+    INFO:tensorflow:Assets written to: /tmp/tmp416di2x1/assets
+
+
+    INFO:tensorflow:Assets written to: /tmp/tmp416di2x1/assets
+
+
+    WARNING:tensorflow:No training configuration found in save file, so the model was *not* compiled. Compile it manually.
+
+
+    WARNING:tensorflow:No training configuration found in save file, so the model was *not* compiled. Compile it manually.
+
 
 ## Understanding the SentenceTransformers Model
 
@@ -265,8 +288,8 @@ embedding
 
 
 
-    array([[7.4543315e-03, 1.6558371e-01, 7.5213611e-06, ..., 3.4412801e-02,
-            3.4355957e-02, 4.6864837e-02]], dtype=float32)
+    array([[-0.23693885, -0.00868655,  0.12708516, ...,  0.02389161,
+            -0.03000948, -0.20219219]], dtype=float32)
 
 
 
@@ -347,19 +370,19 @@ transformer_embedding_array
 
 
 
-    array([[[-0.10358748, -0.26520088, -0.26469216, ...,  0.06233471,
-             -0.15671371, -0.10553032],
-            [ 0.08823883, -0.5994266 ,  0.06708018, ...,  0.51667243,
-              0.8325489 , -1.3810043 ],
-            [-0.4876043 , -0.23194602, -0.6079844 , ..., -0.6846279 ,
-              0.02719029,  0.19620784],
+    array([[[-0.10578819, -0.24982804, -0.25226122, ...,  0.07380735,
+             -0.16002229, -0.10104472],
+            [ 0.08560147, -0.56386817,  0.07879569, ...,  0.53842884,
+              0.8103698 , -1.3633531 ],
+            [-0.49132693, -0.2222665 , -0.6009016 , ..., -0.6793231 ,
+              0.02079807,  0.19803165],
             ...,
-            [-0.42056498, -0.3643854 , -0.4118983 , ...,  0.17465238,
-              0.45005858,  0.21110901],
-            [ 0.07132278, -0.39229715, -0.6799729 , ...,  0.16619124,
-              0.6374214 , -0.4074629 ],
-            [-0.2874202 ,  0.18876112,  0.3008039 , ...,  0.64146394,
-              0.24326666,  0.08623165]]], dtype=float32)
+            [-0.42034534, -0.35809648, -0.40514907, ...,  0.18629718,
+              0.44449466,  0.21497107],
+            [ 0.06977252, -0.3880473 , -0.6704632 , ...,  0.1784373 ,
+              0.6243761 , -0.39589474],
+            [-0.2825999 ,  0.20663676,  0.31645843, ...,  0.6711646 ,
+              0.23843716,  0.08616418]]], dtype=float32)
 
 
 
@@ -397,8 +420,8 @@ pooled_array
 
 
 
-    array([[-0.30123425, -0.22123867, -0.224566  , ...,  0.12464707,
-             0.2769958 , -0.10483663]], dtype=float32)
+    array([[-0.3000789 , -0.20643215, -0.21641909, ...,  0.1395422 ,
+             0.2712665 , -0.10013962]], dtype=float32)
 
 
 
@@ -437,8 +460,8 @@ dense_output_array
 
 
 
-    array([[7.4543315e-03, 1.6558371e-01, 7.5213611e-06, ..., 3.4412801e-02,
-            3.4355957e-02, 4.6864837e-02]], dtype=float32)
+    array([[-0.23693885, -0.00868655,  0.12708516, ...,  0.02389161,
+            -0.03000948, -0.20219219]], dtype=float32)
 
 
 
@@ -507,7 +530,7 @@ np.abs(tf_embedding.pooler_output.numpy() - pooled_array).max()
 
 
 
-    0.8324674
+    0.8287506
 
 
 
