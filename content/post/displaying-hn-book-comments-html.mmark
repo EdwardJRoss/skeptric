@@ -11,7 +11,7 @@ Now I want to be able to display this information in some webpages to help peopl
 
 I ended up building a minimal prototype by manually curating some examples; this let me focus on the design rather than on the technical aspects.
 The [landing page](https://htmlpreview.github.io/?https://github.com/EdwardJRoss/bookfinder/blob/1cc3f24a6fa5fde3c78594614dd834c55944ba10/docs/index.html) is a listing of all the books in decreasing number of comments on Hacker News (which here are just wrong estimates); I picked three books I'm familiar with.
-This helps find the most popular books; it doesn't solve the problems of finding books on a topic [it's a skateboard prototype](https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp?ref=https://product-frameworks.com), a step in the right direction.
+This helps find the most popular books; it doesn't solve the problems of finding books on a topic [it's a skateboard prototype](https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp), a step in the right direction.
 
 <figure>
 <img src="/images/displaying-hn-book-comments-html-list.png" alt="Listing view of books" width="300px">
