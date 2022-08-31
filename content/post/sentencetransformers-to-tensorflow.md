@@ -15,6 +15,9 @@ This post will show you how.
 
 This post was generated with a [Jupyter notebook](/notebooks/sentencetransformers-to-tensorflow.ipynb) which you can download if you want to run it yourself.
 
+**Update 2022-08-31**: Philipp Schmid has just written a better [guide to Use Sentence Transformers with TensorFlow](https://www.philschmid.de/tensorflow-sentence-transformers); go and read that.
+This article may still be useful if you run into issues, or if you prefer Keras' functional interface.
+
 ## Training a SentenceTransformers Model
 
 Let's start with an example model from the [SentenceTransformers Training Examples](https://www.sbert.net/docs/training/overview.html) a bi-encoder consisting of a Transformer embedding, followed by mean pooling, and a single dense layer.
