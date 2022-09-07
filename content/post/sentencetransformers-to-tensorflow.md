@@ -15,8 +15,9 @@ This post will show you how.
 
 This post was generated with a [Jupyter notebook](/notebooks/sentencetransformers-to-tensorflow.ipynb) which you can download if you want to run it yourself.
 
-**Update 2022-08-31**: Philipp Schmid has just written a better [guide to Use Sentence Transformers with TensorFlow](https://www.philschmid.de/tensorflow-sentence-transformers); go and read that.
-This article may still be useful if you run into issues, or if you prefer Keras' functional interface.
+**Update 2022-08-31**: Philipp Schmid has just written a good [guide to Use Sentence Transformers with TensorFlow](https://www.philschmid.de/tensorflow-sentence-transformers).
+His article nicely shows how to load a pretrained model using the class interface with Keras, including wrapping the tokenizer in the model.
+This article shows how to use the Keras functional API, which enables saving and loading the model with Keras, and converting a custom trained dense head.
 
 ## Training a SentenceTransformers Model
 
