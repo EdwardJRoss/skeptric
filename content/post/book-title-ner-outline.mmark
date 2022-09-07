@@ -60,3 +60,8 @@ This is a learning project, not a business, and the outcome is something I find 
 As a starting point I've exported all 2021 Hacker News data from BigQuery [using Kaggle](https://www.kaggle.com/code/edwardjross/hackernews-2021-export/notebook).
 I've also found a [large dataset of books on Amazon](https://github.com/uchidalab/book-dataset) and there are many potential datasets for book names such as [open library](https://openlibrary.org/developers/dumps).
 The next step will be to do some exploratory data analysis on the data and find the quickest way to get some good book data out.
+
+
+**Update 2022-09**:
+I came across [Hacker News Readings](https://hacker-recommended-books.vercel.app/category/0/all-time/page/0/0) from a [Show HN](https://news.ycombinator.com/item?id=28595967) which apparently does this, but unfortunately there's no code or data available.
+It's a good strong baseline though.
