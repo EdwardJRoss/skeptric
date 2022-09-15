@@ -57,3 +57,10 @@ This is just one example of a monad to lift functions.
 Another one is `map` which is a functor that raises a function to one that can handle lists.
 In Haskell the idea is even used to extend pure functions, that are [easy to test](/property-based-testing), into scenarios where there is I/O or state.
 However I'm not convinced the conceptual overhead is always worth it.
+
+If you do want to use Maybe pattern in Python here are some libraries that offer it with increasing levels of sophistication:
+
+* [pymaybe](https://github.com/ekampf/pymaybe) extends a `Maybe` object with dunder methods so a `Nothing` is passed through subsequent operations and is exited with a `get` or `or_else` method
+* [maybe-else](https://github.com/matthewgdv/maybe) does the same thing, but is exited with an `else_`
+* [returns](https://returns.readthedocs.io/en/latest/index.html) has a general monad implementation, good integration with mypy and some documentation
+* [pymonad](https://github.com/jasondelaat/pymonad) has a generic implementation of monads, but not much documentation
