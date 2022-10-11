@@ -6,7 +6,7 @@ feature_image = "/images/hnbook_bad_ner.png"
 +++
 
 I'm working on a project to [extract books from Hacker News](/book-title-ner-outline).
-I've found some ![heuristics to find books](/finding-book-heuristics) and want to train an NER model to recognise the names of books.
+I've found some [heuristics to find books](/finding-book-heuristics) and want to train an NER model to recognise the names of books.
 However my first attempt didn't work very well and I wanted to do a post-mortem.
 
 I took a weighted sample of data likely to contain book names, based on the analysis of the heuristics.
@@ -35,7 +35,7 @@ Setting up a script in advance to evaluate the precision on a trained model woul
 I was hoping active learning would help give me an idea of the models performance, but it turns out SpaCy's NER doesn't have a notion of uncertainty making it difficult.
 
 
-# Training distribution didn't have enough negative samples 
+# Training distribution didn't have enough negative samples
 
 Few Hacker News comments are about books, and annotating lots of negative examples is dull and leads to repetition bias (the annotator is more likely to miss real examples).
 To ameliorate this I used heuristics to choose posts likely to contain book titles and only annotated them.
@@ -71,7 +71,7 @@ I found many ambiguous cases when I annotated the 500 examples:
 
 as an example of the last consider [this comment](https://news.ycombinator.com/item?id=29186253)
 
-> I have read and recommend Andy Tanenbaum's book on operating systems. He's also written a book on networking and one on distributed systems. 
+> I have read and recommend Andy Tanenbaum's book on operating systems. He's also written a book on networking and one on distributed systems.
 
 This is almost surely talking about [Modern Operating Systems by Andrew Tanenbaum](https://openlibrary.org/works/OL1970688W/Modern_Operating_Systems); but is "operating systems" in this text a book title?
 
