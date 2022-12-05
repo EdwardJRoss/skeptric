@@ -12,7 +12,7 @@ This is a variation of Sanjoy Mahajan's [The Art of Insight](https://mitpress.mi
 
 As in the text we approach this by estimating car consumption.
 
-{{<mermaid>}}
+```{mermaid}
 graph BT;
    Import[Oil imports Barrel/Day]
 
@@ -30,7 +30,7 @@ graph BT;
 
    People[Number of People] --> Cars
    CarPeople[Number of Cars per Person] --> Cars
-{{< /mermaid >}}
+```
 
 To estimate imports we estimate demand, since that is estimable.
 For oil, if we ignore reserves, then we have imports + production = consumption + exports.

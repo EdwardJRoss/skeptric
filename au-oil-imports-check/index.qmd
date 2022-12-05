@@ -11,7 +11,7 @@ I've estimated [Australian oil imports](/au-oil-imports); here I check the data 
 The overall tree diagram for the estimate is below:
 
 
-{{<mermaid>}}
+```{mermaid}
 graph BT;
    Import[Oil imports<br/>1.3 Million Barrels/Day]
 
@@ -29,7 +29,7 @@ graph BT;
 
    People[Number of People<br/>25 Million] --> Cars
    CarPeople[Number of Cars per Person<br/>0.8] --> Cars
-{{< /mermaid >}}
+```
 
 
 # Checking oil imports and consumption

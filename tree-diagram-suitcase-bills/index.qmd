@@ -18,7 +18,7 @@ This is referring to the [suitcase of money](/suitcase-of-money).
 
 # Step 1: Tree
 
-{{<mermaid>}}
+```{mermaid}
 graph LR;
    VolBankNote[Volume of Bank Note]
    VolSuitcase[Volume of Suitcase]
@@ -41,11 +41,11 @@ graph LR;
    BankWidth[Width of Bank Note] --> VolBankNote
    BankDepth[Thickness of Bank Note] --> VolBankNote
 
-{{< /mermaid >}}
+```
 
 # Step 2: Annotated Leaves
 
-{{<mermaid>}}
+```{mermaid}
 graph LR;
    VolBankNote[Volume of Bank Note]
    VolSuitcase[Volume of Suitcase]
@@ -68,11 +68,11 @@ graph LR;
    BankWidth[Width of Bank Note<br/>6cm] --> VolBankNote
    BankDepth[Thickness of Bank Note<br/>0.01cm] --> VolBankNote
 
-{{< /mermaid >}}
+```
 
 # Step 3: Propagate
 
-{{<mermaid>}}
+```{mermaid}
 graph LR;
    VolBankNote[Volume of Bank Note<br>1 cm<sup>3</sup>]
    VolSuitcase[Volume of Suitcase<br>50L]
@@ -95,4 +95,4 @@ graph LR;
    BankWidth[Width of Bank Note<br/>6cm] --> VolBankNote
    BankDepth[Thickness of Bank Note<br/>0.01cm] --> VolBankNote
 
-{{< /mermaid >}}
+```

@@ -18,7 +18,7 @@ $$ \frac{5 + 4 + (2 - (3 - (6 + \frac{1}{5})))}{3(6-2)(2-7)} $$
 
 One way to do this is to read it from the outside in and translate it into a tree (for example the first thing we extract is the division).
 
-{{<mermaid>}}
+```{mermaid}
 graph BT;
 
 DIV[`/`] --> ANS
@@ -62,7 +62,7 @@ P3b[2] -->  P3
 P3c[7] --> P3
 
 
-{{< /mermaid >}}
+```
 
 
 We can then read this diagram from the top down to get prefix notation:
