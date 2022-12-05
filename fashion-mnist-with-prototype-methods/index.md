@@ -14,7 +14,7 @@ You could use any kind of features but these images are so simple that we can us
 
 This notebook trains a classifier that gets about 85% accuracy on this dataset using K nearest neighbours, but on the way explores examining data, average prototypes, predicting accuracy with training data size, and approximate nearest neighbours methods.
 
-This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/fashion-mnist-with-prototype-methods/notebook) or [download the Jupyter notebook](/notebooks/fashion-mnist-with-prototype-methods.ipynb).
+This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/fashion-mnist-with-prototype-methods/notebook) or [download the Jupyter notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/fashion-mnist-with-prototype-methods.ipynb).
 
 # Imports
 

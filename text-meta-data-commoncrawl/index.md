@@ -19,7 +19,7 @@ The index only contains locations for the WARC files, the WET and WAT files are 
 For more detail read [Common Crawl's introduction](https://commoncrawl.org/2014/04/navigating-the-warc-file-format/) and the [WARC specification](https://iipc.github.io/warc-specifications/specifications/warc-format/warc-1.0/).
 For processing these at scale see [Common Crawl's pyspark code samples](https://github.com/commoncrawl/cc-pyspark) and [Mark Litwintschik's post on using EMR and Spark with Common Crawl](https://tech.marksblogg.com/petabytes-of-website-data-spark-emr.html).
 
-See the [Jupyter Notebook](/notebooks/WAT%20WET%20WARC%20-%20Common%20Crawl%20Archives.html) ([Raw](/notebooks/WAT%20WET%20WARC%20-%20Common%20Crawl%20Archives.ipynb)) for more code samples.
+See the [Jupyter Notebook](/notebooks/WAT%20WET%20WARC%20-%20Common%20Crawl%20Archives.html) ([Raw](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/WAT%20WET%20WARC%20-%20Common%20Crawl%20Archives.ipynb)) for more code samples.
 
 # A brief introduction to WARC record types
 

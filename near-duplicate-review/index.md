@@ -53,7 +53,7 @@ One technique that I didn't try is the [all-pair-binary algorithm](https://githu
 The paper claims to be able to find exact sets of near-duplicate items faster than MinHash.
 It would be interesting to validate their claim, and see whether it holds under these conditions.
 
-For more detail see the [Detecting duplicate job ads notebook](/notebooks/Detecting duplicate job ads.html) ([raw](/notebooks/Detecting duplicate job ads.ipynb)).
+For more detail see the [Detecting duplicate job ads notebook](/notebooks/Detecting duplicate job ads.html) ([raw](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/Detecting duplicate job ads.ipynb)).
 The notebook is quite long because a lot of it is looking at individual examples of job ads to gain an understanding of the data.
 This is an unfortunate consequence of using the same document for exploration and presentation; it's too much text for a casual reader, but was necessary for me to understand the data.
 To compensate for that I've added a table of contents with links to each section.

@@ -26,7 +26,7 @@ I want to get a basic understanding of what's in the dataset before doing any da
 
 The [Hacker News FAQ](https://news.ycombinator.com/newsfaq.html) is useful for contextualising some of the fields.
 
-This post was generated with a [Jupyter notebook](/notebooks/hackernews-dataset-eda.ipynb).
+This post was generated with a [Jupyter notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/hackernews-dataset-eda.ipynb).
 
 Please note that these comments may contain some explicit content.
 

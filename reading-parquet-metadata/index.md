@@ -26,7 +26,7 @@ In this article we download the Parquet metadata for all 25,000 WARC indexes in 
 A way to make it even faster would be to run it in an EC2 instance where the data is, `us-east-1`.
 We can then use it to query a single domain for a single crawl in about a minute.
 This is fairly slow but we could make many requests concurrently across crawls and domains.
-You can view the corresponding [Jupyter notebook](/notebooks/reading_parquet_metadata.html) (or the [raw ipynb](/notebooks/reading_parquet_metadata.ipynb)).
+You can view the corresponding [Jupyter notebook](/notebooks/reading_parquet_metadata.html) (or the [raw ipynb](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/reading_parquet_metadata.ipynb)).
 
 
 # Reading Metadata with PyArrow

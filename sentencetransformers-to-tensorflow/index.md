@@ -13,7 +13,7 @@ But what if you want to integrate a model trained in SentenceTransformers with o
 The best solution would be to rewrite the training in Tensorflow, but if you've already spent a lot of time training a model you may want to import it into Tensorflow.
 This post will show you how.
 
-This post was generated with a [Jupyter notebook](/notebooks/sentencetransformers-to-tensorflow.ipynb) which you can download if you want to run it yourself.
+This post was generated with a [Jupyter notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/sentencetransformers-to-tensorflow.ipynb) which you can download if you want to run it yourself.
 
 **Update 2022-08-31**: Philipp Schmid has just written a good [guide to Use Sentence Transformers with TensorFlow](https://www.philschmid.de/tensorflow-sentence-transformers).
 His article nicely shows how to load a pretrained model using the class interface with Keras, including wrapping the tokenizer in the model.

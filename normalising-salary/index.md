@@ -32,4 +32,4 @@ After removing the out-of-band result and annualising I got a reasonable result:
 ![Distribution of annualised salary](/images/au_job_salary_after.png)
 
 I undoubtedly removed some results that are valid, or that could be corrected, but this was an effective way of getting a lot of the valid data with a little work.
-I've got a [Notebook showing the approach](/notebooks/Analysing\%20Salary\%20Extracted\%20From\%20CommonCrawl\%20Job\%20Data.html) ([raw](/notebooks/Analysing\%20Salary\%20Extracted\%20From\%20CommonCrawl\%20Job\%20Data.ipynb)).
+I've got a [Notebook showing the approach](/notebooks/Analysing\%20Salary\%20Extracted\%20From\%20CommonCrawl\%20Job\%20Data.html) ([raw](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/Analysing\%20Salary\%20Extracted\%20From\%20CommonCrawl\%20Job\%20Data.ipynb)).

@@ -19,7 +19,7 @@ Instead of using the MNIST digits we'll use [Fashion MNIST](https://github.com/z
 This is a bit harder and a convolutional neural network would perform better here (as demonstrated in [v3 of fastai course](https://github.com/fastai/course-v3/blob/master/nbs/dl1/lesson7-resnet-mnist.ipynb)).
 But to keep things simple we'll use a dense neural network.
 
-This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/peeling-fastai-layered-api-with-fashion-mnist/notebook) or [download the Jupyter notebook](/notebooks/fashion-mnist-with-prototype-methods.ipynb).
+This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/peeling-fastai-layered-api-with-fashion-mnist/notebook) or [download the Jupyter notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/fashion-mnist-with-prototype-methods.ipynb).
 
 # Training a model in 5 lines of code
 

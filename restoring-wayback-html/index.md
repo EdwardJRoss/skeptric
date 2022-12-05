@@ -281,4 +281,4 @@ def wayback_normalise_content(content, base_url):
 assert wayback_normalise_content(original_content, 'https://skeptric.com') == clean_wayback_content
 ```
 
-If you want to try this at home there's a [Jupyter Notebook](/notebooks/restoring_wayback_html.ipynb) (or you can [view it in your browser](/notebooks/restoring_wayback_html.html)).
+If you want to try this at home there's a [Jupyter Notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/restoring_wayback_html.ipynb) (or you can [view it in your browser](/notebooks/restoring_wayback_html.html)).

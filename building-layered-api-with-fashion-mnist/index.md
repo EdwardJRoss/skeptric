@@ -15,7 +15,7 @@ Coming up with a good abstraction that generalises across many usecases is hard,
 
 Then to show how it's useful once we have our training loop we'll see how we can change the model and retrain.
 
-This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/building-layered-api-with-fashion-mnist/notebook) or [download the Jupyter notebook](/notebooks/building-layered-api-with-fashion-mnist.ipynb).
+This post was generated with a Jupyter notebook. You can also [view this notebook on Kaggle](https://www.kaggle.com/code/edwardjross/building-layered-api-with-fashion-mnist/notebook) or [download the Jupyter notebook](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/building-layered-api-with-fashion-mnist.ipynb).
 
 # Basic Training Loop
 
