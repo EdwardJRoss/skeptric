@@ -27,7 +27,7 @@ So in particular we can rewrite $$ f_{X+Y} = \mathcal{F}^{-1} (\mathcal{F}(f_X) 
 This can be computationally convenient; a fast fourier transform can be more efficient than performing the sum in the convolution manually.
 To see this in action we can encode our dice example in R; we represent our probability density function as a vector which are the values of the function at 0, 1, 2, ...
 
-```{r}
+```R
 # Vectors are 0 indexed, so probability of 0 as 0
 # Probability at 1-6 as 1/6
 # We need extra space at the end for higher values so we pad the end with 0s

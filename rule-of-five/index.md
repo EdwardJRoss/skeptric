@@ -49,7 +49,7 @@ The idea is from the wonderful book "How to Measure Anything" by Douglas W. Hubb
 Here's some R code that generates the table and plots above.
 
 
-```{R}
+```R
 # Exact calculation
 ci_quantile_extreme <- function(num_samples, nth_smallest=1, nth_largest=1, quantile=0.5) {
     stopifnot(nth_largest + nth_smallest < num_samples)

@@ -58,7 +58,7 @@ Then the mean satisfies `sum(x - xbar) == 0` (which is just a rearrangement of t
 The RMSE is given by `rmse(a) = sqrt(mean((x - a)^2))`.
 Expanding the quadratic around the mean gives:
 
-```{R}
+```R
 rmse(a) == rmse((a - xbar) + xbar)
         == sqrt((a - xbar)^2 + 2*(a - xbar)*mean(x - xbar) + mean((x - xbar)^2))
 ```
