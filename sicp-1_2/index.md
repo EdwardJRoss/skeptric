@@ -8,7 +8,7 @@ title: SICP Exercise 1.2
 
 Exercise from SICP:
 
-[Exercise 1.2.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-10.html#%_thm_1.2) 
+[Exercise 1.2.](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%25_thm_1.2) 
 
 Translate the following expression into prefix form
 

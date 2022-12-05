@@ -8,7 +8,7 @@ title: Sicp Exercise 1.3
 
 Exercise from SICP:
 
-[Exercise 1.2.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-10.html#%_thm_1.3) 
+[Exercise 1.2.](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%25_thm_1.3) 
 
 > Define a function that takes three numbers as arguments and returns the sum of the two larger numbers.
 

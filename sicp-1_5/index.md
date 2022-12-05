@@ -8,7 +8,7 @@ title: SICP Exercise 1.5
 
 Exercise from SICP:
 
-[Exercise 1.5.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-10.html#%_thm_1.5) 
+[Exercise 1.5.](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%25_thm_1.5) 
 
 Ben Bitdiddle has invented a test to determine whether the interpreter he is faced with is using applicative-order evaluation or normal-order evaluation. He defines the following two procedures.
 

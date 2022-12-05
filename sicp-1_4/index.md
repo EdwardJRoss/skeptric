@@ -8,7 +8,7 @@ title: SICP Exercise 1.4
 
 Exercise from SICP:
 
-[Exercise 1.4.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-10.html#%_thm_1.4) 
+[Exercise 1.4.](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%25_thm_1.4) 
 
 > Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:
 
