@@ -1,0 +1,98 @@
+---
+categories:
+- insight
+date: '2020-09-29T23:00:00+10:00'
+image: /images/envelope.png
+title: Tree Diagram Bills
+---
+
+This is from Sanjoy Mahajan's [The Art of Insight](https://mitpress.mit.edu/books/art-insight-science-and-engineering) Problem 1.5
+
+
+> Make a tree diagram for your estimate in [Problem 1.3](/suitcase-of-money). Do it in three steps: 
+> (1) Draw the tree without any leaf estimates, 
+> (2) estimate the leaf values, 
+> and (3) propagate the leaf values upward to the root.
+
+This is referring to the [suitcase of money](/suitcase-of-money).
+
+# Step 1: Tree
+
+{{<mermaid>}}
+graph LR;
+   VolBankNote[Volume of Bank Note]
+   VolSuitcase[Volume of Suitcase]
+   ValueBankNote[Value of Bank Notes in Suitcase]
+   NumBankNote[Number of Bank Notes in Suitcase]
+   ValueSuitcase[Value of Suitcase]
+   
+   
+   NumBankNote --> ValueSuitcase
+   ValueBankNote --> ValueSuitcase
+
+   VolBankNote -->|-1| NumBankNote
+   VolSuitcase --> NumBankNote
+
+   SuitWidth[Width of Suitcase] --> VolSuitcase
+   SuitHeight[Height of Suitcase] --> VolSuitcase
+   SuitDepth[Depth of Suitcase] --> VolSuitcase
+   
+   BankHeight[Height of Bank Note] --> VolBankNote
+   BankWidth[Width of Bank Note] --> VolBankNote
+   BankDepth[Thickness of Bank Note] --> VolBankNote
+
+{{< /mermaid >}}
+
+# Step 2: Annotated Leaves
+
+{{<mermaid>}}
+graph LR;
+   VolBankNote[Volume of Bank Note]
+   VolSuitcase[Volume of Suitcase]
+   ValueBankNote[Value of Bank Notes in Suitcase<br>$100]
+   NumBankNote[Number of Bank Notes in Suitcase]
+   ValueSuitcase[Value of Suitcase]
+   
+   
+   NumBankNote --> ValueSuitcase
+   ValueBankNote --> ValueSuitcase
+
+   VolBankNote -->|-1| NumBankNote
+   VolSuitcase --> NumBankNote
+
+   SuitWidth[Width of Suitcase<br/>30cm] --> VolSuitcase
+   SuitHeight[Height of Suitcase<br/>50cm] --> VolSuitcase
+   SuitDepth[Depth of Suitcase<br/>30cm] --> VolSuitcase
+   
+   BankHeight[Height of Bank Note<br/>15cm] --> VolBankNote
+   BankWidth[Width of Bank Note<br/>6cm] --> VolBankNote
+   BankDepth[Thickness of Bank Note<br/>0.01cm] --> VolBankNote
+
+{{< /mermaid >}}
+
+# Step 3: Propagate
+
+{{<mermaid>}}
+graph LR;
+   VolBankNote[Volume of Bank Note<br>1 cm<sup>3</sup>]
+   VolSuitcase[Volume of Suitcase<br>50L]
+   ValueBankNote[Value of Bank Notes in Suitcase<br>$100]
+   NumBankNote[Number of Bank Notes in Suitcase<br>50,000]
+   ValueSuitcase[Value of Suitcase<br>$5 Million]
+   
+   
+   NumBankNote --> ValueSuitcase
+   ValueBankNote --> ValueSuitcase
+
+   VolBankNote -->|-1| NumBankNote
+   VolSuitcase --> NumBankNote
+
+   SuitWidth[Width of Suitcase<br/>30cm] --> VolSuitcase
+   SuitHeight[Height of Suitcase<br/>50cm] --> VolSuitcase
+   SuitDepth[Depth of Suitcase<br/>30cm] --> VolSuitcase
+   
+   BankHeight[Height of Bank Note<br/>15cm] --> VolBankNote
+   BankWidth[Width of Bank Note<br/>6cm] --> VolBankNote
+   BankDepth[Thickness of Bank Note<br/>0.01cm] --> VolBankNote
+
+{{< /mermaid >}}
