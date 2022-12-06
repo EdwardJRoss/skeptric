@@ -1,5 +1,5 @@
 ---
-title: "output"
+title: "Skeptric"
 listing:
   contents: ["/*/*.md", "!notebooks/*"]
   sort: "date desc"
@@ -10,5 +10,3 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-
-
