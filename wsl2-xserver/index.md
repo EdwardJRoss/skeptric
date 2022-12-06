@@ -12,6 +12,12 @@ I've recently [started working with WSL2](/wsl2-start) on my Windows machine, bu
 This is an issue for me because running Emacs with Evil keybindings under Windows Terminal I often find there's a lag in registering pressing escape which leads to some confusing issues (but vanilla Vim is fine).
 But having an X Server would also allows running any Linux graphical application under X.
 
+::: {.callout-note}
+Windows now provides [built-in support for GUI apps in WSL2](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps) which is considerably easier to use and setup than the instructions below.
+
+Only follow the below tutorial if for some reason the WSL GUI experience doesn't meet your needs.
+:::
+
 As outlined in [a StackOverflow answer](https://stackoverflow.com/a/61110604) there are three steps to getting this working:
 
 1. Enable WSL to access the X server on Windows Firewall

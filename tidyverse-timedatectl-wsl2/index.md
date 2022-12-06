@@ -18,6 +18,11 @@ sudo apt-get install libxml2-dev
 TZ="Australia/Sydney" R -e 'install.packages("tidyverse")'
 ```
 
+::: {.callout-note}
+Systemd is [now available in WSL](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/) and enabling it may be an alternative way to solve this issue.
+:::
+
+
 # What happens
 
 When I try to install tidyverse I get this error:
