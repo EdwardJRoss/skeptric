@@ -1,7 +1,7 @@
 ---
 categories:
 - data
-- bash
+- linux
 date: '2020-03-23T21:48:51+11:00'
 image: /images/history_count.png
 title: Data Transformations in the Shell

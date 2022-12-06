@@ -1,6 +1,7 @@
 ---
 categories:
-- git
+- linux
+- programming
 date: '2020-07-22T08:43:14+10:00'
 image: /images/git_identities.svg
 title: Git Folder Identities

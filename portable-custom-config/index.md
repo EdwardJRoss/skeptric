@@ -1,8 +1,7 @@
 ---
 categories:
-- git
 - emacs
-- bash
+- linux
 date: '2020-07-23T08:00:00+10:00'
 image: /images/dotfiles.png
 title: Customising Portable Dotfiles

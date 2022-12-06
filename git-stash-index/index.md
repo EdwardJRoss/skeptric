@@ -1,6 +1,6 @@
 ---
 categories:
-- git
+- linux
 date: '2020-09-10T08:00:00+10:00'
 image: /images/git_stash.png
 title: Git Stash Changesets

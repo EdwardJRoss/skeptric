@@ -2,7 +2,6 @@
 categories:
 - data
 - commoncrawl
-- bash
 date: '2020-06-28T08:00:00+10:00'
 image: /images/nquad_grep.png
 title: Processing RDF nquads with grep
