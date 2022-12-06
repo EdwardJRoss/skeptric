@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- gcp
 date: '2021-04-11T08:00:00+10:00'
 image: /images/cloud_run_autoscaling.png
 title: Machine Learning Serving on Google CloudRun

@@ -1,6 +1,4 @@
 ---
-categories:
-- analytics
 date: '2020-10-14T23:17:16+11:00'
 image: /images/melb_analytics.png
 title: Finding Analytics in Melbourne

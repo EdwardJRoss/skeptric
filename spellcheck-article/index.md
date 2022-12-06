@@ -1,6 +1,4 @@
 ---
-categories:
-- ''
 date: '2021-07-12T15:12:29+10:00'
 image: /images/spelling-fixes.png
 title: Spellchecking Articles with Aspell

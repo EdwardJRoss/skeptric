@@ -1,6 +1,6 @@
 ---
 categories:
-- stats
+- statistics
 date: '2022-02-07T15:39:59+11:00'
 image: /images/beta_binomial_simulation_logliklihood.png
 title: Pooling Proportions with Empirical Bayes
@@ -245,14 +245,14 @@ r <- rootSolve::multiroot(
 
 #  $root
 # [1] 10.31818 18.43713
-# 
+#
 # $f.root
 #            d1            d2
 #  1.602294e-07 -1.824109e-07
-# 
+#
 # $iter
 # [1] 6
-# 
+#
 # $estim.precis
 # [1] 1.713201e-07
 ```

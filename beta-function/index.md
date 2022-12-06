@@ -1,6 +1,6 @@
 ---
 categories:
-- math
+- maths
 date: '2020-05-13T21:11:17+10:00'
 image: /images/beta_function_contour.png
 title: Beta Function

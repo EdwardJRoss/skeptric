@@ -1,7 +1,7 @@
 ---
 categories:
 - stan
-- R
+- r
 date: '2021-08-14T22:13:04+10:00'
 image: /images/mcmc_chain_not_converge.png
 title: Fixing sampler errors in probit regression with rstanarm
@@ -11,8 +11,8 @@ I was working through problem 15.5 of [*Regression and Other Stories*](https://a
 I used a model I had built on the [National Election Survey dataset](https://github.com/avehtari/ROS-Examples/tree/master/NES) (on `rstanarm` 2.21.1):
 
 ```R
-fit_nes_probit <- 
- rstanarm::stan_glm(rvote ~ income_int_std + gender + race + 
+fit_nes_probit <-
+ rstanarm::stan_glm(rvote ~ income_int_std + gender + race +
                            region + religion + education_cts +
                            advanced_degree + party + ideology3 +
                            gender : party,
@@ -28,12 +28,12 @@ Chain 1: Rejecting initial value:
 Chain 1:   Log probability evaluates to log(0), i.e. negative infinity.
 Chain 1:   Stan can't start sampling from this initial value.
 ...
-Chain 1: 
-Chain 1: Initialization between (-2, 2) failed after 100 attempts. 
+Chain 1:
+Chain 1: Initialization between (-2, 2) failed after 100 attempts.
 Chain 1:  Try specifying initial values, reducing ranges of constrained values, or reparameterizing the model.
 [1] "Error in sampler$call_sampler(args_list[[i]]) : Initialization failed."
 error occurred during calling the sampler; sampling not done
-Error in check_stanfit(stanfit) : 
+Error in check_stanfit(stanfit) :
   Invalid stanfit object produced please report bug
 ```
 
@@ -44,8 +44,8 @@ This surprised me because I found it worked fine with `link="logit"`, that is lo
 The solution was to set a lower scale value in the prior (the default is 4):
 
 ```R
-fit_nes_probit <- 
- rstanarm::stan_glm(rvote ~ income_int_std + gender + race + 
+fit_nes_probit <-
+ rstanarm::stan_glm(rvote ~ income_int_std + gender + race +
                            region + religion + education_cts +
                            advanced_degree + party + ideology3 +
                            gender : party,
@@ -90,7 +90,7 @@ prior_summary(fit)
 Which resulted in:
 
 ```
-Priors for model 'fit' 
+Priors for model 'fit'
 ------
 Intercept (after predictors centered)
  ~ normal(location = 0, scale = 4)
@@ -139,7 +139,7 @@ library(dplyr)
 
 nes <- foreign::read.dta('https://raw.githubusercontent.com/avehtari/ROS-Examples/master/NES/data/nes5200_processed_voters_realideo.dta')
 
-nes92 <- 
+nes92 <-
 nes %>%
 filter(year == 1992) %>%
 # Only people who actually voted republican or democrat

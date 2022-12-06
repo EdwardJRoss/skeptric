@@ -2,7 +2,7 @@
 categories:
 - sql
 - legacy code
-- dplyr
+- r
 date: '2020-09-18T19:12:08+10:00'
 image: /images/dbplyr_diff.png
 title: Diffing in SQL
@@ -22,7 +22,7 @@ A simple way of checking whether two tables are the same is to use `UNION ALL`.
 This query will return all the rows that occur in only one or the other table, and which table ('old' or 'new') that they occur in.
 
 ```sql
-SELECT col_1, col_2, ..., col_n, 
+SELECT col_1, col_2, ..., col_n,
        count(*) as mult,
        max(source) as source
 FROM
@@ -60,7 +60,7 @@ The union all is still useful for checking both tables have the *same keys*; we 
 For example to get all rows where the column `val` changes by more than 5% you could use something like:
 
 ```sql
-SELECT * 
+SELECT *
 FROM A
 JOIN B on a.key_1 = b.key_1 and a.key_2 = b.key_2 ...
 WHERE a.val NOT BETWEEN 0.95 * b.val and 1.05 * b.val

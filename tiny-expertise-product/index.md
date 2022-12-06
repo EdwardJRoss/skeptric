@@ -1,6 +1,4 @@
 ---
-categories:
-- business
 date: '2020-11-18T21:53:43+11:00'
 image: /images/minature_book.jpg
 title: Packaging your Expertise in a Tiny Product

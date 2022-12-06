@@ -1,7 +1,6 @@
 ---
 categories:
 - statistics
-- multilevel
 date: '2021-09-17T12:34:20+10:00'
 image: /images/heirarchical.webp
 title: Learning about Multilevel Models

@@ -1,7 +1,7 @@
 ---
 categories:
 - data
-- math
+- maths
 date: '2020-05-12T20:50:23+10:00'
 image: /images/binomial_spread.png
 title: From Bernoulli to Binomial Distributions

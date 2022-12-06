@@ -1,6 +1,6 @@
 ---
 categories:
-- math
+- maths
 date: '2020-05-21T21:55:35+10:00'
 image: /images/set_containment.png
 title: Probability Jaccard

@@ -103,9 +103,7 @@ An approach I've found effective for refactoring code analytics code is:
 
 - Break the code into small steps
 - Create a small, representative test dataset
--
-
-Seeing the tree from the branches
+- Seeing the tree from the branches
 
 
 

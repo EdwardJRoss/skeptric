@@ -1,6 +1,5 @@
 ---
 categories:
-- blog
 - programming
 date: '2020-10-31T21:29:34+11:00'
 image: /images/jamstack.png

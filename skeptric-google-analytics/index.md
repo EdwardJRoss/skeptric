@@ -1,7 +1,4 @@
 ---
-categories:
-- analytics
-- data
 date: '2020-11-08T16:21:30+11:00'
 image: /images/google_analytics_skeptric.png
 title: Insights From Google Analytics for a Small Blog

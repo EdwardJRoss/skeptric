@@ -1,7 +1,6 @@
 ---
 categories:
 - general
-- lifehacks
 date: '2020-10-30T19:40:25+11:00'
 image: /images/anki-icon.svg
 title: Social Flashcards
@@ -12,7 +11,7 @@ When someone introduces themselves I'm normally a bit anxious and in my own head
 It takes conscious effort to remember their name, let alone the names of their family or facts about them.
 
 However remembering things about people are really important for building relationships.
-If you take an interest in other people's lives they will be more receptive to you. 
+If you take an interest in other people's lives they will be more receptive to you.
 So having a bad memory for these things puts me at a disadvantage, and I often feel awkward that I've forgotten someone's partner's name.
 
 [Spaced repetition](https://en.wikipedia.org/wiki/Spaced_repetition) is a very effective tool to memorise facts, and there are great tools such as [Anki](https://apps.ankiweb.net/) for doing this.

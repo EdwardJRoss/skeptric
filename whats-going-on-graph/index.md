@@ -1,6 +1,4 @@
 ---
-categories:
-- ''
 date: '2020-05-29T16:26:42+10:00'
 draft: true
 image: ''

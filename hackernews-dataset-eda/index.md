@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- machine-learning
 - hnbooks
 date: '2022-06-21T21:00:00+10:00'
 image: /images/hackernews_eda.png
@@ -440,9 +439,9 @@ df['timestamp'].dt.month.value_counts().sort_index().plot()
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_20_1.png)
-    
+
 
 
 Looking at the daily traffic it look like there may be weekly effects, but aside from a spike towards the end of January it's fairly consistent.
@@ -460,9 +459,9 @@ df['timestamp'].dt.date.value_counts().sort_index().plot()
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_22_1.png)
-    
+
 
 
 Most posts are made on the weekdays
@@ -503,9 +502,9 @@ df['timestamp'].dt.hour.value_counts().sort_index().plot()
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_26_1.png)
-    
+
 
 
 # Story
@@ -1108,7 +1107,7 @@ Every story has a `by` unless it's deleted or dead.
 
 >  **How do I make a link in a text submission?**
 >
-> You can't. This is to prevent people from submitting a link with their comments in a privileged position at the top of the page. If you want to submit a link with comments, just submit it, then add a regular comment. 
+> You can't. This is to prevent people from submitting a link with their comments in a privileged position at the top of the page. If you want to submit a link with comments, just submit it, then add a regular comment.
 
 This seems to be true most of the time
 
@@ -1420,9 +1419,9 @@ The scores look like they follow a sort of power law.
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_42_1.png)
-    
+
 
 
 And descendants follow a similar path
@@ -1447,9 +1446,9 @@ And descendants follow a similar path
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_44_1.png)
-    
+
 
 
 It looks like the titles must be below around 80 characters and are typically around 60
@@ -1467,9 +1466,9 @@ story.title.fillna('').str.len().plot.hist(bins=20)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_46_1.png)
-    
+
 
 
 The text can be much longer and follows a decaying distribution
@@ -1487,9 +1486,9 @@ story.text.fillna('').str.len().plot.hist(bins=20, logy=True)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_48_1.png)
-    
+
 
 
 Some URLs can be *very* long (I guess they can have all sorts of query parameters)
@@ -1507,9 +1506,9 @@ story.url.fillna('').str.len().plot.hist(bins=20, logy=True)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_50_1.png)
-    
+
 
 
 
@@ -1568,9 +1567,9 @@ story_url_host_counts.plot.hist(logy=True, bins=20)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_55_1.png)
-    
+
 
 
 There are some power users that post a *lot* of stories
@@ -1624,9 +1623,9 @@ story_by_counts.plot.hist(logy=True, bins=20)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_59_1.png)
-    
+
 
 
 # Comments
@@ -1967,7 +1966,7 @@ df['parent'].map(parent_dict, na_action='ignore')
     28626089    28625485
     27143346    27142955
     29053108    29052012
-                  ...   
+                  ...
     27367848        <NA>
     28052800    28049873
     28052805    28046997
@@ -1992,12 +1991,12 @@ df['parent0'] = df['parent']
 for idx in tqdm(range(MAX_DEPTH)):
     last_col = f'parent{idx}'
     col = f'parent{idx+1}'
-    
+
     df[col] = df[last_col].map(parent_dict, na_action='ignore')
     if df[col].isna().all():
         del df[col]
         break
-    
+
 ```
 
 
@@ -2698,9 +2697,9 @@ comments['depth'].value_counts().plot(logy=True)
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_81_1.png)
-    
+
 
 
 We can check the type of the root (we get `<NA>` when it's not in the tree).
@@ -2722,7 +2721,7 @@ df.merge(comments['root'], left_index=True, right_on='root', how='right')['type'
 
 
 
-Let's compare the `descendants` column with the 
+Let's compare the `descendants` column with the
 
 
 ```python
@@ -2742,7 +2741,7 @@ df['root'].value_counts()
     25661474    2638
     26347654    2372
     26487854    2155
-                ... 
+                ...
     27038587       1
     26640257       1
     28404872       1
@@ -2777,9 +2776,9 @@ children_counts.plot.scatter('descendants', 'children')
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_88_1.png)
-    
+
 
 
 
@@ -2797,9 +2796,9 @@ children_counts.plot.scatter('descendants', 'diff')
 
 
 
-    
+
 ![png](/post/hackernews-dataset-eda/output_89_1.png)
-    
+
 
 
 The cases where descendants >> children they were posted near our cutoff date, the end of 2021.
@@ -3949,14 +3948,14 @@ HackerNews has it's own formatting specification called [formatdoc](https://news
 >
 > If your url gets linked incorrectly, put it in <angle brackets> and it  should work.
 
-    
+
 The concepts are:
-    
+
 * italics
 * paragraphs
 * code
 * links
-    
+
 In our dataset it's been rendered as HTML
 
 

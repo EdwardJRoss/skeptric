@@ -1,6 +1,5 @@
 ---
 categories:
-- law
 - python
 date: '2021-07-09T22:15:35+10:00'
 image: /images/sentencing_remarks.png

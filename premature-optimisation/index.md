@@ -1,7 +1,5 @@
 ---
 categories:
-- arm
-- assembly
 - programming
 date: '2021-05-25T20:53:02+10:00'
 image: /images/arm_draw_character.png

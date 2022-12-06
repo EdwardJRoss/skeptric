@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- machine-learning
 date: '2022-05-21T08:00:00+10:00'
 image: /images/fashion_mnist_prototypes.png
 title: Fashion MNIST with Prototype Methods

@@ -1,8 +1,4 @@
 ---
-categories:
-- android
-- email
-- FLOSS
 date: '2020-03-25T00:04:28+11:00'
 image: /images/davx5-logo.svg
 title: Syncing Calendars and Contacts to Android with DAVx5

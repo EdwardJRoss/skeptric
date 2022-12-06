@@ -1,6 +1,6 @@
 ---
 categories:
-- hnbook
+- hnbooks
 date: '2022-09-16T20:57:56+10:00'
 image: /images/hnbook_bad_ner.png
 title: How Not to Do Book Named Entity Recognition

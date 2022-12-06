@@ -1,7 +1,6 @@
 ---
 categories:
 - programming
-- teaching
 date: '2020-08-30T08:00:00+10:00'
 image: /images/learning_to_code.jpg
 title: Teaching Programming by Editing Code

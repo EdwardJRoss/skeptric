@@ -1,8 +1,8 @@
 ---
 categories:
-- Presto
-- Athena
-- SQL
+- presto
+- athena
+- sql
 date: '2020-03-26T08:00:00+11:00'
 image: /images/sql_window_function.png
 title: Getting most recent value in Presto with max_by
@@ -28,7 +28,7 @@ In standard SQL you can do this with a window function by adding a row_number to
 ```SQL
 SELECT user_id, status
 FROM (
-    SELECT 
+    SELECT
       user_id,
       status,
       row_number() OVER (PARTITION BY user_id ORDER BY time DESC) AS rn
@@ -75,12 +75,12 @@ One more trick Presto has is `count_if` which removes case statements from aggre
 For example if we wanted the number of logged in and logged out users by country in a pivoted view for standard SQL we could write
 
 ```SQL
-SELECT 
+SELECT
   country,
   count(CASE WHEN status = 'logged-in' THEN 1 end) AS logged_in_users,
   count(CASE WHEN status = 'logged-out' THEN 1 end) AS logged_out_users
 FROM (
-    SELECT 
+    SELECT
       user_id,
       country,
       status,
@@ -99,7 +99,7 @@ SELECT country,
        count_if(status = 'logged-in') AS logged_in_users,
        count_if(status = 'logged-out') AS logged_out_users
 FROM (
-    SELECT 
+    SELECT
       user_id,
       max_by(country, time) AS country,
       max_by(status, time) AS status

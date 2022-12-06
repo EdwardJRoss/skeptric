@@ -1,6 +1,5 @@
 ---
 categories:
-- firefox
 - emacs
 - linux
 date: '2021-04-14T21:08:38+10:00'

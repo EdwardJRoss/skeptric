@@ -1,6 +1,4 @@
 ---
-categories:
-- planning
 date: '2020-09-19T08:00:00+10:00'
 image: /images/poida.jpg
 title: Some Ideas for Recurring Articles

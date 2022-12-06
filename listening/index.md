@@ -1,6 +1,4 @@
 ---
-categories:
-- communication
 date: '2020-05-18T16:52:49+10:00'
 image: /images/listening.jpg
 title: Listening

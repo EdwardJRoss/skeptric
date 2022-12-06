@@ -1,6 +1,4 @@
 ---
-categories:
-- communication
 date: '2020-07-30T08:00:00+10:00'
 image: /images/no_talking.png
 title: Speaking Quota

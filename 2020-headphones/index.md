@@ -1,6 +1,4 @@
 ---
-categories:
-- tools
 date: '2020-10-21T21:27:08+11:00'
 image: /images/jabra85h.jpg
 title: Bluetooth Headphones in 2020
@@ -28,5 +26,5 @@ The Bose has touch control which is reportedly a bit finicky, and there's been s
 While the Jabra doesn't have quite as good active noise cancelling or sound quality as the Bose, it's very well designed and has good call quality (for headphones without a boom).
 
 I ordered them from the Microsoft Store one afternoon and incredibly got them delivered the next morning.
-So far I've found them good, but I'm yet to test them with the Jabra Link 370. 
+So far I've found them good, but I'm yet to test them with the Jabra Link 370.
 Having reading a lot of positive experiences with the Jabra Link on Reddit, I'm expecting it to work well.

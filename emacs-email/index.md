@@ -1,6 +1,5 @@
 ---
 categories:
-- email
 - emacs
 - linux
 date: '2020-03-24T23:05:22+11:00'

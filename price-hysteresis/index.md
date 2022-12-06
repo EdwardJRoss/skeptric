@@ -1,7 +1,6 @@
 ---
 categories:
 - data
-- economics
 date: '2021-04-07T07:17:13+10:00'
 image: /images/hysteresis.svg
 title: Price Hysteresis

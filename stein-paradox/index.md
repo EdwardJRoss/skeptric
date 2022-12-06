@@ -1,6 +1,6 @@
 ---
 categories:
-- math
+- maths
 - data
 date: '2021-10-10T20:48:10+11:00'
 image: /images/stein.png

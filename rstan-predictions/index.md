@@ -3,7 +3,7 @@ categories:
 - stan
 - r
 - data
-- bayesian
+- statistics
 date: '2021-08-20T14:04:27+10:00'
 image: /images/mtcars_posterior_check.png
 title: Making Bayesian Predictions with Stan and R
@@ -66,13 +66,13 @@ predict.my_linstan <- function(object, newdata=NULL) {
     if (is.null(newdata)) {
         newdata = object$data
     }
-    
+
     mm <- model.matrix(delete.response(object$terms), data=newdata)
-    
+
     coef_matrix <- as.matrix(object$fit)
     # Calculate the central coefficients
     coefs <- apply(coef_matrix, 2, median)
-    
+
     # Calculate b * x
     preds <- (mm %*% coefs[colnames(mm)])[,1]
     unlist(preds)
@@ -84,7 +84,7 @@ predict.my_linstan <- function(object, newdata=NULL) {
 For making posterior draws we can define `posterior_predict` in a way compatible with `rstanarm`.
 
 ```R
-posterior_predict <- function (object, ...) 
+posterior_predict <- function (object, ...)
 {
     UseMethod("posterior_predict")
 }
@@ -115,18 +115,18 @@ posterior_predict.my_linstan <- function(object, newdata=NULL, draws=NULL) {
     if (is.null(newdata)) {
         newdata = object$data
     }
-    
+
     mm <- model.matrix(delete.response(object$terms), data=newdata)
-    
+
     coef_matrix <- as.matrix(object$fit)
     if (!is.null(draws)) {
         coef_matrix <- coef_matrix[sample.int(nrow(coef_matrix), draws),]
     }
-    
+
     point_preds <- coef_matrix[,colnames(mm)] %*% t(mm)
     # Note this could do the wrong thing if "sigma" is a coefficient
     preds <- rnorm_matrix(point_preds, coef_matrix[,"sigma"])
-    
+
     preds
 }
 ```

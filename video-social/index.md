@@ -1,6 +1,4 @@
 ---
-categories:
-- life
 date: '2020-04-09T19:47:08+10:00'
 image: /images/groupcall.jpg
 title: Remote social catchups are less intimate

@@ -1,6 +1,4 @@
 ---
-categories:
-- products
 date: '2020-08-19T22:55:13+10:00'
 image: /images/monitor.svg
 title: My next monitor in 2020

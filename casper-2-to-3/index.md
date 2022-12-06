@@ -1,6 +1,4 @@
 ---
-categories:
-- blog
 date: '2020-07-26T08:00:00+10:00'
 image: /images/casper2to3.png
 title: Hugo Casper 2 to 3

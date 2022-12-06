@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- json
 date: '2021-01-28T19:18:14+11:00'
 image: /images/json_extract_dsl.png
 title: Extracting Fields from JSON with a Python DSL
@@ -65,7 +64,7 @@ def compose(*functions):
 def extractor(path: str, sep: str='.') -> Callable[[Any], Any]:
     steps = [convert_integers(x) for x in path.split(sep)]
     return compose(*map(itemgetter, reversed(steps)))
-    
+
 def extract2(obj: Any, path: str, sep: str='.', default=None) -> Any:
   try:
     return extractor(path, sep)(obj)

@@ -1,7 +1,7 @@
 ---
 categories:
 - data
-- bayes
+- statistics
 date: '2021-09-20T13:53:33+10:00'
 image: /images/beta_distribution.png
 title: Bernoulli Trials and the Beta Distribution
@@ -15,7 +15,7 @@ The only possible values are failure (represented by 0) with probability $\theta
 
 The probability distribution can be conveniently written as ${\mathbb P}(\gamma = k) = \theta^{k}(1-\theta)^{1-k}$, since ${\mathbb P}(\gamma = 1) = \theta^{1}(1-\theta)^{0} = \theta$ and ${\mathbb P}(\gamma = 0) = \theta^{0}(1-\theta)^{1} = 1 - \theta$.
 This form is convenient because for multiple variables the probabilities multiply (since the variables are independent), and the exponents add, giving a simple expression.
-In particular 
+In particular
 
 $$\begin{align}
 {\mathbb P}(\gamma_1=k_1,\ldots,\gamma_N=k_N) &= {\mathbb P}(\gamma_1=1) \cdots {\mathbb P}(\gamma_N=k_N) \\
@@ -91,7 +91,7 @@ The cost of this is having to specify a prior (and some extra calculations).
 ### Mean and variance
 
 The mean can be calculated using the [properties of the Beta function](/beta-function).
-Given $\Theta \sim {\rm Beta}(\alpha, \beta)$ then 
+Given $\Theta \sim {\rm Beta}(\alpha, \beta)$ then
 
 $$\begin{align}
 {\mathbb E}(\Theta) &= \int_0^1 \theta {\mathbb P}(\Theta=\theta) \, {\rm d}\theta\\
@@ -112,7 +112,7 @@ $$\begin{align}
 \end{align}$$
 
 
-This then gives variance 
+This then gives variance
 
 $$\begin{align}
 {\mathbb V}(\Theta) &= {\mathbb E}\left((\Theta - {\mathbb E}(\Theta))^2\right)\\

@@ -1,6 +1,5 @@
 ---
 categories:
-- writing
 - python
 date: '2020-08-02T08:00:00+10:00'
 image: /images/jupyter-blog.png
@@ -54,12 +53,12 @@ It seems that the method to extract front matter is quite fragile.
 ```
 # Writing Blog Posts with Jupyter and Hugo
 
-Tags: writing, python  
+Tags: writing, python
 
 date: 2020-08-02T08:00:00+10:00
 
 feature_image: /images/jupyter-blog.png
-  
+
 <!--eofm-->
 ```
 

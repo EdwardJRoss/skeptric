@@ -1,6 +1,4 @@
 ---
-categories:
-- ''
 date: '2020-10-28T21:22:50+11:00'
 image: /images/sleep.png
 title: Sleep

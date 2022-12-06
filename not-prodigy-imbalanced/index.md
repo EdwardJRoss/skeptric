@@ -1,7 +1,7 @@
 ---
 categories:
-- hnbook
-- prodigy
+- hnbooks
+- annotation
 date: '2022-10-11T18:40:33+11:00'
 draft: true
 image: /images/

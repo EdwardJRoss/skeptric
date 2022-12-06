@@ -1,7 +1,6 @@
 ---
 categories:
 - data
-- clustering
 date: '2020-05-25T20:53:28+10:00'
 image: /images/cluster.svg
 title: Clustering for Exploration

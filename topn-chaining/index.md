@@ -2,8 +2,7 @@
 categories:
 - python
 - pandas
-- R
-- dplyr
+- r
 date: '2020-03-22T23:34:56+11:00'
 image: /images/pandas.png
 title: Second most common value with Pandas

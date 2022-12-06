@@ -1,8 +1,6 @@
 ---
 categories:
-- web
 - python
-- javascript
 date: '2020-05-19T19:32:41+10:00'
 image: /images/cors_error.png
 title: Serving Static Assets with Python Simple Server

@@ -1,7 +1,7 @@
 ---
 categories:
 - python
-- prodigy
+- annotation
 date: '2022-10-21T22:28:46+11:00'
 image: /images/spacy_download_trf.jpg
 title: Preventing SpaCy from re-downloading large models

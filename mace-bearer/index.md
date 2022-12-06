@@ -1,7 +1,6 @@
 ---
 categories:
 - general
-- humour
 date: '2020-07-17T17:20:18+10:00'
 image: /images/made_of_meat.png
 title: Mace-Bearer

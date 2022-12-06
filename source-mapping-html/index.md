@@ -2,7 +2,6 @@
 categories:
 - python
 - html
-- web
 - data
 - nlp
 date: '2022-06-17T08:00:00+10:00'

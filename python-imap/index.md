@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- email
 date: '2021-04-12T08:00:00+10:00'
 image: /images/imap_tools.png
 title: Reading Email in Python with imap-tools

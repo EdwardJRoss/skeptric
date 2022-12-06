@@ -3,7 +3,7 @@ categories:
 - stan
 - r
 - data
-- bayesian
+- statistics
 date: '2021-08-19T19:01:51+10:00'
 image: /images/glm_priors.png
 title: Stan Linear Priors
@@ -63,7 +63,7 @@ data {
   int<lower=0> N;       // Number of data points
   int<lower=0> K;       // Number of predictors
   matrix[N, K] X;       // Predictor matrix
-  real y[N];            // Observations 
+  real y[N];            // Observations
 
   // NEW: Data specifying priors
   vector[K] prior_location;                // Coefficient Normal Prior - centre
@@ -83,7 +83,7 @@ model {
   beta ~ normal(prior_location, prior_scale);
   alpha ~ normal(prior_intercept_location - prior_intercept_predictor * beta, prior_intercept_scale);
   sigma ~ exponential(prior_aux_rate);
-  
+
   // Target Density
   y ~ normal(alpha + X * beta, sigma); // target density
 }
@@ -109,26 +109,26 @@ fit_stan_linear <- function(formula, data,
                             prior_aux_rate=FALSE) {
     y <- model.response(model.frame(formula, data))
     X <- remove_intercept_from_model(model.matrix(formula, data))
-    
+
     K <- ncol(X)
     N <- nrow(data)
-    
+
     if (isFALSE(prior_location)) {
         prior_location <- rep(0, K)
     }
-    
+
     if (isFALSE(prior_scale)) {
        prior_scale <-  2.5 * sd(y) / apply(X, 2, sd)
     }
-    
+
      if (isFALSE(prior_intercept_scale)) {
        prior_intercept_scale <- 2.5 * sd(y)
     }
-    
+
     if (isFALSE(prior_aux_rate)) {
        prior_aux_rate <- 1/sd(y)
     }
-    
+
     if (isFALSE(prior_intercept_location)) {
         prior_intercept_location <- mean(y)
         prior_intercept_predictor <- matrix(apply(X, 2, mean), ncol=K)
@@ -138,10 +138,10 @@ fit_stan_linear <- function(formula, data,
         prior_intercept_location <- prior_intercept_location
         prior_intercept_predictor <- matrix(rep(0,K), ncol=K)
     }
-    
-    
+
+
     fit <- rstan::stan(
-        file = "linear.stan", 
+        file = "linear.stan",
         data = list(
             N = nrow(X),
             K = ncol(X),
@@ -157,9 +157,9 @@ fit_stan_linear <- function(formula, data,
           ),
         ...
         )
-    
+
     names(fit) <- get_linear_names(names(fit), colnames(X))
-    
+
     structure(list(fit=fit, formula=formula, data=data), class=c("my_linstan"))
 }
 ```

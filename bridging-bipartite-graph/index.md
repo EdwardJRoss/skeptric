@@ -1,7 +1,6 @@
 ---
 categories:
 - data
-- graph
 - presto
 - athena
 date: '2020-05-26T15:50:02+10:00'

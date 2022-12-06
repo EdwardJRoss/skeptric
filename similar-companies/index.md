@@ -3,7 +3,6 @@ categories:
 - jobs
 - nlp
 - data
-- graphs
 date: '2020-05-30T20:30:57+10:00'
 image: /images/similar_companies.png
 title: Finding Duplicate Companies with Cliques
@@ -41,7 +40,7 @@ similar_connected = sorted(nx.connected_components(G), key=len)
 We can then extract from these the cases where the group contains at least 5 ads and they correspond to different companies in the source dataframe `df`.
 
 ```python
-multicompany = [list(idxs) for idxs in similar_connected 
+multicompany = [list(idxs) for idxs in similar_connected
                 if len(idxs) >= 5
                 and (df
                      .iloc[list(idxs)]

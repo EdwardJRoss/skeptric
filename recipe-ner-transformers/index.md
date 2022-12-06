@@ -1,7 +1,6 @@
 ---
 categories:
 - nlp
-- transformers
 - python
 - ner
 date: '2022-04-09T22:47:00+10:00'

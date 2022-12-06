@@ -1,7 +1,6 @@
 ---
 categories:
 - data
-- geocoding
 date: '2020-08-26T15:28:43+10:00'
 image: /images/coarse_geocoding.png
 title: Rough Coarse Geocoding

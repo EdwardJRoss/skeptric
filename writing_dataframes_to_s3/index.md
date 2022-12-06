@@ -1,7 +1,6 @@
 ---
 categories:
 - pandas
-- aws
 - python
 date: '2021-05-28T19:36:34+10:00'
 image: /images/s3fs.png

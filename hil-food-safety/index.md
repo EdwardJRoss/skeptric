@@ -1,6 +1,5 @@
 ---
 categories:
-- cv
 - books
 - annotation
 date: '2022-08-10T08:00:00+10:00'

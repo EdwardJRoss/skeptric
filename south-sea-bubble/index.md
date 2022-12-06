@@ -1,6 +1,4 @@
 ---
-categories:
-- finance
 date: '2020-09-02T20:31:46+10:00'
 image: /images/south_sea_bubble.png
 title: South Sea Bubble

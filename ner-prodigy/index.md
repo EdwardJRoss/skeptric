@@ -1,14 +1,14 @@
 ---
 categories:
 - nlp
-- prodigy
+- annotation
 - data
 date: '2020-04-02T22:13:34+11:00'
 image: /images/prodigy_jobtitle_ner_results.png
 title: Training a job title NER with Prodigy
 ---
 
-In a couple of hours I trained a reasonable job title Named Entity Recogniser for job ad titles using [Prodigy](https://prodi.gy), with over 70% accuracy. 
+In a couple of hours I trained a reasonable job title Named Entity Recogniser for job ad titles using [Prodigy](https://prodi.gy), with over 70% accuracy.
 While 70% doesn't sound great it's a bit ambiguous what a job title is, and getting exactly the bounds of the job title can be a hard problem.
 It's definitely good enough to be useful, and could be improved.
 

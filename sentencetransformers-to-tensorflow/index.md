@@ -2,7 +2,6 @@
 categories:
 - python
 - nlp
-- tensorflow
 date: '2022-08-23T08:00:00+10:00'
 image: /images/sentencetransformers-to-tensorflow.png
 title: Converting SentenceTransformers to Tensorflow
@@ -119,7 +118,7 @@ This kind of model can be converted into a Keras model in the following steps:
 ```python
 import sentence_transformers
 import tensorflow as tf
-from transformers import AutoTokenizer, TFAutoModel 
+from transformers import AutoTokenizer, TFAutoModel
 
 def sentencetransformer_to_tensorflow(model_path: str) -> tf.keras.Model:
     """Convert SentenceTransformer model at model_path to TensorFlow Keras model"""
@@ -128,7 +127,7 @@ def sentencetransformer_to_tensorflow(model_path: str) -> tf.keras.Model:
 
     input_ids = tf.keras.Input(shape=(None,), dtype=tf.int32)
     attention_mask = tf.keras.Input(shape=(None,), dtype=tf.int32)
-    
+
     token_type_ids = tf.keras.Input(shape=(None,), dtype=tf.int32)
 
     # 2. Get the Hidden State
@@ -142,7 +141,7 @@ def sentencetransformer_to_tensorflow(model_path: str) -> tf.keras.Model:
     mean_pool = tf.keras.layers.GlobalAveragePooling1D()(
         hidden_state
     )
-    
+
     # 4. Dense layer
     sentence_transformer_model = SentenceTransformer(model_path, device="cpu")
     dense_layer = sentence_transformer_model[-1]
@@ -228,7 +227,7 @@ You may have noticed in the code above for step 2 we called `tf_model.bert`, rat
 with TemporaryDirectory() as tf_output_dir:
     tf_model.save(tf_output_dir)
     tf_model_2 = tf.keras.models.load_model(tf_output_dir)
-    
+
 assert np.isclose(tf_model_2(tf_tokens).numpy(),
                   model.encode(input_text),
                   atol=1e-5).all()
@@ -266,7 +265,7 @@ model
 
 
     SentenceTransformer(
-      (0): Transformer({'max_seq_length': 512, 'do_lower_case': False}) with Transformer model: BertModel 
+      (0): Transformer({'max_seq_length': 512, 'do_lower_case': False}) with Transformer model: BertModel
       (1): Pooling({'word_embedding_dimension': 384, 'pooling_mode_cls_token': False, 'pooling_mode_mean_tokens': True, 'pooling_mode_max_tokens': False, 'pooling_mode_mean_sqrt_len_tokens': False})
       (2): Dense({'in_features': 384, 'out_features': 256, 'bias': True, 'activation_function': 'torch.nn.modules.activation.Tanh'})
     )
@@ -350,7 +349,7 @@ model[0]
 
 
 
-    Transformer({'max_seq_length': 512, 'do_lower_case': False}) with Transformer model: BertModel 
+    Transformer({'max_seq_length': 512, 'do_lower_case': False}) with Transformer model: BertModel
 
 
 

@@ -1,6 +1,6 @@
 ---
 categories:
-- SQL
+- sql
 date: '2020-03-27T08:00:43+11:00'
 image: /images/moving_average.png
 title: Moving Averages in SQL
@@ -22,10 +22,10 @@ My recommendation in general is to use a self-join with a weights table ([fiddle
 ```SQL
 SELECT pages.date,
        max(pages.pageviews) as pageviews,
-       CASE 
+       CASE
        WHEN pages.date - (select min(date) from pages) >= 2
        THEN sum(weight * ma_pages.pageviews)
-       END as weighted_moving_average 
+       END as weighted_moving_average
 FROM pages
 JOIN pages AS ma_pages ON pages.date - ma_pages.date BETWEEN 0 AND 2
 JOIN weights ON idx = pages.date - ma_pages.date
@@ -232,7 +232,7 @@ The basic approach is to join the table to itself over the range of dates; this 
 
 ```SQL
 -- Only use if doesn't have missing data
-SELECT pages.date, 
+SELECT pages.date,
       max(pages.pageviews) as pageviews,
       avg(ma_pages.pageviews) as moving_average
 FROM pages
@@ -247,7 +247,7 @@ In our example for 2020-02-09 the denominator for the average is 2 (because ther
 As before we can fix this by inserting 0 pageviews for the missing days ([fiddle](Fiddle: https://dbfiddle.uk/?rdbms=postgres_11&fiddle=b4ee2028eba4d6adbd7a2518c02d2bc3)).
 
 ```SQL
-SELECT pages.date, 
+SELECT pages.date,
       max(pages.pageviews) as pageviews,
       avg(ma_pages.pageviews) as moving_average
 FROM (
@@ -282,7 +282,7 @@ For example if we want the most recent data point to have a weight of 0.6, the m
 | 2   | 0.16   |
 
 Not that we could reproduce the moving average by having a table with each weight being equal and adding to 1
- 
+
 | idx | weight |
 | --- | -----  |
 | 0   | 0.333  |
@@ -295,10 +295,10 @@ Note that we censor the first two rows with a CASE statement, otherwise they wil
 ```SQL
 SELECT pages.date,
        max(pages.pageviews) as pageviews,
-       CASE 
+       CASE
        WHEN pages.date - (select min(date) from pages) >= 2
        THEN sum(weight * ma_pages.pageviews)
-       END as weighted_moving_average 
+       END as weighted_moving_average
 FROM pages
 JOIN pages AS ma_pages ON pages.date - ma_pages.date BETWEEN 0 AND 2
 JOIN weights ON idx = pages.date - ma_pages.date
@@ -315,10 +315,10 @@ But even if you don't have access to creating (temporary) tables, you may be abl
 ```SQL
 SELECT pages.date,
        max(pages.pageviews) as pageviews,
-       CASE 
+       CASE
        WHEN pages.date - (select min(date) from pages) >= 2
        THEN sum(weight * ma_pages.pageviews)
-       END as weighted_moving_average 
+       END as weighted_moving_average
 FROM pages
 JOIN pages AS ma_pages ON pages.date - ma_pages.date BETWEEN 0 AND 2
 JOIN (SELECT idx, 1/(2 + 1.) as weight FROM (VALUES (0, 1, 2)) as t(idx)) weights ON

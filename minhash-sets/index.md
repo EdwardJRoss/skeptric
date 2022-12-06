@@ -3,7 +3,6 @@ categories:
 - jobs
 - nlp
 - python
-- graph
 date: '2020-05-11T08:44:48+10:00'
 image: /images/different_jobs_similar_path.png
 title: Minhash Sets
@@ -33,7 +32,7 @@ def find(x, parents):
     while parents.get(x, x) != x:
         x = parents[x]
     return x
-    
+
 def union(a, b, parents):
     root_a = find(a, parents)
     root_b = find(b, parents)
@@ -47,7 +46,7 @@ For large sets these root structures can get quite big and it makes sense to [*c
 I won't worry about that here.
 
 Here is a convenience method to get all the partitions from the parents dictionary:
-            
+
 ```python
 from collections import defaultdict
 def find_sets(parents):
@@ -87,7 +86,7 @@ def lsh_similar_sets(minhashes, bands, rows):
     lsh = MinHashLSH(num_perm=num_perm, params=(bands, rows))
     for i, mh in enumerate(minhashes):
         lsh.insert(i, mh)
-    
+
     parents = {}
     for hashtable in lsh.hashtables:
         for items in hashtable._dict.values():

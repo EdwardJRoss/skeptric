@@ -1,5 +1,4 @@
 ---
-categories: []
 date: 2019-08-02 10:39:06+10:00
 description: ''
 draft: true

@@ -1,7 +1,6 @@
 ---
 categories:
 - excel
-- datavis
 date: '2020-12-11T18:36:15+11:00'
 image: /images/excel_plot_formatting.png
 title: Templates for Excel Charts

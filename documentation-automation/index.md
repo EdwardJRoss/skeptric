@@ -1,6 +1,5 @@
 ---
 categories:
-- productivity
 - programming
 date: '2020-12-09T19:01:30+11:00'
 image: /images/automation.jpg

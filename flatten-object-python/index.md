@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- json
 - pandas
 date: '2021-01-29T08:00:00+11:00'
 image: /images/flatten_object.png
@@ -23,15 +22,15 @@ from typing import Any, Dict
 
 def flatten_object(nested: Any, sep: str="_", prefix="") -> Dict[str, Any]:
     """Flattens nested dictionaries and iterables
-    
-    The key to a leaf (something is not list-like or a dictionary) 
-    is the accessors to that leaf from the root separated by sep 
+
+    The key to a leaf (something is not list-like or a dictionary)
+    is the accessors to that leaf from the root separated by sep
     prefixed with prefix.
-    
+
     If flattening results in a duplicate key raises a ValueError.
-    
+
     For example:
-      flatten_object([{'a': {'b': 'c'}}, [1]], 
+      flatten_object([{'a': {'b': 'c'}}, [1]],
                      prefix='nest_') == {'nest_0_a_b': 'c', 'nest_1_0': 1}
     """
     ans = {}

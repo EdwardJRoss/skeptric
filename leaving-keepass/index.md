@@ -1,6 +1,4 @@
 ---
-categories:
-- tools
 date: '2020-10-15T21:47:40+11:00'
 image: /images/keepass.jpg
 title: Moving Away From Keepass

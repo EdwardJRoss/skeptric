@@ -1,6 +1,6 @@
 ---
 categories:
-- R
+- r
 - blog
 date: '2020-11-09T06:58:18+11:00'
 draft: true
@@ -58,7 +58,7 @@ static/resources/minhash_s_curves.R
 ---------------------------------------------------------------------
 
 ERROR 1: static/resources/minhash_s_curves.R:133:1: unexpected '}'
-132: 
+132:
 133: }
      ^
 ```

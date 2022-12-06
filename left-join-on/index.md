@@ -1,6 +1,6 @@
 ---
 categories:
-- SQL
+- sql
 date: '2020-08-27T08:00:00+10:00'
 image: /images/left_join.png
 title: Filtering a left join in SQL

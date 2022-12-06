@@ -1,7 +1,6 @@
 ---
 categories:
 - programming
-- deployment
 date: '2020-11-12T22:01:41+11:00'
 image: /images/server_permission.png
 title: Run Webserver Without Root

@@ -1,6 +1,5 @@
 ---
 categories:
-- nbdev
 - jupyter
 - python
 date: '2021-01-22T19:12:15+11:00'
@@ -52,7 +51,7 @@ Then when I tried to install the package from the generated `setup.py` with `pip
 ```
     ERROR: Command errored out with exit status 1:
     ...
-    
+
     AssertionError: missing expected setting: keywords
     ----------------------------------------
 ERROR: Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.

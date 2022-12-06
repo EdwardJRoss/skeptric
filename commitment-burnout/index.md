@@ -1,7 +1,6 @@
 ---
 categories:
 - general
-- arranging
 date: '2021-07-30T14:30:49+10:00'
 image: /images/occupational_burnout.jpg
 title: Burnout from Creeping Commitments

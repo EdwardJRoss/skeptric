@@ -1,7 +1,4 @@
 ---
-categories:
-- data
-- physics
 date: '2021-03-03T21:30:13+11:00'
 image: /images/downey_modeling_framework.png
 title: The Way of the Physicist

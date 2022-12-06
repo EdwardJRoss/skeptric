@@ -1,8 +1,8 @@
 ---
 categories:
-- SQL
-- Presto
-- Athena
+- sql
+- presto
+- athena
 date: '2020-03-28T08:24:51+11:00'
 image: /images/athena_one_sixth.png
 title: Calculating percentages in Presto

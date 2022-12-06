@@ -2,7 +2,6 @@
 categories:
 - python
 - html
-- web
 - data
 - nlp
 date: '2022-06-19T11:03:34+10:00'
@@ -34,19 +33,19 @@ class MyHTMLParser(HTMLParser):
     @property
     def end_tag_index(self):
         return end_tag.search(self.rawdata, self.current_index).end()
-    
+
     def reset(self):
         super().reset()
         self.result = None
-    
+
     @property
     def current_index(self):
         line, char = self.getpos()
         return self.line_lengths[line - 1] + char
-    
+
     def __call__(self, data):
         self.reset()
-        self.line_lengths = [0] + list(accumulate(len(line) for line in 
+        self.line_lengths = [0] + list(accumulate(len(line) for line in
                                                   data.splitlines(keepends=True)))
         self.feed(data)
         self.close()
@@ -68,7 +67,7 @@ class HTMLTagExtract(MyHTMLParser):
         super().reset()
         self.tags = defaultdict(deque)
         self.result = []
-    
+
     def handle_starttag(self, tag, attrs):
         self.tags[tag].append({'tag': tag,
                                'attrs': attrs,
@@ -82,10 +81,10 @@ class HTMLTagExtract(MyHTMLParser):
             tagdata['end'] = end
             tagdata['end_inside'] = self.current_index
             self.result.append(tagdata)
-        
+
     def handle_endtag(self, tag):
         self.pop_tag(tag, self.end_tag_index)
- 
+
     def close(self):
         super().close()
         for tag in self.tags:
@@ -137,11 +136,11 @@ TAG_CLOSED_BY_CLOSE = {
 }
 
 TAG_CLOSED_BY_OPEN = {
-    'p': ['address', 'article', 'aside', 'blockquote', 
-          'details', 'div', 'dl', 'fieldset', 'figcaption', 
+    'p': ['address', 'article', 'aside', 'blockquote',
+          'details', 'div', 'dl', 'fieldset', 'figcaption',
           'figure', 'footer', 'form',
-          'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 
-          'hgroup', 'hr', 'main', 'menu', 'nav', 'ol', 'p', 
+          'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header',
+          'hgroup', 'hr', 'main', 'menu', 'nav', 'ol', 'p',
           'pre', 'section', 'table', 'ul'],
     'li': ['li'],
     'dt': ['dt', 'dd'],
@@ -173,7 +172,7 @@ class TagSpan:
     tag: Optional[str]
     attrs: dict[tuple[str, str]]
     doc: 'HTMLSpanDoc'
-    
+
     @property
     def html(self):
         return self.doc.html[self.start:self.end]
@@ -186,10 +185,10 @@ The parent document contains all the `TagSpan`s, that can be appended to or iter
 class HTMLSpanDoc:
     tag_spans: list[TagSpan] = field(default_factory=list)
     html: str = ''
-        
+
     def append(self, item: TagSpan) -> None:
         self.tag_spans.append(item)
-        
+
     def __iter__(self):
         return iter(self.tag_spans)
 ```
@@ -199,28 +198,28 @@ Now we have all the ingredients we can extend our previous parser to use them:
 
 ```python
 class HTMLTagExtract(MyHTMLParser):
-    def __init__(self, 
+    def __init__(self,
                  tag_closed_by_open=TAG_CLOSED_BY_OPEN,
                  tag_closed_by_close=TAG_CLOSED_BY_CLOSE):
         super().__init__()
         self.tag_closed_by_open = tag_closed_by_open
         self.tag_closed_by_close = tag_closed_by_close
-        
+
     def feed(self, data):
         super().feed(data)
         self.result.html += data
-        
+
     def reset(self):
         super().reset()
         self.tags = defaultdict(deque)
         self.result = HTMLSpanDoc()
-    
+
     def omitted_tag_close(self, tag, close_map):
         for current_tag, parent_tags in close_map.items():
             if tag in parent_tags and self.tags[current_tag]:
                 self.pop_tag(current_tag, self.current_index)
                 self.omitted_tag_close(current_tag, self.tag_closed_by_close)
-    
+
     def handle_starttag(self, tag, attrs):
         self.omitted_tag_close(tag, self.tag_closed_by_open)
         self.tags[tag].append({'tag': tag,
@@ -236,11 +235,11 @@ class HTMLTagExtract(MyHTMLParser):
                         end=end,
                         end_inside=self.current_index)
             )
-            
+
     def handle_endtag(self, tag):
         self.omitted_tag_close(tag, self.tag_closed_by_close)
         self.pop_tag(tag, self.end_tag_index)
-        
+
     def close(self):
         super().close()
         for tag in self.tags:

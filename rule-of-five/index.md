@@ -1,5 +1,4 @@
 ---
-categories: []
 date: 2020-03-18 22:30:27+11:00
 description: ''
 image: /images/5_coin_flips.png

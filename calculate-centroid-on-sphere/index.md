@@ -1,7 +1,7 @@
 ---
 categories:
 - maths
-- pytorch
+- python
 date: '2020-12-10T08:00:00+10:00'
 image: /images/sphere_tangent_plane.png
 title: Centroid of Points on the Surface of a Sphere
@@ -1048,7 +1048,7 @@ fix_latlon = coord_to_latlon(*fix)
 eps = 1e-4
 xeps = np.array([eps, 0])
 yeps = np.array([0, eps])
-perturbations = np.array([latlon_to_coord(*(fix_latlon + x)) for x in 
+perturbations = np.array([latlon_to_coord(*(fix_latlon + x)) for x in
                   [0, xeps, -xeps, yeps, -yeps]]).T
 perturbations
 ```
@@ -1360,9 +1360,9 @@ This is inefficient, but gets us the right answer.
 First we need a way of rotating the sphere.
 This is [surpisingly complicated](https://en.wikipedia.org/wiki/Rotation_matrix), but given an axis represented by unit vector u and an angle theta we can do a rotation with the following matrix:
 
-\\[ R = \\begin{bmatrix} 
-\\cos \\theta +u\_x^2 \\left(1-\\cos \\theta\\right) & u\_x u\_y \\left(1-\\cos \\theta\\right) - u\_z \\sin \\theta & u\_x u\_z \\left(1-\\cos \\theta\\right) + u\_y \\sin \\theta \\\\ 
-u\_y u\_x \\left(1-\\cos \\theta\\right) + u\_z \\sin \\theta & \\cos \\theta + u\_y^2\\left(1-\\cos \\theta\\right) & u\_y u\_z \\left(1-\\cos \\theta\\right) - u\_x \\sin \\theta \\\\ 
+\\[ R = \\begin{bmatrix}
+\\cos \\theta +u\_x^2 \\left(1-\\cos \\theta\\right) & u\_x u\_y \\left(1-\\cos \\theta\\right) - u\_z \\sin \\theta & u\_x u\_z \\left(1-\\cos \\theta\\right) + u\_y \\sin \\theta \\\\
+u\_y u\_x \\left(1-\\cos \\theta\\right) + u\_z \\sin \\theta & \\cos \\theta + u\_y^2\\left(1-\\cos \\theta\\right) & u\_y u\_z \\left(1-\\cos \\theta\\right) - u\_x \\sin \\theta \\\\
 u\_z u\_x \\left(1-\\cos \\theta\\right) - u\_y \\sin \\theta & u\_z u\_y \\left(1-\\cos \\theta\\right) + u\_x \\sin \\theta & \\cos \\theta + u\_z^2\\left(1-\\cos \\theta\\right)
 \\end{bmatrix} \\]
 
@@ -1934,7 +1934,7 @@ def exp(p, t):
     tx, ty = t
     theta = angle_to_north_pole(p)
     axis = perp_to_north_pole(p)
-    
+
     q_rot = exp_northpole(tx, ty)
     q = rot_matrix(axis, -theta) @ q_rot
     return q
@@ -1977,7 +1977,7 @@ def log(p, q):
     theta = angle_to_north_pole(p)
     axis = perp_to_north_pole(p)
     q_rot = rot_matrix(axis, theta) @ q
-    
+
     t = log_northpole(*q_rot)
     return t
 ```

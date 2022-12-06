@@ -1,6 +1,6 @@
 ---
 categories:
-- R
+- r
 - wsl
 date: '2021-06-12T22:38:09+10:00'
 image: /images/tidyverse_timedatectl.png

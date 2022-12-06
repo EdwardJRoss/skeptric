@@ -1,8 +1,7 @@
 ---
 categories:
 - data
-- R
-- regression
+- r
 date: '2021-08-04T12:42:32+10:00'
 image: /images/binary_classification_binplot.png
 title: Binning Binary Predictions
@@ -25,8 +24,8 @@ In particular the points often overlap and we need a way to handle that.
 One technique to show all the points is to jitter them horizontally, but in the middle region I find it really hard to judge whether there are more points at 0 or 1 (my eyes dart back and forth between the two).
 
 ```R
-iris %>% 
-filter(Species != 'setosa') %>% 
+iris %>%
+filter(Species != 'setosa') %>%
 gf_jitter((Species=='virginica')~Sepal.Width, width=0, height=0.1)
 ```
 
@@ -36,8 +35,8 @@ However a similar technique of plotting the points, with colours or shape by the
 If points overlap exactly jittering can help show them
 
 ```R
-iris %>% 
-filter(Species != 'setosa') %>% 
+iris %>%
+filter(Species != 'setosa') %>%
 gf_jitter(col=~Species, Sepal.Length~Sepal.Width, width=0.05, height=0.05)
 ```
 
@@ -51,7 +50,7 @@ One option is to plot the histogram or frequency polygons.
 However just using the counts means that you're mentally trying to adjust the heights, so we should make it a percentage of the total:
 
 ```R
-iris %>% 
+iris %>%
 filter(Species != 'setosa') %>%
 ggplot(aes(x=Sepal.Width, y = ..count../sum(..count..), colour=Species)) +
 geom_freqpoly(bins=10)
@@ -65,8 +64,8 @@ Using density plots is also common, and there are inbuilt heuristics for picking
 However this can sometimes oversmooth behaviour, and again comparing the areas in my head isn't easy.
 
 ```R
-iris %>% 
-filter(Species != 'setosa') %>% 
+iris %>%
+filter(Species != 'setosa') %>%
 gf_density(~Sepal.Width,fill=~Species, bw="SJ")
 ```
 ![Density plot](/images/binary_classification_densityplot.png)
@@ -102,12 +101,12 @@ cut_quantile <- function(x, n, right=TRUE, lowest=-Inf, highest=Inf) {
 Then we can use this to plot the probability in bins as a function of the input; in this case it looks rather similar to our quantile binned plot.
 
 ```R
-iris %>% 
-filter(Species != 'setosa') %>% 
+iris %>%
+filter(Species != 'setosa') %>%
 group_by(bin = cut_quantile(Sepal.Width, 10)) %>%
-summarise(Sepal.Width = mean(Sepal.Width), 
+summarise(Sepal.Width = mean(Sepal.Width),
           p_virginica=mean(Species == 'virginica')) %>%
-gf_point(p_virginica ~ Sepal.Width) 
+gf_point(p_virginica ~ Sepal.Width)
 ```
 
 ![Binned Probability Plot](/images/binary_classification_binplot.png)

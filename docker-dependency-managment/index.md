@@ -1,6 +1,4 @@
 ---
-categories:
-- docker
 date: '2021-03-11T08:00:00+11:00'
 image: /images/docker_resume.png
 title: Docker Dependency Managment
@@ -17,7 +15,7 @@ But sometimes there may be conflicts with other packages on your system, or it m
 A Docker image lets you wrap up all the dependencies in a nice script.
 
 For my TeX setup I already have make commands to produce different formats such as `make pdf`, `make doc`, `make html`, and `make clean` to remove all the files.
-To be able to run these entrypoints I use `make` as the entrypoint and pass a `CMD` which defaults to `all`, but can be called with any of the targets. 
+To be able to run these entrypoints I use `make` as the entrypoint and pass a `CMD` which defaults to `all`, but can be called with any of the targets.
 
 ```
 ENTRYPOINT ["make"]
