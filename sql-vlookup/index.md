@@ -2,6 +2,7 @@
 categories:
 - sql
 - data
+- excel
 date: '2020-04-28T21:32:10+10:00'
 image: /images/excel_vlookup_example.png
 title: Binning data in SQL

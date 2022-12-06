@@ -1,6 +1,6 @@
 ---
 categories:
-- general
+- excel
 date: '2020-06-04T18:08:02+10:00'
 image: /images/mail_merge.png
 title: Mail merge to PDF Files

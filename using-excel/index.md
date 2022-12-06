@@ -1,4 +1,6 @@
 ---
+categories:
+  - excel
 date: 2019-09-25 17:07:45+10:00
 image: /images/excel_2013.png
 title: A programmer using Excel

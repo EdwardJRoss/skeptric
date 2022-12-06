@@ -1,6 +1,4 @@
 ---
-categories:
-- ''
 date: '2021-05-13T20:57:18+10:00'
 draft: true
 image: /images/
