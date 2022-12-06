@@ -15,9 +15,9 @@ I have already [(mis)estimated the energy of a battery](/energy-9v-battery), but
 # Energy density required to launch into space
 
 To launch into space you have to exchange energy to counteract the change in gravitational energy (at least, you'll need more for air resistance).
-The gravitational energy is $$ \frac{G M m}{r} $$; to estimate it requires the gravitational constant, the mass of the Earth and its radius.
-But we can refactor this as $$ r \left( \frac{G M}{r^2} \right) m $$, where the first term is the radius of the Earth ($$ 6 \times 10^6 \rm{m} $$) and the second term is the acceleration due to gravity at the Earth's surface, around $$ 10\ \rm{m}\,\rm{s}^{-2} $$.
-So the energy required to launch into space is $$ 6 \times 10^7\ \rm{J}\,\rm{kg}^{-1} $$ or about 60 kJ/g.
+The gravitational energy is $\frac{G M m}{r}$; to estimate it requires the gravitational constant, the mass of the Earth and its radius.
+But we can refactor this as $r \left( \frac{G M}{r^2} \right) m$, where the first term is the radius of the Earth ($6 \times 10^6 \rm{m}$) and the second term is the acceleration due to gravity at the Earth's surface, around $10\ \rm{m}\,\rm{s}^{-2}$.
+So the energy required to launch into space is $6 \times 10^7\ \rm{J}\,\rm{kg}^{-1}$ or about 60 kJ/g.
 
 # Energy density of battery
 

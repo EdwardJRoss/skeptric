@@ -17,16 +17,16 @@ The exposition in Chapter 9 of [Kruschke's Doing Bayesian Data Analysis](http://
 Suppose there are a number of different categories, some of which are quite small, and we want to estimate the probability that a sample from a given category is positive.
 The simplest [constant model](/constant-models) is to ignore the categories and just estimate the population proportion (that is the fraction of *all* items that is positive), which has high bias but low variance.
 Another approach is to calculate the proportion for each category independently (or equivalently, fit a linear or logistic regression on the one-hot encoded categorical variable) which has high variance but low bias.
-Since the standard error in the estimated proportion [is](/bernoulli-binomial) $$ \sqrt{\frac{p(1-p)}{N}} $$ where p is the true proportion and N is the number of items in the category, for small catagories this uncertainty is going to be high (another way of looking at it; if you've only got 2 data points the only possible proportions are 0%, 50% or 100%).
+Since the standard error in the estimated proportion [is](/bernoulli-binomial) $\sqrt{\frac{p(1-p)}{N}}$ where p is the true proportion and N is the number of items in the category, for small catagories this uncertainty is going to be high (another way of looking at it; if you've only got 2 data points the only possible proportions are 0%, 50% or 100%).
 Ideally we'd like to interpolate between the two; if the overall average is say 14% and the category only has a few observations we'd like to estimate something close to 14%.
 On the other hand if we have lots of data we'd like to get something very close to the category's own proportion.
 How heavily we rely on the population estimate would depend on how much variance there is between categories.
 
-A statistical way of framing this is to say each category, C, is Bernoulli distributed with it's own probability $$ p_C $$, so the individual items in category C are $$ X_C \sim {\rm Binom}(p_C) $$.
+A statistical way of framing this is to say each category, C, is Bernoulli distributed with it's own probability $p_C$, so the individual items in category C are $X_C \sim {\rm Binom}(p_C)$.
 However these aren't independent, when we see a new category it's likely close to the typical category probability, and so they come from some common distribution.
-One possibly choice of distribution is a Beta Distribution; then $$ p_C \sim {\rm Beta}(A, B)$$ for some A and B (although there are other choices of distribution).
+One possibly choice of distribution is a Beta Distribution; then $p_C \sim {\rm Beta}(A, B)$ for some A and B (although there are other choices of distribution).
 This has a nice Bayesian interpretation; for each category C we estimate the Binomial distribution with a Beta(A, B) prior.
-In any case we need to estimate $$p_C$$ as well as A, B, which leads to [shrinking](doingbayesiandataanalysis.blogspot.com/2012/11/shrinkage-in-multi-level-hierarchical.html) the probabilities towards the typical probability across categories.
+In any case we need to estimate $p_C$ as well as A, B, which leads to [shrinking](doingbayesiandataanalysis.blogspot.com/2012/11/shrinkage-in-multi-level-hierarchical.html) the probabilities towards the typical probability across categories.
 
 This can be extended to multiple hierarchical structures and levels of hierarchy.
 A very common example in the literature is interventions in students.

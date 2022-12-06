@@ -22,7 +22,7 @@ You can run them through the AWS web console, through [an Athena CLI](https://sk
 
 # Keeping Athena costs low
 
-Every time you run a query in AWS Athena they charge for processing the query (currently $5 per terabyte), for S3 requests and transfer to the underlying data (which we don't pay for here because the S3 bucket results) and the S3 storage costs of any created results.
+Every time you run a query in AWS Athena they charge for processing the query (currently \$5 per terabyte), for S3 requests and transfer to the underlying data (which we don't pay for here because the S3 bucket results) and the S3 storage costs of any created results.
 See the [AWS pricing details](https://aws.amazon.com/athena/pricing/) for more complete and current information, but the strategies will be the same.
 
 Whenever you run a query in Athena the output is stored as an uncompressed CSV in S3 in the staging bucket you configured, so you should periodically delete old results, for example manually or with [lifecycle rules](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html).

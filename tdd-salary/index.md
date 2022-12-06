@@ -18,7 +18,7 @@ I looked through a bunch of example data to find different patterns, and especia
 This gave me over fifty test cases.
 
 It was very easy to write these test cases and use them to work out how to write a parser.
-I started with the approach from price parser and modified it to deal with things in salaries, such as ranges like $50-70k.
+I started with the approach from price parser and modified it to deal with things in salaries, such as ranges like \$50-70k.
 
 Regular expressions are finicky and a test based approach let me quickly see if I broke anything when I changed the expression (as I often did).
 However within an hour I could get all but a couple of very hard (and obscure) tests passing, which I removed.

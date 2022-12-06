@@ -103,7 +103,7 @@ def multiset(xs):
     return output
 ```
 
-Finally I need a way of calculating the Jaccard index: $$ \frac{\lvert A \cap B \rvert}{\lvert A \cup B \rvert} $$.
+Finally I need a way of calculating the Jaccard index: $\frac{\lvert A \cap B \rvert}{\lvert A \cup B \rvert}$.
 Using the [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) this can be calculated without the time consuming step of calculating the union.
 
 ```python

@@ -10,7 +10,7 @@ Michael Lewis' *The Fifth Risk* promotes parts of the US public service and some
 The public service is culturally opposed, if not legally prevented, from promoting itself which means a lot of the successes and heros go unsung.
 Michael Lewis spells out what some of the largest, yet most obscure parts, of the US government accomplish and how they could be at risk through mismanagement of the Trump administration.
 
-The Department of Energy spends over half its $30 billion budget on nuclear disarmament, looking after US decaying stockpile of nuclear weapons and cleaning up the massive amount of nuclear waste generated producing this stockpile.
+The Department of Energy spends over half its \$30 billion budget on nuclear disarmament, looking after US decaying stockpile of nuclear weapons and cleaning up the massive amount of nuclear waste generated producing this stockpile.
 The Department of Agriculture feeds many needy Americans through food stamps, finances many loans in rural communities and sets nutrition standards in schools.
 The Department of Commerce oversees meteorological forecasts (through the [NOAA](https://www.noaa.gov/)) which allow planes to fly safely, improves outcomes of military missions and helps avert natural disasters.
 

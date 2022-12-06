@@ -19,7 +19,7 @@ Common Crawl tries to do a broad search, getting a wide sample of the web rather
 It's useful to know whether Common Crawl even contains the information you're looking before you start, and the index will tell you where to look.
 
 This article covers [using the web interface](#using-the-web-interface) for quickly checking what's there, [using cdx_toolkit](#cdx-toolkit) to get and download results from the command line or Python, and [using the index and fetching with HTTP requests](#using-the-index-directly) for custom usecases.
-There are other tools as well like the [CDX Index Client](https://github.com/ikreymer/cdx-index-client/) for command line use and [comcrawl from python]($searching-and-fetching-with-python-and-comcrawl), but they seem less flexible than the other options.
+There are other tools as well like the [CDX Index Client](https://github.com/ikreymer/cdx-index-client/) for command line use and [comcrawl from python](\$searching-and-fetching-with-python-and-comcrawl), but they seem less flexible than the other options.
 
 See the corresponding [Jupyter notebook](/notebooks/Searching Common Crawl Index.html) ([raw](https://nbviewer.org/github/EdwardJRoss/skeptric/blob/master/static/notebooks/Searching Common Crawl Index.ipynb)) for more code examples.
 

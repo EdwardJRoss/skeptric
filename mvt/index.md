@@ -16,7 +16,7 @@ You're not quite sure how you got home; there's a vague recollection of wanderin
 Then the mean value theorem says at some point you were going in the right direction.
 
 This is a pretty good way of capturing the mean value theorem.
-The simple form we learned is that if a function $$f:[a,b]\to\mathbb{R}$$ is differentiable on its interior and continuous at its endpoints, then there is a point c in the interval such that $$f'(c)=\frac{f(b)-f(a)}{b-a}$$.
+The simple form we learned is that if a function $f:[a,b]\to\mathbb{R}$ is differentiable on its interior and continuous at its endpoints, then there is a point c in the interval such that $f'(c)=\frac{f(b)-f(a)}{b-a}$.
 The right hand side is the "right direction"; the slope of the straight line path from the pub to your bed.
 The left hand side is the direction you're going at the instant c; the tangent to the path.
 

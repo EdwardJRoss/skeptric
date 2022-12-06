@@ -56,7 +56,7 @@ The input query in a [CTAS](https://docs.aws.amazon.com/athena/latest/ug/create-
     def create_table_as(cursor, table, query, format='AVRO'):
         cursor.execute(f"CREATE TABLE {table} WITH (format = '{format}') as {query}")
 
-The location of the output tables can be obtained with "$path":
+The location of the output tables can be obtained with "\$path":
 
     def table_file_location(cursor, table):
        cursor.execute(f'SELECT DISTINCT "$path" FROM {table}')

@@ -20,16 +20,16 @@ While we know there are more Baby Boomers than Millenials let's assume people's 
 Then there are about 20,000 people of any age.
 You would need a maths textbook for each years 7 through 12, but years 11 and 12 aren't compulsory and textbooks are more likely to be shared.
 Let's take it as about 5 textbooks per student lifetime so that's a maximum market of 100,000 textbooks per year.
-At $50 per book that's about $5 million maximum gross revenue.
+At \$50 per book that's about \$5 million maximum gross revenue.
 
 However the real market will be significantly smaller because textbooks get resold and reused, especially in public schools.
 New textbooks generally get republished every few years in response to curriculum changes, so maybe this reduces the effective market by 50%.
 It's also going to be unrealistic to capture the whole market when there were other popular interstate publishers, but maybe they had 70%.
-So that's a gross revenue under $2 million.
+So that's a gross revenue under \$2 million.
 
 Publishing books is relatively expensive; they typically run a few hundred pages and need to be printed, shipped and distributed.
-Variable costs could easily eat up 40% of the profits leaving about $1 million for salaries and marketing.
-Assuming marketing costs are marginal and average employee cost is all in $100,000 then it could support about 10 employees at no profit.
+Variable costs could easily eat up 40% of the profits leaving about \$1 million for salaries and marketing.
+Assuming marketing costs are marginal and average employee cost is all in \$100,000 then it could support about 10 employees at no profit.
 
 This explains why there weren't any serious competitors in the South Australian mathematics textbook market; it was quite small.
 Haese Mathematics started with teachers Bob Haese, Sandra Haese and Kim Harris writing maths textbooks for the South Australian curriculum in the late 70s and early 80s.

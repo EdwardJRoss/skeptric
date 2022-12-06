@@ -31,7 +31,7 @@ It consists of news articles and manually generated abstracts.
 Their approach is to extract *key sentences* by forming a weighted graph of the sentences based on textual similarity between the sentences, rank the sentences using weighted PageRank, and limit the summary by length.
 The particular similarity they use is the number of tokens in common, divided by the sum of log lengths of the sentences (perhaps a cousin of Jaccard Distance).
 
-$$ {\rm Similarity}(S_i, S_j) = \frac{\left \vert S_i \cap S_j \right \vert}{\log(\vert S_i \vert) + \log(\vert S_j \vert)} $$
+$${\rm Similarity}(S_i, S_j) = \frac{\left \vert S_i \cap S_j \right \vert}{\log(\vert S_i \vert) + \log(\vert S_j \vert)}$$
 
 In terms of [ROUGE-1](https://en.wikipedia.org/wiki/ROUGE_(metric)) it ranks about middle of the systems submitted; which is pretty impressive given the simplicity.
 In the example it seems to work well because the subject is in the title line and repeated in the most relevant sentences.

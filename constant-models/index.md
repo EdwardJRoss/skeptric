@@ -107,7 +107,7 @@ The Mean Weighted Average Error applies this to the MAE:
 
 `mwae(w, a) = w * (x >= a) * (x - a) - (1 - w) * (x < a) * (x - a)`
 
-$$ \rm{MWAE(a; w)} = \frac{1}{N} \sum\limits_{i=1}^{N} \begin{cases}  w (x_i - a) & x_i \geq a  \\ (1-w) (a - x_i) & x_i \lt a  \end{cases} $$
+$$\rm{MWAE(a; w)} = \frac{1}{N} \sum\limits_{i=1}^{N} \begin{cases}  w (x_i - a) & x_i \geq a  \\ (1-w) (a - x_i) & x_i \lt a  \end{cases}$$
 
 
 The constant model that minimises MWAE is the wth quantile.
@@ -130,19 +130,19 @@ The Lᵖ error is given by
 
 `lp(a) = mean((x - a)^p) ^ (1/p)`
 
-$$L^p(a) = \sqrt[p]{\frac{1}{N}\sum\limits_{i=1}^{N} {\left\Vert{x_i - a}\right\Vert ^p}} $$
+$$L^p(a) = \sqrt[p]{\frac{1}{N}\sum\limits_{i=1}^{N} {\left\Vert{x_i - a}\right\Vert ^p}}$$
 
 In particular when p is 1 we get the Mean Average Error and when p is 2 we get the Root Mean Square Error.
 
-As $$ p \rightarrow \infty $$ this converges to the maximum norm: `l_infinity(a) = max(x - a)`.
+As $p \rightarrow \infty$ this converges to the maximum norm: `l_infinity(a) = max(x - a)`.
 This depends only on the furthest points, and is minimised at the midrange, halfway between the maximum and minimum point, and the minimum value is half the range.
-There are a whole range of metrics between the MAE at $$ p=1 $$, which is completely insensitive to outliers, and the Maximum Norm at $$ p = \infty $$ which depends only on the most extreme outliers. As p increases the best constant moves continuously towards the outliers.
+There are a whole range of metrics between the MAE at $p=1$, which is completely insensitive to outliers, and the Maximum Norm at $p = \infty$ which depends only on the most extreme outliers. As p increases the best constant moves continuously towards the outliers.
 
 We can further generalise this by weighting the norm as we did for MWAE:
 
 `weighted_norm(w, x) = sum(w * (x >= 0) * x - (1 - w) * (x < 0) * x)`
 
-$$ \left\Vert x \right\Vert_w = \sum\limits_{i=1}^{N} \begin{cases}  w x_i & x_i \geq 0  \\ -(1-w) x_i & x_i \lt 0  \end{cases} $$
+$$\left\Vert x \right\Vert_w = \sum\limits_{i=1}^{N} \begin{cases}  w x_i & x_i \geq 0  \\ -(1-w) x_i & x_i \lt 0  \end{cases}$$
 
 It's also possible to generate the [trimmed mean](https://en.wikipedia.org/wiki/Truncated_mean) or [Winsorized mean](https://en.wikipedia.org/wiki/Winsorized_mean) by modifying how the metric treats the most extreme points; removing or capping the most extreme values.
 There are certainly metrics that don't fit in this framework, but this connection between a metric and best constant statistic gives simple benchmarks to common models and suggests a family metrics for different regression problems.

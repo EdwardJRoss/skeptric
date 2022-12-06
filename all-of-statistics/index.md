@@ -26,7 +26,7 @@ It enabled me to understand how to use different statistical tests, gave me the 
 
 Here are some highlights of things I have used since reading the book:
 
-* Algebraic tricks for expectations and variances like $$ V(X + Y) = V(X) + V(Y) + 2 \rm{Cov}(X, Y) $$ (which are helpful when reading books/papers)
+* Algebraic tricks for expectations and variances like $V(X + Y) = V(X) + V(Y) + 2 \rm{Cov}(X, Y)$ (which are helpful when reading books/papers)
 * Bootstrap confidence intervals are very powerful for calculating statistics on large datasets where the central limit theorem doesn't apply
 * Maximum Likelihood Estimators as a tool for fitting parametric models
 * Hypothesis tests essentially *cut* a confidence interval; the various statistical tests are (estimates of) confidence intervals for different distributions

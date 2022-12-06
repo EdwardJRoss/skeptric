@@ -20,7 +20,7 @@ This resonates with an experiment in Christopher Hsee's [Less is Better paper](h
 University students were split into groups and each was asked to price a dinnerware set.
 One set had 8 dinner plates, 8 soup bowls and 8 desert places all in good condition.
 The other set had everything in the first set plus 8 cups, 2 of which were broken, and 8 saucers, 7 of which were broken.
-Students who saw the first set tended to give a higher price ($32) than the second set ($23), with the same framing of typical prices of $30-$60 for dinnerware sets.
+Students who saw the first set tended to give a higher price (\$32) than the second set (\$23), with the same framing of typical prices of \$30-\$60 for dinnerware sets.
 Clearly having a set with *more* items should theoretically be more valuable.
 Students who saw both sets together priced the second set slightly higher.
 

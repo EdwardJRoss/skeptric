@@ -206,7 +206,7 @@ Below are the operations, I will use the notation n[4] to represent a parameter 
 <td>F7</td>
 <td>pre</td>
 <td>i[1] j[4] k[4] l[4] m[1] A[m]</td>
-<td>Preamble; i is DVI version number which is 2. l is considered a magnification; 1 unit is set to $$\frac{j}{k} 10^{-7} \mbox{m}$$ and the entire document is scaled by a factor of $$\frac{l}{1000}$$. A is an information header</td>
+<td>Preamble; i is DVI version number which is 2. l is considered a magnification; 1 unit is set to $\frac{j}{k} 10^{-7} \mbox{m}$ and the entire document is scaled by a factor of $\frac{l}{1000}$. A is an information header</td>
 </tr>
 <tr>
 <td>F8</td>
@@ -293,7 +293,7 @@ Let’s walk through this byte by byte.
     f7 02 018392 c01c3b0000 000003e8
        1b 20 54 65 58 20 6f 75 74 70 75 74 20 32 30 31 33 2e 30 38 2e 31 32 3a 31 38 30 34
 
-The first line starts with the pre opcode, followed by the version 02, numerator = 25400000, denominator = 473628672 and magnitude = 1000. This means 1 unit is  $${25400000 \over 473628672} 10^{-7}\mbox{m} = {0.0254 \over 72.27 * 2^{16}} \mbox{m}$$ . There are 72.27 [standard points](http://en.wikipedia.org/wiki/Point_%28typography%29#Traditional_American_point_system) in an inch and 2.54 cm in an inch, so a standard point is  $${72.27 \over 0.0254} \mbox{m} = 2^{16} \mbox{unit}$$ . Thus a unit is  $$2^{-16}$$  standard points; what TeX calls a scaled point (sp). The document is then scaled by 1000/1000=1.
+The first line starts with the pre opcode, followed by the version 02, numerator = 25400000, denominator = 473628672 and magnitude = 1000. This means 1 unit is  ${25400000 \over 473628672} 10^{-7}\mbox{m} = {0.0254 \over 72.27 * 2^{16}} \mbox{m}$ . There are 72.27 [standard points](http://en.wikipedia.org/wiki/Point_%28typography%29#Traditional_American_point_system) in an inch and 2.54 cm in an inch, so a standard point is  ${72.27 \over 0.0254} \mbox{m} = 2^{16} \mbox{unit}$ . Thus a unit is  $2^{-16}$  standard points; what TeX calls a scaled point (sp). The document is then scaled by 1000/1000=1.
 
 
 The second line is the documentation string; 1b states it consists of 27 bytes. The bytes then form the ASCII string

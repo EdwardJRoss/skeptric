@@ -26,7 +26,7 @@ These are all quite old and well known tasks in their class.
 BERT can give contextual word embeddings; that is an embedding for each word that takes in the surrounding context.
 The word embeddings can then be used for the tasks by training a softmax classifier, that is a very shallow neural net.
 
-Concretely given the (contextual) word vectors $$ v_i $$, then we train a classifier $$ \rm{softmax}\left(W \sum_{i \in C} \frac{1}{\lvert C \rvert}v_i\right) $$, where W is a weight matrix of embedding dimension x number of classes, to be fitted using cross-entropy loss.
+Concretely given the (contextual) word vectors $v_i$, then we train a classifier $\rm{softmax}\left(W \sum_{i \in C} \frac{1}{\lvert C \rvert}v_i\right)$, where W is a weight matrix of embedding dimension x number of classes, to be fitted using cross-entropy loss.
 Note that the vectors have to be averaged to the appropriate level for the task (the sum over context C, in the previous equation); for Part of Speech tagging (and Masked Language Modelling) we just use each word vector directly, for dialogue speech we average the vectors over each utterance and for topic classification we average over the whole document.
 I'm actually *assuming* that the vectors are averaged; it's not discussed explicitly in the work and there's no code provided to see what was done; but this seems like the most likely way to handle it.
 

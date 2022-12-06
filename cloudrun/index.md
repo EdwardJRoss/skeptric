@@ -9,7 +9,7 @@ title: Machine Learning Serving on Google CloudRun
 
 I sometimes build hobby machine learning APIs that I want to show off, like [whatcar.xyz](http://www.whatcar.xyz).
 Ideally I want these to be cheap and low maintenance; I want them to be available most of the time but I don't want to spend much time or money maintaining them and I can have many of them running at the same time.
-My current solution is Cloud Compute (e.g. Digital Ocean or Linode) which has low fixed costs (around $5 per month).
+My current solution is Cloud Compute (e.g. Digital Ocean or Linode) which has low fixed costs (around \$5 per month).
 Unfortunately once every couple of months it goes down; so I have to monitor it and get the server running again (which can take me a few days to get to if I'm busy).
 I've looked at switching to a hosted Application Platforms like [Heroku](https://www.heroku.com/), [Digital Ocean App Platform](https://www.digitalocean.com/products/app-platform/) and [Google App Engine](https://cloud.google.com/appengine); but they're quite a bit more expensive, and not worth it for hobby projects.
 There are also Hosted Kubernetes solutions but they're also more expensive and require learning a bunch of Kubernetes.
@@ -38,32 +38,32 @@ This article will explore how I migrated [whatcar.xyz](http://www.whatcar.xyz) t
 # Costs
 
 One of the issues with big cloud vendors is it's really difficult to ascertain costs, because they break it down into lots of small fees for a variety of services.
-There's also a real risk of costs spiralling out of control, like the [story of spending $72,000 in a couple of days](https://old.reddit.com/r/googlecloud/comments/kaa5ew/we_burnt_72k_testing_firebase_cloud_run_and/) with firebase and cloud run.
+There's also a real risk of costs spiralling out of control, like the [story of spending \$72,000 in a couple of days](https://old.reddit.com/r/googlecloud/comments/kaa5ew/we_burnt_72k_testing_firebase_cloud_run_and/) with firebase and cloud run.
 
 [Google Cloud Run's pricing](https://cloud.google.com/run/pricing) is in the ridiculous units of dollars per vCPU second and GiB second; I find these really hard to process until I change the unit.
 At the time of writing the Tier 1 pricing is:
 
-* $2 per vCPU-day, with the first 2 vCPU-days free per month
-* $0.22 per GiB-day, with the first 4 GiB-days free per month
-* $0.40 per million requests, with the first 2 million requests free per month
+* \$2 per vCPU-day, with the first 2 vCPU-days free per month
+* \$0.22 per GiB-day, with the first 4 GiB-days free per month
+* \$0.40 per million requests, with the first 2 million requests free per month
 
-There's also [network egress costs](https://cloud.google.com/vpc/network-pricing#internet_egress); the worst case is in Australia where it's $0.19/GB (with free 1GiB within North America).
-Another incidental [cost is logging ingestion](https://cloud.google.com/stackdriver/pricing): $0.50/GiB (First 50GiB per project free)
+There's also [network egress costs](https://cloud.google.com/vpc/network-pricing#internet_egress); the worst case is in Australia where it's \$0.19/GB (with free 1GiB within North America).
+Another incidental [cost is logging ingestion](https://cloud.google.com/stackdriver/pricing): \$0.50/GiB (First 50GiB per project free)
 There are also some minor incidental costs for storing the image and such, but they are relatively controllable.
 
 The largest risk here is scaling; you could scale up to 1000 instances which could very quickly burn money for CPU and Memory.
-The easiest solution is to limit the maximum number of instances; with one instance the worst case scenario is just under $70 per month running full time.
+The easiest solution is to limit the maximum number of instances; with one instance the worst case scenario is just under \$70 per month running full time.
 
 The next biggest risk is requests and network; if someone hits my endpoint lots how much could it cost?
-Requests will also spawn log lines and network egress; if I assume my payload is about 1 kB and each request generates 100B of logs the total cost is about $0.64 per million requests.
+Requests will also spawn log lines and network egress; if I assume my payload is about 1 kB and each request generates 100B of logs the total cost is about \$0.64 per million requests.
 
 You can configure the maximum number of concurrent requests per container; the default is 80.
 Assuming each request is handled in 250ms on average, this means the most requests it could handle is around 1 million per hour.
-So if someone drowned the endpoint in requests all month it would cost about $460 per month per available container.
+So if someone drowned the endpoint in requests all month it would cost about \$460 per month per available container.
 
 These scenarios are quite unlikely - but it's good to know I don't think I could get charged thousands of dollars if something goes terribly wrong.
 In practice my current server has sees well under 5,000 requests per month.
-Even if each request keeps a container alive for a minute, this would be around 3.5 days of running, which with 1 vCPU and 1 GiB per instance would cost me about $0.66 per month.
+Even if each request keeps a container alive for a minute, this would be around 3.5 days of running, which with 1 vCPU and 1 GiB per instance would cost me about \$0.66 per month.
 This is the real cost benefit of Cloud Run; for a barely used API it costs at most cents each month.
 
 ## Billing Alerts

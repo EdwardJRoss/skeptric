@@ -11,7 +11,7 @@ When showing money in Jupyter notebooks the dollar signs can disappear and turn 
 This is annoying if you really want to print monetary amounts and not typeset mathematical equations.
 However this is easy to fix in Pandas dataframes, Markdown or HTML output.
 
-For Pandas dataframes this is especially annoying because it's much more likely you would want to be showing $ signs than displays math.
+For Pandas dataframes this is especially annoying because it's much more likely you would want to be showing \$ signs than displays math.
 Thankfully it's easy to fix by setting the [display option](https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html) `pd.options.display.html.use_mathjax = False`.
 It's strange this is True by default, but you can add this configuration near the top of all your Jupyter notebooks.
 

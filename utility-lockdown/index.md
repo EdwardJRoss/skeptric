@@ -29,7 +29,7 @@ These raise real challenges with quantifying quality of life in general, and [Qu
 From a practical perspective it's *easier* to use the experiencing self because the experiences can be aggregated (but memories can not), but I'm not aware of good measures..
 
 A common way to evaluate the economic benefit is to convert a life to a monetary amount and look to economic losses and spending (like in this [Crikey article](https://www.crikey.com.au/2020/10/09/covid-19-lockdown-cost/)).
-The Government has an estimated [Value of a Statistical Life](https://obpr.pmc.gov.au/sites/default/files/2021-09/value-of-statistical-life-guidance-note-2020-08.pdf), currently $222,000.
+The Government has an estimated [Value of a Statistical Life](https://obpr.pmc.gov.au/sites/default/files/2021-09/value-of-statistical-life-guidance-note-2020-08.pdf), currently \$222,000.
 However I'm wary of any methodology based on willingness to pay; price and value are two very different things.
 In some contexts this conversion may make policy sense, but there are limits to its applicability (someone can't legally pay to end another person's life).
 
@@ -51,7 +51,7 @@ As a ballpark estimate let's use 1 death per 500 people (it will depend on treat
 
 People who die from COVID-19 are much more likely to be older and vulnerable of dying of other diseases such as cold and flu, and we should adjust for that.
 According to [Years lost to COVID-19 in 81 Countries](https://www.nature.com/articles/s41598-021-83040-3) the average years of life lost is 16, which assuming otherwise full quality of life.
-This means the cost due to death is around $$16/500 \approx 1/30$$.
+This means the cost due to death is around $16/500 \approx 1/30$.
 
 For illness according to the [US CDC](https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/burden.html) around 1/3 of people have had symptomatic COVID-19 (assuming at most one infection per person).
 Assuming the average length of infection is a week, even if it reduces the quality of life to around 1/150, which is much smaller than the impact due to death.

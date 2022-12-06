@@ -227,7 +227,7 @@ re74, re75, re78: real earnings in 1974, 1975 and 1978
 
 We are going to focus on how the real earnings in 1978, `re78` is impacted by the experimental treatment, `treat`, conditioned on the real earnings the year before intervention, `re75`.
 There are 3 very different `sample` compositions, 1 is people who were treated, 2 is from the [Current Population Survey](https://www.census.gov/programs-surveys/cps.html), and 3 is from the [Panel Study of Income Dynamics](https://psidonline.isr.umich.edu/) (the Dehejia and Wahba paper find similar subsamples from the broader surveys).
-In all cases there's a terminal spike at an earnings of $0, and in the Current Population Survey another terminal spike a bit over $25,000 that indicate censoring.
+In all cases there's a terminal spike at an earnings of \$0, and in the Current Population Survey another terminal spike a bit over \$25,000 that indicate censoring.
 
 
 ```R

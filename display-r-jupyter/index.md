@@ -21,7 +21,7 @@ Obviously you adjust rows and columns to how many you want to display.
 
 Another problem is that it will interpret text between `$` characters as LaTeX, which is really annoying if you've got text with currency.
 
-![The term $a$ is displayed as a mathematical variable a](/images/jupyter_r_latex.png)
+![The term \$a\$ is displayed as a mathematical variable a](/images/jupyter_r_latex.png)
 
 The best thing to do is to escape these characters before display using `function(x) gsub('\\$', '\\\\$', x)`.
 When using `dplyr` this can be automated for all character strings by appending to the pipeline

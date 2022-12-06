@@ -56,9 +56,9 @@ In this case we can convert them to conditional probabilities by dividing each r
 
 We can use this to calculate the probability of any sentence under the bigram model, for example the sentence `<s> Sam I am <s>` has probability (using `.` in place of `<s>`)
 
-$$ P(\rm{Sam\ I\ am}) = P(\rm{Sam} \vert .) P(\rm{I} \vert \rm{Sam}) P(\rm{am} \vert \rm{I}) P(. \vert \rm{am})= 0.5 \times 0.5 \times 1 \times 0.5 = 0.125 $$
+$$P(\rm{Sam\ I\ am}) = P(\rm{Sam} \vert .) P(\rm{I} \vert \rm{Sam}) P(\rm{am} \vert \rm{I}) P(. \vert \rm{am})= 0.5 \times 0.5 \times 1 \times 0.5 = 0.125$$
 
-Note this generalises and we can get sentences like `<s> I am <s>` or `<s> Sam I am Sam am <s>`, but we can't possibly get `<s> am I Sam <s>` since $$P(\rm{am}| .) = 0$$.
+Note this generalises and we can get sentences like `<s> I am <s>` or `<s> Sam I am Sam am <s>`, but we can't possibly get `<s> am I Sam <s>` since $P(\rm{am}| .) = 0$.
 
 The add-k method adds a constant k to every element of the matrix.
 As discussed we can only do this naively if we've got a single sentence boundary token.

@@ -17,7 +17,7 @@ The key factor I overlooked is the stochastic nature of the model at an individu
 
 # Individuals in the SIR Model
 
-In the SIR model an infectious individual on average infects $$ R_0 $$ other people while infected.
+In the SIR model an infectious individual on average infects $R_0$ other people while infected.
 In a population where most people are susceptible if this number is greater than 1 then the epidemic spreads, if it's less than 1 then the disease will die out.
 
 One simple method for reducing the number of other individuals infected is to isolate them.
@@ -28,8 +28,8 @@ The problem is that a lot of people don't *know* that they're infectious.
 With many diseases people are infectious before they show symptoms, and some people don't ever show symptoms but are infectious.
 So they go on as before and infect many other people.
 
-A really simple model for this is that asymptomatic carriers infect a high number of other people $$ R_h \gg 1 $$ and symptomatic cariers infect a low number of people $$ R_l \ll 1 $$.
-Then if the chance of being asymptomatic is $$ p $$ the overall $$ R_0 = p R_h + (1 - p) R_l  \approx p R_h $$.
+A really simple model for this is that asymptomatic carriers infect a high number of other people $R_h \gg 1$ and symptomatic cariers infect a low number of people $R_l \ll 1$.
+Then if the chance of being asymptomatic is $p$ the overall $R_0 = p R_h + (1 - p) R_l  \approx p R_h$.
 
 # Contact tracing
 
@@ -37,8 +37,8 @@ Many infectious diseases spread mainly through direct contact between individual
 If someone has tested positive then their direct contacts are much more likely to have it than random individuals.
 If you test those individuals immediately you can effectively detect asymptomatic carriers and get them to isolate.
 
-This then moves these asymptomatic carriers from the $$ R_h $$ group into the $$ R_l $$ group, effectively reducing $$ p $$.
-If you can get $$ p $$ low enough then the epidemic spread will stop.
+This then moves these asymptomatic carriers from the $R_h$ group into the $R_l$ group, effectively reducing $p$.
+If you can get $p$ low enough then the epidemic spread will stop.
 
 However contact tracing is a lot of work.
 Every person tested positive need to be contacted and interviewed; this could take some time if they are hard to get hold of.

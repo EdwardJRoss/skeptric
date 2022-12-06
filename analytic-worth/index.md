@@ -31,9 +31,9 @@ Cost: C(analytics) + C(convince) = C(scoping) + C(data collection) + C(synthesis
 
 
 Examples:
-Picking a shampoo: Profit <= E(best) - E(worst) ~ $5/month
-If there are no options: Profit = $0
-If someone won't listen to you: Profit = $0. Other reasons? Justify a decision (brand)
+Picking a shampoo: Profit <= E(best) - E(worst) ~ \$5/month
+If there are no options: Profit = \$0
+If someone won't listen to you: Profit = \$0. Other reasons? Justify a decision (brand)
 
 Should I walk to work or drive to minimise time? Very unlikely walking will be faster - not worth investing in.
 P(analytics action = default action) ~ 1

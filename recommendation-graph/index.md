@@ -27,7 +27,7 @@ Because the graph is undirected the adjacency matrix is symmetric.
 ![Adjacency matrix of Bipartite Graph](/images/bipartite_matrix.png)
 
 The adjacency matrix can be represented by it's top right corner, the interaction between products and customers, *A*.
-A common approach for this is [matrix factorisation](https://en.wikipedia.org/wiki/Matrix_factorization_(recommender_systems)) where this matrix is decomposed into a product of matrices $$ A = UV $$.
+A common approach for this is [matrix factorisation](https://en.wikipedia.org/wiki/Matrix_factorization_(recommender_systems)) where this matrix is decomposed into a product of matrices $A = UV$.
 This can be thought of as an embedding; *U* embeds products and the adjoint of *V* embeds the customers.
 The items can then be clustered in the embedding space for example using [k-means](https://en.wikipedia.org/wiki/K-means_clustering).
 
@@ -35,7 +35,7 @@ The items can then be clustered in the embedding space for example using [k-mean
 
 If you don't care explicitly about the products you could just look at the customers.
 Two customers are similar if they've bought the same product.
-This can be explicitly constructed by counting the number of products they have in common, via the matrix product $$ A A^{T} $$.
+This can be explicitly constructed by counting the number of products they have in common, via the matrix product $A A^{T}$.
 Then community detection algorithms could be run on the weighted graph (optionally removing the diagonal of self-links).
 
 ![Customer-Customer Matrix](/images/bipartite_second_matrix.png)

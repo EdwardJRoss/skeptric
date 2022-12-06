@@ -15,43 +15,43 @@ In this article we extend this to specify priors; defaulting to general weakly i
 
 # Priors in linear regression
 
-In our previous model $$ y \sim N(\alpha + \beta x, \sigma) $$, we didn't specify any priors for our parameters, the intercept $$\alpha$$, the coefficients $$\beta$$ and the residual standard deviation $$\sigma$$.
+In our previous model $y \sim N(\alpha + \beta x, \sigma)$, we didn't specify any priors for our parameters, the intercept $\alpha$, the coefficients $\beta$ and the residual standard deviation $\sigma$.
 We can extend our Stan model to take data specifying these priors, and to declare the priors themselves in the model.
 
 Following `rstanarm::stan_glm` it would be nice that if you didn't specify a prior for it to use a reasonable default prior.
 Following the discussion in [*Regression and Other Stories*](https://avehtari.github.io/ROS-Examples/), Section 9.5, we can use the same weak priors that they use that keep inferences stable, but don't have much impact on the estimates.
 
-The default prior for the coefficients is $$\beta \sim N(0, 2.5 s_y/s_x)$$.
+The default prior for the coefficients is $\beta \sim N(0, 2.5 s_y/s_x)$.
 Centring on 0 also makes sense without knowing which direction the coefficients should lie in.
 The ratio of standard deviations is important for the prior to be invariant under rescaling transformation.
-If we were to rescale $$y' = k y$$ and $$x' =  A x$$, then the coefficients would scale as $$\beta' = kA^{-1} \beta $$, so our prior should rescale in an analogous way.
+If we were to rescale $y' = k y$ and $x' =  A x$, then the coefficients would scale as $\beta' = kA^{-1} \beta$, so our prior should rescale in an analogous way.
 The factor 2.5, quoting from *Regression and Other Stories*, "is somewhat arbitrary, chosen to provide some stability in estimation while having little influence on the coefficient estimate when data are even moderately informative".
 Perhaps the worst part of this assumption is that as you add more coefficients (and especially interactions) that the prior stays the same and they are all independent.
 Perhaps a better approach would be a joint distribution where some of the coefficients were more spread than others, since in many cases as you get more predictors a few of them may have a significant association but most will not.
 
-The default weak prior for the intercept $$\alpha$$ is given indirectly by assigning a prior the expected value of y at the mean value of x is normally distributed with mean the mean value of y, and standard deviation 2.5 times the standard deviation of y; that is $$ E(y | x=\bar{x}) \sim N(\bar{y}, 2.5 s_y)$$.
+The default weak prior for the intercept $\alpha$ is given indirectly by assigning a prior the expected value of y at the mean value of x is normally distributed with mean the mean value of y, and standard deviation 2.5 times the standard deviation of y; that is $E(y | x=\bar{x}) \sim N(\bar{y}, 2.5 s_y)$.
 Essentially we're saying that at the centre of x, the data should be near the centre of y, and the error scales with the standard deviation of y (using a similar rescaling argument as above), again picking 2.5 as a .
-This is better than putting a prior directly on the intercept, because it's invariant in a translation of $x$ or $y$; we're always evaluating near the centre of the data (where we're likely to have the most information).
-The expected value of y in our model is precisely $$ \alpha + \beta x$$, so we can rearrange this into  $$\alpha \sim N(\bar{y} - \beta \bar{x}, 2.5 s_y) $$.
+This is better than putting a prior directly on the intercept, because it's invariant in a translation of \$x\$ or \$y\$; we're always evaluating near the centre of the data (where we're likely to have the most information).
+The expected value of y in our model is precisely $\alpha + \beta x$, so we can rearrange this into  $\alpha \sim N(\bar{y} - \beta \bar{x}, 2.5 s_y)$.
 
-Finally for the residual standard deviation assumed prior is $$ \sigma \sim {\rm Exponential}(1/s_y) $$.
-This means in particular that the expected value is $$s_y$$, which is reasonable from scaling assumptions, and that the value is non-negative.
+Finally for the residual standard deviation assumed prior is $\sigma \sim {\rm Exponential}(1/s_y)$.
+This means in particular that the expected value is $s_y$, which is reasonable from scaling assumptions, and that the value is non-negative.
 I'm not sure how reasonable the assumption in the distribution itself is, but I'll take it as a given.
 
 We further want to be able to extend from these default priors to enable passing informative priors.
 We can directly extend the prior for the coefficients to take a centre vector and standard deviation vector (or more generally a covariance matrix) that can be passed in place of the default priors.
-For the intercept $$\alpha$$ we could similarly specify a centre point and standard deviation, but to conform with the weak prior form we could pretend the data is centred, $$\bar{x} = 0$$, so the $$\beta$$ coefficient has no influence on the prior.
+For the intercept $\alpha$ we could similarly specify a centre point and standard deviation, but to conform with the weak prior form we could pretend the data is centred, $\bar{x} = 0$, so the $\beta$ coefficient has no influence on the prior.
 Finally for the standard deviation we could pass a different parameter for the exponential distribution than the inverse standard deviation of y.
 
 # Writing a Stan Model
 
 With this plan we extend our Stan data to include the centre
 
-$$ \begin{align}
+$$\begin{align}
 \beta &\sim N(\mu_\beta, s_\beta) \\
 \alpha &\sim N(\mu_\alpha - \beta \bar{x}, s_\alpha)\\
 \sigma &\sim {\rm Exponential}(1/{\mu_\sigma})
-\end{align} $$
+\end{align}$$
 
 Following `rstanarm` I refer to the centre as the `location` and the standard deviation as the `scale`, and I call the parameter in the exponential distribution the `rate`.
 Note that the priors are specified as part of the model.
@@ -168,7 +168,7 @@ fit_stan_linear <- function(formula, data,
 
 As a test of this functionality let's compare `rstanarm::stan_glm` with our function on the [SexRatio](https://github.com/avehtari/ROS-Examples/tree/master/SexRatio/) data from Section 9.5 of *Regression and Other Stories* (inspired by a study of the effect of Beauty on the sex ratio of children, where there is weak data and small priors).
 
-We have a small data set of 5 points, representing the percentage of girl babies $$y$$, as a function of standardised beauty $$x$$.
+We have a small data set of 5 points, representing the percentage of girl babies $y$, as a function of standardised beauty $x$.
 
 
 ```R

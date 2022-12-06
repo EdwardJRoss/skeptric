@@ -12,7 +12,7 @@ title: Making Bayesian Predictions with Stan and R
 This is the third on a series of articles showing the basics of building models in Stan and accessing them in R.
 Now that we can specify a linear model and [fit it in with formula syntax](/getting-started-rstan), and [specify priors for the model](/stan-linear-priors), it would be useful to be able to make predictions with it.
 
-In principle making predictions from our linear model $$ y \sim N(\alpha + \beta x, \sigma)$$ is easy; to make point predictions we take central estimates of the coefficients $$\hat{\alpha}$$ and $$\hat{\beta}$$ and estimate $$ y \approx \hat{\alpha} + \hat{\beta} x$$.
+In principle making predictions from our linear model $y \sim N(\alpha + \beta x, \sigma)$ is easy; to make point predictions we take central estimates of the coefficients $\hat{\alpha}$ and $\hat{\beta}$ and estimate $y \approx \hat{\alpha} + \hat{\beta} x$.
 If we want to represent our inferential uncertainty we could take posterior draws of the coefficients and simulate the random normal samples `rnorm(nrow(x), alpha + x %*% beta, sigma)`.
 However the `stanfit` object doesn't have enough information on how to do this; we're going to have to add it.
 And ideally we'd be able to use R's inbuilt `predict` function like with other models.

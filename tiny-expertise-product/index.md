@@ -6,7 +6,7 @@ image: /images/minature_book.jpg
 title: Packaging your Expertise in a Tiny Product
 ---
 
-I was listening to the $100 MBA Podcast about [How to Easily Create a Small Information Product](https://100mba.net/mba493/).
+I was listening to the \$100 MBA Podcast about [How to Easily Create a Small Information Product](https://100mba.net/mba493/).
 I really like the idea of building a tiny product in under 12 hours of work to get experience making something and building [success in small steps](/success-small-steps).
 
 Their basic premise is it's really easy to create a simple product that let's you share your expertise to help people make a small transformation:

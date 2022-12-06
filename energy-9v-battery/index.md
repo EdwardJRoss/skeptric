@@ -14,9 +14,9 @@ We're just going to estimate the first part.
 
 # Battery Energy
 
-A volt is energy per unit charge $$ V = \frac{E}{q} $$.
-To get towards an energy we need an amount of charge; the current in Ampere is the charge per unit time $$ I = frac{q}{t} $$.
-So the product $$ V I = \frac{E}{t} $$ is energy per unit time, or power.
+A volt is energy per unit charge $V = \frac{E}{q}$.
+To get towards an energy we need an amount of charge; the current in Ampere is the charge per unit time $I = frac{q}{t}$.
+So the product $V I = \frac{E}{t}$ is energy per unit time, or power.
 
 My smoke detector needs a 9V battery, and should be replaced every year.
 If I can estimate the current the smoke detector draws I can estimate the energy.
@@ -28,7 +28,7 @@ Guessing the geometric mean of 1 A and 1 mA gives 30 mA, or 0.03 A.
 
 Then the Energy in a 9V battery is given by
 
-$$ E = V I t = 9 \rm{V} \times 0.03 \rm{A} \times 3 \times 10^{7} s = 10^{7} \rm{J} $$.
+$$E = V I t = 9 \rm{V} \times 0.03 \rm{A} \times 3 \times 10^{7} s = 10^{7} \rm{J}$$.
 
 A common unit for energy in batteries is Watt Hours, which is 1/3600 J.
 So the energy is roughly 2500 Wh, or 2.5 kWh.

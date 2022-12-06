@@ -14,7 +14,7 @@ This article is the first in a series showing how I got there; this one builds a
 I used the Methods Consultants [Introduction to Stan in R](https://blog.methodsconsultants.com/posts/introduction-to-stan-in-r/) to get started.
 A broader (but shallow) introduction is the *Methods Bites* [Applied Bayesian Statistics Using Stan and R](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/applied-bayesian-statistics/).
 
-A simple place to start is a linear model $$ y \sim N(\alpha + X \beta, \sigma) $$ (often written, equivalently, as $$ y \sim \alpha + X \beta + \epsilon $$, where $$ \epsilon \sim N(0, \sigma) $$.
+A simple place to start is a linear model $y \sim N(\alpha + X \beta, \sigma)$ (often written, equivalently, as $y \sim \alpha + X \beta + \epsilon$, where $\epsilon \sim N(0, \sigma)$.
 We can write out the model in Stan explicitly as follows and save it to `linear_flat.stan`:
 
 
@@ -103,7 +103,7 @@ For getting the responses I couldn't find a simpler way than `model.response(mod
 The `model.frame` extracts all the columns from the formula, response and predictors, and the `model.response` just gets the column of responses.
 
 The predictors matrix can be extracted using [`model.matrix`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/model.matrix).
-Unfortunately this also contains the intercept which we want to take out of our matrix (a more flexible solutions is to remove $$\alpha$$ from the model).
+Unfortunately this also contains the intercept which we want to take out of our matrix (a more flexible solutions is to remove $\alpha$ from the model).
 
 Here's a little piece of logic to remove the first column, which should be the intercept, from the model.
 This will fail for formula's without an intercept (e.g. `mpg ~ cyl - 1`).

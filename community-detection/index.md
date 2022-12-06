@@ -16,7 +16,7 @@ The intuitive idea is that you want to group nodes such that a node in the group
 However the devil is in the detail and there's no clear definition of whether one community is "better" than the other.
 
 In fact it's even hard to say how similar two partitions into communities are.
-In the article they recommend using the variation of information: $$ V(X, Y) = H(X \vert Y) + H (Y \vert X) $$ where *H* is the Shannon entropy of the cluster assignments.
+In the article they recommend using the variation of information: $V(X, Y) = H(X \vert Y) + H (Y \vert X)$ where *H* is the Shannon entropy of the cluster assignments.
 But a deeper problem is there are rarely ground truths for what the communities are.
 There exist some examples in the literature; like the Zacchary Karate Club network about members of a Karate Club that split into two separate clubs, or another about bottlenose dolphins observed together that later migrated to different areas. 
 But the datasets are typically small, noisy (a single missed observation could radically change the graph) and scarce and it's hard to say how *true* their ground truths are.

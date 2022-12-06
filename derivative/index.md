@@ -25,7 +25,7 @@ The derivative is the tangent plane at any point; it represents how much the hei
 
 Concretely we have a function f mapping an m dimensional space to an n dimenstional space, and want to approximate it near some point v of the input space.
 We take a point near v by adding *small* m dimensional vector h and try to find the best linear approximation.
-The derivative $$ df_v $$ is a linear function such that  $$ f(v + h) \approx f(v) + df_v(h) $$, where the approximation is better the smaller h is.
+The derivative $df_v$ is a linear function such that  $f(v + h) \approx f(v) + df_v(h)$, where the approximation is better the smaller h is.
 
 Note that if the derivative is 0, that is the tangent plane is horizontal, then any small step won't change the height.
 This happens whenever you are at the top of a hill or the bottom of a valley; called a local extrema.
@@ -34,19 +34,19 @@ This happens whenever you are at the top of a hill or the bottom of a valley; ca
 
 A fundamental property of the derivative is the *chain rule*; which tells how to calculate the derivative of a composition of functions.
 It essentially says the derivative of a composition is the composition of the derivatives; that is the matrix product of the linear derivative matrices.
-It's pretty straightforward to prove: $$ g(f(v + h)) \approx g(f(v) + df_v(h)) \approx g(f(v)) + dg_{f(v)}(df_v(h)) $$.
-A short notational way to put this is $$ d(f\circ g)_{v} = dg_{f(v)} \circ df_v $$.
+It's pretty straightforward to prove: $g(f(v + h)) \approx g(f(v) + df_v(h)) \approx g(f(v)) + dg_{f(v)}(df_v(h))$.
+A short notational way to put this is $d(f\circ g)_{v} = dg_{f(v)} \circ df_v$.
 
 This is a really useful tool for calculating derivatives in practice.
 It can be efficiently implemented in [Automatic Differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) available in libraries like Tensorflow and Pytorch.
 
 The standard rules for calculating derivatives can be obtained from the chain rule.
-For example the multiplication rule is $$ d(f \cdot g)_v = g(v) df_v + f(v) dg_v $$.
+For example the multiplication rule is $d(f \cdot g)_v = g(v) df_v + f(v) dg_v$.
 Multiplication is actually a function that takes 2 numbers and returns one number and we can directly calculate the derivative.
-$$ (x + \delta_x) \cdot (y + \delta_y) = x \cdot y + y \delta_x + x \delta_y + \delta_x \delta_y $$ and so $$ d \cdot_{(x,y)} = \begin{bmatrix}
+$$(x + \delta_x) \cdot (y + \delta_y) = x \cdot y + y \delta_x + x \delta_y + \delta_x \delta_y$$ and so $d \cdot_{(x,y)} = \begin{bmatrix}
 0 &  x \\
 y & 0
-\end{bmatrix} $$.
+\end{bmatrix}$.
 Then the multiplication rule immediately follows from the chain rule.
 
 Note that the definition of the derivative doesn't explicitly refer to the coordinates.

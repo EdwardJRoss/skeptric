@@ -20,9 +20,9 @@ The way I approached this was:
 * For salaries without a period, infer the period from the range (ignoring when it's ambiguous)
 * Divide out the period (inferred or actual) to get the annualised salary.
 
-For example by looking at the data I can see for Australian jobs annual salaries should be above $10,000.
-Daily salaries are above $100 and hourly salaries below $200; between $100 and $200 it's ambiguous depending on the kind of role.
-But below $100 it's unambiguously hourly.
+For example by looking at the data I can see for Australian jobs annual salaries should be above \$10,000.
+Daily salaries are above \$100 and hourly salaries below \$200; between \$100 and \$200 it's ambiguous depending on the kind of role.
+But below \$100 it's unambiguously hourly.
 This approach could be applied to different markets and currencies I'm less familiar with.
 
 I used the [TDD approach to parsing salary](/tdd-salary), which allowed me to improve it and the tests caught some regressions I would have introduced.

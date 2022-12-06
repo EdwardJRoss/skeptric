@@ -14,9 +14,9 @@ A questions mathematicians ask is what kinds of groups are there?
 One way to tackle this is to try to decompose them.
 One way of doing this is a [decomposition series](https://en.wikipedia.org/wiki/Composition_series) of normal subgroups.
 
-$$ 1 = H_0\triangleleft H_1\triangleleft \cdots \triangleleft H_n = G $$
+$$1 = H_0\triangleleft H_1\triangleleft \cdots \triangleleft H_n = G$$
 
-By the [Jordan-Hölder theorem](https://en.wikipedia.org/wiki/Composition_series) the induced simple quotient groups $$ H_j  / H_{j-1} $$ are unique up to permutation of order.
+By the [Jordan-Hölder theorem](https://en.wikipedia.org/wiki/Composition_series) the induced simple quotient groups $H_j  / H_{j-1}$ are unique up to permutation of order.
 The [Classification of Finite Simple Groups](https://en.wikipedia.org/wiki/Classification_of_finite_simple_groups) lists all the possible groups.
 These can all be seen as sorts of symmetries:
 

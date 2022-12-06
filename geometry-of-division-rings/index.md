@@ -6,7 +6,7 @@ image: /images/quaternion_sphere.jpg
 title: Geometry of division rings
 ---
 
-It is fairly easy to construct a geometry from algebra: given a [division ring](http://en.wikipedia.org/wiki/Division_ring) K we form an n-dimensional vector space, the points being the elements of the field and a line being a translation of all (left) multiples of a non-zero vector, i.e. of the form  $$\{a\mathbf{v} + \mathbf{c}| a \in K\}$$  for some fixed vectors  $$\mathbf{v} \neq 0$$  and **c**.
+It is fairly easy to construct a geometry from algebra: given a [division ring](http://en.wikipedia.org/wiki/Division_ring) K we form an n-dimensional vector space, the points being the elements of the field and a line being a translation of all (left) multiples of a non-zero vector, i.e. of the form  $\{a\mathbf{v} + \mathbf{c}| a \in K\}$  for some fixed vectors  $\mathbf{v} \neq 0$  and **c**.
 
 
 Interestingly it’s just as possible to go the other way, if we’re careful about what we mean by a geometry. I will loosely follow Artin’s book [Geometric Algebra](http://archive.org/details/geometricalgebra033556mbp). In particular we have the undefined terms of point, line and the undefined relation of lies on. Then, for a fixed positive integer, the axioms are:
@@ -33,13 +33,13 @@ We can define a **dilation** to be a mapping of points onto points such that the
 Any line containing a point and the translation (or more generally an injective dilation) of the point is called a **trace** of the translation. A **scalar multiplication** is a group automorphism of the translations such that each trace of a translation is a trace of its image.
 
 
-Given two scalar multiplications  $$\alpha$$  and  $$\beta$$  we define their sum on a translation T by  $$(\alpha + \beta)(T) = \alpha(T) \beta(T)$$  and their product by  $$\alpha \times \beta (T) = \alpha (\beta T)$$ , define 0 to be the scalar multiplication sending all translations to the identity, and 1 to be the identity scalar multiplication.
+Given two scalar multiplications  $\alpha$  and  $\beta$  we define their sum on a translation T by  $(\alpha + \beta)(T) = \alpha(T) \beta(T)$  and their product by  $\alpha \times \beta (T) = \alpha (\beta T)$ , define 0 to be the scalar multiplication sending all translations to the identity, and 1 to be the identity scalar multiplication.
 
 
-**Theorem:** The scalar multiplications form a division ring under the multiplications given above if and only if  $$d > 2$$ .
+**Theorem:** The scalar multiplications form a division ring under the multiplications given above if and only if  $d > 2$ .
 
 
-Then we can go ahead and choose any point, which we call the origin, and d other points which, with the origin, span the space. We denote the d translations from the origin to the other points by  $$v_1, \ldots, v_d$$ . Then any vector can be uniquely written  $$(k_1, \ldots, k_d) = k_1 (v_1) + \ldots k_d(v_d)$$  for unique  $$k_1, \ldots k_d$$  in the space. Now given there is a unique translation from the origin to any point, we can identify a vector with its action on the origin. Thus we obtain a **coordinitisation** of the space; a correspondence with  $$K^d$$  for some division ring K. This is of course not cannonical; our choice of the d + 1 points were arbitrary.
+Then we can go ahead and choose any point, which we call the origin, and d other points which, with the origin, span the space. We denote the d translations from the origin to the other points by  $v_1, \ldots, v_d$ . Then any vector can be uniquely written  $(k_1, \ldots, k_d) = k_1 (v_1) + \ldots k_d(v_d)$  for unique  $k_1, \ldots k_d$  in the space. Now given there is a unique translation from the origin to any point, we can identify a vector with its action on the origin. Thus we obtain a **coordinitisation** of the space; a correspondence with  $K^d$  for some division ring K. This is of course not cannonical; our choice of the d + 1 points were arbitrary.
 
 
 It is interesting to note how such geometric axioms (although carefully chosen) correspond so exactly with the algebraic notions of division ring and vector space.
@@ -75,7 +75,7 @@ A diagram is shown below. If it is true for one point X then it can be shown to 
 Geometrically Artin shows this is equivalent to: Given three collinear, distinct points P, Q, R there exists a dilation with fixed point P mapping Q onto R. This is essentially saying we can get to any point by a scaling operation, and underlies the scalar multiplication structure.
 
 
-One may ask whether this axiom necessarily holds in dimension 2. It doesn’t. An interesting counterexample is the [octonionic plane](http://math.ucr.edu/home/baez/octonions/node8.html) (the [octonions](http://en.wikipedia.org/wiki/Octonion) are a non-associative (but alternative) division algebra over the reals). Because the octonions are non-associative you can’t really do linear algebra over them; in particular consider a potential line through an origin  $$\{a\mathbf{v}| a \in \mathbb{O}\}$$ . Now consider the ‘line’ through the origin and another point on this ‘line’,  $$\{b(a \mathbf{v})| b \in \mathbb{O}\}$$  because  $$b(a \mathbf{v}) \neq (ba) \mathbf{v}$$  in general this line would have different points to the original.
+One may ask whether this axiom necessarily holds in dimension 2. It doesn’t. An interesting counterexample is the [octonionic plane](http://math.ucr.edu/home/baez/octonions/node8.html) (the [octonions](http://en.wikipedia.org/wiki/Octonion) are a non-associative (but alternative) division algebra over the reals). Because the octonions are non-associative you can’t really do linear algebra over them; in particular consider a potential line through an origin  $\{a\mathbf{v}| a \in \mathbb{O}\}$ . Now consider the ‘line’ through the origin and another point on this ‘line’,  $\{b(a \mathbf{v})| b \in \mathbb{O}\}$  because  $b(a \mathbf{v}) \neq (ba) \mathbf{v}$  in general this line would have different points to the original.
 
 
 For a plethora of examples of non-Desarguesian planes see this [review](http://www.ams.org/notices/200710/tx071001294p.pdf).

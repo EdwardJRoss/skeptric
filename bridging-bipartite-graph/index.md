@@ -14,7 +14,7 @@ For example you can have the actors as customers and events as products that are
 One of [the ways](/recommendation-graph) to represent this is to relate actors by the number of events they both participate in.
 For example two customers are related by the number of products they have both purchased, or two users by the number of videos they have both viewed, or two forum members by the number of posts they have both commented on.
 
-Mathematically if the adjacency matrix of the bipartite graph is *A*, then this joint matrix is $$ A A^{T} $$.
+Mathematically if the adjacency matrix of the bipartite graph is *A*, then this joint matrix is $A A^{T}$.
 However most of the time this matrix is very sparse, and calculating this matrix product directly is very slow.
 But by iterating over the sorted events you can calculate it efficiently.
 

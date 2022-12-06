@@ -7,9 +7,9 @@ title: Pooling Proportions with Empirical Bayes
 ---
 
 Calculating binomial proportions by group is inherently noisy for small groups.
-The standard deviation for a group is $$\sqrt{\frac{p(1-p)}{N}}$$, where $$p$$ is the true proportion of the group and $$N$$ the size of the group.
-The numerator is always at least as large as the distance to 0 or 1, so for small $$N$$ the uncertainty is very large relative to the measurement.
-The resolution of the measurement is at most $$1/N$$; with $$N=2$$ the only possible outcomes are 0%, 50% or 100%.
+The standard deviation for a group is $\sqrt{\frac{p(1-p)}{N}}$, where $p$ is the true proportion of the group and $N$ the size of the group.
+The numerator is always at least as large as the distance to 0 or 1, so for small $N$ the uncertainty is very large relative to the measurement.
+The resolution of the measurement is at most $1/N$; with $N=2$ the only possible outcomes are 0%, 50% or 100%.
 Because of this in rankings the small groups are always near the top and the bottom.
 
 There is a better way to calculate binomial proportions by pooling information across groups.
@@ -24,26 +24,26 @@ The maximum likelihood estimate (or any other estimate) can be plugged in and th
 
 # Model and Group Estimates
 
-The data is from m groups, with group $$i$$ containing $$N_i$$ dichotomous outcomes of which $$k_i$$ are positive.
-The group is modelled as a binomial with probability $$\theta_i$$, which is the group average we are trying to infer.
-The groups probabilities are modelled as a Beta distribution where the parameters $$\alpha$$ and $$\beta$$ are to be inferred.
+The data is from m groups, with group $i$ containing $N_i$ dichotomous outcomes of which $k_i$ are positive.
+The group is modelled as a binomial with probability $\theta_i$, which is the group average we are trying to infer.
+The groups probabilities are modelled as a Beta distribution where the parameters $\alpha$ and $\beta$ are to be inferred.
 
-$$ \begin{align}
+$$\begin{align}
 \theta_i & \sim {\rm Beta}(\alpha, \beta) \\
 k_i & \sim {\rm Binomial}(N_i, \theta_i) \; \forall i=1,\ldots,m
 \end{align}$$
 
-Given $$\alpha$$ and $$\beta$$ the posterior estimates are
+Given $\alpha$ and $\beta$ the posterior estimates are
 
-$$ \hat{\theta}_i = \frac{k_i + \alpha - 1 }{N_i + \alpha + \beta - 2} $$
+$$\hat{\theta}_i = \frac{k_i + \alpha - 1 }{N_i + \alpha + \beta - 2}$$
 
-That is the prior is effectively starting at $$\alpha+\beta-2$$ outcomes, of which $$\alpha-1$$ are positive and $$\beta-1$$ are negative.
-This standard notation is asymmetrical; using the sample strength $$\kappa = \alpha + \beta$$ it's a more symmetrical (but still plagued by off-by-one adjustments).
+That is the prior is effectively starting at $\alpha+\beta-2$ outcomes, of which $\alpha-1$ are positive and $\beta-1$ are negative.
+This standard notation is asymmetrical; using the sample strength $\kappa = \alpha + \beta$ it's a more symmetrical (but still plagued by off-by-one adjustments).
 
-$$ \hat{\theta}_i = \frac{k_i + \alpha - 1 }{N_i + \kappa - 2} $$
+$$\hat{\theta}_i = \frac{k_i + \alpha - 1 }{N_i + \kappa - 2}$$
 
 In fact it can be seen as a weighted average of the group average and the prior average from the Beta distribtuion.
-The direct estimate of probability is $$p_i = k_i/N_i$$, and the mode of the Beta function is $$\omega = \frac{\alpha-1}{\kappa-2}$$ (for $$\kappa > 2$$).
+The direct estimate of probability is $p_i = k_i/N_i$, and the mode of the Beta function is $\omega = \frac{\alpha-1}{\kappa-2}$ (for $\kappa > 2$).
 Then
 
 $$\hat{\theta}_i = \frac{N_i p_i + (\kappa - 2) \omega }{N_i + (\kappa - 2)}$$
@@ -54,11 +54,11 @@ Any estimate of the Beta Distribution will work.
 [Probabilaball](http://www.probabilaball.com/2015/05/beta-binomial-empirical-bayes.html) has an example [with code](https://github.com/Probabilaball/Blog-Code/tree/master/Beta-Binomial-Empirical-Bayes) of using the method of moments estimator (there's also a brief example in Casella's [An Introduction to Empirical Bayes Data Analysis](https://www.biostat.jhsph.edu/~fdominic/teaching/bio656/labs/labs09/Casella.EmpBayes.pdf)).
 However the maximum likelihood estimator has many nice properties, and examining the likelihood shows the sensitivity to the parameters.
 
-We want to find the dependence of the binomial outcomes on the hyper-priors $$\alpha$$ and $$\beta$$ alone.
+We want to find the dependence of the binomial outcomes on the hyper-priors $\alpha$ and $\beta$ alone.
 For now just consider one group and drop the group index for simplicity.
 From our distributional model assumptions we have the following probability distributions:
 
-$$ \begin{align}
+$$\begin{align}
 P(\theta \vert \alpha, \beta) &=  \frac{\theta^{\alpha-1}(1-\theta)^{\beta-1}}{B(\alpha, \beta)} \\
 P(k \vert N, \theta) &=  {N \choose k} \theta^{k}(1-\theta)^{N-k}
 \end{align}$$
@@ -83,7 +83,7 @@ psim <- table(k_sim)/length(k_sim)
 # 0.1463 0.3227 0.3060 0.1641 0.0535 0.0074
 ```
 
-We can obtain the marginal distribution by integrating out $$\theta$$ using the law of total probability, and simplifying with conditional independence.
+We can obtain the marginal distribution by integrating out $\theta$ using the law of total probability, and simplifying with conditional independence.
 This can be done for a wide range of models, called [Conditionally Independent Hierarchical Models](http://people.csail.mit.edu/jrennie/trg/papers/kass-bayesian-89.pdf), see also the derivation for a [hierarchical normal distribution with known variance](/james-stein-bayes)
 
 
@@ -169,7 +169,7 @@ negloglik <- function(a,b) {
 ```
 
 Since there are only two parameters we can do a brute force search.
-I find it easier to think about in terms of the mode $$\omega$$ and strength $$\kappa$$, or $$\tau = \kappa - 2$$.
+I find it easier to think about in terms of the mode $\omega$ and strength $\kappa$, or $\tau = \kappa - 2$.
 
 ```R
 omega <- seq(0, 1, by=0.01)
@@ -192,7 +192,7 @@ c(omega[idx], tau[idx], a[idx], b[idx])
 
 Brute force searching gives an estimate close to the original parameters.
 It also allows us to plot the distribution easily, with the true value as a point in red.
-Notice that the negative log likelihood increases fast as $$\omega$$ gets far from the true value, but relatively slowly for larger sample strengths.
+Notice that the negative log likelihood increases fast as $\omega$ gets far from the true value, but relatively slowly for larger sample strengths.
 
 ![Log likelihood of parameters from data](/images/beta_binomial_simulation_logliklihood.png)
 
@@ -219,7 +219,7 @@ d_nll_by_b <- function(a,b) {
 
 It seems there's a unique global maximum and we can solve for it numerically.
 For an initial estimate use that the mean of the distribution is approximately the mean of the groups, and the variance is approximately the variance of the groups.
-These can then be rearranged to get $$\alpha$$ and $$\beta$$ (see the article on the [beta distribution](/beta-distribution) for details).
+These can then be rearranged to get $\alpha$ and $\beta$ (see the article on the [beta distribution](/beta-distribution) for details).
 For our starting point we can use a rough approximation.
 
 ```R
@@ -260,7 +260,7 @@ r <- rootSolve::multiroot(
 Ideally all this would be wrapped up in some library that makes this easy to use.
 This is a better default for calculating group proportions than the simple average.
 
-We can then put this estimate to improve the raw estimate $$p=k/N$$ to $$\hat{p} = \frac{k+\alpha-1}{N+\alpha+\beta-2}$$.
+We can then put this estimate to improve the raw estimate $p=k/N$ to $\hat{p} = \frac{k+\alpha-1}{N+\alpha+\beta-2}$.
 
 ```R
 ahat <- r$root[1]
@@ -290,9 +290,9 @@ df$phat_error <- df$theta - df$phat
 |  0.53|  42|  23| 0.55| 0.47|   -0.02|       0.06|
 |  0.29|  63|  14| 0.22| 0.26|    0.06|       0.03|
 
-Notice that the error is much smaller for $$\hat{p}$$ when $$N$$ is small.
+Notice that the error is much smaller for $\hat{p}$ when $N$ is small.
 In particular the most extreme value of p, when N=20, gets shrunk down closer to the true value.
-The RMSE for $$\hat{p}$$ is 0.05, much smaller than the RMSE for $$p$$ of 0.18.
+The RMSE for $\hat{p}$ is 0.05, much smaller than the RMSE for $p$ of 0.18.
 
 This should be the default way of calculating proportions.
 David Robinson has provided the [ebbr R package](https://github.com/dgrtwo/ebbr), but the [python port](https://github.com/uttiyamaji/ebbp) needs some work.

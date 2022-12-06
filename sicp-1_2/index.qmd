@@ -12,7 +12,7 @@ Exercise from SICP:
 
 Translate the following expression into prefix form
 
-$$ \frac{5 + 4 + (2 - (3 - (6 + \frac{1}{5})))}{3(6-2)(2-7)} $$
+$$\frac{5 + 4 + (2 - (3 - (6 + \frac{1}{5})))}{3(6-2)(2-7)}$$
 
 # Solution
 

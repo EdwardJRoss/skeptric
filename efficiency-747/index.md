@@ -13,17 +13,17 @@ This is from Sanjoy Mahajan's [The Art of Insight](https://mitpress.mit.edu/book
 > (b) the volume of its fuel tank.
 > Check your estimates against the technical data for a 747.
 
-A flight from Melbourne to Las Angeles direct costs about $1,000.
+A flight from Melbourne to Las Angeles direct costs about \$1,000.
 
 There are a number of costs of a long distance flight; such as crew, food, and airport fees.
 It's reasonable to assume the majority of the cost is fuel.
 There's also some profit margin for the airline, and allowance for a partially filled plane.
-Assume fuel is around 80% of the costs, or $800 per passenger.
+Assume fuel is around 80% of the costs, or \$800 per passenger.
 
 Jet fuel is more expensive than car fuel (being higher octane), but airlines would get discounts buying the fuel in bulk.
-Assume that the cost of jet fuel is about the same as petrol $1.50 per litre.
+Assume that the cost of jet fuel is about the same as petrol \$1.50 per litre.
 
-Then the fuel usage is $800 per passenger divided by $1.50 per litre, or 500 litres per passenger.
+Then the fuel usage is \$800 per passenger divided by \$1.50 per litre, or 500 litres per passenger.
 
 Melbourne and Las Angeles are roughly on opposite sides of the world.
 The world is about 6,000 km radius.

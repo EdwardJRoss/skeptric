@@ -28,8 +28,8 @@ Even better would be to present the models separately for each gender (even if t
 
 This doesn't just apply to linear regression, but to more complex models with a handful of parameters too.
 In *Regression and Other Stories* they talk about the divide-by-4 rule for logistic regression.
-In the model $$ logit^{-1}(\alpha + \beta x) $$ a unit difference in x makes at most a difference in $$ \beta / 4 $$ in the probability (at a probability of 50%, and smaller near the extremes).
-When communicating a logistic regression to non-statisticians, especially one where most predictions are in the middle, the coefficient $$ \beta / 4 $$ is a much better parameter to explain than $$ \beta $$ itself.
+In the model $logit^{-1}(\alpha + \beta x)$ a unit difference in x makes at most a difference in $\beta / 4$ in the probability (at a probability of 50%, and smaller near the extremes).
+When communicating a logistic regression to non-statisticians, especially one where most predictions are in the middle, the coefficient $\beta / 4$ is a much better parameter to explain than $\beta$ itself.
 
 Another useful trick in generalised linear models is to divide the coefficients by the standard deviation, especially when the predictors are on different scale.
 If you've got both age and income as predictors, even if they have equal weight, in natural units the income coefficient will be much lower because it has a huge variation in tens of thousands of dollars, but age only varies by scores of years.
@@ -37,13 +37,13 @@ To the untrained eye it makes income seem much less important, and the relative 
 Dividing by the standard deviation puts them on the same scale, in terms of the impact they can have on the outcome variable (assuming they are similarly distributed), which makes it much easier to compare models.
 
 A more complex example is the [Generalised Logistic Function](https://en.wikipedia.org/wiki/Generalised_logistic_function), which is an S-shaped curve that has the useful property of quickly switching between two extreme values.
-One way to write this is $$ Y(t) = \frac{A \left(C + e^{-Bt}\right)^{1/\nu} + J}{\left(C + e^{-Bt}\right)^{1/\nu}} $$, but it's not clear what all these things mean.
+One way to write this is $Y(t) = \frac{A \left(C + e^{-Bt}\right)^{1/\nu} + J}{\left(C + e^{-Bt}\right)^{1/\nu}}$, but it's not clear what all these things mean.
 
 ![Example Logistic Function](/images/logistic_function.png)
 
-Wikipedia puts it in a much more interpretable form: $$ Y(t) = A + { K-A \over (1 + Q e^{-Bt}) ^ {1 / \nu} $$, where A is the lowest value it can reach and K is the highest value, and Q is the initial value at t=0.
-The other values; the growth rate B, the shape factor $$ \nu $$ are harder to interpret.
-However you could further reparameterise these for a use case; maybe there's two other points on the curve that mean something and we could use these instead of B and $$ \nu $$.
+Wikipedia puts it in a much more interpretable form: $Y(t) = A + { K-A \over (1 + Q e^{-Bt}) ^ {1 / \nu}$, where A is the lowest value it can reach and K is the highest value, and Q is the initial value at t=0.
+The other values; the growth rate B, the shape factor $\nu$ are harder to interpret.
+However you could further reparameterise these for a use case; maybe there's two other points on the curve that mean something and we could use these instead of B and $\nu$.
 Or suppose this represents the number of people that would churn from a product at a given price, and when multiplying by the price we get the profit.
 Then the price at which profit is optimised, and the optimal profit (perhaps relative to the current profit) are great, meaningful parameters.
 

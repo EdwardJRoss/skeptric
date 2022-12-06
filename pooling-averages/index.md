@@ -51,7 +51,7 @@ These different methods can be illustrated with an example from SEEK's marketpla
 ## Show me the money
 
 When an employer posts a job ad on SEEK they can choose whether to show the salary range for the role.
-For some kinds of roles it is very common to show the salary (such as $20 - $30 an hour), and for other kinds it is not.
+For some kinds of roles it is very common to show the salary (such as \$20 - \$30 an hour), and for other kinds it is not.
 We can calculate the proportion of employers who show salary for each role.
 
 Below is 12 roles, taken from the thousands of role titles on SEEK, with the percentage of employers who show the salary.
@@ -88,7 +88,7 @@ For some applications the error should be weighted, for example by volume, but w
 In this example there are only 12 groups, but in many applications real at SEEK we have tens of thousands or more.
 The techniques here work much better the more groups there are, but 12 is enough to show the impact and make it easy to follow.
 These group estimates have very high variance which makes these techniques particularly effective.
-In contrast when estimating average salary, which may vary by 20% within a role, but between roles can vary from $20 an hour to over $100 an hour, there is little benefit in shrinking the estimates.
+In contrast when estimating average salary, which may vary by 20% within a role, but between roles can vary from \$20 an hour to over \$100 an hour, there is little benefit in shrinking the estimates.
 
 # Baseline Averages
 
@@ -157,8 +157,8 @@ Assigning any group below some threshold size to the overall average reduces the
 The threshold could be chosen through statistical heuristics.
 Ideally the variance within groups would be balanced against the variance between groups.
 The variance between the groups can be estimated as the standard deviation of the group averages, which is 15 percentage points.
-To estimate the binomial sample with standard deviation $$\sigma$$ requires a sample size of $$n=\frac{p(1-p)}{\sigma^2}$$.
-Using the overall average $$p=33\%$$ and $$\sigma=15 {\rm\ p.p}$$ which gives a sample size of 10.
+To estimate the binomial sample with standard deviation $\sigma$ requires a sample size of $n=\frac{p(1-p)}{\sigma^2}$.
+Using the overall average $p=33\%$ and $\sigma=15 {\rm\ p.p}$ which gives a sample size of 10.
 Including the small groups in the calculation of standard deviation inflates the standard deviation, which reduces the sample size, so we may want to adjust it to be larger.
 Alternatively cross-validation could be used to estimate the threshold.
 In this case it's not too sensitive and 10 works reasonably well.
@@ -175,34 +175,34 @@ A better approach would be to interpolate between the two extremes.
 # Partial Pooling Model
 
 A weighted average can balance the information from within each group and the information from other groups.
-In each group we have $$n$$ ads, $$k$$ of which have salary shown, giving a group proportion of $$p=k/n$$.
-For a group with no data, such as Chiropractor, the proportion should be $$P$$ close to the overall average. 
-For groups with some data we could interpolate between the group proportion, and the prior proportion $$P$$ by using some effective number of ads $$N$$.
+In each group we have $n$ ads, $k$ of which have salary shown, giving a group proportion of $p=k/n$.
+For a group with no data, such as Chiropractor, the proportion should be $P$ close to the overall average. 
+For groups with some data we could interpolate between the group proportion, and the prior proportion $P$ by using some effective number of ads $N$.
 Then the estimate for the group is the weighted average:
 
-$$ \frac{N}{N+n} P + \frac{n}{N+n} p $$
+$$\frac{N}{N+n} P + \frac{n}{N+n} p$$
 
-When there are no ads the estimated average is $$P$$, and as the number of ads increases it gets closer to the group average, $$p$$.
+When there are no ads the estimated average is $P$, and as the number of ads increases it gets closer to the group average, $p$.
 
-The values for $$N$$ and $$P$$ can be estimated by a statistical model.
+The values for $N$ and $P$ can be estimated by a statistical model.
 The probability that a role has salary shown is assumed to be randomly drawn from a statistical distribution.
-In particular we assume it is a [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) peaked at $$P$$, with strength $$N+2$$.
-For a given $$N$$ and $$P$$ we can simulate 12 random draws for each role's probability of showing the salary, and then for each of the 450 jobs in the sample randomly choose whether the salary is shown with the group probability.
-Doing this very many times we could look at what percentage of draws had exactly our sample data, which gives the probability of the data given $$N$$ and $$P$$.
-A good estimate of $$N$$ and $$P$$ is the one for which the actual observed data is most likely.
+In particular we assume it is a [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) peaked at $P$, with strength $N+2$.
+For a given $N$ and $P$ we can simulate 12 random draws for each role's probability of showing the salary, and then for each of the 450 jobs in the sample randomly choose whether the salary is shown with the group probability.
+Doing this very many times we could look at what percentage of draws had exactly our sample data, which gives the probability of the data given $N$ and $P$.
+A good estimate of $N$ and $P$ is the one for which the actual observed data is most likely.
 
-The most likely values of $$N$$ and $$P$$ can be calculated efficiently.
+The most likely values of $N$ and $P$ can be calculated efficiently.
 The strategy of directly calculating the likelihood of the data is computationally infeasible, even for this small dataset.
-However for each $$N$$ and $$P$$ it is [possible to calculate](https://skeptric.com/pooling-proportions-empirical-bayes/) the probability as a closed form expression.
+However for each $N$ and $P$ it is [possible to calculate](https://skeptric.com/pooling-proportions-empirical-bayes/) the probability as a closed form expression.
 This can be efficiently numerically optimised even for a very large number of groups.
-For this data below is a plot showing the likelihood for some different values of $$N$$ and $$P$$.
+For this data below is a plot showing the likelihood for some different values of $N$ and $P$.
 
 ![Likelihood at different values of N and P](/images/likelihood_heirarchical_pooling.png)
 
-This gives most likely values of $$P=30\%$$ and $$N=100$$.
+This gives most likely values of $P=30\%$ and $N=100$.
 The most likely probability is slightly different to the overall average of 33%.
-The overall average is the centre of the groups weighted by size, whereas $$P$$ is the centre of the groups weighted equally.
-Partial pooling then shrinks the estimates towards $$P=30\%$$, weighting this prior estimate by $$N=100$$.
+The overall average is the centre of the groups weighted by size, whereas $P$ is the centre of the groups weighted equally.
+Partial pooling then shrinks the estimates towards $P=30\%$, weighting this prior estimate by $N=100$.
 A Dental Assistant, with 105 ads, shrinks almost halfway between the group average and 30%.
 A Dental Hygienist with 2 ads shrinks almost all the way to 30%.
 

@@ -8,7 +8,7 @@ title: A Reading Guide to Stein's Paradox
 ---
 
 [Stein's Paradox](https://en.wikipedia.org/wiki/Stein%27s_example) states that when trying to estimate the 3 or more means of normally distributed data together, it's *always* better (on average) to shrink the estimates.
-Specifically if you've got p independent normally distributed variables $$X_i \sim N(\theta_i, 1) ;\, i=1,\ldots,p$$ the best estimates for minimising the mean squared error of *all* the estimates isn't the values themselves $$X$$, and the James-Stein estimator is better (has strictly lower risk).
+Specifically if you've got p independent normally distributed variables $X_i \sim N(\theta_i, 1) ;\, i=1,\ldots,p$ the best estimates for minimising the mean squared error of *all* the estimates isn't the values themselves $X$, and the James-Stein estimator is better (has strictly lower risk).
 
 $$\hat\theta^{JS}(X) = \left(1 - \frac{p-2}{\lVert X\rVert^2}\right)X$$
 
@@ -21,7 +21,7 @@ This article will give a guide on how to understand this phenomenon a bit better
 The best introductory resource is this [Statslab Cambridge](http://www.statslab.cam.ac.uk/~rjs57/SteinParadox.pdf) article by Richard Samsworth, which gives a clear explanation and a very simple proof.
 If the notation is a bit hard to follow I recommend the book [All of Statistics](http://www.stat.cmu.edu/~larry/all-of-statistics/index.html) which covers Decision Theory in Chapter 10 (and touches on the James-Stein Estimator).
 
-One thing to note from this article is the improvement in risk over the Maximum Likelihood Estimator $$X$$ is $$(p-2){\mathbb E}\left(\frac{1}{\lVert X \rVert^2}\right)$$.
+One thing to note from this article is the improvement in risk over the Maximum Likelihood Estimator $X$ is $(p-2){\mathbb E}\left(\frac{1}{\lVert X \rVert^2}\right)$.
 So the closer the points are to the origin the more the improvement (although there is always *some* improvement).
 And since the choice of origin is arbitrary (through a change in coordinates) having a good guess of where to shrink the estimates to will give a much better result like in the baseball example.
 
@@ -29,16 +29,16 @@ And since the choice of origin is arbitrary (through a change in coordinates) ha
 
 Bradley Efron has done a lot of writing connecting it to *empirical Bayes* methods, showing it as a striking example of how on large datasets blending Bayesian methods with frequentist estimates can lead to striking solutions.
 The 1977 Scientific American Article [Stein's Paradox in Statistics](https://statweb.stanford.edu/~ckirby/brad/other/Article1977.pdf) by Efron and Morris gives a good flavour of what it means an why it's important.
-They state a slightly different estimate (where $$ X_i \sim N(\theta_i, \sigma) $$):
+They state a slightly different estimate (where $X_i \sim N(\theta_i, \sigma)$):
 
-$$ \hat\theta^{JS} = \bar X + \left(1 - \frac{(p-3) \sigma^2}{\lVert X - \bar X \rVert^2} \right) (X-\bar X)$$
+$$\hat\theta^{JS} = \bar X + \left(1 - \frac{(p-3) \sigma^2}{\lVert X - \bar X \rVert^2} \right) (X-\bar X)$$
 
-here instead of picking the origin they're estimating it from the data as the *grand mean* $$\bar X = \frac{\sum_{i=1}^{p} X_i}{p}$$, which will give a better than random risk but at the cost of 1 degree of freedom (the p-3 in the numerator instead of p-2).
+here instead of picking the origin they're estimating it from the data as the *grand mean* $\bar X = \frac{\sum_{i=1}^{p} X_i}{p}$, which will give a better than random risk but at the cost of 1 degree of freedom (the p-3 in the numerator instead of p-2).
 The other thing to note is the larger the standard deviation the more we shrink the estimate (which makes sense since we are less certain about it).
 I suspect if they had different standard deviations you would shrink more in directions with larger standard deviation.
 
 To understand this connection Chapter 1 of Efron's [Large-Scale Inference](https://statweb.stanford.edu/~ckirby/brad/LSI/monograph_CUP.pdf) gives a very good introduction.
-It walks through how starting with the model $$\theta \sim N(0, A)$$ and $$X \vert \theta \sim N(\theta, 1)$$ the James-Stein estimator can be recovered, and then how it can be extended to estimate the mean or standard deviation.
+It walks through how starting with the model $\theta \sim N(0, A)$ and $X \vert \theta \sim N(\theta, 1)$ the James-Stein estimator can be recovered, and then how it can be extended to estimate the mean or standard deviation.
 It also explains *limited translation estimators* where we shrink less, which gives a higher risk but less biased estimator.
 A similar (but briefer) explanation is in Chapter 7 of [Computer Age of Statistical Inference](https://web.stanford.edu/~hastie/CASI/) which also covers the connection with ridge regression.
 A great more general tutorial is Casella's [An Introduction to Empirical Bayes Data Analysis](https://www.biostat.jhsph.edu/~fdominic/teaching/bio656/labs/labs09/Casella.EmpBayes.pdf).

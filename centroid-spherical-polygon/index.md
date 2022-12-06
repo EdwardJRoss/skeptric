@@ -9,10 +9,10 @@ title: Centroid Spherical Polygon
 You're organising a conference of operations research analysts from all over the world, but their time is very valuable and they only agree to meet if you minimise the average distance they need to travel (even if they have to have it on a boat in the middle of the ocean).
 Where do you put the conference?
 
-Let's model the world as a unit sphere in 3 dimensional space, and have the N people at cartesian coordinates $$ \{ p_i\}_{i=1}^{N}$$.
+Let's model the world as a unit sphere in 3 dimensional space, and have the N people at cartesian coordinates $\{ p_i\}_{i=1}^{N}$.
 Then the point c of minimum average distance, the spherical centroid (or [spherical Fréchet mean](https://en.wikipedia.org/wiki/Fr%C3%A9chet_mean)), is given by the formula:
 
-$$ c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}} $$
+$$c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}}$$
 
 Where k is a normalising constant so that c lies on the unit sphere.
 This is like the geometric centroid of the points, but weighted based on the similarity of the centroid to those points.
@@ -35,16 +35,16 @@ But this is very similar to [finding the centroid of cosine similarity](/project
 ## Solution
 
 The extrema of average distance can be found using the [method of Lagrange multipliers](https://en.wikipedia.org/wiki/Lagrange_multiplier).
-The total distance to a point c is given by $$ d(c) = \sum_{i=1}^{N} \arccos\left( c \cdot p_i \right) $$, and this is extremised at the same points that the average distance is (since they just differ by a constant factor of N).
-Then the lagrangian that constrains c to the unit sphere is given by $$ L(c, \lambda) = \sum_{i=1}^{N} \arccos\left( c \cdot p_i \right) + \lambda (1 - c \cdot c) $$.
+The total distance to a point c is given by $d(c) = \sum_{i=1}^{N} \arccos\left( c \cdot p_i \right)$, and this is extremised at the same points that the average distance is (since they just differ by a constant factor of N).
+Then the lagrangian that constrains c to the unit sphere is given by $L(c, \lambda) = \sum_{i=1}^{N} \arccos\left( c \cdot p_i \right) + \lambda (1 - c \cdot c)$.
 
-Taking the partial derivatives (using [arccos derivative](https://math.berkeley.edu/~peyam/Math1AFa10/Arccos.pdf)) we get (where $$ p_{ij} $$ is a clumsy notation meaning the jth coordinate of the ith point):
+Taking the partial derivatives (using [arccos derivative](https://math.berkeley.edu/~peyam/Math1AFa10/Arccos.pdf)) we get (where $p_{ij}$ is a clumsy notation meaning the jth coordinate of the ith point):
 
-$$ \frac{\partial L}{\partial C_j}(c, \lambda) = - \sum_{i=1}^{N} \frac{p_{ij}}{\sqrt{1 - (c \cdot p_i)^2}} - 2 \lambda c_j $$
+$$\frac{\partial L}{\partial C_j}(c, \lambda) = - \sum_{i=1}^{N} \frac{p_{ij}}{\sqrt{1 - (c \cdot p_i)^2}} - 2 \lambda c_j$$
 
-$$ \frac{\partial L}{\partial \lambda}(c, \lambda) = 1 - c \cdot c $$
+$$\frac{\partial L}{\partial \lambda}(c, \lambda) = 1 - c \cdot c$$
 
-The extrema occur where these are 0, and in particular where $$ c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}} $$ where k is a constant so that the second normalisation constraint holds.
+The extrema occur where these are 0, and in particular where $c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}}$ where k is a constant so that the second normalisation constraint holds.
 
 What's not obvious to me is when this point will be the minimum, and when calculating it iteratively will converge.
 There are going to be issues when the points are symmetric; for example for two antipodal points the entire great circle on the plane orthogonal to them will be minimum, and the formula blows up.

@@ -52,7 +52,7 @@ The Work of Art approach is comparable to the zero shot classifier (in precision
 One advantage of combining these different heuristics is getting a diversity of examples.
 To understand how they are related I calculated the [confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Confidence) for each pair of rules:
 
-$$ \mathrm{conf}(X \Rightarrow Y) = P(Y | X) = \frac{\mathrm{supp}(X \cap Y)}{ \mathrm{supp}(X) } $$
+$$\mathrm{conf}(X \Rightarrow Y) = P(Y | X) = \frac{\mathrm{supp}(X \cap Y)}{ \mathrm{supp}(X) }$$
 
 Most of the density is on the columns for `work_of_art` and `zero_shot_80` because they have the most coverage.
 These two have only about 25% overlap, and about 35% precision, meaning that combining them will give more diverse examples.

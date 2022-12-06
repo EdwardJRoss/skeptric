@@ -76,15 +76,15 @@ But it's in the right ballpark, and will give roughly the right form of the dyna
 
 In summary we have three equations about how much each proportion changes each day:
 
-* $$ \Delta s = - bis $$
-* $$ \Delta i = bis - i/t $$
-* $$ \Delta r = i/t $$
+* $\Delta s = - bis$
+* $\Delta i = bis - i/t$
+* $\Delta r = i/t$
 
-Or to put it in a different notation if we have at day n, $$ s_n $$ susceptible, $$ i_n $$ infectious and $$ r_n $$ removed then:
+Or to put it in a different notation if we have at day n, $s_n$ susceptible, $i_n$ infectious and $r_n$ removed then:
 
-* $$s_{n+1} = s_n - b s_n $$
-* $$i_{n+1} = i_n + b i_n s_n - i_n / t $$
-* $$r_{n+1} = r_n + i_n / t $$
+* $s_{n+1} = s_n - b s_n$
+* $i_{n+1} = i_n + b i_n s_n - i_n / t$
+* $r_{n+1} = r_n + i_n / t$
 
 These are simple equations that you can put into a programming language or a spreadsheet.
 All you need is the initial proportion of susceptible, infectious and recovered and estimates of b and t.
@@ -104,42 +104,42 @@ This is because all a susceptible person can do is become infectious.
 When there are no infectious people left then the number of susceptible people doesn't change; which makes sense since there's no way they can get infected (obviously the initial source of infection is beyond this model!).
 
 Also note the more susceptible people there are, the faster they decrease.
-If the number of infectious people is constant then susceptibles drop off exponentially like $$ e^{-bi} $$.
+If the number of infectious people is constant then susceptibles drop off exponentially like $e^{-bi}$.
 If the number of infectious people is growing then it will drop off even faster.
 This is why infectious diseases are so scary; they can spread exponentially through a population.
 
 ## Change in infectious
 
 The rate at which the number of infectious people changes is really crucial; this is how quickly people are getting sick.
-It's useful to rewrite the equation $$ \Delta i = bis - \frac{i}{t} $$, as $$ \Delta i = (bts - 1) \frac{i}{t} $$.
+It's useful to rewrite the equation $\Delta i = bis - \frac{i}{t}$, as $\Delta i = (bts - 1) \frac{i}{t}$.
 If the product b ✕ t ✕ s is greater than 1 then the number of infectious people is increasing.
 If it's less than 1 then the number of infectious people is decreasing.
 
-The product b ✕ t is called the basic reproduction number $$ R_0 $$.
+The product b ✕ t is called the basic reproduction number $R_0$.
 Recall that b is the number of people an infectious person will come into infectious contact with per day.
 And t is the average number of days a person will be infectious.
 So their product is the average number of people an infectious person will infect.
 
-When $$ R_0 s \ll 1 $$ then $$ \Delta i \approx - \frac{i}{t} $$ and the number of infectious people drops off exponentially like $$ e^{-1/t} $$.
-In this case the infection dies out, and approximately $$ s e^{-i R_0} $$ more of the population becomes infected.
+When $R_0 s \ll 1$ then $\Delta i \approx - \frac{i}{t}$ and the number of infectious people drops off exponentially like $e^{-1/t}$.
+In this case the infection dies out, and approximately $s e^{-i R_0}$ more of the population becomes infected.
 
-When $$ R_0 s \gg 1 $$ then the number of infectious people grows exponentially like $$ e^{R_0 s} $$.
+When $R_0 s \gg 1$ then the number of infectious people grows exponentially like $e^{R_0 s}$.
 Since s is decreasing this rate of increase will slow down.
 
-The critical point is when $$ R_0 s = 1 $$, or equivalently $$ R_0 = \frac{1}{s}$$.
+The critical point is when $R_0 s = 1$, or equivalently $R_0 = \frac{1}{s}$.
 Here the rate of change of infectious is zero; we've hit the maximum of infectious cases.
 
 The maximum number of infectious cases is very relevant for hospitals.
 Some fraction of infectious individuals will need to be hospitalised or they could have severe repercussions or even die.
 So to minimise harm hospitals should have enough staff and beds to cover this fraction of the infectious individuals at peak.
 
-So if initially $$ R_0 s \ll 1 $$ then the infection will die out quickly.
-However if $$ R_0 s > 1 $$ then the infection will grow exponentially (and susceptibles will decrease exponentially) until $$ R_0 s = 1 $$ and then it will start to die out.
+So if initially $R_0 s \ll 1$ then the infection will die out quickly.
+However if $R_0 s > 1$ then the infection will grow exponentially (and susceptibles will decrease exponentially) until $R_0 s = 1$ and then it will start to die out.
 In the second case we have an epidemic and a large fraction of the population will have contracted the disease.
 
 ## Basic Reproduction Number
 
-It's clear that the dynamics are really strongly governed by the product $$ R_0 s $$.
+It's clear that the dynamics are really strongly governed by the product $R_0 s$.
 For a new kind of disease, s will be close to 1; almost everyone is susceptible.
 Then all you can do is to reduce the basic reproduction number.
 
@@ -152,7 +152,7 @@ Another method is to reduce the likelihood of an infection on contact; for examp
 Many diseases can spread indirectly through contact with a surface, so regular cleaning is important too.
 Similarly any treatment to reduce the infectious period, or reduce the amount of pathogens excreted would help reduce this number.
 
-It's notable that it's the product $$ R_0 s $$ that matters.
+It's notable that it's the product $R_0 s$ that matters.
 If the basic reproduction number is 4, but much less than a quarter of the population is susceptible then the disease won't spread.
 This is the phenomenon of [Herd immunity](https://en.wikipedia.org/wiki/Herd_immunity).
 Essentially the removed individuals act as a buffer that extinguishes the disease before it can move too far.

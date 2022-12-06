@@ -11,7 +11,7 @@ I want something portable enough to take with me, but comfortable enough to wear
 I want something good for listening to music and podcasts on the go, but also for taking calls and video calls.
 After some investigation I've settled on the [Jabra Elite 85h](https://www.jabra.com.au/bluetooth-headsets/jabra-elite-85h).
 
-Reviews are pretty unanimous that the top of the line over-ear wireless headphones are Bose Noise Cancelling Headphones 700 (retailing around $490), followed by Sony WH-1000XM4 ($410), and finally Jabra Elite 85h ($380).
+Reviews are pretty unanimous that the top of the line over-ear wireless headphones are Bose Noise Cancelling Headphones 700 (retailing around \$490), followed by Sony WH-1000XM4 (\$410), and finally Jabra Elite 85h (\$380).
 The reviews uniformly agree the Sony has terrible call quality which immediately rules it out, leaving the superlative Bose and the runner-up Jabra (most alternatives have poor call quality).
 
 However there's a twist, bluetooth calls on PC are often problematic due to the type of bluetooth available in computers.

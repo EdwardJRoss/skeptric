@@ -16,7 +16,7 @@ It was bounded, it's product with another function needed to have a unique maxim
 These could be written out as a series of constraints, but it seemed that the problem was severely under-constrained.
 
 One way I thought of to solve it was by an exhaustive search.
-By cutting up the x and y axis into N and M pieces respectively then there are $$ M^N $$ possible piecewise linear curves, and each could be evaluated against those constraints.
+By cutting up the x and y axis into N and M pieces respectively then there are $M^N$ possible piecewise linear curves, and each could be evaluated against those constraints.
 This was computationally infeasible, and required a better search strategy.
 There were ways to better parametrise the curve; for example it was decreasing we could look at the step down at each point rather than the values, but some of the constraints were very difficult to directly parameterise.
 

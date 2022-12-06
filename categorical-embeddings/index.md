@@ -47,7 +47,7 @@ Consequently they will have the most advantage where the information is sparse a
 I've found binary classification problems to be a fruitful testing ground, where each data point only contains a single bit of information, and so pooling can be very useful.
 
 You can evaluate this using [binary cross entropy](/binary-rms) (also called logistic loss, or log loss), which is a measure of how likely the data is given the model.
-However where there's sufficient data you can compare the percentage predicted for the category with the actual percentage of positive cases in the category (just keep in mind the [standard deviation of the binomial](/bernoulli-binomial) is $$\sqrt{\frac{p(1-p)}{n}$$, which bounds how accurately you can evaluate the percentage from the data).
+However where there's sufficient data you can compare the percentage predicted for the category with the actual percentage of positive cases in the category (just keep in mind the [standard deviation of the binomial](/bernoulli-binomial) is $\sqrt{\frac{p(1-p)}{n}$, which bounds how accurately you can evaluate the percentage from the data).
 In any case it's useful to compare uplift compared with the [constant model](/constant-models) of predicting the overall average probability (i.e. number of positive cases divided by total number of cases) for every category, and a One Hot Encoding of the categorical variable (with appropriate treatment of uncommon categories, and appropriate use of any available hierarchy information).
 
 For running these evaluations I've found Logistic Regression with a L2 regularisation (i.e. logistic ridge regression) works quite well.

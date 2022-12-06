@@ -7,9 +7,9 @@ image: /images/
 title: Hierarchical Binomial
 ---
 
-$$ \{\gamma_{i,s}\}_{i=1}^{n_s} \sim \theta_s \quad \forall s=1,\ldots,m$$
+$$\{\gamma_{i,s}\}_{i=1}^{n_s} \sim \theta_s \quad \forall s=1,\ldots,m$$
 
-$$ \theta_s \sim {\rm Beta}(\omega \tau + 1, (1-\omega) \tau + 1) $$
+$$\theta_s \sim {\rm Beta}(\omega \tau + 1, (1-\omega) \tau + 1)$$
 
 $$\begin{align}
 {\mathbb P}\left( \{\theta_s\}_{s=1}^{m}, \omega, \tau | \{\gamma_{i,s}\}\right) &= \frac{{\mathbb P}\left(\{\gamma_{i,s}\} \vert \{\theta_s\}_{s=1}^{m}, \omega, \tau \right) {\mathbb P}(\{\theta_s\}_{s=1}^{m}, \omega, \tau)}{{\mathbb P}(\{\gamma_{i,s}\})} \\
@@ -30,7 +30,7 @@ $$
 
 where B is the [beta function](/beta-function).
 I don't know a simple way to calculate these integrals for any non-trivial priors, but since they are only two dimensional they can be efficiently integrated with adaptive quadrature.
-For example using a flat prior on $$\omega$$ and an exponential prior with rate 1 on $$\tau$$ (so $${\mathbb P}(\tau=t) \propto e^{-t},\; \forall t \in [0,\infty]$$) in R:
+For example using a flat prior on $\omega$ and an exponential prior with rate 1 on $\tau$ (so ${\mathbb P}(\tau=t) \propto e^{-t},\; \forall t \in [0,\infty]$) in R:
 
 ```R
 # The data are encoded as a list with one outcome per group
@@ -80,8 +80,8 @@ posterior <- function(omega, tau, theta) {
 
 Note that when there is a large number of parameters the products are likely to have rounding issues, and it's better to add the log likelihoods then exponentiate.
 
-Similarly using the Beta function marginals and expectation values require at most a two dimensional integral over $$\omega$$ and $$\tau$$.
-For example the marginal posterior in $$\omega$$ and $$\tau$$ is:
+Similarly using the Beta function marginals and expectation values require at most a two dimensional integral over $\omega$ and $\tau$.
+For example the marginal posterior in $\omega$ and $\tau$ is:
 
 ```R
 posterior_omega_tau <- function(omega, tau) {
@@ -91,7 +91,7 @@ posterior_omega_tau <- function(omega, tau) {
 }
 ```
 
-Or to get a posterior of one of the $$\theta_i$$
+Or to get a posterior of one of the $\theta_i$
 
 ```R
 posterior_theta <- function(i, thetai) {

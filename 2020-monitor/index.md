@@ -20,11 +20,11 @@ For a 27 inch monitor at Full HD it's 82 PPI, which is on the low side - some pe
 A 27 inch monitor at QHD (1440p) it's at 108 PPI which is back in the manageable zone.
 I'd play it safe and stay above 90 PPI.
 
-The low end of a 27 inch QHD monitor is a [Panasonic 272B8QJEB](https://www.philips.com.au/c-p/272B8QJEB_75/qhd-lcd-monitor) which is a bit under $400.
+The low end of a 27 inch QHD monitor is a [Panasonic 272B8QJEB](https://www.philips.com.au/c-p/272B8QJEB_75/qhd-lcd-monitor) which is a bit under \$400.
 This is a pretty featureful monitor with lots of connectors (HDMI, DVI, VGA, Display Port), and a VESA mount.
 One slight concern I have is whether my old Linux laptop will handle this monitor properly; I *think* it will, but it's a risk.
 
-For a 24 inch HD monitor there are *lots* of options around the $200 mark.
+For a 24 inch HD monitor there are *lots* of options around the \$200 mark.
 I know my laptop can handle 2 external monitors with xrandr, so it seems like 2 x 24 inch monitors would be a better choice for the same price.
 Otherwise I could get a single monitor and just work with 20% less screen real estate.
 

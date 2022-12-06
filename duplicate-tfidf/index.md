@@ -15,7 +15,7 @@ It works, but the results aren't much better, and there are some complications i
 When trying to find similar ads with the Jaccard index we looked at the proportion of n-grams they have in common relative to all the n-grams between them.
 However if both contain a common phrase like "please contact our office" then they could be spuriously thought to be common.
 So the idea is to weight them down by the inverse document frequency.
-Then we can use the [weighted Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index#Weighted_Jaccard_similarity_and_distance) $$ J_\mathcal{W}(\mathbf{x}, \mathbf{y}) = \frac{\sum_i \min(x_i, y_i)}{\sum_i \max(x_i, y_i)} $$.
+Then we can use the [weighted Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index#Weighted_Jaccard_similarity_and_distance) $J_\mathcal{W}(\mathbf{x}, \mathbf{y}) = \frac{\sum_i \min(x_i, y_i)}{\sum_i \max(x_i, y_i)}$.
 
 Looking at the frequencies of values for 1-grams and 4-grams for a sample of 2000 ads this gives a very similar result:
 
@@ -47,7 +47,7 @@ We then fit the data to our sample of 2000 ads to get the weights matrix:
 X4 = tfidf_vectorizer_4.fit_transform((ads[index] for index in sample_indices))
 ```
 
-We can get the weighted Jaccard, using the [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) $$ \sum_i \min(x_i, y_i) + \sum_i \max(x_i, y_i) = \sum_i x_i + \sum_i y_i $$ to avoid calculating the maximum:
+We can get the weighted Jaccard, using the [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) $\sum_i \min(x_i, y_i) + \sum_i \max(x_i, y_i) = \sum_i x_i + \sum_i y_i$ to avoid calculating the maximum:
 
 ```python
 def weighted_jaccard(d1, d2):

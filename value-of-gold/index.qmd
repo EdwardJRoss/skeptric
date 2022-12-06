@@ -12,7 +12,7 @@ How much is one cubic centimetre of gold worth?
 
 The plan is to estimate the value of gold with the price of a gold ring.
 This works well because gold is the most expensive part of the ring, and strongly influences the price of the cheapest rings, but the purity is measured and reported.
-I've seen 14 carat gold rings for around $300, which I'm going to use as a baseline.
+I've seen 14 carat gold rings for around \$300, which I'm going to use as a baseline.
 
 Here's the plan for calculating it:
 
@@ -36,10 +36,10 @@ graph BT;
    G[% of Ring that is Gold] --> A
 ```
 
-The area of an annulus with inner radius r and outer radius R is $$ \pi (R^2 - r^2) $$.
+The area of an annulus with inner radius r and outer radius R is $\pi (R^2 - r^2)$.
 My ring finger is about 1cm across, so has a radius of about 5mm.
 A ring is typically around 2mm thick.
-So the area of the annulus, looking at the ring top down, is $$ \pi \left((5+2 \rm{mm})^2 - (5 \rm{mm})^2\right) \approx 3 \times (49 - 25)\rm{mm}^2 $$, so approximately 75 mm<sup>2</sup>.
+So the area of the annulus, looking at the ring top down, is $\pi \left((5+2 \rm{mm})^2 - (5 \rm{mm})^2\right) \approx 3 \times (49 - 25)\rm{mm}^2$, so approximately 75 mm<sup>2</sup>.
 
 The height of a ring is roughly twice it's thickness; call it 4mm.
 So the volume of the ring is about 300 mm<sup>3</sup>.
@@ -67,10 +67,10 @@ graph BT;
 
 ## Estimating Value of Gold
 
-We know the 14 carat gold ring costs around $300.
+We know the 14 carat gold ring costs around \$300.
 I think most of the cost of the cheaper rings is going to be the gold itself; the material filler is quite cheap, but there's some payment for craftsmanship and margins.
 Let's assume 80% of the total cost is gold.
-Then the cost of gold is 80% of $300, which is about $250.
+Then the cost of gold is 80% of \$300, which is about \$250.
 
 ```{mermaid}
 graph BT;
@@ -80,7 +80,7 @@ graph BT;
 
 ## Putting it together
 
-Combining our two estimates gives $250 for 0.15 cm<sup>3</sup> of gold, so about $2000 per cubic centimetre.
+Combining our two estimates gives \$250 for 0.15 cm<sup>3</sup> of gold, so about \$2000 per cubic centimetre.
 
 ```{mermaid}
 graph BT;
@@ -91,12 +91,12 @@ graph BT;
 # Checking
 
 Whenever we do these kinds of estimates it's always good to check it where possible to see whether we ended up in the right place.
-Using that a 14 carat ring is $300 is a great way of using pedestrian knowledge to calculate the value of gold.
+Using that a 14 carat ring is \$300 is a great way of using pedestrian knowledge to calculate the value of gold.
 But I can look up buying gold bars directly.
 
 I can see a gold bar online of 255mm by 85mm by 35mm for just over a million dollars.
 The volume of this bar is about 25cm by 8cm by 4cm which is about 800 cubic centimetres.
-So my estimated cost would be $2000/cubic centimetre by 800 cubic centimetres which is $1.6 million.
+So my estimated cost would be \$2000/cubic centimetre by 800 cubic centimetres which is \$1.6 million.
 
-So it looks like I overestimated the value by about 60%, it's closer to $1300 per cubic centimetre.
+So it looks like I overestimated the value by about 60%, it's closer to \$1300 per cubic centimetre.
 But this is a pretty good outcome for such crude assumptions.

@@ -35,10 +35,10 @@ We then collect all items that have the same hash accross all *r* rows for any b
 This can be used to get the probability a pair will occur in the same band:
 
 * The probability that a given row is the same is the Jaccard similarity *s* (as discussed in the [previous article on MinHash](/minhash))
-* The probability that a given band of *r* rows agree is $$ s^r $$, because they are each independent
-* The probability that a given band of *r* rows do not agree is $$ 1 - s^r $$
-* The probability that the *r* rows don't agree for any of the *b* bands is $$ (1 - s^r)^b $$ because they are independent
-* The probability that the *r* rows agree for at least one of the *b* bands is $$ 1 - (1 - s^r)^b $$
+* The probability that a given band of *r* rows agree is $s^r$, because they are each independent
+* The probability that a given band of *r* rows do not agree is $1 - s^r$
+* The probability that the *r* rows don't agree for any of the *b* bands is $(1 - s^r)^b$ because they are independent
+* The probability that the *r* rows agree for at least one of the *b* bands is $1 - (1 - s^r)^b$
 
 This curve is a high-pass filter and it looks a bit like an "S", so we call it an S curve.
 
@@ -51,15 +51,15 @@ However since there are typically orders of magnitude more pairs with low simila
 ## Analysis of the S-Curve
 
 A little calculus helps understand how the parameters affect the shape of the curve.
-The probability of emission from the LSH as a function of similarity s is $$ P(s) = 1 - (1 - s^r) ^ b $$.
-The slope of this curve is $$ P^\prime(s) = r b (1 - s^r)^(b-1) * s ^ {r - 1} $$, which is always increasing.
+The probability of emission from the LSH as a function of similarity s is $P(s) = 1 - (1 - s^r) ^ b$.
+The slope of this curve is $P^\prime(s) = r b (1 - s^r)^(b-1) * s ^ {r - 1}$, which is always increasing.
 This means the curve is a good high pass filter.
 
-Calculating where the second derivative is zero gives the curve is steepest at $$ \sqrt[r]{\frac{1 - \frac{1}{r}}{b - \frac{1}{r}}} $$.
+Calculating where the second derivative is zero gives the curve is steepest at $\sqrt[r]{\frac{1 - \frac{1}{r}}{b - \frac{1}{r}}}$.
 We'll call this point the *threshold* of the curve, because it's close to where it starts letting in values.
-This is approximately $$ \hat{s} = \sqrt[r]{\frac{1}{b}} $$, and the approximation is better for larger *r*.
-For *b* and *r* larger than about 4 the probability at the threshold is $$ 1 - e ^ {-1} \approx 0.6 $$, so it is close to the midpoint between accepting and rejecting.
-The slope at this point is around $$ \frac{r} {e \hat{s}} $$, which gives a first-order width of the *s*.
+This is approximately $\hat{s} = \sqrt[r]{\frac{1}{b}}$, and the approximation is better for larger *r*.
+For *b* and *r* larger than about 4 the probability at the threshold is $1 - e ^ {-1} \approx 0.6$, so it is close to the midpoint between accepting and rejecting.
+The slope at this point is around $\frac{r} {e \hat{s}}$, which gives a first-order width of the *s*.
 
 The upshot of all this is that if you double the number of rows and square the number of bands you get the same threshold with approximately half the width.
 Because the total number of hash functions required is the product of the number of bands and rows, it gets expensive to decrease the width because the bands required is large.
