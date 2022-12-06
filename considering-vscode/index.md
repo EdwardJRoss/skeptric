@@ -1,7 +1,6 @@
 ---
 categories:
 - emacs
-- vscode
 date: '2020-05-09T08:50:50+10:00'
 image: /images/vscode.svg
 title: Considering VS Code from Emacs

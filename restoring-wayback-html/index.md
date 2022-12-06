@@ -1,6 +1,4 @@
 ---
-categories:
-- webrefine
 date: '2021-12-01T11:02:27+11:00'
 image: /images/wayback_html.png
 title: Restoring Wayback Machine HTML

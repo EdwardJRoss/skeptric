@@ -1,9 +1,7 @@
 ---
 categories:
 - python
-- hypothesis
-- regex
-- test
+- testing
 date: '2021-07-02T14:41:51+10:00'
 image: /images/regex_hypothesis.png
 title: Property Based Testing with Regular Expressions

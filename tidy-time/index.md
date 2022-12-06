@@ -1,7 +1,6 @@
 ---
 categories:
 - general
-- time
 date: '2020-09-14T21:41:59+10:00'
 image: /images/clutter.jpg
 title: Tidy Time

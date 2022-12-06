@@ -2,8 +2,7 @@
 categories:
 - pandas
 - python
-- test
-- hypothesis
+- testing
 date: '2021-07-03T08:00:00+10:00'
 image: /images/hypothesis_pandas_series.png
 title: Testing Pandas transformations with Hypothesis

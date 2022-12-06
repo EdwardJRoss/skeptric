@@ -1,6 +1,4 @@
 ---
-categories:
-- software
 date: '2020-05-15T15:36:27+10:00'
 image: /images/easy.jpg
 title: Power of Easy

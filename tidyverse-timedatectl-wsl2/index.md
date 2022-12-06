@@ -1,8 +1,7 @@
 ---
 categories:
 - R
-- tidyverse
-- debug
+- wsl
 date: '2021-06-12T22:38:09+10:00'
 image: /images/tidyverse_timedatectl.png
 title: Installing Tidyverse in WSL without Timedatectl Status 1 Issue

@@ -1,6 +1,4 @@
 ---
-categories:
-- psychology
 date: '2020-12-16T21:14:07+11:00'
 image: /images/mere_exposure.png
 title: Mere Exposure

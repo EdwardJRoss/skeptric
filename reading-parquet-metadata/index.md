@@ -1,7 +1,6 @@
 ---
 categories:
 - python
-- parquet
 - commoncrawl
 date: '2022-04-18T13:26:11+10:00'
 image: /images/parquet_file_format.gif
