@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-09-20">
+
+<title>skeptric - Bernoulli Trials and the Beta Distribution</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bernoulli Trials and the Beta Distribution</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+    <div class="quarto-category">statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 20, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="estimating-a-bernoulli-probability" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-a-bernoulli-probability">Estimating a Bernoulli Probability</h2>
+<p>Suppose we want to know the probability of an event occurring; it could be a customer converting, a person contracting a disease or a student passing a test. This can be represented by a Bernoulli Distribution, where each draw is an independent random variable <span class="math inline">\(\gamma_i \sim {\rm Bernoulli}(\theta)\)</span>. The only possible values are failure (represented by 0) with probability <span class="math inline">\(\theta\)</span> and success (represented by 1) with probability <span class="math inline">\(1-\theta\)</span> (although the labels are completely arbitrary and we can switch them by setting <span class="math inline">\(\eta_i = 1 - \gamma_i\)</span> then <span class="math inline">\(\eta_i \sim {\rm Bernoulli}(1-\theta)\)</span>).</p>
+<p>The probability distribution can be conveniently written as <span class="math inline">\({\mathbb P}(\gamma = k) = \theta^{k}(1-\theta)^{1-k}\)</span>, since <span class="math inline">\({\mathbb P}(\gamma = 1) = \theta^{1}(1-\theta)^{0} = \theta\)</span> and <span class="math inline">\({\mathbb P}(\gamma = 0) = \theta^{0}(1-\theta)^{1} = 1 - \theta\)</span>. This form is convenient because for multiple variables the probabilities multiply (since the variables are independent), and the exponents add, giving a simple expression. In particular</p>
+<p><span class="math display">\[\begin{align}
+{\mathbb P}(\gamma_1=k_1,\ldots,\gamma_N=k_N) &amp;= {\mathbb P}(\gamma_1=1) \cdots {\mathbb P}(\gamma_N=k_N) \\
+&amp;= \theta^{k_1 + \cdots + k_N} (1 - \theta)^{N - (k_1 + \ldots k_N)} \\
+&amp;= \theta^{z}(1-\theta)^{N-z}
+\end{align}\]</span></p>
+<p>where z is the number of positive results (which is as in the <a href="../bernoulli-binomial">binomial distribution</a>, up to multiplicity from different orderings). Note that the result just depends on the total number of trials and the number of successes.</p>
+<p>In the Bayesian framework the posterior probability distribution of <span class="math inline">\(\theta\)</span> can be estimated conditional on the observed data; in particular from Bayes rule:</p>
+<p><span class="math display">\[\begin{align}
+{\mathbb P}\left(\theta \vert \gamma_1=k_1, \ldots, \gamma_N=k_N\right) &amp;= \frac{{\mathbb P}\left(\theta \vert \gamma_1=k_1,\ldots,\gamma_N=k_N\right)P(\theta)}{P(\gamma_1=k_1,\ldots,\gamma_N=k_N)} \\
+&amp;= \frac{\theta^z(1-\theta)^{N-z}P(\theta)}{\int_0^1 P(\gamma_1=k_1,\ldots,\gamma_k \vert \theta=k_N) P(\theta) \,{\rm d}\theta}
+\end{align}\]</span></p>
+<p>To get a posterior distribution we need to choose an appropriate prior. A <em>flat prior</em> is a reasonable starting point if we know nothing about the situation, <span class="math inline">\(P(\theta) = 1, \; \forall \theta \in[0,1]\)</span>. Then from the above the posterior will be proportional to <span class="math inline">\(\theta^{z}(1-\theta)^{N-z}\)</span> (up to a normalising constant). This is a special case of the Beta distribution; if <span class="math inline">\(\Theta \sim {\rm Beta}(\alpha,\beta)\)</span> for positive <span class="math inline">\(\alpha, \beta\)</span> then</p>
+<p><span class="math display">\[P(\Theta=\theta) = {\rm Beta}(\alpha, \beta)(\theta) = \frac{\theta^{\alpha-1}(1-\theta)^{\beta-1}}{B(\alpha, \beta)}\]</span></p>
+<p>Where the normalising denominator is the Beta Function <span class="math inline">\(B(\alpha, \beta) = \int_{0}^{1} \theta^{\alpha}(1-\theta)^{\beta-1}\, {\rm d}\theta = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\)</span>. Notice that in particular <span class="math inline">\({\rm Beta}(1,1)\)</span> is the (flat) uniform distribution on [0,1].</p>
+<p>The special thing about the Beta Distribution is it’s a <em>conjugate prior</em> for Bernoulli trials; with a Beta Prior distribution for the probability of positive cases <span class="math inline">\(\theta\)</span> then the posterior is also a Beta distribution. Specifically <span class="math inline">\({\mathbb P}\left(\theta \vert \gamma_1=k_1, \ldots, \gamma_N=k_N\right) \propto \theta^{k + \alpha - 1}(1 - \theta)^{N-k + \beta - 1}\)</span>, and so the posterior is distributed as <span class="math inline">\({\rm Beta}(\alpha + z, \beta + N-z)\)</span>, and in particular for a uniform prior it is <span class="math inline">\({\rm Beta}(z + 1, N-z+1)\)</span>.</p>
+</section>
+<section id="properties-of-the-beta-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-beta-distribution">Properties of the Beta Distribution</h2>
+<p>Since given a flat (or more generally Beta) prior we get a Beta posterior for the Bernoulli probability <span class="math inline">\(\theta\)</span> it makes sense to study the properties of the Beta distribution to understand <span class="math inline">\(\theta\)</span>.</p>
+<section id="maximum-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood">Maximum likelihood</h3>
+<p>The most likely value can be found with a bit of differential calculus. The derivative is</p>
+<p><span class="math display">\[\frac{{\rm d}{\rm Beta}(\alpha, \beta)}{{\rm d} \theta}(\theta) =  \frac{\theta^{\alpha-2}(1-\theta)^{\beta-2}}{B(\alpha, \beta)}\left(\alpha - 1 - (\alpha + \beta - 2)\theta\right)\]</span></p>
+<p>which may be zero at <span class="math inline">\(\hat{\theta} = 0, 1, \frac{\alpha - 1}{\alpha + \beta - 2}\)</span>. The extremum is a maximum when the second derivative is negative. The second derivative at the local extrema are:</p>
+<p><span class="math display">\[\begin{align}
+\frac{{\rm d^2}{\rm Beta}(\alpha, \beta)}{{\rm d} \theta^2}(\hat{\theta}) &amp;= \frac{\rm d}{{\rm d}\theta}\left.\left(\frac{\theta^{\alpha-2}(1-\theta)^{\beta-2}}{B(\alpha, \beta)}\right)\right\vert_{\theta=\hat\theta}\left((\alpha - 1)- (\alpha + \beta - 2)\hat\theta\right) \\
+&amp;- \left(\frac{\hat\theta^{\alpha-2}(1-\hat\theta)^{\beta-2}}{B(\alpha, \beta)}\right) (\alpha + \beta - 2)\\
+&amp;=- \left(\frac{\hat\theta^{\alpha-2}(1-\hat\theta)^{\beta-2}}{B(\alpha, \beta)}\right) (\alpha + \beta - 2)\\
+&amp;=- {\rm Beta}(\alpha, \beta)(\hat\theta) \frac{(\alpha + \beta - 2)}{\hat\theta(1-\hat\theta)}
+\end{align}\]</span>.</p>
+<p>which is negative if and only if <span class="math inline">\(0 &lt; \hat\theta &lt; 1\)</span> and <span class="math inline">\(\alpha + \beta &gt; 2\)</span>. In the case when <span class="math inline">\(\alpha = 1\)</span> and <span class="math inline">\(\beta &gt; 1\)</span> then the derivative <span class="math inline">\(-\frac{\theta^{-1}(1-\theta)^{\beta-2}}{B(1, \beta)}(\beta - 1)\theta\)</span> is negative on the whole interval (0,1), and so the function decreases from its maximum value at <span class="math inline">\(\hat\theta=0\)</span>. Similarly when <span class="math inline">\(\beta=1\)</span> and <span class="math inline">\(\alpha &gt; 1\)</span> then <span class="math inline">\(\hat\theta=1\)</span> and the derivative is positive on the whole interval (0,1) and so the function increases to its maximum valu at <span class="math inline">\(\hat\theta=1\)</span>. So overall in all cases where <span class="math inline">\(\alpha + \beta &gt; 2\)</span> the maximum likelihood occurs at <span class="math inline">\(\hat\theta=\frac{\alpha - 1}{\alpha + \beta - 2}\)</span> which is necessarily in the interval [0,1].</p>
+<p>This gives the same results as a Maximum Likelihood analysis for the Binomial when we observe z successes from N trials with a uniform prior. With the <span class="math inline">\({\rm Beta}(z+1, N-z+1)\)</span> distribution the maximum likelihood estimator is <span class="math inline">\(\hat\theta=\frac{z}{N}\)</span>, the proportion of successes. The second derivative also matches an approximate normal distribution of <span class="math inline">\(\theta\)</span> with standard deviation <span class="math inline">\(\sqrt{\frac{\hat\theta(1-\hat\theta)}{N}}\)</span> as would be obtained from the <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation#Efficiency">efficiency of Maximum Likelihood Estimators</a> using the <a href="https://en.wikipedia.org/wiki/Fisher_information">Fisher Information Matrix</a> for the binomial.</p>
+<p>When <span class="math inline">\(\alpha + \beta \leq 2\)</span> there isn’t necessarily a maximum likelihood estimate. When <span class="math inline">\(\alpha = \beta = 1\)</span> then all values are equally likely. The <a href="https://en.wikipedia.org/wiki/Jeffreys_prior#Bernoulli_trial">Jeffrey’s Prior</a> is <span class="math inline">\({\mathbb P}(\theta) \propto \sqrt{I(\theta)} = \frac{1}{\sqrt{\theta(1-\theta)}}\)</span> and so corresponds to a <span class="math inline">\({\rm Beta}(1/2,1/2)\)</span>. In this case there is a <em>local minimum</em> at 1/2, and the most likely values are 0 and 1. But as soon as we add any data to a Jeffrey’s prior we do have a most likely estimate; for <span class="math inline">\(\alpha \leq 1\)</span> and <span class="math inline">\(\alpha + \beta \geq 2\)</span> then the derivative is negative on the whole interval (0,1) and so the probability decreases from its maximum value at 0. Similarly for <span class="math inline">\(\beta \leq 1\)</span> and <span class="math inline">\(\alpha + \beta \geq 2\)</span> then the derivative is positive on the whole interval (0,1) and the probability increases to its maximum value at 1.</p>
+<p>The Bayesian framework allows us to ask questions that are harder just using asymptotic analysis. For example we can calculate things like how likely <span class="math inline">\(\theta\)</span> is greater than 1/2, and come up with a credible interval for the parameter based on the data. The cost of this is having to specify a prior (and some extra calculations).</p>
+</section>
+<section id="mean-and-variance" class="level3">
+<h3 class="anchored" data-anchor-id="mean-and-variance">Mean and variance</h3>
+<p>The mean can be calculated using the <a href="../beta-function">properties of the Beta function</a>. Given <span class="math inline">\(\Theta \sim {\rm Beta}(\alpha, \beta)\)</span> then</p>
+<p><span class="math display">\[\begin{align}
+{\mathbb E}(\Theta) &amp;= \int_0^1 \theta {\mathbb P}(\Theta=\theta) \, {\rm d}\theta\\
+&amp;= \int_0^1 \frac{\theta^{\alpha}(1-\theta)^{\beta-1}}{B(\alpha, \beta)} \\
+&amp;= \frac{B(\alpha + 1, \beta)}{B(\alpha, \beta)} \\
+&amp; = \frac{\alpha}{\alpha + \beta}
+\end{align}\]</span></p>
+<p>Notice that the mean value is well defined for all positive <span class="math inline">\(\alpha, \beta\)</span>, and when the mode exists it is closer to the edges of the distribution than the mean.</p>
+<p>We can similarly calculate the expectation of the square:</p>
+<p><span class="math display">\[\begin{align}
+{\mathbb E}(\Theta^2) &amp;= \int_0^1 \theta^2 {\mathbb P}(\Theta=\theta) \, {\rm d}\theta\\
+&amp;= \frac{B(\alpha + 2, \beta)}{B(\alpha, \beta)} \\
+&amp;= \frac{\alpha(\alpha+1)}{(\alpha+\beta+1)(\alpha+\beta)}
+\end{align}\]</span></p>
+<p>This then gives variance</p>
+<p><span class="math display">\[\begin{align}
+{\mathbb V}(\Theta) &amp;= {\mathbb E}\left((\Theta - {\mathbb E}(\Theta))^2\right)\\
+&amp;={\mathbb E}(\Theta^2) - {\mathbb E}(\Theta)^2 \\
+&amp;= \frac{\alpha}{\alpha+\beta}\left(\frac{\alpha+1}{\alpha+\beta+1} - \frac{\alpha}{\alpha+\beta}\right) \\
+&amp; = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}
+\end{align}\]</span></p>
+</section>
+</section>
+<section id="parameterisations-of-beta-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="parameterisations-of-beta-distribution">Parameterisations of Beta Distribution</h2>
+<p>Summarising our previous results we have for a <span class="math inline">\({\rm Beta}(\alpha, \beta)\)</span> distribution the mean is <span class="math inline">\(\mu = \frac{\alpha}{\alpha + \beta}\)</span>, the variance is <span class="math inline">\(\sigma^2 = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\)</span> and the mode, for <span class="math inline">\(\alpha, \beta \geq 1\)</span> and <span class="math inline">\(\alpha + \beta &gt; 2\)</span> is <span class="math inline">\(\omega = \frac{\alpha -1}{\alpha+\beta-2}\)</span>. However we can use these properties to themselves define the Beta distribution which is useful for different contexts.</p>
+<p>Firstly note that <span class="math inline">\(\alpha\)</span> is analogous to the number of successes and <span class="math inline">\(\beta\)</span> is analogous to the number of failures in the Bernoulli trials. These are additive, so that given an <span class="math inline">\({\rm Beta}(\alpha, \beta)\)</span> prior and z successes with <span class="math inline">\(v = N-z\)</span> failures the posterior is <span class="math inline">\({\rm Beta}(\alpha + z, \beta + v)\)</span>. So in this parameterisation the successes and failures add.</p>
+<p>Another way to look at it is in terms of size <span class="math inline">\(\kappa = \alpha + \beta\)</span> and the mode <span class="math inline">\(\omega\)</span>. These are analogous to the number of trials and proportion of successes respectively. We can rewrite <span class="math inline">\(\alpha = (\kappa - 2)\omega + 1\)</span> and <span class="math inline">\(\beta = (\kappa - 2)(1- \omega) + 1\)</span>, and for <span class="math inline">\(\kappa \geq 2\)</span> we can always express the Beta function in terms of <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\omega\)</span>. Given N trials with a proportion of successes <span class="math inline">\(p=z/N\)</span>, the posterior has size <span class="math inline">\(\kappa' = \kappa + N\)</span>, and posterior mode <span class="math inline">\(\omega' = \frac{(\kappa - 2)}{N + \kappa - 2} \omega + \frac{N}{N + \kappa - 2} p\)</span>, so it’s a weighted average of the individual probabilities. In summary sample sizes add, and proportions combine as a weighted average, which makes intuitive sense when thinking about combining the results of Bernoulli trials.</p>
+<p>Finally sometimes it can be useful to think in terms of the mean and the variance. These don’t have quite as clean as an interpretation in terms of the data, but the mean represents how skewed the data is (in a slightly less extreme way than the mode), and the variance is inversely related to the size since the certainty increases with more data. The size can be expressed as <span class="math inline">\(\kappa = \frac{\mu(1-\mu)}{\sigma^2} - 1\)</span> and <span class="math inline">\(\alpha = \kappa \mu\)</span>, <span class="math inline">\(\beta = \kappa(1-\mu)\)</span>. They combine in a more complex way.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>For binomial trials the Beta distribution occurs naturally as a conjugate prior for the binomial probability <span class="math inline">\(\theta\)</span>. Starting with a uniform prior and adding data with N trials and z successes we get a <span class="math inline">\({\rm Beta}(z+1,N+z-1)\)</span> posterior for <span class="math inline">\(\theta\)</span>. This has its maximum probability at the sample proportion <span class="math inline">\(p=z/N\)</span>, and we can alternately write the distribution as <span class="math inline">\({\rm Beta}(Np + 1, N(1-p) + 1)\)</span>. The sample proportions combine as a weighted average; given <span class="math inline">\(N_1, N_2\)</span> trials with sample proportions <span class="math inline">\(p_1, p_2\)</span> the combined size is <span class="math inline">\(N_1 + N_2\)</span> with proportion <span class="math inline">\(\frac{N_1 p_1 + N_2 p_2}{N_1 + N_2}\)</span>.</p>
+<p>Choosing a <span class="math inline">\({\rm Beta}(\alpha, \beta)\)</span> prior is equivalent to starting with a flat prior and adding an additional <span class="math inline">\(\alpha - 1\)</span> successes and <span class="math inline">\(\beta - 1\)</span> failures; or equivalently having a successful proportion of <span class="math inline">\(\omega = \frac{\alpha-1}{\alpha + \beta - 2}\)</span> out of <span class="math inline">\(\kappa - 2 = \alpha + \beta - 2\)</span> trials. This framing is useful in understanding hierarchical binomial models. A lot of this is based heavily on Chapter 6 of Kruschke’s <a href="http://doingbayesiandataanalysis.blogspot.com/">Doing Bayesian Data Analysis</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

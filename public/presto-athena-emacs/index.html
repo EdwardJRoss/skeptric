@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-03-19">
+
+<title>skeptric - Presto and Athena CLI in Emacs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Presto and Athena CLI in Emacs</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 19, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I find having Emacs as a unified programming environment really useful. When writing an SQL pipeline I can iteratively develop my SQL in emacs, running it against the database. For a quick and dirty analysis I can copy the output into the .sql file and comment it out. Then I can copy the SQL into a programming language, parameterise it, and test it without touching the mouse. So when I started using <a href="https://prestodb.io/">Presto</a> and AWS’s managed alternative <a href="https://aws.amazon.com/athena/">Athena</a>, I needed to integrate it into emacs.</p>
+<p>After considering the alternatives I ended up using <a href="https://www.masteringemacs.org/article/comint-writing-command-interpreter">Mastering Emacs guide</a> to hack together my own comint modes for <a href="https://github.com/EdwardJRoss/dotfiles/blob/master/emacs.d/lisp/presto.el">Presto</a> and <a href="https://github.com/EdwardJRoss/dotfiles/blob/master/emacs.d/lisp/athena.el">Athena</a> and it works pretty well. These use the <a href="https://prestodb.io/docs/current/installation/cli.html">Presto CLI</a> and <a href="https://github.com/guardian/athena-cli">Athena CLI</a> to interact with the databases; you will need to have them set up. To connect with emacs you need to add the files to your <code>load-path</code>, and <code>require</code> the package (<code>presto</code> or <code>athena</code>), and configure the path to the binary and the arguments.</p>
+<pre class="elisp"><code>(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(require 'presto)
+;; Configure path and arguments
+(setq presto-cli-file-path "~/bin/presto")
+;; Here put whatever arguments you would use to connect through the CLI
+(setq presto-cli-arguments '("--server"
+                                "localhost:8889"
+                                "--catalog"
+                                "hive")</code></pre>
+<p>Then to use it in Emacs you just invoke <code>M-x run-presto</code> to start a presto session in a buffer called <code>*Presto*</code>. If you’re in a buffer with cursor over some SQL you can send it to be evaluated using <code>M-x presto-send</code>. The rest of this post covers the rationale and the details.</p>
+<section id="ways-to-integrate-sql-into-emacs" class="level1">
+<h1>Ways to integrate SQL into Emacs</h1>
+<p>The best way to use SQL from Emacs is <a href="https://www.emacswiki.org/emacs/SqlMode">sql-mode</a>; there are <a href="https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/">good</a> <a href="https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client">guides</a> on using it to manage multiple database connection configurations and easily send chunks of SQL from a file to the database. However I really struggled to add a Presto backend and found the <a href="https://github.com/emacs-mirror/emacs/blob/master/lisp/progmodes/sql.el">source documentation</a> on adding a product didn’t work for me. More recently someone else has created a <a href="https://github.com/kat-co/sql-prestodb">sql-mode backend for presto</a> and I will look to migrate to that.</p>
+<p>An alternative is <a href="https://github.com/kiwanami/emacs-edbi">Emacs EDBI</a>, which uses Perl’s DBI (DataBase Interface) to connect to databases. This means there is a very large number of databases available and you can connect via ODBC drivers (which your database likely has for your platform). However installing Perl dependencies is a bit of trouble, and the mode has a detailed workflow and keybindings which I don’t find intuitive (especially as an <a href="https://github.com/emacs-evil/evil">Emacs evil</a> user). I think it could be a good solution if you spend some time configuring it to be comfortable for you, but I haven’t invested in it.</p>
+<p>So I resolved to make my own comint mode following <a href="https://www.masteringemacs.org/article/comint-writing-command-interpreter">Mastering Emacs comint mode guide</a>. Comint mode allows integrating a command line interface through Emacs, which is very flexible and convenient to use. This worked pretty well with Presto and Emacs</p>
+</section>
+<section id="setting-up-command-line-interfaces" class="level1">
+<h1>Setting up Command Line Interfaces</h1>
+<p>Presto comes with a <a href="https://prestodb.io/docs/current/installation/cli.html">good CLI</a> written in Java. You should be able to download it and just run it with Java; try <code>presto --help</code> to see all the configuration options.</p>
+<p>The story for Athena is much worse; Amazon doesn’t give you a nice CLI just a crummy web GUI and an onerous interface through AWS CLI (you have to do your own polling). There is an <a href="https://github.com/guardian/athena-cli">unmaintained Athena CLI</a> that works well enough, however it’s dependencies are broken. Make sure you first pip install <code>cmd2 == 0.8.0</code> (and maybe <code>tabulate == 0.8.3</code>) before trying to run it or it will be broken. Once it’s installed run <code>athena --help</code> to see all the configuration options; in particular you will need to set a <code>--bucket</code> as a S3 staging bucket for all your query results. Note that this uses <code>boto3</code> to connect to AWS and so you should use <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html">boto3 configuration</a> for AWS. In particular the environment variables like <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> or <code>AWS_PROFILE</code> are useful for making sure you can connect with the right role.</p>
+<p>Make sure you can run your CLI from the terminal before you try to integrate with emacs.</p>
+</section>
+<section id="integrating-the-clis-into-emacs" class="level1">
+<h1>Integrating the CLIs into Emacs</h1>
+<p>Once you can connect and execute queries from the command line you want to encode that into Emacs by defining the path to the program and the arguments. Here’s an example for Presto:</p>
+<pre class="elisp"><code>(defvar presto-cli-file-path "~/bin/presto"
+  "Path to the program used by `run-presto'.")
+
+(defvar presto-cli-arguments '("--server"
+                                  "localhost:8889"
+                                  "--catalog"
+                                  "hive")
+  "Commandline arguments to pass to `presto-cli'.")</code></pre>
+<p>Then we create a <code>run-presto</code> function to start the process:</p>
+<pre class="elisp"><code>(defun run-presto ()
+  "Run an inferior instance of `presto-cli' inside Emacs."
+  (interactive)
+  (let* ((presto-program presto-cli-file-path)
+         (buffer (comint-check-proc "Presto")))
+    ;; pop to the "*Presto*" buffer if the process is dead, the
+    ;; buffer is missing or it's got the wrong mode.
+    (pop-to-buffer-same-window
+     (if (or buffer (not (derived-mode-p 'presto-mode))
+             (comint-check-proc (current-buffer)))
+         (get-buffer-create (or buffer "*Presto*"))
+       (current-buffer)))
+    ;; create the comint process if there is no buffer.
+    (unless buffer
+      (apply 'make-comint-in-buffer "Presto" buffer
+             presto-program '() presto-cli-arguments)
+      (presto-mode))))</code></pre>
+<p>This starts the new process in <code>presto-mode</code> which we need to define as a derived mode of <code>comint-mode</code>. See the <a href="https://www.masteringemacs.org/article/comint-writing-command-interpreter">Mastering Emacs guide</a> or the <a href="https://github.com/EdwardJRoss/dotfiles/blob/master/emacs.d/lisp/presto.el">source</a> for details.</p>
+</section>
+<section id="setting-the-pager" class="level1">
+<h1>Setting the Pager</h1>
+<p>By default <code>less</code> is used as the pager which doesn’t work well in Emacs (you’ll see <code>WARNING: terminal is not fully functional</code> messages).</p>
+<p>One solution is to turn off the pager and let Emacs terminal handle all the buffering, using the special environment variables for Presto and Athena CLIs.</p>
+<pre class="elisp"><code>(setenv "PRESTO_PAGER" "")
+(setenv "ATHENA_PAGER" "")</code></pre>
+<p>Unfortunately I found Emacs comint gets really slow for large results (which terminals handle well), and so if I forgot a limit on a query I could lock up Emacs fetching results. So I used head to only get the top 1000 results; unfortunately there’s no clear sign if the results have been truncated, but for me the tradeoff was worth it.</p>
+<pre class="elisp"><code>(setenv "PRESTO_PAGER" "head -n 1000")
+(setenv "ATHENA_PAGER" "head -n 1000")</code></pre>
+<p>I will still sometimes find it’s slow if I have really long rows; but I don’t know how to improve that.</p>
+</section>
+<section id="sending-text-to-prestoathena" class="level1">
+<h1>Sending text to Presto/Athena</h1>
+<p>Often I like to work in an SQL file and interactively send queries to Presto/Athena. While I can copy and paste the query into the <code>*Presto*</code> or <code>*Athena*</code> buffer, it’s much nicer to do it with a single command.</p>
+<p>It’s straightforward to send it using <code>comint-send-region</code> (which handles some magic in how newlines are sent to the comint process).</p>
+<pre class="elisp"><code>(defun presto-send ()
+  "Send the current region or paragraph to Presto process."
+  (interactive)
+  (let ((beg-end (if (use-region-p)
+                    (cons (region-beginning) (region-end))
+                    (er/paragraph-extents))))
+    (comint-send-region "*Presto*" (car beg-end) (cdr beg-end))))</code></pre>
+<p>The <code>er/paragraph-extents</code> function will grab the paragraph under the cursor to send, so if your query is separated by newlines and your cursor is anywhere in it this will do the right thing.</p>
+<pre class="elisp"><code>(defun er/paragraph-extents ()
+  "Return a cons cell with beginning and end of paragraph."
+  (save-excursion
+    (forward-paragraph)
+    (let ((end (point)))
+      (backward-paragraph)
+      (cons (point) end))))</code></pre>
+</section>
+<section id="quality-of-life-improvements" class="level1">
+<h1>Quality of life improvements</h1>
+<p>That’s the bare minimum to use it, but I made some changes to make it more usable.</p>
+<p>I copied the <a href="https://prestosql.io/docs/current/language/reserved.html">Presto keywords</a> and added a <code>font-lock</code> to highlight them. This makes it easier to spot spelling mistakes with keywords in the buffer</p>
+<p>Presto CLI emits some ANSI control sequences to move the cursor which Emacs doesn’t understand, so I followed <a href="https://oleksandrmanzyuk.wordpress.com/2011/11/05/better-emacs-shell-part-i/">oleksandrmanzyuk’s guide to filtering them out</a>.</p>
+</section>
+<section id="pain-points" class="level1">
+<h1>Pain points</h1>
+<p>While this works alright there are still a few pain points.</p>
+<p>It would be nice to bind <code>presto-send</code> to a key, but I don’t know what mode to do it with because not all SQL is presto. The <code>sql-mode</code> has a nice way of solving this (and more) with the idea of attaching a process to an editing buffer, but this is pretty hard to implement. The nicest solution would probably be to integrate with <code>sql-mode</code>.</p>
+<p>By default long lines are wrapped; I always invoke <code>toggle-truncate-lines</code> the first time that happens but that should be baked into the mode by default.</p>
+<p>There is some weird behaviour with scrolling through command history. The first time I invoke <code>comint-previous-input</code> with <code>M-p</code> the cursor moves back one space. If I press it again I get the error message <code>not-at-command-line</code>. So I then move the cursor right and invoke <code>comint-previous-input</code> again and it retrieves the <em>2nd to last</em> input. I can then get the last input by invoking <code>comint-next-input</code> with <code>M-n</code>. I haven’t worked out how to work around this so I’ve got used to this, and tend to send commands rather than using comint more often. Also history is lost between invocations.</p>
+<p>Presto will show the progress of the query as it executes. In the terminal this will only happen in a single paragraph as the cursor is moved around with ANSI control sequences, and the text is overwritten on update. However Emacs can’t deal with these (in fact these are the ones that we filtered out above), and so we will get a new paragraph for every update. For a long running query the comint buffer can fill up with these updates. It should be possible to remove this noise in the comint mode, but I haven’t worked out how.</p>
+<p>Presto processes can’t be killed with <code>(comint-interrupt-subjob)</code> (<code>C-c C-c</code>), but Athena processes can. When I make a mistake in Presto I’ll delete the <code>*Presto*</code> buffer, kill the job in the Presto UI, and then <code>run-presto</code> again. When AWS credentials expire I have to delete the <code>*Athena*</code> buffer, update the credentials and <code>run-athena</code> again.</p>
+<p>Sometimes I want to export the output into another program for sharing. My workflow is to copy the results into a scratch buffer. I’ll then <code>regexp-replace</code> <code>+| +</code> with <code>,</code>, and then remove the leading whitespace and delete the line that seperates the header (which works fine unless the row could contain a pipe!). Then I can copy this CSV into another program. It would be nice to have an integrated way of doing this (this is one thing <a href="https://www.jetbrains.com/datagrip">JetBrains Datagrip</a> seems more convenient for).</p>
+<p>However it’s good enough to be useful for everyday work.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

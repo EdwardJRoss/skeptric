@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-01-15">
+
+<title>skeptric - Extracting Skills from Job Ads: Part 3 Conjugations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Extracting Skills from Job Ads: Part 3 Conjugations</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+    <div class="quarto-category">jobs</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 15, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’m trying to extract skills from job ads, using job ads in the <a href="https://www.kaggle.com/c/job-salary-prediction">Adzuna Job Salary Predictions Kaggle Competition</a>.</p>
+<p>In the <a href="../extract-skills-2-adpositions/">previous post</a> I extracted skills written in phrases like “experience in telesales” using spaCy’s dependency parse, but it wouldn’t extract many types of experience from a job ad. Here we will extend these rules to extract lists of skills (for example extracting “telesales” and “callcentre” from “experience in telesales or receptionist”, which will let us analyse which experiences are related.</p>
+<p>You can see the <a href="../notebooks/Parsing Experience from Adzuna Job Ads.html">Jupyter notebook</a> for the full analysis.</p>
+<section id="expanding-conjugations" class="level1">
+<h1>Expanding Conjugations</h1>
+<p>We can use spaCy’s dependency parse to extract conjugations</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/job_experience_conjugation.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Conjugation Dependency Parse</figcaption><p></p>
+</figure>
+</div>
+<p>To extract the conjugations (blue lines in the diagram) of a term we look for children with a dependency <code>conj</code>, and then recursively look for conjugations in their children.</p>
+<pre><code>def get_conjugations(tok):
+    new = [tok]
+    while new:
+        tok = new.pop()
+        yield tok
+        for child in tok.children:
+            if child.dep_ == 'conj':
+                new.append(child)</code></pre>
+<p>For each conjugation we want to extract the phrase (the green terms); a rough way to do this is to extract the longest sequence of nouns/adjectives left of the term.</p>
+<pre><code>def get_left_span(tok, label='', include=True):
+    offset = 1 if include else 0
+    idx = tok.i
+    while idx &gt; tok.left_edge.i:
+        if tok.doc[idx - 1].pos_ in ('NOUN', 'PROPN', 'ADJ', 'X'):
+            idx -= 1
+        else:
+            break
+    return label, idx, tok.i+offset</code></pre>
+<p>Then we can modify our previous rule to handle conjugations by iterating over conjugations (the last 2 lines):</p>
+<pre><code>def extract_adp_conj_experience(doc):
+    for tok in doc:
+        if tok.lower_ == 'experience':                             # red text
+            for child in tok.rights:
+                if child.dep_ == 'prep':                           # red arrow
+                    for obj in child.children:
+                        if obj.dep_ == 'pobj':                     # orange arrow
+                            for conj in get_conjugations(obj):     # blue arrows
+                                yield get_left_span(conj, label)   # green text</code></pre>
+<p>While this works pretty well for the phrase “experience of Pioneer or Miser software” it will only extract the term “Miser software”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/job_experience_conj_trunc.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Parse tree: “experience of Pioneer or Miser software”</figcaption><p></p>
+</figure>
+</div>
+<p>However if we rewrite the sentence to “experience of Pioneer <em>software</em> of Miser software” then it will extract both “Miser software” and “Pioneer software”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/job_experience_conj_expand.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Parse tree: “experience of Pioneer software or Miser software”</figcaption><p></p>
+</figure>
+</div>
+<p>This kind of pattern is pretty common (e.g.&nbsp;sales or service environment), and we would get better results if we could implement these rewrite rules but I haven’t tried to yet.</p>
+</section>
+<section id="analysing-the-results" class="level1">
+<h1>Analysing the results</h1>
+<p>This allows us to extract a list of skills like in the <a href="../extract-skills-2-adpositions/">previous post</a>, but now we can also look at which terms commonly co-occur to find related skills by ranking. For example the top related skills for “sales” are “customer service”, “marketing”, and “business development”. For common skills this works pretty well:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Core Skill</th>
+<th>Closest Skill</th>
+<th>Second Closest Skill</th>
+<th>Third Closest Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sales</td>
+<td>customer service</td>
+<td>marketing</td>
+<td>business development</td>
+</tr>
+<tr class="even">
+<td>project management</td>
+<td>design</td>
+<td>delivery</td>
+<td>development</td>
+</tr>
+<tr class="odd">
+<td>SQL</td>
+<td>Oracle</td>
+<td>SAS</td>
+<td>Java</td>
+</tr>
+<tr class="even">
+<td>manufacturing environment</td>
+<td>aerospace industry</td>
+<td>automotive industry</td>
+<td>statistical process</td>
+</tr>
+<tr class="odd">
+<td>planning</td>
+<td>managing</td>
+<td>delivering</td>
+<td>management</td>
+</tr>
+<tr class="even">
+<td>testing</td>
+<td>development</td>
+<td>design</td>
+<td>maintenance</td>
+</tr>
+<tr class="odd">
+<td>marketing</td>
+<td>sales</td>
+<td>advertising</td>
+<td>PR</td>
+</tr>
+<tr class="even">
+<td>analysis</td>
+<td>design</td>
+<td>development</td>
+<td>reporting</td>
+</tr>
+<tr class="odd">
+<td>Java</td>
+<td>C++</td>
+<td>C</td>
+<td>SQL</td>
+</tr>
+<tr class="even">
+<td>software development</td>
+<td>.NET</td>
+<td>commercial environment</td>
+<td>different methodologies</td>
+</tr>
+<tr class="odd">
+<td>customer service</td>
+<td>sales</td>
+<td>retail</td>
+<td>hospitality</td>
+</tr>
+<tr class="even">
+<td>administration</td>
+<td>configuration</td>
+<td>maintenance</td>
+<td>system design</td>
+</tr>
+<tr class="odd">
+<td>CSS</td>
+<td>HTML</td>
+<td>JavaScript</td>
+<td>PHP</td>
+</tr>
+<tr class="even">
+<td>recruitment</td>
+<td>training</td>
+<td>sales</td>
+<td>sales environment</td>
+</tr>
+<tr class="odd">
+<td>Excel</td>
+<td>Word</td>
+<td>PowerPoint</td>
+<td>Outlook</td>
+</tr>
+<tr class="even">
+<td>SAP</td>
+<td>Excel</td>
+<td>Oracle</td>
+<td>Hyperion</td>
+</tr>
+<tr class="odd">
+<td>writing</td>
+<td>editing</td>
+<td>maintaining</td>
+<td>reviewing</td>
+</tr>
+<tr class="even">
+<td>Windows</td>
+<td>Linux</td>
+<td>Active Directory</td>
+<td>development</td>
+</tr>
+<tr class="odd">
+<td>Python</td>
+<td>Perl</td>
+<td>Ruby</td>
+<td>Java</td>
+</tr>
+</tbody>
+</table>
+<p>This is very informative, for example:</p>
+<ul>
+<li>if you want a career in marketing it’s useful to have sales skills, which are close to customer service skills, which are often found in retail and hospitality</li>
+<li>The backend programming languages (Java, C++, C) cluster together, separately from the frontend languages (CSS, HTML, JavaScript, PHP)</li>
+<li>Excel often ends up in a list of Windows Office technologies; but is especially useful for people who are using SAP</li>
+</ul>
+<p>However for some skills noise terms start to occur, for example “teaching” is most closely related to “training”, “UK” and “years”. This is because we’re extracting skills in a very specific way, and so we’re missing many other ways skills could be encoded in the job ad. Another consequence of our extraction method is we get related skills that are phrased in the same way because they often occur together in a list, for example “planning”, “managing” and “delivering”. This is good because it mitigates there being multiple ways a skill could be written; admistration, administrating, admin, and Administration could all the same thing.</p>
+<p>There’s a lot more we could do here to look at the network of related skills, or disambiguate broad skills like “design” based on their context, if we could retrieve more skills from a job ad. Unfortunately it rapidly becomes much more difficult to write rules to extract skills phrased in different ways. In particular this job ad data has had some formatting removed (like lists) that makes it even harder to use a rule based approach. In a follow up series we will investigate using the rule based extraction to help seed a predictive model to extract skills.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

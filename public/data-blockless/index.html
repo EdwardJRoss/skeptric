@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2019-10-11">
+
+<title>skeptric - Data Blockless: A better way to create data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Blockless: A better way to create data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 11, 2019</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Before you can do any machine learning you need to be able to read the data, create test and training splits and convert it into the right format. Fastai has a generic <a href="https://docs.fast.ai/data_block.html">data block API</a> for doing these tasks. However it’s quite hard to extend to new data types. There’s a few classes to implement; Items, ItemLists, LabelLists and the Preprocessors which are obfuscated through a complex inheritance and dispatch hierarchy. I spent two weeks of evenings trying to implement a combined image and tabular data for the <a href="https://www.kaggle.com/c/petfinder-adoption-prediction">Petfinder.my Adoption Prediction Kernel</a>, and only <a href="https://www.kaggle.com/edwardjross/neural-network-tabuler-vision-fastai-poc">managed to combine the data sources</a> because fastai’s <a href="https://forums.fast.ai/t/custom-itemlist-getting-forkingpickler-broken-pipe/39086/10">Sylvain Guggers released a MixedItemList</a>.</p>
+<p>However it’s possible to make data preparation straightforward and easy to extend, using a generalisation of the <code>ListContainer</code> from <a href="https://nbviewer.jupyter.org/github/fastai/course-v3/blob/master/nbs/dl2/06_cuda_cnn_hooks_init.ipynb#A-Hooks-class">fastai part2 v3</a>.</p>
+<section id="worked-example" class="level1">
+<h1>Worked example</h1>
+<p>Creating a Pytorch DataLoader for Deep Learning requires:</p>
+<ol type="1">
+<li>Reading in the data</li>
+<li>Apply transforms</li>
+<li>Label the inputs</li>
+<li>Split into training, validation and test sets</li>
+<li>Wrap it in a DataLoader</li>
+</ol>
+<p>Here’s an extract from a <a href="https://nbviewer.jupyter.org/github/EdwardJRoss/agilitai/blob/master/Training%20Prototype%20-%20Deep%20Learning%20with%20Images.ipynb">worked example</a> using <a href="https://github.com/fastai/imagenette">Imagenette</a>.</p>
+<p>For Imagenette (like for <a href="http://www.image-net.org/">Imagenet</a>) there are separate training and validation folders, each containing a folder with each object category. It’s easy to extract these labels with Pandas:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> (pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   .DataFrame(image_paths, columns<span class="op">=</span>[<span class="st">'path'</span>])</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   .assign(label<span class="op">=</span><span class="kw">lambda</span> df: df.path.<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.parent.name),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           split<span class="op">=</span><span class="kw">lambda</span> df: df.path.<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.parent.parent.name),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           train<span class="op">=</span><span class="kw">lambda</span> df: df.split <span class="op">==</span> <span class="st">'train'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data block provides a variety of common methods to load, label and split data, but in practice you have to tweak the datasets to make it work. Using Pandas is very flexible and almost as easy.</p>
+<p>We’ll need to provide transforms that takes the image path, opens the file, resizes it and converts it to a tensor. Similarly we need a transform to one-hot encode categories. The transforms are applied lazily, so no images are opened until they’re accessed by the dataloader.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>img_tfms <span class="op">=</span> [img_open, partial(img_resize, size<span class="op">=</span><span class="dv">128</span>), img_rgb, img_to_float]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>img_items <span class="op">=</span> ListContainer(df.path, img_tfms)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cat_tfms <span class="op">=</span> [cat_norm]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cat_items <span class="op">=</span> ListContainer(df.label, cat_tfms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We then label our items using the <code>combine</code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> img_items.combine(cat_items)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then we can split the training and validation set using the <code>split</code> method of ListContainers using the dataframe’s train mask, and then create a <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">Pytorch DataLoader</a> for each split.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>train_items, valid_items <span class="op">=</span> items.split(df.train)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>train_dl <span class="op">=</span> DataLoader(train_items, bs, shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>valid_dl <span class="op">=</span> DataLoader(valid_items, bs, shuffle<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The rest of this post will explore how all of this works.</p>
+</section>
+<section id="transforming-items" class="level1">
+<h1>Transforming Items</h1>
+<p>To take a description of an item, like the path to an image, and converting it to a Tensor requires transformation. We don’t want to read the image into memory until we have to, so we only execute this transformation when we get a single item.</p>
+<p>The <code>ListContainer</code> needs to store both the items and the transformations.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ListContainer(<span class="bu">object</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, items, tfms<span class="op">=</span><span class="va">None</span>): <span class="va">self</span>.items, <span class="va">self</span>.tfms <span class="op">=</span> <span class="bu">list</span>(items), <span class="bu">list</span>(tfms <span class="kw">or</span> [])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We have a method <code>get</code> to apply the transforms to an item:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get(idx): <span class="cf">return</span> comply(<span class="va">self</span>.tfms, <span class="va">self</span>.items[idx])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Where <code>comply</code>, a portmanteau of <a href="https://en.wikipedia.org/wiki/Function_composition_(computer_science)"><code>compose</code></a> and <a href="https://en.wikipedia.org/wiki/Apply"><code>apply</code></a>. If we have multiple items (like how a DataFrame has multiple series) then <code>tfms</code> is a list of lists of functions, where each list of functions is composed and applied separately to the items:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> comply(functions, x):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(functions) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">isinstance</span>(functions[<span class="dv">0</span>], Iterable):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(functions) <span class="op">==</span> <span class="bu">len</span>(x)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [comply(f, xi) <span class="cf">for</span> (f, xi) <span class="kw">in</span> <span class="bu">zip</span>(functions, x)]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> f <span class="kw">in</span> functions:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> f(x)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="selecting-objects" class="level1">
+<h1>Selecting Objects</h1>
+<p>ListContainers can be subsetted the same way numpy arrays can, using a list of indices, a boolean mask or a slice. Subsetting creates another list container. This can be used for example to extract the training set: <code>train_items = items[df.train]</code></p>
+<p>When a single integer index is passed, it calls <code>get</code> to apply the transformations. This will be used by the dataloader.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, idx):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(idx, <span class="bu">int</span>): <span class="cf">return</span> <span class="va">self</span>.get(idx)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(idx, <span class="bu">slice</span>): <span class="cf">return</span> <span class="va">self</span>.__class__(<span class="va">self</span>.items[idx], <span class="va">self</span>.tfms)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Must be a list</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">len</span>(idx) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">isinstance</span>(idx[<span class="dv">0</span>], (<span class="bu">bool</span>, np.bool_)):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(idx) <span class="op">!=</span> <span class="bu">len</span>(<span class="va">self</span>.items):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="ss">f'Boolean index length </span><span class="sc">{</span><span class="bu">len</span>(idx)<span class="sc">}</span><span class="ss"> did not match collection length </span><span class="sc">{</span><span class="bu">len</span>(<span class="va">self</span>.items)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(idx) <span class="op">==</span> <span class="bu">len</span>(<span class="va">self</span>.items), <span class="st">"Boolean mask must have same length as object"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__class__([o <span class="cf">for</span> m,o <span class="kw">in</span> <span class="bu">zip</span>(idx, <span class="va">self</span>.items) <span class="cf">if</span> m], <span class="va">self</span>.tfms)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: <span class="cf">return</span> <span class="va">self</span>.__class__([<span class="va">self</span>.items[i] <span class="cf">for</span> i <span class="kw">in</span> idx], <span class="va">self</span>.tfms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="list-functionality" class="level1">
+<h1>List Functionality</h1>
+<p>There are standard methods provided for the length, iteration, changing and removing items.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>): <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.items)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>): <span class="cf">return</span> (<span class="va">self</span>[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>.items)))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__setitem__</span>(<span class="va">self</span>, i, o): <span class="va">self</span>.items[i] <span class="op">=</span> o</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__delitem__</span>(<span class="va">self</span>, i): <span class="kw">del</span>(<span class="va">self</span>.items[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="splitting-test-and-training" class="level1">
+<h1>Splitting Test and Training</h1>
+<p>To be able to split a set into test and training we need to be able to pick out the complement of a selection with <code>exclude</code>. Similar to <code>__getitem__</code> it must be able to handle a boolean mask, a slice or a list of indices.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exclude(<span class="va">self</span>, idxs):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(idxs, <span class="bu">slice</span>): idxs <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>))[idxs]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(idxs) <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(idxs[<span class="dv">0</span>], (<span class="bu">bool</span>, np.bool_)):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>[[<span class="kw">not</span> x <span class="cf">for</span> x <span class="kw">in</span> idxs]]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>[[x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>)) <span class="cf">if</span> x <span class="kw">not</span> <span class="kw">in</span> idxs]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Split just combines <code>__getitem__</code> and <code>exclude</code>. Because each returns another <code>ListContainer</code> the set could be split again to produce separate train, validation and test sets.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> split(<span class="va">self</span>, by):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="va">self</span>[by], <span class="va">self</span>.exclude(by))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="labelling-data" class="level1">
+<h1>Labelling Data</h1>
+<p>To label the data we just store an additional <code>LabelList</code>, similar to <code>Series</code> in a <code>DataFrame</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> combine(<span class="va">self</span>, <span class="op">*</span>others):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> other <span class="kw">in</span> others:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">assert</span> <span class="bu">len</span>(<span class="va">self</span>) <span class="op">==</span> <span class="bu">len</span>(other)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        lists <span class="op">=</span> (<span class="va">self</span>,) <span class="op">+</span> others</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        items <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>[<span class="bu">getattr</span>(l, <span class="st">'items'</span>, l) <span class="cf">for</span> l <span class="kw">in</span> lists])</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        tfms <span class="op">=</span> [<span class="bu">getattr</span>(l, <span class="st">'tfms'</span>) <span class="cf">for</span> l <span class="kw">in</span> lists]</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__class__(items, tfms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There also need to be methods to extract the item from the label.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> separate_one(<span class="va">self</span>, dim):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__class__([item[dim] <span class="cf">for</span> item <span class="kw">in</span> <span class="va">self</span>.items], <span class="va">self</span>.tfms[dim])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> separate(<span class="va">self</span>):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        dim <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.tfms)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="va">self</span>.project_one(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(dim)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that these methods are very generic, the same idea could be used to combine text and image data.</p>
+</section>
+<section id="displaying" class="level1">
+<h1>Displaying</h1>
+<p>The items can be displayed at the console, before transformation:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>__class__<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(<span class="va">self</span>)<span class="sc">}</span><span class="ss"> items)</span><span class="ch">\n</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>items[:<span class="dv">10</span>]<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>)<span class="op">&gt;</span><span class="dv">10</span>: res <span class="op">=</span> res[:<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span> <span class="st">'...]'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.tfms: res <span class="op">+=</span> <span class="ss">f'; Transformed by </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>tfms<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Generally you also want a datatype specific way to display your data (e.g.&nbsp;show an image or play an audiofile). This would need to be added by subclassing <code>ListContainer</code> for separate instances.</p>
+</section>
+<section id="preprocessing" class="level1">
+<h1>Preprocessing</h1>
+<p>Fastai has a separate <a href="https://docs.fast.ai/data_block.html#Invisible-step:-preprocessing">preprocessing</a> stage that is invisible, which has confused <a href="https://forums.fast.ai/t/character-level-language-model/31379/2">me and others</a> when trying to build a <a href="https://nbviewer.jupyter.org/gist/EdwardJRoss/86b31848a7951411de56f10f55e9de4e">character level language model</a>. Any preprocessing would be done explicitly before putting items into the ItemList; since they are to be applied once, to all the data. It would be straightforward to create an explicit preprocessing function for each data type that returns a corresponding <code>ListContainer</code>.</p>
+</section>
+<section id="transformations-in-the-dataloader" class="level1">
+<h1>Transformations in the DataLoader</h1>
+<p>It’s also possible to put <a href="https://nbviewer.jupyter.org/github/EdwardJRoss/agilitai/blob/master/Training%20Prototype%20-%20Deep%20Learning%20with%20Images.ipynb#4.1-We-could-do-the-mappings-in-Collate">arbitrary transformations</a> in the DataLoader’s <code>collate_fn</code> argument.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformCollate:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tfms<span class="op">=</span>[], collate<span class="op">=</span>torch.stack):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tfms <span class="op">=</span> tfms</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.collate <span class="op">=</span> collate</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, items):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.collate([comply(<span class="va">self</span>.tfms, item) <span class="cf">for</span> item <span class="kw">in</span> items])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you wouldn’t need to lazily apply transformation in the <code>ListContainer</code>, they would be applied by the <code>DataLoader</code> as needed.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>img_collate <span class="op">=</span> TransformCollate(img_tfms)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>train_x <span class="op">=</span> DataLoader(df.path[df.train], bs, collate_fn<span class="op">=</span>img_collate, shuffle<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We could also provide a method for combining the collation function for the items with the collation function for the labels.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProductCollate:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>collates):</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.collates <span class="op">=</span> collates</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, items):</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        items <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(<span class="op">*</span>items))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(items) <span class="op">==</span> <span class="bu">len</span>(<span class="va">self</span>.collates)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">tuple</span>(collate(item_group) <span class="cf">for</span> collate, item_group <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.collates, items))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This can be used to get a DataLoader for the labelled items:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>xy_collate <span class="op">=</span> ProductCollate(img_collate, cat_collate)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> DataLoader(<span class="bu">list</span>(<span class="bu">zip</span>(df.path[df.train], df.label[df.train])),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                   bs,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                   collate_fn<span class="op">=</span>xy_collate,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                   shuffle<span class="op">=</span><span class="va">True</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I personally prefer the transformation to occur in the <code>ListContainer</code> because you can easily interactively explore the output of transforms, and because the transforms are stored with the object they don’t need to be passed around like the custom collation functions. But lazy transformations used in <code>ListContainer</code> are unusual in Python and could cause confusion.</p>
+<p>I’m going to continue working on improving deep learning workflows in my <a href="https://github.com/EdwardJRoss/agilitai">agilitai</a> library based heavily on fastai v3 part 2.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

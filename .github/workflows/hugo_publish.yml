@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: hugo publish
+name: publish
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -26,17 +26,7 @@ jobs:
       with:
         submodules: true  # Fetch Hugo themes
         fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
-    
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: '0.68.3'
-        # extended: true
-          
-    # Build with hugo
-    - name: Build
-      run: hugo 
-  
+
     # Rclone to destination
     - name: rclone
       uses: ./.github/actions/rclone

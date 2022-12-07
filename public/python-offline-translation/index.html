@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-09-11">
+
+<title>skeptric - Offline Translation in Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Offline Translation in Python</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 11, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Suppose you want to translate text from one language to another. Most people’s first point of call is an online translation service from one of the big cloud providers, and most translation libraries in Python wrap Google translate. However the free services have rate limits, the paid services can quickly get expensive, and sometimes you have private data you don’t want to upload online. An alternative is to run a machine translation model locally, and thanks to Hugging Face it’s pretty simple to do.</p>
+<p>There are some downsides to running these models locally. The quality of the translations will be lower than the cloud providers, and even they produce very strange results <a href="https://www.vice.com/en/article/j5npeg/why-is-google-translate-spitting-out-sinister-religious-prophecies">like translating gibberish into religious prophecies</a> and sometimes amusing, like in a <a href="https://legendsoflocalization.com/funky-fantasy-iv/">Google translation of Final Fantasy IV</a>. The quality is often quite good, but sometimes the output is bizarre or wrong. It can also be quite slow to run, especially if you don’t run it on a GPU.</p>
+<p>This article will compare two options; <a href="https://github.com/argosopentech/argos-translate">Argos Translate</a> (a wrapper for <a href="https://opennmt.net/">OpenNMT</a>) with <a href="https://marian-nmt.github.io/">Marian Machine Translation</a>. Argos Translate is a more complete solution, is easier to get set up, and is substantially faster. However Marian Machine Translation gives better translations, supports more languages, and better supports batch translations.</p>
+<section id="argos-machine-translation" class="level1">
+<h1>Argos Machine Translation</h1>
+<p><a href="https://github.com/argosopentech/argos-translate">Argos Translate</a> is a wrapper around <a href="https://opennmt.net/">OpenNMT’s</a> <a href="https://github.com/OpenNMT/CTranslate2">CTranslate2 Models</a>. It can provide a web API, a GUI, and a command line interface as well as a Python interface.</p>
+<p>Installation is straightforward with <code>pip install argostranslate</code>. You have to <a href="https://www.argosopentech.com/argospm/index/">download the model locally</a> and then install it with <code>package.install_from_path</code>. For example for a Russian to English model:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the file</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">'https://argosopentech.nyc3.digitaloceanspaces.com/argospm/translate-ru_en-1_0.argosmodel'</span>, <span class="st">'translate-ru_en-1_0.argosmodel'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Install it</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> argostranslate <span class="im">import</span> package</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>package.install_from_path(<span class="st">'translate-ru_en-1_0.argosmodel'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Following the documentation it seens it’s quite hard to directly get a model and you have to iterate through the installed languages. I had to implement this helper function (but surely there’s an easier way??):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> argostranslate <span class="im">import</span> translate</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_argos_model(source, target):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    lang <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>source<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    source_lang <span class="op">=</span> [model <span class="cf">for</span> model <span class="kw">in</span> translate.get_installed_languages() <span class="cf">if</span> lang <span class="kw">in</span> <span class="bu">map</span>(<span class="bu">repr</span>, model.translations_from)]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    target_lang <span class="op">=</span> [model <span class="cf">for</span> model <span class="kw">in</span> translate.get_installed_languages() <span class="cf">if</span> lang <span class="kw">in</span> <span class="bu">map</span>(<span class="bu">repr</span>, model.translations_to)]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> source_lang[<span class="dv">0</span>].get_translation(target_lang[<span class="dv">0</span>])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>argos_ru_en <span class="op">=</span> get_argos_model(<span class="st">'Russian'</span>, <span class="st">'English'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then I could translate a string with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>argos_ru_en.translate(<span class="st">'что слишком сознавать — это болезнь, настоящая, полная болезнь.'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "I think it's a disease, a real, complete disease."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="marian-machine-translation" class="level1">
+<h1>Marian Machine Translation</h1>
+<p>We can run a minimal example using the example from <a href="https://huggingface.co/transformers/model_doc/marian.html">Hugging Face’s wrapper</a> of <a href="https://marian-nmt.github.io/">Marian Machine Translation</a>, the engine behind Microsoft Translator. First you need to <a href="https://pytorch.org/">install PyTorch</a>, then pip install <code>sentencepiece</code> and <code>huggingface</code>, the you can run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> MarianMTModel, MarianTokenizer</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Sequence</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Translator:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, source_lang: <span class="bu">str</span>, dest_lang: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model_name <span class="op">=</span> <span class="ss">f'Helsinki-NLP/opus-mt-</span><span class="sc">{</span>source_lang<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>dest_lang<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> MarianMTModel.from_pretrained(<span class="va">self</span>.model_name)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tokenizer <span class="op">=</span> MarianTokenizer.from_pretrained(<span class="va">self</span>.model_name)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> translate(<span class="va">self</span>, texts: Sequence[<span class="bu">str</span>]) <span class="op">-&gt;</span> Sequence[<span class="bu">str</span>]:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        tokens <span class="op">=</span> <span class="va">self</span>.tokenizer(<span class="bu">list</span>(texts), return_tensors<span class="op">=</span><span class="st">"pt"</span>, padding<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        translate_tokens <span class="op">=</span> <span class="va">self</span>.model.generate(<span class="op">**</span>tokens)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="va">self</span>.tokenizer.decode(t, skip_special_tokens<span class="op">=</span><span class="va">True</span>) <span class="cf">for</span> t <span class="kw">in</span> translate_tokens]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>marian_ru_en <span class="op">=</span> Translator(<span class="st">'ru'</span>, <span class="st">'en'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>marian_ru_en.translate([<span class="st">'что слишком сознавать — это болезнь, настоящая, полная болезнь.'</span>])</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns: ['That being too conscious is a disease, a real, complete disease.']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>Translator</code> object takes a list of sentences from a source language to a destination language. The languages are two letter <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639 codes</a>, above we create a translator from Russian (<code>ru</code>) to English (<code>en</code>). This will then get a model and a tokenizer, which will be downloaded if necessary (and weighs around 300MB). Marian supports a very large list of languages, you can see all the models on <a href="https://huggingface.co/Helsinki-NLP">Hugging Face’s model hub</a>.</p>
+<p>It is incredible to me that this is so easy (thanks to Hugging Face), that there are so many languages (thanks to Neural Machine Translation), and that the models are freely available (thanks to Helsinki NLP). I looked into this about 5 years ago and the best open solution was <a href="http://www.statmt.org/moses/">Moses Machine Translation</a>, which I couldn’t get set up in a few hours, has worse translations (statistical methods can get quite good, but require a lot of work and tend to work poorly for informal text, such as web based data) and many fewer languages. The space of language technology has come a remarkably long way in a few years. However there are some limitations of these models, in terms of the length of text it can translate, how fast it runs and how it responds to unusual punctuation (relative to the data it was trained on).</p>
+<section id="handling-long-text" class="level2">
+<h2 class="anchored" data-anchor-id="handling-long-text">Handling Long Text</h2>
+<p>If you run it on a long text you will get <code>IndexError: index out of range in self</code>; this is a limitation of Transformer models where they have a maximum size input. The model only supports up to 512 tokens (where a token is dependent on the <a href="https://github.com/google/sentencepiece">SentencePiece encoding</a>, most words are made up of at most a few tokens), and if you pass any more it fails. The <code>tokens</code> returned by the tokenizer is a dictionary containing two tensors, the <code>input_ids</code> (which are the actual sentencepiece token ids) and <code>attention_mask</code> (which seems to be all 1s). The tensors are rank 2 with shape the number of texts by the <em>maximum</em> number of tokens in any of the texts. For long texts the best thing to do is to break the text apart at sentence boundaries and then paste it back together again.</p>
+<p>A robust way to break a long text into sentences is with <a href="https://stanfordnlp.github.io/stanza/">Stanza</a>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stanza</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First you will need to download the model</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># stanza.download('ru')</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> stanza.Pipeline(<span class="st">'ru'</span>, processors<span class="op">=</span><span class="st">'tokenize'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sentence <span class="kw">in</span> nlp.process(<span class="st">'Сдается однокомнатная мебелированная квартира квартира. Ежемесячная плата 18 тыс.р. + свет.'</span>).sentences:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(sentence.text)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Сдается однокомнатная мебелированная квартира квартира.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ежемесячная плата 18 тыс.р. + свет.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However we lose the space between sentences. To be able to capture this we need to be able to get both the sentence and the boundary preceeding it. Start with a generic container for the text and a prefix:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclassess <span class="im">import</span> dataclass</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SentenceBoundary:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    text: <span class="bu">str</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    prefix: <span class="bu">str</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.prefix <span class="op">+</span> <span class="va">self</span>.text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And then create a SentenceBoundary object that can extract these from a Stanza Document, appending an empty text to get the trailing characters of the document. We also add methods for getting the non-empty sentences for translation, and for mapping the text through a dictionary of translations.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations <span class="co"># For Python 3.7</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SentenceBoundaries:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    sentence_boundaries: List[SentenceBoundary]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> from_doc(cls, doc: stanza.Document) <span class="op">-&gt;</span> SentenceBoundaries:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        sentence_boundaries <span class="op">=</span> []</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        start_idx <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> sent <span class="kw">in</span> doc.sentences:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            sentence_boundaries.append(SentenceBoundary(text<span class="op">=</span>sent.text, prefix<span class="op">=</span>doc.text[start_idx:sent.tokens[<span class="dv">0</span>].start_char]))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>            start_idx <span class="op">=</span> sent.tokens[<span class="op">-</span><span class="dv">1</span>].end_char</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        sentence_boundaries.append(SentenceBoundary(text<span class="op">=</span><span class="st">''</span>, prefix<span class="op">=</span>doc.text[start_idx:]))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cls(sentence_boundaries)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> nonempty_sentences(<span class="va">self</span>) <span class="op">-&gt;</span> List[<span class="bu">str</span>]:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [item.text <span class="cf">for</span> item <span class="kw">in</span> <span class="va">self</span>.sentence_boundaries <span class="cf">if</span> item.text]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">map</span>(<span class="va">self</span>, d: Dict[<span class="bu">str</span>, <span class="bu">str</span>]) <span class="op">-&gt;</span> SentenceBoundaries:</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> SentenceBoundaries([SentenceBoundary(text<span class="op">=</span>d.get(sb.text, sb.text),</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                                                    prefix<span class="op">=</span>sb.prefix) <span class="cf">for</span> sb <span class="kw">in</span> <span class="va">self</span>.sentence_boundaries])</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">''</span>.join(<span class="bu">map</span>(<span class="bu">str</span>, <span class="va">self</span>.sentence_boundaries))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Because the all the texts are put into a single tensor there needs to be enough memory (CPU or GPU) available to store it all. So we need to <a href="../python-minibatching">minibatch</a> the sentences into smaller groups. In fact since it needs to be processed in a rectangular block you should try to process all the shortest texts together and all the longest texts together for best efficiency. Moreover it’s worth caching any repeated texts to stop retranslating.</p>
+<p>Putting this all together we get a more robust translator:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Translator:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, source_lang: <span class="bu">str</span>, dest_lang: <span class="bu">str</span>, use_gpu: <span class="bu">bool</span><span class="op">=</span><span class="va">False</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.use_gpu <span class="op">=</span> use_gpu</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model_name <span class="op">=</span> <span class="ss">f'Helsinki-NLP/opus-mt-</span><span class="sc">{</span>source_lang<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>dest_lang<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> MarianMTModel.from_pretrained(<span class="va">self</span>.model_name)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> use_gpu:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.model <span class="op">=</span> <span class="va">self</span>.model.cuda()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tokenizer <span class="op">=</span> MarianTokenizer.from_pretrained(<span class="va">self</span>.model_name)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sentencizer <span class="op">=</span> stanza.Pipeline(source_lang, processors<span class="op">=</span><span class="st">'tokenize'</span>, verbose<span class="op">=</span><span class="va">False</span>, use_gpu<span class="op">=</span>use_gpu)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> sentencize(<span class="va">self</span>, texts: Sequence[<span class="bu">str</span>]) <span class="op">-&gt;</span> List[SentenceBoundaries]:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [SentenceBoundaries.from_doc(<span class="va">self</span>.sentencizer.process(text)) <span class="cf">for</span> text <span class="kw">in</span> texts]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> translate(<span class="va">self</span>, texts: Sequence[<span class="bu">str</span>], batch_size:<span class="bu">int</span><span class="op">=</span><span class="dv">10</span>, truncation<span class="op">=</span><span class="va">True</span>) <span class="op">-&gt;</span> Sequence[<span class="bu">str</span>]:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(texts, <span class="bu">str</span>):</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">'Expected a sequence of texts'</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        text_sentences <span class="op">=</span> <span class="va">self</span>.sentencize(texts)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        translations <span class="op">=</span> {sent: <span class="va">None</span> <span class="cf">for</span> text <span class="kw">in</span> text_sentences <span class="cf">for</span> sent <span class="kw">in</span> text.nonempty_sentences}</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> text_batch <span class="kw">in</span> minibatch(<span class="bu">sorted</span>(translations, key<span class="op">=</span><span class="bu">len</span>, reverse<span class="op">=</span><span class="va">True</span>), batch_size):</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>            tokens <span class="op">=</span> <span class="va">self</span>.tokenizer(text_batch, return_tensors<span class="op">=</span><span class="st">"pt"</span>, padding<span class="op">=</span><span class="va">True</span>, truncation<span class="op">=</span>truncation)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.use_gpu:</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                tokens <span class="op">=</span> {k:v.cuda() <span class="cf">for</span> k, v <span class="kw">in</span> tokens.items()}</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            translate_tokens <span class="op">=</span> <span class="va">self</span>.model.generate(<span class="op">**</span>tokens)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>            translate_batch <span class="op">=</span> [<span class="va">self</span>.tokenizer.decode(t, skip_special_tokens<span class="op">=</span><span class="va">True</span>) <span class="cf">for</span> t <span class="kw">in</span> translate_tokens]</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> (text, translated) <span class="kw">in</span> <span class="bu">zip</span>(text_batch, translate_batch):</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                translations[text] <span class="op">=</span> translated</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="bu">str</span>(text.<span class="bu">map</span>(translations)) <span class="cf">for</span> text <span class="kw">in</span> text_sentences]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that we set <code>truncation=True</code> in the tokenizer, so if a text is too long after breaking it into sentences we just drop the rest of the text rather than failing.</p>
+</section>
+</section>
+<section id="translation-quality" class="level1">
+<h1>Translation Quality</h1>
+<p>Finally sometimes punctuation causes some strange hallucinations from the model. First consider some pure punctuation:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> translation <span class="kw">in</span> marian_ru_en.translate([<span class="st">''</span>, <span class="st">'.'</span>, <span class="st">'!'</span>, <span class="st">'-'</span>, <span class="st">'&amp;'</span>]):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(translation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>MarianMT gives some rather creative translations:</p>
+<pre><code>It's okay. It's okay, it's okay, it's okay.
+I don't know.
+Hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey, hey.
+- Yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah, yeah.
+♪ I don't know ♪</code></pre>
+<p>Argos does much better with most of these translating them by copying, but still translates <code>'.'</code> to <code>♪</code> and <code>- -</code> to <code>[Grunts]</code>. It also seems to truncate repeated punctuation.</p>
+<p>For some examples of how it performs I tested them on text from the <a href="https://www.kaggle.com/c/avito-demand-prediction">Avito Demand Prediction competition</a>, which is in Russian (not a language I know well). Here’s some examples from titles (which are difficult because they’re fragments). Generally Google Translate is pretty close to the actual meaning (verified by the images), then Marian captures less of the actual meaning, and Argos less again.</p>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 27%">
+<col style="width: 20%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Text</th>
+<th>MarianMT Translation</th>
+<th>ArgosMT Translation</th>
+<th>Google Translate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Кокоби(кокон для сна)</td>
+<td>Cocoby (sleep cocoon)</td>
+<td>Cocobi(s)</td>
+<td>Cocobi (sleeping cocoon)</td>
+</tr>
+<tr class="even">
+<td>Стойка для Одежды</td>
+<td>Clothes stand</td>
+<td>Clothing for clothing</td>
+<td>Clothes Rack</td>
+</tr>
+<tr class="odd">
+<td>Philips bluray</td>
+<td>Philips bluray</td>
+<td>Philips bluray</td>
+<td>Philips bluray</td>
+</tr>
+<tr class="even">
+<td>Автокресло</td>
+<td>Truck, car seat</td>
+<td>Road</td>
+<td>Car seat</td>
+</tr>
+<tr class="odd">
+<td>ВАЗ 2110, 2003</td>
+<td>VAZ 2110, 2003</td>
+<td>WAZ 2110, 2003</td>
+<td>VAZ 2110, 2003</td>
+</tr>
+<tr class="even">
+<td>Авто люлька</td>
+<td>Car bulwark</td>
+<td>Truck</td>
+<td>Car carrycot</td>
+</tr>
+<tr class="odd">
+<td>Водонагреватель 100 литров нержавейка плоский</td>
+<td>The water absorber is 100 litres stainless flat.</td>
+<td>100 litres of dynamometer flat</td>
+<td>Water heater 100 liters stainless steel flat</td>
+</tr>
+<tr class="even">
+<td>Бойфренды colins</td>
+<td>Collins Boyfriends</td>
+<td>Colins</td>
+<td>boyfriends colins</td>
+</tr>
+<tr class="odd">
+<td>Платье</td>
+<td>Clothes</td>
+<td>Plato.</td>
+<td>Dress</td>
+</tr>
+<tr class="even">
+<td>Полу ботиночки замш натур.Бамбини</td>
+<td>Half the boots are for nature. Bambini.</td>
+<td>Half the boots are straight. Bambini</td>
+<td>Semi boots suede nature Bambini</td>
+</tr>
+<tr class="odd">
+<td>1-к квартира, 25 м², 2/2 эт.</td>
+<td>One-to-one apartment, 25 m2, 2/2 ot.</td>
+<td>1st apartment, 25 m2, 2/2.</td>
+<td>1-room apartment, 25 m², 2/2 fl.</td>
+</tr>
+<tr class="even">
+<td>Джинсы</td>
+<td>Jeans.</td>
+<td>Jeans</td>
+<td>Jeans</td>
+</tr>
+<tr class="odd">
+<td>Атласы и Контурныя карты за 8 класс</td>
+<td>Atlass and end-of-grade maps</td>
+<td>Atlas and Contourna Cards 8 class</td>
+<td>Atlases and Contour maps for grade 8</td>
+</tr>
+<tr class="even">
+<td>Монитор acer 18.5</td>
+<td>Monitor acer 18.5</td>
+<td>Monitor acer 18.5</td>
+<td>acer 18.5 monitor</td>
+</tr>
+<tr class="odd">
+<td>Продаются щенки немецкой овчарки</td>
+<td>German shepherd’s puppies are for sale.</td>
+<td>They sell German sheep</td>
+<td>German Shepherd puppies for sale</td>
+</tr>
+<tr class="even">
+<td>Платье женское новое</td>
+<td>A woman’s new dress.</td>
+<td>Women’s new dress</td>
+<td>Women’s dress new</td>
+</tr>
+<tr class="odd">
+<td>Chevrolet Lanos, 2008</td>
+<td>Chevrolet Lanos, 2008</td>
+<td>Chevrolet Lanos, 2008</td>
+<td>Chevrolet Lanos, 2008</td>
+</tr>
+<tr class="even">
+<td>Объемная цифра 2</td>
+<td>Volume 2</td>
+<td>Volume 2</td>
+<td>3D figure 2</td>
+</tr>
+<tr class="odd">
+<td>Куртка весенняя(осенняя)</td>
+<td>Spring jacket (Spring)</td>
+<td>Spring(s)</td>
+<td>Jacket spring (autumn)</td>
+</tr>
+<tr class="even">
+<td>Сниму коттедж</td>
+<td>I’ll take the cottage off.</td>
+<td>I’ll take the cattage.</td>
+<td>Cottage for rent</td>
+</tr>
+</tbody>
+</table>
+<section id="effect-of-punctuation" class="level2">
+<h2 class="anchored" data-anchor-id="effect-of-punctuation">Effect of punctuation</h2>
+<p>The MarianMT model is very sensitive to punctuation and capitalisation, the OpenNMT model used by Argos is less sensitive to punctuation but is sensitive to tokenisation. This is likely because the underlying sentencepiece tokenizer doesn’t treat these specially; this makes it incredibly flexible for languages with non-European punctuation and tokenisation (for example Thai, Arabic and Mandarin Chinese). However it means it performs less well with strange punctuation and capitalisation. Consider the following description fragment from the Avito competition:</p>
+<blockquote class="blockquote">
+<p>Чтобы посмотреть весь ассортимент нашего магазина перейдите по ссылке в блоке справа ⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒/</p>
+<p>НАЛИЧИЕ ТОВАРА УТОЧНЯЙТЕ ПО КОТАКТНОМУ ТЕЛЕФОНУ./</p>
+<p>Продам Кулер для компьютера COOLER MASTER/</p>
+<p>/</p>
+<p>В НАШЕМ МАГАЗИНЕ НА ТЕХНИКУ ДАЕТСЯ ГАРАНТИЯ!!!!!!/ ========================================/</p>
+</blockquote>
+<p>Google Translate gives a plausible translation:</p>
+<blockquote class="blockquote">
+<p>To view the entire range of our store, follow the link in the block on the right ⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒ /</p>
+<p>CHECK OUT THE AVAILABILITY OF THE GOODS BY CONTACT PHONE. /</p>
+<p>Selling Cooler for computer COOLER MASTER /</p>
+<p>/</p>
+<p>IN OUR STORE IT IS GIVEN A WARRANTY !!!!!! /</p>
+<p>======================================== /</p>
+</blockquote>
+<section id="marianmt" class="level3">
+<h3 class="anchored" data-anchor-id="marianmt">MarianMT</h3>
+<p>MarianMT (without breaking into sentences) loses a lot of the punctuation information, it drops the middle sentence about contacting by telephone, and misses some translations (МАГАЗИНЕ should be shop or store like in the Google translate, but it’s been just transliterated to magasine)</p>
+<blockquote class="blockquote">
+<p>To look at the entire range of our store, you can cross-reference in the right-hand-hand box to sell the Cooler Master/// in our magasine to technic to produce garantium.</p>
+</blockquote>
+<p>It’s very sensitive to the punctuation, if we just remove the last forward slash we get a bunch of hallucinated punctuation:</p>
+<blockquote class="blockquote">
+<p>To look at the entire range of our store, I want you to cross-reference to the right-hand box in our computer, COLER MASTER// IN TECHNOLOGY, GARANTIA!!!!!!!!!!!!/=======================================================================================)============)========================================)=========================================== )))))))))))))))))) )))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</p>
+</blockquote>
+<p>This could be due to sentencepiece’s encoding being impacted by the punctuation (you can see Google translated broke apart the forward slashes from the spaces). What if we remove the extra punctuation?</p>
+<blockquote class="blockquote">
+<p>Чтобы посмотреть весь ассортимент нашего магазина перейдите по ссылке в блоке справа.</p>
+<p>НАЛИЧИЕ ТОВАРА УТОЧНЯЙТЕ ПО КОТАКТНОМУ ТЕЛЕФОНУ.</p>
+<p>Продам Кулер для компьютера COOLER MASTER.</p>
+<p>В НАШЕМ МАГАЗИНЕ НА ТЕХНИКУ ДАЕТСЯ ГАРАНТИЯ!!!!!!</p>
+</blockquote>
+<p>Strangely MarianMT drops all but the first line (and it’s not because of the newlines):</p>
+<blockquote class="blockquote">
+<p>To look at the entire range of our store, you can cross the link in the block on the right.</p>
+</blockquote>
+<p>Translating it line by line gives a better result, but it’s more literal:</p>
+<blockquote class="blockquote">
+<p>To see the full range of our store, cross the link in the block on the right.</p>
+<p>Cash the product, get it off the phone.</p>
+<p>I’ll sell Cooler for COOLER MASTER.</p>
+<p>THE TECHNOLOGY GUARANTIES IN OUR MAGAZINE!!!!!!!</p>
+</blockquote>
+<p>If we first lowercase it all (using <code>.lower()</code> in Python) the line-by-line translation gets a little better:</p>
+<blockquote class="blockquote">
+<p>To see the entire range of our store, cross the link in the block on the right.</p>
+<p>Check whether the product is available on the kitty phone.</p>
+<p>I’m gonna sell a cooler master cooler.</p>
+<p>in our hardware store there’s a guarantee!!!!!!!!!!!</p>
+</blockquote>
+</section>
+<section id="argos-translate" class="level3">
+<h3 class="anchored" data-anchor-id="argos-translate">Argos Translate</h3>
+<p>Argos Translate gives a readable translation that drops some punctuation, and after the first sentence is mostly nonsense, and hallucinates a final line. Curiously translating <code>========</code> with MarianMT also gives a similar translation <code>== sync, corrected by elderman == @elder_man'</code>.</p>
+<blockquote class="blockquote">
+<p>In order to look at the entire range of our stores, go through the reference to the right of the right, the State states that it states:</p>
+<p>I’d like you to take a look at the TEST. /</p>
+<p>I’ll sell Couler for COOLER MASTER/</p>
+<p>/</p>
+<p>I’ve got a lot of guitar! /</p>
+<p>== sync, corrected by elderman ==</p>
+</blockquote>
+<p>Removing the extra punctuation doesn’t change the translation content much, except removing the hallucination.</p>
+<blockquote class="blockquote">
+<p>To see our store’s entire range, you’re gonna have to go to the right block. I’d like you to take a look at the TEST.</p>
+<p>I’ll sell Couler for the COOLER MASTER computer.</p>
+<p>I’m in the middle of a guitar!</p>
+</blockquote>
+<p>Passing the sentences separately gives the same result. First lower-casing all the words gives a very slightly better translation:</p>
+<blockquote class="blockquote">
+<p>To’ve seen the store’s all sorts of stuff, you’re gonna have to go to the right block.</p>
+<p>If there’s a merchandise, please click on the cable phone.</p>
+<p>I’ll sell the cooler master computer.</p>
+<p>We’ve got security at our hardware store!</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="speed" class="level1">
+<h1>Speed</h1>
+<p>The speed of translation can be slow for a large amount of text, but it is trivially paralellisable. Running MarianMT on my CPU for titles (typically a few words/tokens) I could get through about 1000 per 15 minutes of CPU time (on my laptop). Descriptions, which average around 27 words, would take about 25 CPU minutes per 100. So to process on a single CPU the whole 1.5 million Avito titles would take about 2 weeks, and the descriptions almost a year.</p>
+<p>It automatically runs on multiple cores, and you could distribute it between multiple machines. Running on a GPU is around 50 times faster; on a Kaggle GPU I could get through 1000 titles in under 30 seconds, and 100 descriptions in 40 seconds (tuning the mini-batch size appropriately), so you could translate all 1.5 million descriptions in about a week.</p>
+<p>Argos is around 3 times faster on CPU than MarianMT, however it doesn’t automatically parallelise and the object can’t be pickled so it’s hard to use with multiprocessing. It can be used <a href="https://github.com/argosopentech/argos-translate/#gpu-acceleration">with GPU acceleration</a>, but since objects can only be passed one string at a time I can’t see a way to process batches at once. So for batch processing large amounts of text with OpenNMT it may be better to use the underlying <a href="https://github.com/OpenNMT/CTranslate2">CTranlate2</a> model directly.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>I think it’s amazing that in a relatively short amount of time you can get reasonable machine translation on a commodity PC. There’s some hoops you have to jump through to get it to work, and it’s a little bit slow on CPU, but it’s great that it’s even possible and that these models are in the open. You couldn’t use it to replace a professional machine translation service (without at least some fine tuning on a more specific dataset), but it’s definitely good enough to be useful. It would be interesting to test it out on some low resource languages to see how well the models perform.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

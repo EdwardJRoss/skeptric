@@ -1,0 +1,73 @@
+---
+categories:
+- sicp
+date: '2020-10-01T08:00:00+10:00'
+image: /images/sicp.jpg
+title: SICP Exercise 1.2
+---
+
+Exercise from SICP:
+
+[Exercise 1.2.](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%25_thm_1.2) 
+
+Translate the following expression into prefix form
+
+$$\frac{5 + 4 + (2 - (3 - (6 + \frac{1}{5})))}{3(6-2)(2-7)}$$
+
+# Solution
+
+One way to do this is to read it from the outside in and translate it into a tree (for example the first thing we extract is the division).
+
+```{mermaid}
+graph BT;
+
+DIV[`/`] --> ANS
+TOP[.] --> ANS[.]
+BOTTOM[.] --> ANS
+
+TOPSUM[+] --> TOP
+S1[5] --> TOP
+S2[4] --> TOP
+S3[.] --> TOP
+
+S3A[-] --> S3
+S3B[2] --> S3
+S3C[.] --> S3
+
+S3C1[+] --> S3C
+S3C2[.] --> S3C
+S3C3[.] --> S3C
+
+S3C2A[-] --> S3C2
+S3C2B[3] --> S3C2
+S3C2C[6] --> S3C2
+
+RATIODIV[`/`] --> S3C3
+RATIONUM[4] --> S3C3
+RATIODEN[5] --> S3C3
+
+
+
+PROD[*] --> BOTTOM
+P1[3] --> BOTTOM
+P2[.] --> BOTTOM
+P3[.] --> BOTTOM
+
+P2a[-] --> P2
+P2b[6] --> P2
+P2c[2] --> P2
+
+P3a[-] --> P3
+P3b[2] -->  P3
+P3c[7] --> P3
+
+
+```
+
+
+We can then read this diagram from the top down to get prefix notation:
+
+```
+(/ (+ 5 4 (- 2 (+ (- 3 6) (/ 4 5))))
+   (* 3 (- 6 2) (- 2 7)))
+```

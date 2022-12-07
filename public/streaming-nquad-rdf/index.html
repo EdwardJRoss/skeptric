@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-06-21">
+
+<title>skeptric - Streaming n-quads as RDF</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Streaming n-quads as RDF</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 21, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>The <a href="http://webdatacommons.org/">Web Data Commons</a> extracts structured <a href="https://en.wikipedia.org/wiki/Resource_Description_Framework">RDF Data</a> from about one monthly <a href="https://commoncrawl.org">Common Crawl</a> per year. These contain a vast amount of structured information about local businesses, hostels, job postings, products and many other things from the internet. Python’s <a href="https://rdflib.readthedocs.io/en/stable/">RDFLib</a> can read the n-quad format the data is stored in, but by default requires reading all of the millions to billions of relations into memory. However it’s possible to process this data in a streaming fashion allowing it to be processed much faster.</p>
+<p>To get an idea of the kind of data we’re talking about there are over 650 thousand pages from over 8,000 domains containing a Job Posting like this:</p>
+<pre><code>{'type': 'JobPosting',
+ 'title': 'Category Manager - Prof. Audio Visual Solutions',
+ 'jobLocation': {'address': {
+     'addressRegion': 'IL',
+     'addressLocality': 'Glenview',
+     'addressCountry', 'United States',
+     'postalCode': '60026',}}
+ 'hiringOrganization': {'name': 'Anixter International'},
+ 'employmentType': 'FULL_TIME',
+ 'datePosted': '2019-08-01 17:48:55',
+ 'validThrough': '2019-11-11',
+ 'description': ...,
+}</code></pre>
+<p>However it’s stored in large files with millions of lines like this:</p>
+<pre><code>_:genid2d8020c9b7d2294a778072a41d6d59640a2db0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://schema.org/JobPosting&gt; &lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt; .
+_:genid2d8020c9b7d2294a778072a41d6d59640a2db0 &lt;http://schema.org/identifier&gt; _:genid2d8020c9b7d2294a778072a41d6d59640a2db2 &lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt; .
+_:genid2d8020c9b7d2294a778072a41d6d59640a2db0 &lt;http://schema.org/title&gt; "Category Manager - Prof. Audio Visual Solutions" &lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt; .</code></pre>
+<p>We can extract these using RDFlib with <a href="https://docs.python.org/3.7/library/itertools.html#itertools.groupby">itertool’s groupby</a> to extract the data from each crawled webpage into a separate RDF Graph for further transformation.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> groupby</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rdflib</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_nquads(lines):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> group, quad_lines <span class="kw">in</span> groupby(lines, get_quad_label):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        graph <span class="op">=</span> rdflib.Graph(identifier<span class="op">=</span>group)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        graph.parse(data<span class="op">=</span><span class="st">''</span>.join(quad_lines), <span class="bu">format</span><span class="op">=</span><span class="st">'nquads'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can extract the crawled URL from the quad with a simple piece of logic:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>RDF_QUAD_LABEL_RE <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">"[ </span><span class="ch">\t</span><span class="st">]+&lt;([^ </span><span class="ch">\t</span><span class="st">]*)&gt;[ </span><span class="ch">\t</span><span class="st">].</span><span class="ch">\n</span><span class="st">$"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_quad_label(s):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> RDF_QUAD_LABEL_RE.search(line).group(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then we can process the data one graph at a time</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gzip</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> gzip.<span class="bu">open</span>(<span class="st">'afile.nquads.gz'</span>, <span class="st">'rt'</span>) <span class="im">as</span> f:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> graph <span class="kw">in</span> parse_nquads(f):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="whats-an-n-quad" class="level1">
+<h1>What’s an n-quad?</h1>
+<p>The data is stored in RDF n-quads which is specified in a <a href="https://www.w3.org/TR/n-quads/">W3C recommendation</a>. Each line represents a relation of the form: “subject predicate object graphlabel .”</p>
+<p>For example the line below:</p>
+<pre><code>_:genid2d8020c9b7d2294a778072a41d6d59640a2db0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://schema.org/JobPosting&gt; &lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt; .</code></pre>
+<p>Has:</p>
+<ul>
+<li>Object <code>_:genid2d8020c9b7d2294a778072a41d6d59640a2db0</code> (a blank Node)</li>
+<li>Predicate: <code>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</code></li>
+<li>Subject: <code>&lt;http://schema.org/JobPosting&gt;</code></li>
+<li>Graph Label: <code>&lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt;</code></li>
+</ul>
+<p>So this is saying that this object has RDF Type Job Posting, and is from the URL in the graph label.</p>
+<p>Similarly the line:</p>
+<pre><code>_:genid2d8020c9b7d2294a778072a41d6d59640a2db0 &lt;http://schema.org/title&gt; "Category Manager - Prof. Audio Visual Solutions" &lt;http://jobs.anixter.com/jobs/inventory-management/glenview-il-60026-/category-manager-prof-audio-visual-solutions/153414552962719?lang=en_us&gt; .</code></pre>
+<p>Says that the same object has a title “Category Manager - Prof.&nbsp;Audio Visual Solutions”.</p>
+<p>We want a way to collect all of these objects up together for each source URL (graph label).</p>
+<p>While it’s not too hard to parse directly from the specification, there are some subtleties (like types of literals) and it’s generally better to use a library. Also being able to relate the nodes some logic, and while we could use <a href="https://github.com/logpy/logpy">kanren in Python</a>, RDFLib is designed specially for the job.</p>
+</section>
+<section id="python-rdflib" class="level1">
+<h1>Python RDFLib</h1>
+<p>The easiest way to read this is all at once with a <a href="https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html?highlight=conjunctivegraph#rdflib.ConjunctiveGraph"><code>ConjunctiveGraph</code></a> like in <a href="https://rebeccabilbro.github.io/rdf-basics/">this article by Rebecca Bilbro</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdflib <span class="im">import</span> ConjunctiveGraph</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> ConjunctiveGraph()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">'rt'</span>) <span class="im">as</span> f:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    graph.parse(data, <span class="bu">format</span><span class="op">=</span><span class="st">"nquads"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Unfortunately this means we have to load all the data into memory at once and process all the graphs from different files together, only to split them apart after. With gigabytes of compressed n-quads this is not a good solution, and there don’t seem to be any <a href="https://stackoverflow.com/questions/56007110/split-all-the-different-graphs-included-in-a-n-quads-file">answers on StackOverflow</a>.</p>
+</section>
+<section id="extracting-a-label-from-the-n-quad" class="level1">
+<h1>Extracting a label from the n-quad</h1>
+<p>By the specification the label, if it is there, should be a URI (e.g.&nbsp;<code>&lt;http://example.org/page&gt;</code>) or a blank node. I’m going to assume that it’s always there and always a URI; this is true for Web Data Commons where the label is the URL of the page the data was extracted from. We can then use the <a href="https://www.w3.org/TR/n-quads/">specification</a> to construct a simple regular expression to extract it.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>RDF_QUAD_LABEL_RE <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">"[ </span><span class="ch">\t</span><span class="st">]+&lt;([^ </span><span class="ch">\t</span><span class="st">]*)&gt;[ </span><span class="ch">\t</span><span class="st">].</span><span class="ch">\n</span><span class="st">$"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_quad_label(s):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> RDF_QUAD_LABEL_RE.search(line).group(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ideally we would use RDFLib nquad parser directly to do it, but it mainly uses stateful objects <a href="https://github.com/RDFLib/rdflib/blob/master/rdflib/plugins/parsers/nquads.py">internally</a> and hides the quad structure so we end up having to do some contortions to use it. It uses a similar but <a href="https://github.com/RDFLib/rdflib/blob/master/rdflib/plugins/parsers/ntriples.py#L27">more conservative expression</a> for a URI.</p>
+<p>Now we can identify the labels we can group together the lines that have the same label, on the assumption that they are sequential (they seem to be in the Web Commons data). We could always ensure this by sorting the <em>reversed</em> lines (e.g.&nbsp;in bash <code>rev | sort | rev</code>).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gzip.<span class="bu">open</span>(<span class="st">'afile.nquad.gz'</span>, <span class="st">'rt'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>label_groups <span class="op">=</span> groupby(f, get_quad_label)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>group, quad_lines <span class="op">=</span> <span class="bu">next</span>(label_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reading-into-rdflib-graphs" class="level1">
+<h1>Reading into RDFLib Graphs</h1>
+<p>By default an RDFlib Graph ignores anything that doesn’t match the identifier in the constructor, so we need to set that to the pages URL.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> rdflib.Graph(identifier<span class="op">=</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then we can parse it by passing the lines as a string to <code>data</code> (which gets converted to BytesIO under the hood):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>graph.parse(data<span class="op">=</span><span class="st">''</span>.join(quad_lines), <span class="bu">format</span><span class="op">=</span><span class="st">'nquads'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we have a valid RDFGraph in <code>graph</code>, we can <a href="https://rdflib.readthedocs.io/en/stable/intro_to_graphs.html">navigate it</a> and generally transform and save it one graph at a time. It’s a pity that we have to do this legwork and it’s not easy with <code>rdflib</code> directly.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

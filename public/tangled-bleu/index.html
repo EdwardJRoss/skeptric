@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-07-27">
+
+<title>skeptric - Tangled up in BLEU</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tangled up in BLEU</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 27, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>How can we evaluate how good a machine generated translation is? We could get bilingual readers to score the translation, and average their scores. However this is expensive and time consuming. This means evaluation becomes a bottleneck for experimentation If we need hours of human time to evaluate an experiment this becomes a bottleneck for experimentation.</p>
+<p>This motivates automatic metrics for evaluation machine translation. One of the oldest examples is the <a href="https://en.wikipedia.org/wiki/BLEU">BiLingual Evaluation Understudy</a> (BLEU). This requires a source text to translate, as well as one or more reference translations. Then the automatic translation is evaluated based on average n-gram precision; that is taking all sequences of n tokens from the candidate translation, how many are in the reference translation? It turns out this depends a bit on some choices you make (how you tokenise, how you penalise very short translations), so there’s a standard implementation called <a href="https://github.com/mjpost/sacrebleu">sacreBLEU</a>.</p>
+<p>Then the question is how well do these automatic metrics correlate with human judgement? While n-gram precision captures some things, you can often reword a translation in a way that is equally as good, but would have a much lower BLEU score. The approach taken in the WMT Conferences on Machine Translation is to get human evaluations on different systems and see how well the metrics correlate with human evaluation.</p>
+<p>Specifically they have a process of <em>Direct Assessment</em> (DA) where they get human annotators to evaluate segments of a candidate translation against a reference translation on a scale of 0-100. They then filter out the worst quality annotators and standardise individual annotator scores, since people will have different baselines and variances. Finally the DA score for a system is the mean of the standardised evaluations for all translations of that system. See the <a href="https://www.aclweb.org/anthology/W19-5301.pdf">2019 WMT Findings</a> for details, and other methods they consider.</p>
+<p>Then they evaluate the Pearson correlation between the DA score for the system and the automatic metric for the system to evaluate how well the automatic metric correlates with human judgement for a given language pair. The source texts are drawn from news articles and the translations are made specifically for this task. In the <a href="https://www.aclweb.org/anthology/W19-5302.pdf">results of the WMT 2019 metrics shared task</a> they compute these correlations for a large number of metrics such as BLEU. What they find is that sacreBLEU actually correlates very well with human judgement in many cases, for example for English-German with 22 systems the correlation is 0.97.</p>
+<p>At first glance this seems great; we have a simple metric that can judge machine translations similarly to a human. It seems that if a new translation algorithm is released with a higher sacreBLEU score then it should actually be better. However when they look at the correlation for the top-N systems the correlation is actually <em>negative</em> for small N and slowly increases as we add worse systems. In other words it’s no good at distinguishing the top systems from each other, it’s only good at telling the top from the bottom.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/bleu_da_correlation.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">sacreBLEU correlation</figcaption><p></p>
+</figure>
+</div>
+<p>The ACL 2020 paper <a href="https://www.aclweb.org/anthology/2020.acl-main.448.pdf">Tangled up in BLEU</a> delves into this problem in more detail. They point out that Peason correlations are unstable for small sample sizes (here we only have around 20 systems) and are very sensitive to outliers. Correlation is only a single number summary and very different relations can have the <a href="https://janhove.github.io/teaching/2016/11/21/what-correlations-look-like">same correlation coefficient</a>.</p>
+<p>To address this they use robust outlier removal and compare the results of a few baseline metrics such as sacreBLEU with the best metrics from WMT-2019. They find that after removing outliers sacreBLEU often has a much worse correlation than the best metrics. For example in the English-German task they show how systems compare after subsampling based on whether they contain the outliers <code>en-de-task</code> and <code>online-X</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/bleu_outliers.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">BLEU after removing Outliers</figcaption><p></p>
+</figure>
+</div>
+<p>Moreover they find that a system that is 1-2 BLEU points better is only 50% likely to be better to a human; making it very hard to use in practice. Instead they recommend using other metrics. The simplest is <a href="https://www.aclweb.org/anthology/W15-3049.pdf">chrF</a> which is an F-score based on character n-grams which is more robust to outliers and outperforms BLEU in many cases; but is worse in a few cases. A more complex approach is <a href="https://arxiv.org/pdf/1609.06038.pdf">ESIM</a> which computes sentence representations from BERT embeddings and then computes the similarity between the two strings; this performs quite well. Similarly there’s <a href="https://www.aclweb.org/anthology/W19-5358.pdf">YiSi-1</a> that computes the semantic similarity of phrases using BERT contextual word embeddings.</p>
+<p>It seems to me that YiSi is the most stable and indicative on the dataset, and has an <a href="https://github.com/chikiulo/yisi">open source implementation</a>. At least for incremental improvements on news translation it sounds like a very strong contender. But even here small changes in the metric won’t always correlate to human performance, and it’s likely biased to certain kinds of methods.</p>
+<p>Tanlged up in BLEU makes the conclusion that important empirical advances should always be backed up with human annotated evidence. In particular I could imagine different approaches, different domains, or particular styles of reference translation could produce completely different results to human evaluation. News articles are very literal and are relatively straightforward to translate. Compare this with Homer’s epic poems which have <a href="https://en.wikipedia.org/wiki/English_translations_of_Homer">dozens of different professional translations</a> with different styles and goals (which is why it would be a horrible place to start machine translation, but an admirable long term goal).</p>
+<p>However what’s most striking to me is how a rigorous understanding of the Pearson correlation coefficient completely changes the interpretation from BLEU being a reasonable measure for human translation quality to a mediocre one. If they had used some complex machine learning model optimised on RMSE then they would have come to the same conclusion, but it would have been much less obvious. By robustly identifying and removing outliers, a certain number of median average deviations from the median, they clearly demonstrated the issues with Pearson correlation coefficient.</p>
+<p>One question that’s left for me is how robust are these current metrics are over different techniques and datasets. Before neural translation was as good as it is today, rule based systems often outperformed them on human evaluation but got lower BLEU scores. Are ESIM and YiSi-1 biased towards transformer based translations? If someone develops a breakthrough LSTM or hybrid rule-neural model will the scores still correlate well? It would be worth evaluating on all previous WMT evaluation sets to understand this better (has this been done?)</p>
+<p>Ultimately the only true way to measure a machine translation system is still with expensive expert time. But it’s useful to have some rough approximations.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

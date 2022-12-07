@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-04-09">
+
+<title>skeptric - Training Recipe Ingredient NER with Transformers</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Training Recipe Ingredient NER with Transformers</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+    <div class="quarto-category">python</div>
+    <div class="quarto-category">ner</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 9, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I trained a Transformer model to predict the components of an ingredient, such as the name of the ingredient, the quantity and the unit. It performed better than the benchmark CRF model when using fewer data examples, and on the full dataset performed similarly but was useful for identifying issues in the data annotations. It also has some success even on languages that it wasn’t trained on such as French, Hungarian, and Russian. It took several hours to put together with no prior experience, and minutes to train for free on a Kaggle notebook. You can <a href="https://huggingface.co/edwardjross/xlm-roberta-base-finetuned-recipe-all">try it online</a> or see the <a href="https://github.com/EdwardJRoss/nlp_transformers_exercises/blob/master/notebooks/ch4-ner-recipe-stanford-crf.ipynb">training notebook</a><a href="https://kaggle.com/kernels/welcome?src=https://github.com/EdwardJRoss/nlp_transformers_exercises/blob/master/notebooks/ch4-ner-recipe-xlm-roberta.ipynb"><img style="display: inline;" src="https://kaggle.com/static/images/open-in-kaggle.svg"></a>.</p>
+<p>The underlying training and test data is from <a href="https://arxiv.org/abs/2004.12184">A Named Entity Based Approach to Model Recipes</a>, by Diwan, Batra, and Bagler. They manually annotated a large number of ingredients from AllRecipes.com and FOOD.com with the tags below.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Tag</th>
+<th>Significance</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NAME</td>
+<td>Name of Ingredient</td>
+<td>salt, pepper</td>
+</tr>
+<tr class="even">
+<td>STATE</td>
+<td>Processing State of Ingredient.</td>
+<td>ground, thawed</td>
+</tr>
+<tr class="odd">
+<td>UNIT</td>
+<td>Measuring unit(s).</td>
+<td>gram, cup</td>
+</tr>
+<tr class="even">
+<td>QUANTITY</td>
+<td>Quantity associated with the unit(s).</td>
+<td>1, 1 1/2 , 2-4</td>
+</tr>
+<tr class="odd">
+<td>SIZE</td>
+<td>Portion sizes mentioned.</td>
+<td>small, large</td>
+</tr>
+<tr class="even">
+<td>TEMP</td>
+<td>Temperature applied prior to cooking.</td>
+<td>hot, frozen</td>
+</tr>
+<tr class="odd">
+<td>DRY/FRESH</td>
+<td>Fresh otherwise as mentioned.</td>
+<td>dry, fresh</td>
+</tr>
+</tbody>
+</table>
+<p>I have <a href="../stanford-ner-python">previously replicated their benchmark</a> using Stanford NER, a Conditional Random Fields model. Here are the f1-scores reported in the paper (columns are training set, rows are testing set).</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Benchmark - Paper</th>
+<th>AllRecipes</th>
+<th>FOOD.com</th>
+<th>BOTH</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Testing Set</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AllRecipes</td>
+<td>96.82%</td>
+<td>93.17%</td>
+<td>97.09%</td>
+</tr>
+<tr class="odd">
+<td>FOOD.com</td>
+<td>86.72%</td>
+<td>95.19%</td>
+<td>98.48%</td>
+</tr>
+<tr class="even">
+<td>BOTH</td>
+<td>89.72%</td>
+<td>94.98%</td>
+<td>96.11%</td>
+</tr>
+</tbody>
+</table>
+<p>While these may look impressive, using the model of predicting the most common label for each token, and O for out of vocabulary tokens, gets an f1-score over 92%. This is actually quite a simple problem because most tokens have a label and ambiguity is rare.</p>
+<p>I followed the process of training an NER with transformers from Chapter 4 of <a href="https://www.oreilly.com/library/view/natural-language-processing/9781098103231/">Natural Language Processing with Transformers</a> by Tunstall, von Werra, and Wolf (using their <a href="https://github.com/nlp-with-transformers/notebooks">public notebooks</a> as a guide). There was marked improvement on using the smaller AllRecipes dataset (1470 training samples). However on the larger FOOD.com dataset (5142 training samples) the increase in performance was smaller, and on the combined dataset it was very marginal. Note this is keeping a validation set, and using the default hyperparameters from the text; I haven’t tried to optimise it at all or use every data point.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Transformer (XLM Roberta)</th>
+<th>AllRecipes</th>
+<th>FOOD.com</th>
+<th>BOTH</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Testing Set</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AllRecipes</td>
+<td>96.94%</td>
+<td>95.73%</td>
+<td>97.34%</td>
+</tr>
+<tr class="odd">
+<td>FOOD.com</td>
+<td>91.64%</td>
+<td>96.04%</td>
+<td>95.77%</td>
+</tr>
+<tr class="even">
+<td>BOTH</td>
+<td>92.9%</td>
+<td>95.96%</td>
+<td>96.15%</td>
+</tr>
+</tbody>
+</table>
+<p>I suspect the reasons it doesn’t do much better are because of inconsistencies in the annotation and hitting the limits. Running an error analysis, as per the NLP with transformers text, showed some issues. Often only the first of multiple ingredients is annotated.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 9%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>token</th>
+<th>1</th>
+<th>teaspoon</th>
+<th>orange</th>
+<th>zest</th>
+<th>or</th>
+<th>1</th>
+<th>teaspoon</th>
+<th>lemon</th>
+<th>zest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>label</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>NAME</td>
+<td>NAME</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<p>In this case all but the last ingredient name is annotated.</p>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>token</th>
+<th>1/4</th>
+<th>cup</th>
+<th>sugar</th>
+<th>,</th>
+<th>to</th>
+<th>taste</th>
+<th>(</th>
+<th>can</th>
+<th>use</th>
+<th>honey</th>
+<th>,</th>
+<th>agave</th>
+<th>syrup</th>
+<th>,</th>
+<th>or</th>
+<th>stevia</th>
+<th>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>labels</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>NAME</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>UNIT</td>
+<td>O</td>
+<td>NAME</td>
+<td>O</td>
+<td>NAME</td>
+<td>NAME</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<p>The inconsistencies confused both me and the model. There are instances in both “firm tofu” and “firm tomatoes” where firm is considered part of the name, and others where it is part of the state. Similarly in “stewing beef”, stewing is sometimes a state and sometimes part of the name. Though there were real issues in the model; it couldn’t distinguish “clove” in “garlic clove” (a unit), from “ground cloves” (a name).</p>
+<p>An amazing thing about using a multilingual transformer model like XLM Roberta is it has some zero-shot cross-language generalisation. Even though all the examples are English it does better than random on other languages. Admittedly the pattern of ingredients makes it easier (e.g.&nbsp;a numerical quantity, followed by a unit, followed by a name), but it picked up some other things. I didn’t have a dataset to test on, but tried it on a few examples I could find. If you want to try more you can try it in the <a href="https://huggingface.co/edwardjross/xlm-roberta-base-finetuned-recipe-all">Huggingface model hub</a> and share what you find.</p>
+<p>As you might expect it does well on a French example, where there’s a lot of similar vocabulary. However any model relying on token lookups would not be able to learn this from the training data.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>1</th>
+<th>petit</th>
+<th>oignon</th>
+<th>rouge</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>translation</td>
+<td>1</td>
+<td>small</td>
+<td>onion</td>
+<td>red</td>
+</tr>
+<tr class="even">
+<td>actual</td>
+<td>I-QUANTITY</td>
+<td>I-SIZE</td>
+<td>I-NAME</td>
+<td>I-NAME</td>
+</tr>
+<tr class="odd">
+<td>prediction</td>
+<td>I-QUANTITY</td>
+<td>I-SIZE</td>
+<td>I-NAME</td>
+<td>I-NAME</td>
+</tr>
+</tbody>
+</table>
+<p>Going a bit further afield to Hungarian it certainly does better than random. Here’s an example where it only makes a mistake on one entity; but picks up that fagyasztott is not part of the name.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>1</th>
+<th>csomag</th>
+<th>fagyasztott</th>
+<th>kukorica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>translation</td>
+<td>1</td>
+<td>packet</td>
+<td>frozen</td>
+<td>corn</td>
+</tr>
+<tr class="even">
+<td>actual</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>TEMP</td>
+<td>NAME</td>
+</tr>
+<tr class="odd">
+<td>prediction</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>STATE</td>
+<td>NAME</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s another Hungarian example where it gets the name wrong because it missed the unit (konzerv).</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>50</th>
+<th>dkg</th>
+<th>kukorica</th>
+<th>konzerv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>translation</td>
+<td>50</td>
+<td>dkg (10g)</td>
+<td>corn</td>
+<td>canned</td>
+</tr>
+<tr class="even">
+<td>actual</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>NAME</td>
+<td>UNIT</td>
+</tr>
+<tr class="odd">
+<td>prediction</td>
+<td>QUANTITY</td>
+<td>UNIT</td>
+<td>NAME</td>
+<td>NAME</td>
+</tr>
+</tbody>
+</table>
+<p>However here’s a harder example that it gets precisely right.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>őrölt</th>
+<th>fehér</th>
+<th>bor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>translation</td>
+<td>ground</td>
+<td>white</td>
+<td>pepper</td>
+</tr>
+<tr class="even">
+<td>actual</td>
+<td>STATE</td>
+<td>NAME</td>
+<td>NAME</td>
+</tr>
+<tr class="odd">
+<td>prediction</td>
+<td>STATE</td>
+<td>NAME</td>
+<td>NAME</td>
+</tr>
+</tbody>
+</table>
+<p>Russian should be even harder since it’s a different script, although is straightforward to transliterate. However here’s an example that it gets exactly right:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>Сало</th>
+<th>свиное</th>
+<th>свежее</th>
+<th>-</th>
+<th>50</th>
+<th>г</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>translation</td>
+<td>fat</td>
+<td>port</td>
+<td>fresh</td>
+<td>-</td>
+<td>50</td>
+<td>g</td>
+</tr>
+<tr class="even">
+<td>actual</td>
+<td>NAME</td>
+<td>NAME</td>
+<td>DF</td>
+<td>O</td>
+<td>O</td>
+<td>I-UNIT</td>
+</tr>
+<tr class="odd">
+<td>prediction</td>
+<td>NAME</td>
+<td>NAME</td>
+<td>DF</td>
+<td>O</td>
+<td>O</td>
+<td>I-UNIT</td>
+</tr>
+</tbody>
+</table>
+<p>If one wanted to extend this model to one of these other languages the existing predictions would be a good way to start. Then annotators could correct the mistakes, especially where the model is unsure, which is much faster than manually labelling every token. In this way a good training set could be constructed relatively quickly by bootstrapping from another language. For more ideas on dealing with few to no labels, see Chapter 9 of the <a href="https://www.oreilly.com/library/view/natural-language-processing/9781098103231/">Natural Language Processing with Transformers</a> book.</p>
+<p>To take the model further we could fix the annotation errors, in particular multiple annotations within an ingredient, and retrain the model. We could also annotate more diverse ingredient sets; the NY Times released a similar <a href="https://github.com/NYTimes/ingredient-phrase-tagger">ingredient phrase tagger</a> along with training data (and the corresponding <a href="https://open.blogs.nytimes.com/2015/04/09/extracting-structured-data-from-recipes-using-conditional-random-fields/">blog post</a> is informative). However the tagger is already really very good.</p>
+<p>Though really the model is really good and a better thing to do would be to run it over a large number of recipe ingredients to extract information. There are many recipes that can be extracted from the internet; for example using <a href="http://webdatacommons.org">Web Data Commons</a> extracts of Recipes, <a href="https://www.reddit.com/r/recipes/">recipes subreddit</a> (via <a href="https://pushshift.io/">pushshift</a>), or <a href="https://en.wikibooks.org/wiki/Special:Export">exporting</a> the <a href="https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents">Cookbook wikibook</a>, or using <a href="https://github.com/fictivekin/openrecipes">OpenRecipes</a> (or their <a href="https://s3.amazonaws.com/openrecipes/20170107-061401-recipeitems.json.gz">latest export</a>). Practically the CRF model is likely a better choice since it works roughly as well and would run much more efficiently. Then you could look at which ingredient names occur together, estimate nutritional content, convert quantities by region or do more complex tasks like suggest ingredient substitutes or generate recipes.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: public
+
+website:
+  title: "skeptric"
+  favicon: favicon.ico
+  site-url: https://skeptric.com
+  description: "Blog on Machine Learning, Programming, and Mathematics by Edward Ross."
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/EdwardJRoss
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+freeze: true

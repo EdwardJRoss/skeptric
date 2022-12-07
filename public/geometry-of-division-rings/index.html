@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2012-07-25">
+
+<title>skeptric - Geometry of division rings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Geometry of division rings</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">maths</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 25, 2012</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>It is fairly easy to construct a geometry from algebra: given a <a href="http://en.wikipedia.org/wiki/Division_ring">division ring</a> K we form an n-dimensional vector space, the points being the elements of the field and a line being a translation of all (left) multiples of a non-zero vector, i.e.&nbsp;of the form <span class="math inline">\(\{a\mathbf{v} + \mathbf{c}| a \in K\}\)</span> for some fixed vectors <span class="math inline">\(\mathbf{v} \neq 0\)</span> and <strong>c</strong>.</p>
+<p>Interestingly it’s just as possible to go the other way, if we’re careful about what we mean by a geometry. I will loosely follow Artin’s book <a href="http://archive.org/details/geometricalgebra033556mbp">Geometric Algebra</a>. In particular we have the undefined terms of point, line and the undefined relation of lies on. Then, for a fixed positive integer, the axioms are:</p>
+<ol type="1">
+<li>Given two distinct points there is a unique line that both points lie on</li>
+<li>Each line has at least three points which lie on it</li>
+<li>Given a line and a point not on that line there exists a unique line lying on the plane containing them that the point lies on and no point of the first line lies on.</li>
+<li>All points are spanned by d+1 points and no fewer.</li>
+</ol>
+<!--more-->
+<p>There are obviously a couple of definitions wanting. A <strong>linear manifold</strong> is a collection of points such that given any pair of distinct points in the collection, every point that lies on the line is also in the collection. The <strong>span</strong> of a set of points is the smallest linear manifold containing each of the points (that such exists follows from the fact the collection of all points is a linear manifold, and the intersection of two linear manifolds is a linear manifold). A <strong>plane</strong> is a set that is spanned by 3 points and no fewer.</p>
+<p>We can define a <strong>dilation</strong> to be a mapping of points onto points such that the image of all points that lie on a given line lie on a line (that is a transformation that preserves lying on a line). We define a <strong>translation</strong> to be an injective dilation with no fixed points, or the identity.</p>
+<p>Any line containing a point and the translation (or more generally an injective dilation) of the point is called a <strong>trace</strong> of the translation. A <strong>scalar multiplication</strong> is a group automorphism of the translations such that each trace of a translation is a trace of its image.</p>
+<p>Given two scalar multiplications <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> we define their sum on a translation T by <span class="math inline">\((\alpha + \beta)(T) = \alpha(T) \beta(T)\)</span> and their product by <span class="math inline">\(\alpha \times \beta (T) = \alpha (\beta T)\)</span> , define 0 to be the scalar multiplication sending all translations to the identity, and 1 to be the identity scalar multiplication.</p>
+<p><strong>Theorem:</strong> The scalar multiplications form a division ring under the multiplications given above if and only if <span class="math inline">\(d &gt; 2\)</span> .</p>
+<p>Then we can go ahead and choose any point, which we call the origin, and d other points which, with the origin, span the space. We denote the d translations from the origin to the other points by <span class="math inline">\(v_1, \ldots, v_d\)</span> . Then any vector can be uniquely written <span class="math inline">\((k_1, \ldots, k_d) = k_1 (v_1) + \ldots k_d(v_d)\)</span> for unique <span class="math inline">\(k_1, \ldots k_d\)</span> in the space. Now given there is a unique translation from the origin to any point, we can identify a vector with its action on the origin. Thus we obtain a <strong>coordinitisation</strong> of the space; a correspondence with <span class="math inline">\(K^d\)</span> for some division ring K. This is of course not cannonical; our choice of the d + 1 points were arbitrary.</p>
+<p>It is interesting to note how such geometric axioms (although carefully chosen) correspond so exactly with the algebraic notions of division ring and vector space.</p>
+<p>What about d = 1 and 2? For d=1 there is no hope, since axiom 3 is trivial and we could just take the line with n points for n not a power of a prime number. Since there is no division ring with n elements the theorem could not be true.</p>
+<p>The case d = 2 turns out to be quite interesting. In dimensions at least 3 we can prove <strong>Desargues theorem</strong>. This has two parts:</p>
+<ol type="1">
+<li>Let p, q, r be parallel lines, and let P, P’ be distinct points on p, Q, Q’ be distinct points on q and R, R’ be distinct points on R. If PQ is parallel to P’Q’ and QR is parallel to Q’R’ then PR is parallel to P’R’.</li>
+</ol>
+<p>This is shown in the figure below (where line segments are lines). To prove this one assumes first the lines lie in different planes, and then to prove in the plane projects into the plane.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/desargues_parallel1.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Parallel form of Desargues Theorem</figcaption><p></p>
+</figure>
+</div>
+<p>Artin proves that this is equivalent to for every pair of distinct points there exists a translation from one to the other. This underlies the vector structure.</p>
+<p>2.(X) Let p, q, r be three lines which all meet in a point X and P, P’ lie on p, Q, Q’ lie on q and R, R’ lie on r. If PQ is parallel to P’Q’ and QR is parallel to Q’R’ then PR is parallel to P’R’.</p>
+<p>A diagram is shown below. If it is true for one point X then it can be shown to be true for all points. Again the proof in dimensions at least 3 is done by first proving the case where the 3 lines are not coplanar and then projecting them into the same plane.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/desargues_meet.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Projective form of Desargues Theorem</figcaption><p></p>
+</figure>
+</div>
+<p>Geometrically Artin shows this is equivalent to: Given three collinear, distinct points P, Q, R there exists a dilation with fixed point P mapping Q onto R. This is essentially saying we can get to any point by a scaling operation, and underlies the scalar multiplication structure.</p>
+<p>One may ask whether this axiom necessarily holds in dimension 2. It doesn’t. An interesting counterexample is the <a href="http://math.ucr.edu/home/baez/octonions/node8.html">octonionic plane</a> (the <a href="http://en.wikipedia.org/wiki/Octonion">octonions</a> are a non-associative (but alternative) division algebra over the reals). Because the octonions are non-associative you can’t really do linear algebra over them; in particular consider a potential line through an origin <span class="math inline">\(\{a\mathbf{v}| a \in \mathbb{O}\}\)</span> . Now consider the ‘line’ through the origin and another point on this ‘line’, <span class="math inline">\(\{b(a \mathbf{v})| b \in \mathbb{O}\}\)</span> because <span class="math inline">\(b(a \mathbf{v}) \neq (ba) \mathbf{v}\)</span> in general this line would have different points to the original.</p>
+<p>For a plethora of examples of non-Desarguesian planes see this <a href="http://www.ams.org/notices/200710/tx071001294p.pdf">review</a>.</p>
+<p>Reflecting back there are a couple of interesting things to note about this construction. Axiom 3 is inherently 2-dimensional, so all the geometry of a d-dimensional affine space is determined by the geometry of its planes. Notice how the structure of 2 and 3 dimensions completely determines the structure of higher dimensions; this may have something to do with our familiarity with 2 and 3 dimensions in the choice of our axioms.</p>
+<p>Axiom 3 can be replaced by a projective equivalent, such as</p>
+<p>3P. (<a href="http://archive.org/details/projectivegeome00veblgoog">Veblen and Young</a>) Given a triangle (that is three non-collinear points) any line that intersects two sides of the triangle (a side of a triangle is the line between two of the points, excluding the points themselves) intersects the third.</p>
+<p>With any of these replacements all the appropriately projectivised statements above are true; in particular <a href="http://en.wikipedia.org/wiki/Desargues_theorem">Desargues’ theorem</a> has a more elegant statement. We can recover the affine space by choosing a point at infinity; an interesting question is whether the fields constructed from two different points at infinity are canonically isomorphic.</p>
+<p>It’s also remarkable there is a geometric proposition that is satisfied if and only if the space is commutative, <a href="http://en.wikipedia.org/wiki/Pappus%27s_hexagon_theorem">Pappus’ theorem</a>.</p>
+<p>Above all the geometric approach shows the space for geometry (as I’ve argued <a href="../really-mean-rn/">before</a>) is the affine/projective plane itself, and not its group of transformations, the vector space. From an algebraic perspective that is to say the geometric element is not the vector space itself but the set on which the vector space acts transitively and freely (it can be represented by the same underlying set as the vector space, but does not have the same algebraic structure).</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

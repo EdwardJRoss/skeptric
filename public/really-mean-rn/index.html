@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2011-05-06">
+
+<title>skeptric - Do you really mean ℝⁿ?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Do you really mean ℝⁿ?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 6, 2011</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>In mathematics and physics it is common to talk about <span class="math inline">\(\mathbb{R}^n\)</span> when really we mean something else that can be represented by <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p>Consider mechanics or geometry, these are often represented as theories in <span class="math inline">\(\mathbb{R}^n\)</span> , but really they don’t occur in a vector space at all! Look around you, a three-dimensional description of space probably seems reasonable, but where’s the origin? [Perhaps the centre of your eyes could be an origin, but someone else would disagree with you]. Classical mechanics, special relativity and geometry are much better described as an <strong>affine space</strong> – which is a vector space without an origin.</p>
+<!--more-->
+<p>Of course to do any calculations we need to choose an origin in the affine space and choose some axes, and this allows us to represent our space as <span class="math inline">\(\mathbb{R}^n\)</span> . But if we calculate the volume of a box (relative to another box) using two different origins we expect to get the same answer. This is precisely what the affine structure says: our results are independent of our choice of origin (that is they are invariant/covariant with respect to translations).</p>
+<p>Now suppose you have a genuine <span class="math inline">\(n\)</span>-dimensional vector space (perhaps you’ve chosen an origin in your geometry), we can now call this <span class="math inline">\(\mathbb{R}^n\)</span> right? Wrong; <span class="math inline">\(\mathbb{R}^n\)</span> has a natural ordered basis <span class="math inline">\(e_1=(1,0,\ldots,0), \ldots, e_n=(0,\ldots,0,1)\)</span> . Again, taking you as the origin in the space around you – what are the three basis vectors? There are lots of choices!</p>
+<p>Alright so let’s choose <span class="math inline">\(n\)</span> (ordered) linearly independent basis vectors, by identifying the the <span class="math inline">\(i^\mathrm{th}\)</span> one with <span class="math inline">\(e_i\)</span> (for the space around us we could choose (magnetic) North, (magnetic) East and (gravitational) up), and this gives us axes. But there’s nothing super-special about these choices – again our box-volume should be independent of our choice of axes. This is encoded in the vector space structure: there’s no canonical choice of basis, and all physical quantities should be properly covariant with an appropriate change of basis.</p>
+<p>Fine — we’ve taken an <span class="math inline">\(n\)</span>-dimensional vector space and chosen an ordered basis — surely we can now call it <span class="math inline">\(\mathbb{R}^n\)</span> ? Well it depends on how much extra structure you have on your vector space. The ordered basis for <span class="math inline">\(\mathbb{R}^n\)</span> gives it a canonical orientation. There is a canonical inner product on <span class="math inline">\(\mathbb{R}^n\)</span> , the dot product <span class="math inline">\(\langle e_i, e_j \rangle = \delta_{ij}\)</span> . (It is exceedingly rare to see the distinction made between <span class="math inline">\(\mathbb{R}^n\)</span> as a vector space, an oriented vector space and an inner product space.) So your vector space must at least have an orientation and an inner product (and your choice of ordered basis must be oriented and orthonormal) – but this is a lot of extra structure to throw in.</p>
+<p>A lot can be said for the geometry of affine spaces over a vector space (that is without a metric or orientation). There is no concept of absolute volume (this is given by a metric), but there is a relative notion of <strong>oriented volume</strong> for <span class="math inline">\(n\)</span>-dimensional parallelograms (which is essentially “how many copies of parallelogram 1 fit into parallelogram 2″ with the conditions that volume is translation invariant and scaling a side by some factor scales the volume by the same factor). In fact we can talk about the relative volume for any hyper-polygon (by cutting it into triangular pieces – a parallelogram is just two triangles stuck together) and approximate the relative volume of other objects such as spheres (this is how a lot of Greek geometry was done). There is also the notion of an <strong>affine transformation</strong>, one that preserves the affine structure (essentially a shift followed by a linear transformation), and a <strong>determinant</strong> which is the amount by which an affine transformation scales the volume of <span class="math inline">\(n\)</span>-dimensional parallelograms.</p>
+<p>If we push even further to locally affine transformations the determinant will naturally generalise to the <strong>Jacobian</strong> of the transformation, and one can define the <strong>exterior derivative</strong>. Or thinking of spaces that are locally affine leads to manifolds. But this is a whole essay in itself.</p>
+<p>Of course we do often have more structure – Euclidean geometry, classical mechanics, Electrodynamics and special relativity all have metrics – a notion of absolute volume. But it is interesting to separate the metric independent behaviour (for instance in Electrodynamics the Maxwell equations <span class="math inline">\(\mathrm{d} \mathbf{F}=0\)</span> ) from the metric behaviour ( <span class="math inline">\(\mathrm{d} \star \mathbf{F} = \mathbf{J}\)</span> ). Certainly it is useful to write equations in a form where they are explicitly independent of the choice of origin and basis (as opposed to writing them in <span class="math inline">\(\mathbb{R}^n\)</span> ) – this is the advantage of Lagrange’s method of mechanics over Newton’s.</p>
+<p>We should explicitly distinguish these structures from <span class="math inline">\(\mathbb{R}^n\)</span>. A vector space should just be denoted by a letter like V, with possibly a superscript to denote its dimension like <span class="math inline">\(V^{(n)}\)</span> . An affine space could be denoted <span class="math inline">\(A^{(n)}\)</span> , an affine space with a positive definite inner product is called Euclidean space <span class="math inline">\(E^{(n)}\)</span> and an affine space with an inner product signature <span class="math inline">\((n-1,1)\)</span> is called Minkowski <span class="math inline">\(n\)</span>-space <span class="math inline">\(M^{(n)}\)</span> . I would advocate using <span class="math inline">\(E^{(m,n)}\)</span> for an affine space with an inner product signature <span class="math inline">\((m,n)\)</span>.</p>
+<p>As I’ve said at the end of the day to do calculations we will go into a specific representation which may look like <span class="math inline">\(\mathbb{R}^n\)</span> and this is fine – but it is important to state and develop the theory in ways that are independent of these choices.</p>
+<p>End Note: Given a basis for a vector space V <span class="math inline">\(\{e_1,\ldots,e_n\}\)</span> we can define a <strong>dual basis</strong> for <span class="math inline">\(V^*\)</span>, <span class="math inline">\(\{e^1,\ldots,e^n\}\)</span> by <span class="math inline">\(e^i(e_j) = \delta^i_j\)</span> . The mapping of a basis onto its dual gives an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(V^*\)</span>, but this isomorphism isn’t <em>natural</em>. This has a specific categorical meaning but roughly its because if we have a linear transformation <span class="math inline">\(L\)</span> on <span class="math inline">\(V\)</span>, <span class="math inline">\(L\)</span> has a natural action on <span class="math inline">\(V^*\)</span>. In terms of the matrix of the transformation the action on <span class="math inline">\(V^*\)</span> is the adjoint matrix (that is the transpose or Hermitian conjugate depending if the matrix is real or complex). But the dual basis transforms by the <em>inverse</em> to maintain <span class="math inline">\(e^i(e_j) = \delta^i_j\)</span> . So the adjoint action preserves the identification of bases (and so the isomorphism is independent of our choice of basis) if and only if <span class="math inline">\(T^* = T^{-1}\)</span> , which means the matrix is orthogonal or unitary. However apriori there is no reason to only use this type of linear transformation so the identification is not canonical. If, however, there is a metric on our vector space we should only use linear transformations that preserve this metric, and in terms of an orthonormal basis, this means we only use orthogonal/unitary transformations. So a metric induces a canonical isomorphism between a vector space and its dual! It is not too hard to see conversely that an isomorphism between a vector space and its dual gives a metric.</p>
+<p>This is another reason (related to the existence of a natural inner product) a vector space should not be represented by <span class="math inline">\(\mathbb{R}^n\)</span> – it is canonically identified with its dual.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

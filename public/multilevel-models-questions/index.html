@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-09-17">
+
+<title>skeptric - Learning about Multilevel Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Learning about Multilevel Models</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 17, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>The concept of a <a href="https://en.wikipedia.org/wiki/Multilevel_model"><em>multilevel model</em></a>, also called a mixed effects model or a hierarchical model, is reasonably new to me. It’s not the kind of thing typically taught in physics (where there are very explicit models) or in machine learning, but is quite common in social science. I first came across it through <a href="https://www.learnbayesstats.com/episode/34-multilevel-regression-post-stratification-missing-data-lauren-kennedy">Lauren Kennedy on the Learning Bayesian Statistics Podcast</a>, through talking with a trained neuroscientist and a trained statistician who were talking about fixed and variable effects as I went cross-eyed, and through the excellent <a href="https://avehtari.github.io/ROS-Examples/">Regression and Other Stories</a> textbook which makes many allusions to it (to be expounded on in their upcoming sequel <a href="www.stat.columbia.edu/~gelman/armm/">Applied Regression and Multilevel Models</a>). The exposition in Chapter 9 of <a href="http://doingbayesiandataanalysis.blogspot.com/">Kruschke’s Doing Bayesian Data Analysis</a> gives a good introduction in the binomial case, but I still don’t really understand multilevel models and this article will list some questions I’m trying to understand.</p>
+<section id="overview-of-multilevel-models" class="level1">
+<h1>Overview of multilevel models</h1>
+<p>Suppose there are a number of different categories, some of which are quite small, and we want to estimate the probability that a sample from a given category is positive. The simplest <a href="../constant-models">constant model</a> is to ignore the categories and just estimate the population proportion (that is the fraction of <em>all</em> items that is positive), which has high bias but low variance. Another approach is to calculate the proportion for each category independently (or equivalently, fit a linear or logistic regression on the one-hot encoded categorical variable) which has high variance but low bias. Since the standard error in the estimated proportion <a href="../bernoulli-binomial">is</a> <span class="math inline">\(\sqrt{\frac{p(1-p)}{N}}\)</span> where p is the true proportion and N is the number of items in the category, for small catagories this uncertainty is going to be high (another way of looking at it; if you’ve only got 2 data points the only possible proportions are 0%, 50% or 100%). Ideally we’d like to interpolate between the two; if the overall average is say 14% and the category only has a few observations we’d like to estimate something close to 14%. On the other hand if we have lots of data we’d like to get something very close to the category’s own proportion. How heavily we rely on the population estimate would depend on how much variance there is between categories.</p>
+<p>A statistical way of framing this is to say each category, C, is Bernoulli distributed with it’s own probability <span class="math inline">\(p_C\)</span>, so the individual items in category C are <span class="math inline">\(X_C \sim {\rm Binom}(p_C)\)</span>. However these aren’t independent, when we see a new category it’s likely close to the typical category probability, and so they come from some common distribution. One possibly choice of distribution is a Beta Distribution; then <span class="math inline">\(p_C \sim {\rm Beta}(A, B)\)</span> for some A and B (although there are other choices of distribution). This has a nice Bayesian interpretation; for each category C we estimate the Binomial distribution with a Beta(A, B) prior. In any case we need to estimate <span class="math inline">\(p_C\)</span> as well as A, B, which leads to <a href="doingbayesiandataanalysis.blogspot.com/2012/11/shrinkage-in-multi-level-hierarchical.html">shrinking</a> the probabilities towards the typical probability across categories.</p>
+<p>This can be extended to multiple hierarchical structures and levels of hierarchy. A very common example in the literature is interventions in students. If an educational treatment is being exposed to students in classrooms, students in the same classroom are more similar than those in different classrooms (since they have the same teacher and would be exposed to the treatment in the same way). For a linear regression it may not be reasonable to treat students in the same classroom as independent and instead we need to somehow account for the correlation between students in the same classrooms, and a multilevel model allows us to do this.</p>
+<p>In general there may be multiple levels of heirarchy (for example children in classrooms in schools in districts), or multiple simultaneous heirarchies (for example music students are in a classroom but they may also be grouped by instrument), and the underlying models do not need to be linear.</p>
+</section>
+<section id="questions-about-multilevel-models" class="level1">
+<h1>Questions about multilevel models</h1>
+<p>I’m interested in multilevel models in a machine learning context. I have been using some high cardinality categorical data with millions of observations and am interested in whether multilevel models could improve the estimates (or whether it’s just better to use <a href="../categorical-embeddings">categorical embeddings</a> in these cases).</p>
+<section id="how-do-we-estimate-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-estimate-the-models">How do we estimate the models?</h2>
+<p>These can be estimated using Bayesian methods, but for large datasets and complex heirarchies MCMC based approaches can be computationally intractable. I’m not sure whether they can be structured in a way to make them faster, or perhaps using good priors or approximate Bayesian approaches could help. Is there are way to estimate heirarchical models on large datasets using Bayesian methods in reasonable time?</p>
+<p>Another approach is Maximum Likelihood Estimation where we find the most likely parameters (and Bayesian priors can be incorporated <a href="../prior-regularise">as regularisation</a>). This boils down to function optimisation which can be done efficiently with blackbox methods. Given we have a large amount of data do we lose anything with these methods over Bayesian approaches (I would expect the modes to be quite sharp, depending on the complexity of the model)? I’ve also heard of Restricted Maximum Likelihood Estimation - what is that and how does it compare?</p>
+</section>
+<section id="can-we-include-information-about-the-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="can-we-include-information-about-the-correlation">Can we include information about the correlation?</h2>
+<p>If we have lots of information about the categories is there a way to encode this in the models (perhaps as priors or as extra predictors)?</p>
+</section>
+<section id="what-software-is-there-for-these-models" class="level2">
+<h2 class="anchored" data-anchor-id="what-software-is-there-for-these-models">What software is there for these models?</h2>
+<p>For a likelihood approach <a href="https://github.com/lme4/lme4">lme4</a> seems to be the staple; how do we use it? Is there an equivalent in Python; statsmodels <a href="https://www.statsmodels.org/stable/mixed_linear.html">MixedLinearModel</a> looks a lot less flexible?</p>
+<p>For Bayesian methods there’s Stan, PyMC3, JAGS among other software (along with wrappers like <a href="https://github.com/paul-buerkner/brms"><code>brms</code></a> that provides a formula syntax close to lme4 in Stan). How does the performance compare between them, and how can they be implemented in an efficient way?</p>
+</section>
+<section id="using-with-non-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="using-with-non-linear-models">Using with non-linear models?</h2>
+<p>I wonder whether heirarchical shrinkage would be useful in tree based models (and perhaps make their estimates more stable along with less variable selection like <a href="https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf">ctrees</a>). In general heirarhcical shrinkage can be added to Bayesian models by having higher level distributions of the parameters, does it make sense to do this in practice?</p>
+</section>
+<section id="how-does-shrinkage-vary-with-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-shrinkage-vary-with-distribution">How does shrinkage vary with distribution?</h2>
+<p>It would make sense that the higher the interclass deviation and the smaller the intraclass deviation the more shrinkage there should be to the group parameters. Does this happen? Can we quantify this?</p>
+</section>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next steps</h1>
+<p>I’ll start reading some basic papers on the topic to get an understanding of these questions and try to set up some analysis to help answer them.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
