@@ -26,4 +26,11 @@ Now I'm much more comfortable with how my secrets are being used.
 I'm still trusting Github to store and pass my secrets correctly, I'm still downloading rclone from `https://rclone.org/install.sh` so I'm trusting that domain hasn't been acquired (and the [CA](https://en.wikipedia.org/wiki/Certificate_authority) certificates fetched by Alpine Linux are correctly validating the domain).
 But it seems less risky than relying on some unknown Github repository with no reputation at stake (and I was already relying on all of those).
 
+::: {.callout-note}
+## Update
+
+Since this was written rclone have released an [image on Dockerhub](https://hub.docker.com/r/rclone/rclone).
+I'm now using this rather than downloading rclone, which transfers the trust from rclone.org to Dockerhub's credentials.
+:::
+
 I'm still comfortable using the external [Hugo Setup](https://github.com/marketplace/actions/hugo-setup) action because I don't pass any secrets.
