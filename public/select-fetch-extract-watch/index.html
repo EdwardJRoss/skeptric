@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-04-15">
+
+<title>skeptric - Select, Fetch, Extract, Watch: Web Scraping Architecture</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Select, Fetch, Extract, Watch: Web Scraping Architecture</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 15, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>The internet is full of useful information just waiting to be collected, processes and analysed. While getting started scraping data from the web is straightforward, it’s easy to tangle the whole process together in a way that makes it fragile to failure, or hard to change with requirements. And the internet is inconsistent and changing; in anything but the smallest scraping projects you’re going to run into failures. I find it useful to conceptually break web scraping down into four steps; selecting the data to retrieve, fetching the data from the internet, extracting structured data from the raw responses, and watching the process to make sure it’s functioning correctly.</p>
+<p>When you’re getting started put all your work into making sure you can get the information you need. But before you scale it up operationally think about trying to disentangle the four steps to make it more robust and flexible.</p>
+<p>The rest of this article is going to go into detail on each of the four steps, through the lens of three types of use cases:</p>
+<ol type="1">
+<li>monitoring a single page for changes over time like <a href="https://visualping.io/">VisualPing</a></li>
+<li>extracting information from all the product pages on a website</li>
+<li>collecting a wide crawl of the web like <a href="https://commoncrawl.org">Common Crawl</a></li>
+</ol>
+<section id="select" class="level1">
+<h1>Select</h1>
+<p>Select is about choosing the data to extract, where to get it from, and when to retrieve it.</p>
+<p>For example if you’re monitoring a single page for changes over time then you just need to keep track of a single URL to retrieve. The only choice you need to make is how often you retrieve it; this could be handled with a stateless scheduler (e.g.&nbsp;run on the first minute of every hour) or by tracking when it was last retrieved (e.g.&nbsp;if it was more than an hour ago then refetch).</p>
+<p>If you’re extracting all the product pages on a website you’ll need a way to find a list of all those pages. The best way to do this will depend on the website; maybe there’s a sitemap.xml with all the pages listed, if they can be retrieved from a sequential numeric id you could search the space of allowed ids, but otherwise you may have to scrape category pages or search results to find all the product page URLs. The order doesn’t normally matter too much if you can scrape all the required pages in the allotted time. You also need to decide how often to retrieve the information; if it’s unlikely to change you may just want to fetch it once, but you may want to check back every month to see what’s changed. Generally you’ll get more product pages over time so it’s important to keep track of what you’ve already retrieved and when you retrieved it.</p>
+<p>For collecting a wide crawl of the web you start with a small set of seed pages and collect all the URLs in already scraped pages as future sites to crawl. Here there’s too much to scrape every possible page, and you have to decide how to prioritise the crawl (going deep in a few websites, covering as many websites as possible) and when to retrieve a page again. You will also want to limit the rate at which you request from any given domain in the fetch step.</p>
+<p>Select is the most robust phase to failure; the most common reasons it would fail is if a page is removed (for example because a product is no longer offered, or a dead link in a crawl), or more rarely because the URL structure is completely changed.</p>
+</section>
+<section id="fetch" class="level1">
+<h1>Fetch</h1>
+<p>Fetch is about actually retrieving the data over the network. There can be all sorts of issues in doing this, and sometimes you only get one shot - especially if you’re monitoring changes over time. Because of this I recommend serialising everything in the Web Archive format so you keep your data; this is easy to do with <a href="../request-warc">Python’s requests library</a> or with <a href="https://github.com/odie5533/WarcMiddleware">Scrapy</a>.</p>
+<p>The issues here are fairly common across use cases, and well written about elsewhere. You need to make sure you’re being respectful; understanding the robots.txt, setting an appropriate User Agent, making requests at a rate that adds little load to the server and slowing the rate when there are server issues or the response time increases. Sometimes you need work around issues, like retrying failed requests, managing sessions and even using proxies. Overall you want to hit the remote server as few times as possible, so save all your data as WARC so you only need to do it once.</p>
+<p>If you’ve got a huge scraping project keeping all the bulk of HTML and headers in WARC for the few fields you’re extracting (often 10x-100x larger after compression) may get burdensome. But I think of it as a backup; you can delete old ones over time as you’re more sure you don’t need them, but it’s always worth keeping so you can recover from issues in extraction.</p>
+</section>
+<section id="extract" class="level1">
+<h1>Extract</h1>
+<p>Extracting is getting the data out of your responses. If you’re doing a wide crawl then the WARC is probably as much extraction as you can do, if you’re hitting a well structured API the extraction may already be done in the JSON response. But it’s very common to have to parse data out of HTML, or at least transform some JSON.</p>
+<p>For monitoring part of a single page this could be a CSS selector that selects the content to be monitored, and potentially normalising irrelevant changes (e.g.&nbsp;whitespace in the markup). This could fail if the structure of the page changes so much the section disappears.</p>
+<p>A product page is more complicated and the best way to extract the required fields depends on how the page is structured. But it’s a good bet that your heuristics will eventually fail on unusual pages, or as the website changes its structure over time. A more subtle failure mode is you may discover some pages have a field that would add a lot of value that you weren’t previously extracting. For these reasons it makes sense to work off of WARC files you can retry on later, and skip over errors to extract the data that you can. Then we can watch these issues and improve the extraction iteratively.</p>
+</section>
+<section id="watch" class="level1">
+<h1>Watch</h1>
+<p>Watch is monitoring your pipeline to make sure when it’s broken you know, before you end up with weeks of lost data.</p>
+<p>For visiting product pages or a web crawl you could watch the select step to make sure you’re getting, and fetching, new items at an expected rate.</p>
+<p>For all use cases it’s useful monitoring the response status codes; if you’re getting too many bad codes something is going wrong and you want to raise an alert. It’s also worth doing some sanity checks on the data; the response size should be variable within a certain range (a common failure case is getting empty or error pages).</p>
+<p>For extract you can monitor the percentage of fetches that don’t extract cleanly and pass validations; they can alert you to a change in the page structure, or even errors with fetching.</p>
+</section>
+<section id="putting-them-together" class="level1">
+<h1>Putting them together</h1>
+<p>In reality you can’t always disentangle these steps. For a web crawl your selection will depend on the website you just extracted. Some websites will force you to perform a series of actions to fetch that may impact your choice of selection. For product information you may need to tie information from a category or search page with data from a product page.</p>
+<p>But in the whole the cleaner the interface you can have between the steps, the easier time you’ll have maintaining your scraper and recovering from errors. Notably the <a href="https://docs.scrapy.org/en/latest/topics/architecture.html">Scrapy architecture</a> follows a similar pattern; the scheduler selects, the downloader fetches, and the spiders extract into the pipeline.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

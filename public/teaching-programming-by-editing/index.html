@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-08-30">
+
+<title>skeptric - Teaching Programming by Editing Code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Teaching Programming by Editing Code</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">programming</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 30, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’ve had a few discussions with people, especially analysts, about how to learn programming. Generally I encourage them to find a project they want to accomplish and try to learn programming on the way. However I really struggle to find resources to recommend because they tend to spend a lot of time teaching programming concepts from scratch. I wonder if a better way to teach these things would be to start with code that’s close to what they want to accomplish, and get them to edit it.</p>
+<p>When someone asks me for advice on what resources to recommend, I carefully consider their background and where they want to get to. Often analysts will have come across things like <code>if</code> statements through Excel or Tableau, and have an understanding of what they want to do to the data, and how to break down problems. This actually means they are quite capable of picking up many programming concepts, even if they’ve never studied programming.</p>
+<p>But more important than where they are is where they want to get to. Generally people want to learn programming to do something, and I’ve seen a variety of examples:</p>
+<ul>
+<li>summarising themes from free text survey responses</li>
+<li>performing custom statistical tests on skewed data, that their testing tools can’t handle</li>
+<li>fitting more models to better inform the outcomes of a decision</li>
+<li>automating regular reports that are currently painfully extracted from multiple sources</li>
+</ul>
+<p>Depending on what they want to do, the actual materials that are relevant will vary. Some people want to transition into a software engineering career, and that will often be a different path again.</p>
+<p>However I get frustrated that the vast majority of learning to program materials spend a lot of time on dry theory. There are typically chapters on every different type of programming construct (types, string, conditionals, loops, vectors, objects, …), with little motivation as to <em>why</em> they study them.</p>
+<p>There’s a learning concept called the <a href="https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators">Whole Game</a> which focuses on teaching by getting people to actually play the game rather than just learn the rules. By getting students to do a small version of what they’re trying to accomplish, and getting them to learn themselves, is extremely motivating. I’ve seen this myself in the <a href="https://www.fast.ai">fastai</a> course where I learned this concept.</p>
+<p>For example take the problem of summarising themes from free text survey responses. You could start by present a basic <a href="../topic-model-bootstrap">topic model</a> to extract themes from a text. Then get them to point this topic model at their own text; this alone can often be quite a challenge to extract the text and put it in the right format. Then you could give them some options on how to customise it; to see how changes make the model better or worse. This can start as simply as learning to edit the code to change constant values. Then maybe they need to find ways to print out words and sentences of different topics by changing an index. A for loop would let them display all the topics at once, or maybe process multiple surveys. Maybe converting the text to lowercase before fitting the model would lead to better results?</p>
+<p>This is a basic example, but I really think if someone is really motivated to build a good theme summary automatically they could learn a lot from doing this. And it would enable them to better learn how to solve related problems. When they start hitting some limits they might start wondering how the model actually works, and that could lead to much deeper learning.</p>
+<p>Depending on the level experience you may want to hide some of the complex logic (one of the wondrous things about programming is that you can do this through functions). How you hide the complexity, and how much you hide, depends on where you want the student to focus. This means thinking a bit about where they are, and how they can learn in small steps. Also it’s really hard to do this - I find sitting with someone as they work through the problem can be really helpful because they’ll hit issues you didn’t even think of. Some gentle encouragement, hints, or occasionally fixing weird problems can be very helpful in getting them through the process. But as much as possible you want them to drive their own learning.</p>
+<p>I haven’t seen this idea of teaching programming by editing code to be widely taught. But in practice it’s how most programmers actually work. I’m much more likely to be maintaining and extending some existing code than I am to be writing my own. Even when I’m writing my own, it’s not unusual for me to look at tutorials or Stack Overflow for how to solve particular problems. Similarly I think this would be a valuable way to learn how to code.</p>
+<p>That’s not to say the fundamentals aren’t important. But you’re much better off learning why they’re useful first, before learning all the intricate details of what they are. I’ve learned a lot by taking two courses in algorithms and data structures and a course in compilers, by reading (most of) the <a href="https://mitpress.mit.edu/sites/default/files/sicp/index.html">Structure and Interpretation of Computer Programs</a> (one day I’d like to look at <a href="https://htdp.org/">How to Design Programs</a>). But I started learning programming by trying to build games, first in various frameworks and then in Java. I then learned a bunch more trying to do Physics simulations and calculations.</p>
+<p>Really the biggest risk isn’t that a student never reads the specification; it’s that they lose the motivation and give up. As Peter Norvig points out, learning programming <a href="https://norvig.com/21-days.html">takes years</a>, but it starts with small steps.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

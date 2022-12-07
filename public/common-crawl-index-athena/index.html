@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-06-13">
+
+<title>skeptric - Common Crawl Index Athena</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Common Crawl Index Athena</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">commoncrawl</div>
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 13, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://commoncrawl.org">Common Crawl</a> builds an open dataset containing <a href="https://commoncrawl.github.io/cc-crawl-statistics/plots/crawlsize">over 100 billion unique items</a> downloaded from the internet. There are petabytes of data archived so directly searching through them is very expensive and slow. To search for pages that have been archived within a domain (for example all pages from wikipedia.com) you can <a href="../searching-100b-pages-cdx">search the Capture Index</a>. But this doesn’t help if you want to search for paths archived <em>across</em> domains.</p>
+<p>For example you might want to find how many domains been archived, or the distribution of languages of archived pages, or find pages offered in multiple languages to build a corpus of parallel texts for a machine translation model. For these usecases Common Crawl provide a columnar index to the WARC files, which are parquet files available on S3. Even the index parquet files are 300 GB per crawl so you may want to process them with Spark or AWS Athena (which is a managed version of <a href="https://prestodb.io/">Apache Presto</a>).</p>
+<p>Common Crawl have a <a href="https://commoncrawl.org/2018/03/index-to-warc-files-and-urls-in-columnar-format/">guide to setting up access to the index in Athena</a>, and a <a href="https://github.com/commoncrawl/cc-index-table">repository containing examples of Athena queries and Spark jobs</a> to extract information from the index. This article will explore some examples of querying this data with Athena, assuming you have created the table <code>ccindex</code> as per the Common Crawl setup instructions. You can run them through the AWS web console, through <a href="https://skeptric.com/presto-athena-emacs/#setting-up-command-line-interfaces">an Athena CLI</a> or in <a href="https://github.com/laughingman7743/PyAthena">Python with pyathena</a> or <a href="https://dyfanjones.github.io/RAthena/">R with RAthena</a></p>
+<section id="keeping-athena-costs-low" class="level1">
+<h1>Keeping Athena costs low</h1>
+<p>Every time you run a query in AWS Athena they charge for processing the query (currently $5 per terabyte), for S3 requests and transfer to the underlying data (which we don’t pay for here because the S3 bucket results) and the S3 storage costs of any created results. See the <a href="https://aws.amazon.com/athena/pricing/">AWS pricing details</a> for more complete and current information, but the strategies will be the same.</p>
+<p>Whenever you run a query in Athena the output is stored as an uncompressed CSV in S3 in the staging bucket you configured, so you should periodically delete old results, for example manually or with <a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html">lifecycle rules</a>. If you ever need to create a large extract (multiple gigabytes) it’s more cost efficient to store it as parquet with a <a href="https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html">Create Table As Statement (CTAS)</a>; see <a href="../export-athena">my article on exporting data from Athena for details</a>.</p>
+<p>To keep the amount of data processed low the best things to do is filter on <code>crawl</code> which correspond to which monthly snapshot is used, and <code>subset</code>, because the table is partitioned on these it will always reduce the amount of data scanned. Only querying the columns you need (instead of <code>select *</code>) will also reduce the amount of data scanned, since the data is stored in a columnar format. Finally if you can use a low cardinality column prefer that over a high cardinality column (e.g.&nbsp;don’t use <code>url</code> if you only want the TLD, use <code>url_host_tld</code> instead).</p>
+</section>
+<section id="exploring-common-crawl-with-athena" class="level1">
+<h1>Exploring Common Crawl with Athena</h1>
+<p>We can find out what crawls are in the data by searching through the partitions. Because we’re just using the partition columns we’re not charged for any data processed, but it’s relatively slow; it took 3 minutes for me.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> crawl, subset, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> n_captures</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> crawl, subset</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> crawl <span class="kw">desc</span>, subset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<thead>
+<tr class="header">
+<th>crawl</th>
+<th>subset</th>
+<th>n_captures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CC-MAIN-2020-24</td>
+<td>crawldiagnostics</td>
+<td>70454588</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-24</td>
+<td>robotstxt</td>
+<td>15356021</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+<td>277844242</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-16</td>
+<td>crawldiagnostics</td>
+<td>432035051</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-16</td>
+<td>robotstxt</td>
+<td>112871871</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-16</td>
+<td>warc</td>
+<td>2886236237</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>The crawls contain the year and ISO week of the crawl (so e.g.&nbsp;<code>CC-MAIN-2020-24</code> is the crawl from the 24th week of 2020, which is early June).</p>
+<p>There are 3 kinds of subsets, as described <a href="http://commoncrawl.org/2016/">in the 2016 release</a></p>
+<ul>
+<li>warc - The actual web archive files containing all the data of successful requests (200 ok)</li>
+<li>crawldiagnostics - Contains responses like 404 file not found, redirects, 304 not modified, etc.</li>
+<li>robotstxt - Contains the <a href="https://en.wikipedia.org/wiki/Robots_exclusion_standard">robots.txt</a> that would impact what pages the crawl accessed</li>
+</ul>
+<p>At the time of writing it looks like there’s something wrong with the most recent index, it contains 280 million captures, when <a href="https://commoncrawl.org/2020/06/may-june-2020-crawl-archive-now-available/">the dataset should countail 2.75 billion</a>. However the 2020-16 one looks correct.</p>
+<p>Note that when new crawls are added you have to first run <code>MSCK Repair Table</code> to be able to access them (this re-scans the partitions).</p>
+<section id="whats-in-the-columnar-index" class="level2">
+<h2 class="anchored" data-anchor-id="whats-in-the-columnar-index">What’s in the columnar index</h2>
+<p>To see what’s in the index let’s look at a few example rows; we’ll limit 10 to reduce the amount of data scanned (under 10MB).</p>
+<p>The columns are</p>
+<ul>
+<li>url_surtkey: Canonical form of URL with host name reversed</li>
+<li>url: URL that was archived</li>
+<li>url_host_name: The host name</li>
+<li>url_host_tld: The TLD (e.g.&nbsp;au)</li>
+<li>url_host_2nd_last_part, … url_host_5th_last_part: The parts of the host name separated by .</li>
+<li>url_host_registry_suffix: e.g.&nbsp;.com.au</li>
+<li>url_host_private_domain</li>
+<li>url_protocol: e.g.&nbsp;https</li>
+<li>url_port: The port accesed, it seems to be blank for default ports (80 for http, 443 for https).</li>
+<li>url_path: The path of the URL (everything from the first <code>/</code> to the query parameter starting at <code>?</code>)</li>
+<li>url_query: Query parameter; everything after the <code>?</code></li>
+<li>fetch_time: When the page was retrieved</li>
+<li>fetch_status: The HTTP status of the request (e.g.&nbsp;200 is OK)</li>
+<li>content_digest: A digest to uniquely identify the content</li>
+<li>content_mime_type: The type of content in the header</li>
+<li>content_mime_detected: The type of content detected</li>
+<li>content_charset: The characterset of the data (e.g.&nbsp;UTF-8)</li>
+<li>content_languages: Languages declared of the content</li>
+<li>warc_filename: The filename the archived data is in</li>
+<li>warc_record_offset: The offset in bytes in the archived file where the corresponding data starts</li>
+<li>warc_record_length: The length of the archived data in bytes</li>
+<li>warc_segment: The segment the data is archived in; this is part of the filename</li>
+<li>crawl: The id of the crawl (e.g.&nbsp;CC-MAIN-YYYY-WW where YYYY is the year and WW is the ISO week of the year).</li>
+<li>subset: Is this the ‘warc’, or ‘robotstxt’, or ‘crawldiagnostics’</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-24'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> url_host_tld <span class="op">=</span> <span class="st">'au'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> url_host_registered_domain <span class="op">=</span> <span class="st">'realestate.com.au'</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">limit</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 7%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 13%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 0%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>url_surtkey</th>
+<th>url</th>
+<th>url_host_name</th>
+<th>url_host_tld</th>
+<th>url_host_2nd_last_part</th>
+<th>url_host_3rd_last_part</th>
+<th>url_host_4th_last_part</th>
+<th>url_host_5th_last_part</th>
+<th>url_host_registry_suffix</th>
+<th>url_host_registered_domain</th>
+<th>url_host_private_suffix</th>
+<th>url_host_private_domain</th>
+<th>url_protocol</th>
+<th>url_port</th>
+<th>url_path</th>
+<th>url_query</th>
+<th>fetch_time</th>
+<th>fetch_status</th>
+<th>content_digest</th>
+<th>content_mime_type</th>
+<th>content_mime_detected</th>
+<th>content_charset</th>
+<th>content_languages</th>
+<th>warc_filename</th>
+<th>warc_record_offset</th>
+<th>warc_record_length</th>
+<th>warc_segment</th>
+<th>crawl</th>
+<th>subset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>au,com,realestate)/advice</td>
+<td>https://www.realestate.com.au/advice/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/</td>
+<td></td>
+<td>2020-05-28 22:09:01.000</td>
+<td>200</td>
+<td>BIVR34XTK7HJGQJ5H47GO65UBODZA6XY</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347400101.39/warc/CC-MAIN-20200528201823-20200528231823-00270.warc.gz</td>
+<td>898091083</td>
+<td>17598</td>
+<td>1590347400101.39</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="even">
+<td>au,com,realestate)/advice/10-clever-storage-solutions-rental-properties</td>
+<td>https://www.realestate.com.au/advice/10-clever-storage-solutions-rental-properties/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-clever-storage-solutions-rental-properties/</td>
+<td></td>
+<td>2020-06-06 05:39:55.000</td>
+<td>200</td>
+<td>2YJSRGZHQVSE5WWKHEHPJ26RBIIQOIMP</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590348509972.80/warc/CC-MAIN-20200606031557-20200606061557-00502.warc.gz</td>
+<td>855590228</td>
+<td>36195</td>
+<td>1590348509972.80</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="odd">
+<td>au,com,realestate)/advice/10-features-to-look-for-when-buying-a-period-home</td>
+<td>https://www.realestate.com.au/advice/10-features-to-look-for-when-buying-a-period-home/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-features-to-look-for-when-buying-a-period-home/</td>
+<td></td>
+<td>2020-05-26 08:40:48.000</td>
+<td>200</td>
+<td>V75WAUJFWLXT5VPZFCPHUEPFHAZJY6MX</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347390755.1/warc/CC-MAIN-20200526081547-20200526111547-00430.warc.gz</td>
+<td>809064278</td>
+<td>35882</td>
+<td>1590347390755.1</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="even">
+<td>au,com,realestate)/advice/10-foodie-towns-worth-going-rural</td>
+<td>https://www.realestate.com.au/advice/10-foodie-towns-worth-going-rural/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-foodie-towns-worth-going-rural/</td>
+<td></td>
+<td>2020-05-27 16:31:24.000</td>
+<td>200</td>
+<td>XP4RGQCIWL5GL4O3KJG53AGRYVRXEGGV</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347394756.31/warc/CC-MAIN-20200527141855-20200527171855-00398.warc.gz</td>
+<td>909969420</td>
+<td>35652</td>
+<td>1590347394756.31</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="odd">
+<td>au,com,realestate)/advice/10-things-consider-buying-fixer-upper</td>
+<td>https://www.realestate.com.au/advice/10-things-consider-buying-fixer-upper/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-things-consider-buying-fixer-upper/</td>
+<td></td>
+<td>2020-05-27 13:38:45.000</td>
+<td>200</td>
+<td>EZSDPRBNJIJEY4Y47C6A42T7YCDNDOSH</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347394074.44/warc/CC-MAIN-20200527110649-20200527140649-00029.warc.gz</td>
+<td>891295141</td>
+<td>34746</td>
+<td>1590347394074.44</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="even">
+<td>au,com,realestate)/advice/10-things-moving-new-house</td>
+<td>https://www.realestate.com.au/advice/10-things-moving-new-house/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-things-moving-new-house/</td>
+<td></td>
+<td>2020-06-02 18:28:54.000</td>
+<td>200</td>
+<td>EX24KJUKOHX5GOX36QFTNVZGACZPJO2J</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347425481.58/warc/CC-MAIN-20200602162157-20200602192157-00363.warc.gz</td>
+<td>879272045</td>
+<td>35475</td>
+<td>1590347425481.58</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="odd">
+<td>au,com,realestate)/advice/10-tips-coping-share-house-kitchen</td>
+<td>https://www.realestate.com.au/advice/10-tips-coping-share-house-kitchen/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-tips-coping-share-house-kitchen/</td>
+<td></td>
+<td>2020-06-02 09:15:24.000</td>
+<td>200</td>
+<td>GWGMC36W4MHHSZ4GOQJA5AHGPY3LUUID</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347423915.42/warc/CC-MAIN-20200602064854-20200602094854-00528.warc.gz</td>
+<td>840946829</td>
+<td>33050</td>
+<td>1590347423915.42</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="even">
+<td>au,com,realestate)/advice/10-tips-to-sharing-a-home-with-your-adult-children</td>
+<td>https://www.realestate.com.au/advice/10-tips-to-sharing-a-home-with-your-adult-children/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/10-tips-to-sharing-a-home-with-your-adult-children/</td>
+<td></td>
+<td>2020-05-28 02:26:38.000</td>
+<td>200</td>
+<td>FMVSRNL32GKBRPLTV755XBL43G27P7YX</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347396300.22/warc/CC-MAIN-20200527235451-20200528025451-00478.warc.gz</td>
+<td>873617107</td>
+<td>31724</td>
+<td>1590347396300.22</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="odd">
+<td>au,com,realestate)/advice/101-guide-contents-insurance</td>
+<td>https://www.realestate.com.au/advice/101-guide-contents-insurance/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/101-guide-contents-insurance/</td>
+<td></td>
+<td>2020-06-05 11:00:50.000</td>
+<td>200</td>
+<td>PTLEDOTFYPBVZO2AC26KUHB6SBJ6FZKG</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590348496026.74/warc/CC-MAIN-20200605080742-20200605110742-00542.warc.gz</td>
+<td>837847660</td>
+<td>31792</td>
+<td>1590348496026.74</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+<tr class="even">
+<td>au,com,realestate)/advice/11-things-you-really-need-to-tell-your-landlord</td>
+<td>https://www.realestate.com.au/advice/11-things-you-really-need-to-tell-your-landlord/</td>
+<td>www.realestate.com.au</td>
+<td>au</td>
+<td>com</td>
+<td>realestate</td>
+<td>www</td>
+<td></td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>com.au</td>
+<td>realestate.com.au</td>
+<td>https</td>
+<td></td>
+<td>/advice/11-things-you-really-need-to-tell-your-landlord/</td>
+<td></td>
+<td>2020-05-31 04:37:28.000</td>
+<td>200</td>
+<td>MWL7BHWJEGV7TU7ORULZYGBRDNIY3GQI</td>
+<td>text/html</td>
+<td>text/html</td>
+<td>UTF-8</td>
+<td>eng</td>
+<td>crawl-data/CC-MAIN-2020-24/segments/1590347410745.37/warc/CC-MAIN-20200531023023-20200531053023-00083.warc.gz</td>
+<td>867625659</td>
+<td>33829</td>
+<td>1590347410745.37</td>
+<td>CC-MAIN-2020-24</td>
+<td>warc</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="most-crawled-tlds" class="level2">
+<h2 class="anchored" data-anchor-id="most-crawled-tlds">Most crawled TLDs</h2>
+<p>To get an idea of the coverage of Common Crawl we can look at the most crawled TLDs, the number of captured domains and the average number of captures per domain for a snapshot.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a># Scans 150GB (~ 75c)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> url_host_tld,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       approx_distinct(url_host_registered_domain) <span class="kw">as</span> n_domains,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> n_captures,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">sum</span>(<span class="fl">1e0</span>) <span class="op">/</span> approx_distinct(url_host_registered_domain) <span class="kw">as</span> avg_captures_per_domain,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-16'</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> url_host_tld</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> <span class="kw">by</span> n_captures <span class="kw">desc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The number of domains is staggering; 15 million from <code>.com</code> alone, 400k for Australia. The typical average number of pages per domain is 80, but for <code>.edu</code> it’s nearly 5,000 and for <code>.gov</code> it’s nearly 2,500. Much more content is archived from a university of government pages than general domains.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/cc_athena_tld.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Counts of TLD</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="australian-domains-with-most-pages-archived" class="level2">
+<h2 class="anchored" data-anchor-id="australian-domains-with-most-pages-archived">Australian domains with most pages archived</h2>
+<p>This query finds the <code>au</code> domains with most pages archived from 2020-16 crawl. It takes about 5s and scans under 10MB (so it’s practically free).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="fu">count</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       url_host_registered_domain</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-16'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> url_host_tld <span class="op">=</span> <span class="st">'au'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span>  url_host_registered_domain</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> (<span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">100</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span>  <span class="fu">count</span> <span class="kw">DESC</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">limit</span> <span class="dv">500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The top websites look to be government and university websites. Note this isn’t about popularity of the site, but is related to the number of pages on the site, how many links there are to each page, and the how permissive its robots.txt file is. To find the most popular sites you would need panel web traffic panel <a href="https://www.alexa.com/topsites/countries/AU">like Alexa</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/cc_athena_largest_au_domains.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Largest domains in AU</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="domains-with-the-most-subdomains" class="level2">
+<h2 class="anchored" data-anchor-id="domains-with-the-most-subdomains">Domains with the most subdomains</h2>
+<p>Some domains have a lot of different subdomains which they provide to users as namespaces. Wordpress is a common example where you can get a free personal website with a Wordpress domain. These could be good places to look for user generated content, each subdomain belonging to a user.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> url_host_registered_domain,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       approx_distinct(url_host_name) <span class="kw">AS</span> num_subdomains</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-16'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> url_host_registered_domain</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> num_subdomains <span class="kw">DESC</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a># Scans 1GB <span class="kw">data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The results make sense, the top 5 sites; blogspot, wordpress, wixsite, weebly and fc2 are all sites for hosting personal content.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/cc_athena_subdomains.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Largest number subdomains in Common Crawl</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="public-dropbox-content-types" class="level2">
+<h2 class="anchored" data-anchor-id="public-dropbox-content-types">Public Dropbox Content Types</h2>
+<p>There were almost five thousand subdomains of dropboxusercontent.com, it would be interesting to see what type of content is in there.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> content_mime_detected,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> n</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-16'</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> url_host_registered_domain <span class="op">=</span> <span class="st">'dropboxusercontent.com'</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n <span class="kw">DESC</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s mostly PDFs, but there’s some zip files and mobile applications. I wonder how much of it is malware.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>content_mime_detected</th>
+<th>n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>application/pdf</td>
+<td>5033</td>
+</tr>
+<tr class="even">
+<td>application/zip</td>
+<td>204</td>
+</tr>
+<tr class="odd">
+<td>audio/mpeg</td>
+<td>186</td>
+</tr>
+<tr class="even">
+<td>application/vnd.symbian.install</td>
+<td>130</td>
+</tr>
+<tr class="odd">
+<td>text/plain</td>
+<td>127</td>
+</tr>
+<tr class="even">
+<td>image/jpeg</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td>application/vnd.android.package-archive</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>video/mp4</td>
+<td>38</td>
+</tr>
+<tr class="odd">
+<td>application/epub+zip</td>
+<td>36</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="downloading-some-content" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-some-content">Downloading some content</h2>
+<p>Let’s find some SQL files on Github:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> url,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       warc_filename,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       warc_record_offset,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       warc_record_offset <span class="op">+</span> warc_record_length <span class="kw">as</span> warc_record_end</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="ot">"ccindex"</span>.<span class="ot">"ccindex"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> crawl <span class="op">=</span> <span class="st">'CC-MAIN-2020-16'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> subset <span class="op">=</span> <span class="st">'warc'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> url_host_registered_domain <span class="op">=</span> <span class="st">'githubusercontent.com'</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> content_mime_detected <span class="op">=</span> <span class="st">'text/x-sql'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>url</th>
+<th>warc_filename</th>
+<th>warc_record_offset</th>
+<th>warc_record_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>https://raw.githubusercontent.com/arey/spring-batch-toolkit/blog-parallelisation/src/test/resources/com/javaetmoi/core/batch/test/TestParallelAndPartitioning.sql</td>
+<td>crawl-data/CC-MAIN-2020-16/segments/1585370493684.2/warc/CC-MAIN-20200329015008-20200329045008-00304.warc.gz</td>
+<td>689964496</td>
+<td>689966615</td>
+</tr>
+<tr class="even">
+<td>https://raw.githubusercontent.com/bailangzhan/demo/master/category.sql</td>
+<td>crawl-data/CC-MAIN-2020-16/segments/1585371896913.98/warc/CC-MAIN-20200410110538-20200410141038-00434.warc.gz</td>
+<td>616371570</td>
+<td>616562918</td>
+</tr>
+<tr class="odd">
+<td>https://raw.githubusercontent.com/citrix/sample-scripts/master/storefront/Create-ImportSubscriptionDataSP.sql</td>
+<td>crawl-data/CC-MAIN-2020-16/segments/1585371896913.98/warc/CC-MAIN-20200410110538-20200410141038-00251.warc.gz</td>
+<td>619544564</td>
+<td>619546850</td>
+</tr>
+<tr class="even">
+<td>https://raw.githubusercontent.com/citrix/sample-scripts/master/storefront/Create-StoreSubscriptionsDB-2016.sql</td>
+<td>crawl-data/CC-MAIN-2020-16/segments/1585370506673.7/warc/CC-MAIN-20200402045741-20200402075741-00091.warc.gz</td>
+<td>669277710</td>
+<td>669280288</td>
+</tr>
+<tr class="odd">
+<td>https://raw.githubusercontent.com/cwoodruff/ChinookDatabase/master/Scripts/Chinook_SqlServer.sql</td>
+<td>crawl-data/CC-MAIN-2020-16/segments/1585370506673.7/warc/CC-MAIN-20200402045741-20200402075741-00421.warc.gz</td>
+<td>652805559</td>
+<td>652898120</td>
+</tr>
+</tbody>
+</table>
+<p>We can then use this to retrieve the WARC for the first record; we just prepend <code>https://data.commoncrawl.org/</code> to the filename and only get the relevant bytes with the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range">Range header</a>.</p>
+<pre><code>curl https://data.commoncrawl.org/crawl-data/CC-MAIN-2020-16/segments/1585370493684.2/warc/CC-MAIN-20200329015008-20200329045008-00304.warc.gz \
+    -H "range: bytes=689964496-689966615" &gt; sql_sample.warc.gz</code></pre>
+<p>Then you can inspect the file with zcat</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/cc_github_sql_warc.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">SQL WARC file</figcaption><p></p>
+</figure>
+</div>
+<p>If you needed to export the WARC data at scale Common Crawl have <a href="https://github.com/commoncrawl/cc-index-table#export-subsets-of-the-common-crawl-archives">a script</a> for producing the WARC extract from a SparkSQL query.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

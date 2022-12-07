@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-12-23">
+
+<title>skeptric - Language Through Prism</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Language Through Prism</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 23, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Neural language models, which have advanced the <a href="https://paperswithcode.com/area/natural-language-processing">state of the art for Natural Language Processing</a> by a huge leap over previous methods, represent the individual tokens as a sequence of vectors. This sequence of vectors can be thought of explicitly as a discrete time varying signal in each dimension, and you could decompose this signal into low frequency components, representing the information at the document level, and high frequency components, representing information at the token level and discarding higher level information. The NeurIPS 2020 paper <a href="https://arxiv.org/abs/2011.04823">Language Through a Prism: A Spectral Approach for Multiscale Language Representations</a> applies this idea to BERT and shows that this decomposition can improve model performance for tasks at the paragraph or document scale.</p>
+<section id="the-tasks" class="level1">
+<h1>The Tasks</h1>
+<p>There are three tasks they evaluate on, in order to evaluate performance at different scales:</p>
+<ul>
+<li>Part of Speech Tagging (word level) on Penn Treebank</li>
+<li>Dialogue speech act classification (utterance-level) on Switchboard Dialog Speech Acts corpus</li>
+<li>Topic Classification (document level) on the 20 Newsgroups dataset</li>
+<li>Masked Language Modelling on Wikitext-103</li>
+</ul>
+<p>These are all quite old and well known tasks in their class.</p>
+</section>
+<section id="probing-contextual-word-embeddings" class="level1">
+<h1>Probing contextual word embeddings</h1>
+<p>BERT can give contextual word embeddings; that is an embedding for each word that takes in the surrounding context. The word embeddings can then be used for the tasks by training a softmax classifier, that is a very shallow neural net.</p>
+<p>Concretely given the (contextual) word vectors <span class="math inline">\(v_i\)</span>, then we train a classifier <span class="math inline">\(\rm{softmax}\left(W \sum_{i \in C} \frac{1}{\lvert C \rvert}v_i\right)\)</span>, where W is a weight matrix of embedding dimension x number of classes, to be fitted using cross-entropy loss. Note that the vectors have to be averaged to the appropriate level for the task (the sum over context C, in the previous equation); for Part of Speech tagging (and Masked Language Modelling) we just use each word vector directly, for dialogue speech we average the vectors over each utterance and for topic classification we average over the whole document. I’m actually <em>assuming</em> that the vectors are averaged; it’s not discussed explicitly in the work and there’s no code provided to see what was done; but this seems like the most likely way to handle it.</p>
+<p>The idea introduced in the paper is to try to try a classifier after passing the vectors through a bandpass filter at different frequencies (identically across each dimension) to see how they would do at different topics. For example a low pass filter will capture most of the document level variation of the embeddings, and a high pass filter will capture most of the word level variation (taking out the average context).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/prism_embeddings.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Diagram of Bandpassed Embeddings</figcaption><p></p>
+</figure>
+</div>
+<p>The results turn out nicely;</p>
+<ul>
+<li>the high frequency vectors (1-2 token period) best predict part of speech</li>
+<li>the mid frequency vectors (8-32 token period) best predict dialog</li>
+<li>the low frequency vectors (256+ token period) best predict document classification, doing better than the original word embeddings</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/prism_probing_results.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Results of Probing Prism</figcaption><p></p>
+</figure>
+</div>
+<p>The last result is particularly interesting; by throwing away information we get a better result. But assuming it is just an average at the document level, really by taking the low frequency we’re getting a <em>better average</em> by smoothing out some of the local noise. In fact a frequency 0 vector would in fact just be the average across each dimension, for every word.</p>
+</section>
+<section id="using-spectral-filters-during-training" class="level1">
+<h1>Using Spectral Filters During Training</h1>
+<p>The second approach they take is to apply spectral filters to BERT. They take the hidden state in the last layer and divide it into 5 equal segments and apply 5 different band filters (from low to high) on those segments. They then add a classification layer and train the model on each of the tasks above, comparing it with BERT trained in the same way.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/prism_model.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Diagram of Prism Model</figcaption><p></p>
+</figure>
+</div>
+<p>They find that for tasks above the word level that adding the Prism layer gives results better than BERT:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/prism_layer_results.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Results of Prism experiments</figcaption><p></p>
+</figure>
+</div>
+<p>However I find it strange all these results are <em>far</em> below State of the Art:</p>
+<ul>
+<li><a href="https://paperswithcode.com/sota/part-of-speech-tagging-on-penn-treebank">Part of Speech Tagging on Penn Treebank</a> above 97% accuracy</li>
+<li><a href="https://paperswithcode.com/sota/dialogue-act-classification-on-switchboard">Dialogue Act Classification on Switchboard Corpus</a> above 82% accuracy</li>
+<li><a href="https://paperswithcode.com/sota/text-classification-on-20news">Topic Classification on 20 Newsgroups</a> above 88% accuracy</li>
+</ul>
+<p>I’m wondering if finetuning the language model would result in better scores. I think they didn’t do this because the masked task is local, as shown in the first section, and may lose information from the higher layers. However this casts doubt in my mind whether the prism layer would be useful in increasing performance in real systems.</p>
+<p>Another thing they showed is the prism model was better at predicting missing words further away (but worse at predicting closer missing words). I would like to see a deeper analysis of this before I draw conclusions - is it just guessing common words more often?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/prism_masked_prediction.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Prism model predicts missing words better further away</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>I’m not convinced this approach produces better models, that requires more evidence. But it seems like an interesting tool for <em>analysing</em> models and text. When looking at the activations relevant to a prediction you get to analyse it at different <em>scales</em>, so you could say whether it was driven by word, paragraph or document level features without explicitly modelling these. You could also look at the regions at this level relevant to it.</p>
+<p>The better long range masked prediction is also potentially interesting. The best generative language models like BERT, GPT-2 and GPT-3 tend to be fine for short sentences, but tend to lose coherence after a couple of sentences. If we could <em>force</em> the models to focus on longer range dependencies (i.e.&nbsp;lower frequencies) maybe we could generate language with more coherence at the paragraph and document level. But I’m not sure how.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

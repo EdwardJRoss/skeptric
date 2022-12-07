@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-05-09">
+
+<title>skeptric - Considering VS Code from Emacs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Considering VS Code from Emacs</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">emacs</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 9, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’ve been using Emacs as my primary editor for around 5 years now (after 4 years of Vim). I’m very comfortable in it, having spent a long time configuring my <a href="https://github.com/EdwardJRoss/dotfiles/blob/master/emacs.d/init.el">init.el</a>. But once in a while I’m slowed down by some strange issue, so I’m going to put aside my sunk configuration costs and have a look at using VS Code.</p>
+<section id="on-emacs" class="level1">
+<h1>On Emacs</h1>
+<p>I recently read a LWN article on <a href="https://lwn.net/SubscriberLink/819452/1480c3a59d3d9093/">Making Emacs Popular Again</a> (and the corresponding <a href="https://news.ycombinator.com/item?id=23107123">HN thread</a>). It’s very hard to bring in new libraries and external code to Emacs because of their strict requirements of GPL3+ (so even <a href="https://www.qt.io/">Qt’s</a> GPL3 <a href="https://lwn.net/ml/emacs-devel/E1jPGhC-0003i1-W4@fencepost.gnu.org/">isn’t sufficient</a>) and requirement of code <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Copyright-Assignment.html">copyright assignation to FSF</a>, and even if the primary contributors are fine to sign away their copyright it is difficult for established projects with multiple contributors and a barrier to entry for new contributions. While I am sympathetic to free software the GNU approach puts a high barrier on entry. The primary reason Emacs has seen a resurgence is the ability to install third-party packages from <a href="https://melpa.org/">MELPA</a>, which contains packages with the kind of features in modern IDEs.</p>
+<p>That being said there are many great features built into Emacs like <a href="https://www.gnu.org/software/emacs/manual/html_node/tramp/Quick-Start-Guide.html">remote editing with Tramp</a>, ability to use <a href="https://www.masteringemacs.org/article/running-shells-in-emacs-overview">shells</a>, working in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html">directories</a>, <a href="https://www.masteringemacs.org/article/displaying-interacting-processes-proced">process management</a> and much more. There are lots of inbuilt functionality from how things are displayed to obscure gems like RFC1345 input mode for typing unicode characters. There are some useful packaged that can be installed directly via <a href="https://elpa.gnu.org/">Elpa</a> (the official Emacs package repository where everything is owned by FSF) like <a href="https://orgmode.org/">Org Mode</a>.</p>
+<p>The best thing about emacs is everything is very customisable with <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">Hooks</a> and writing functions in <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/">Elisp</a>. This is great for making little tweaks, but for large groups of functionality it requires much more.</p>
+<p>With MELPA packages Emacs can quickly become a powerful environment for text editing. I move around text using Vim keybinding with <a href="https://github.com/emacs-evil/evil">Evil</a>, <a href="https://github.com/emacs-evil/evil-collection/">Evil Collection</a> and <a href="https://github.com/gridaphobe/evil-god-state/">Evil God State</a> using my own custom commands to navigate between windows or launch applications. I use <a href="https://magit.vc/">Magit</a> for interfacing with Git, which frequently saves me from commiting inadvertent changes (and reaches the deeper features of git better than the generic <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Version-Control.html">VC mode</a>). I quickly navigate menus with <a href="https://github.com/abo-abo/swiper">Ivy</a>, jump through code with <a href="https://github.com/jacktasia/dumb-jump">dumbjump</a> and complete code with <a href="https://company-mode.github.io/">Company Mode</a>. I can use <a href="https://github.com/jorgenschaefer/elpy">Elpy</a> for Python, <a href="https://ess.r-project.org/">ESS</a> for R, and I’ve been hearing good things about using <a href="https://emacs-lsp.github.io/lsp-mode/">Lanugage Server Protocol</a> which provides backends to lots of languages not well supported in Emacs (like Java).</p>
+<p>However this requires a lot of time to understand what packages to use and how to configure them. It’s good that it is often easy to customise them, because often it’s inconsistent between packages, wbut sometimes it requires a lot of customisation to just make it workable. And then sometimes there are painfully weird interactions. Company mode sometimes makes it <em>really</em> slow to type in a comint buffer (like a shell), and it took me a long time to figure out that was the issue. Now I just live without completion in comint buffers, which is a loss. When I run a command that starts a process it might sometimes run it remotely over TRAMP when I launch it in a local buffer.</p>
+<p>All the time I spend configuring and debugging Emacs is time I’m not spending doing something more productive, so I want to see if there’s a better option now.</p>
+</section>
+<section id="alternatives-to-emacs" class="level1">
+<h1>Alternatives to Emacs</h1>
+<p>I’m already using Vim for small edits, Jupyter Notebooks for exploratory analysis and sometimes RStudio when I want to use some HTML R features, or for some R Markdown (because <a href="https://github.com/polymode/polymode">Emacs polymode</a> is a little buggy around the edges). But none of these could be a full time alternative for me; Vim is less of an IDE than Emacs and the others only work for limited languages and tasks. It seems like the most popular alternatives from my colleagues is Jetbrains’ products and VSCode (with Sublime and Atom seeming to lose mindshare), and they both look viable.</p>
+<p>From the outside VS Code looks promising. It can interact with <a href="https://code.visualstudio.com/docs/remote/wsl">WSL</a>, <a href="https://code.visualstudio.com/docs/containers/overview">Containers</a> and over <a href="https://code.visualstudio.com/docs/remote/ssh">SSH</a>. It has a <a href="https://github.com/VSCodeVim/Vim">Vim Emulation Mode</a> which looks like it has enough features to be useful (though not as many as Evil). I’ve seen you can start a terminal from inside VSCode. It’s got documentation that focuses on usage, which is a big advantage over Emacs (which has complete documentation but requires serious dedication to read through).</p>
+<p>I’m concerned about Electron memory usage; Slack already uses a lot of memory. I’m also concerned how it will do for general tasks like editing text files, SQL and whatever else I come across. But it seems to have a lot of plugins so we’ll see what it can do.</p>
+</section>
+<section id="other-peoples-experiences" class="level1">
+<h1>Other people’s experiences</h1>
+<p>A Google search shows a lot of people have switched between the two, and I thought it may be useful to get their perspectives.</p>
+<p>The best article I found was <a href="https://www.admiralbumblebee.com/programming/2020/01/04/Six-months-VS-Code.html">AdmiralBumbleBee’s comparison</a>, which highlights that window management, navigation, and configuration is better in Emacs, but terminals are better in VS Code. They also mention having trouble with magit and syncing their <code>init.el</code> file, but those are things I like about Emacs. This resonates with a <a href="https://www.reddit.com/r/emacs/comments/8h1cxa/any_long_time_emacs_users_tried_vscode/dyhf84a/">Reddit post</a> that says VS Code is viable but easy to configure, limits how to split window and only working on a “per-project” basis (and I find this frustrating when I work in R Studio).</p>
+<p><a href="https://hadi.timachi.com/2019/12/07/Why_I_switched_from_VScode_to_Emacs">Hadi Timachi</a> moved from Emacs to VS Code and back again, but his issues don’t seem compelling. It seems worth a try.</p>
+</section>
+<section id="making-emacs-better" class="level1">
+<h1>Making Emacs Better</h1>
+<p>Reflecting on the article trying to make Emacs more attractive to new users, what Emacs really needs is more contributors that can help the project. From core contributors who are very friendly to the community like Eli Zaretskii, to people who write about Emacs for general people like <a href="http://emacsrocks.com/">Magnar Sveen of Emacs Rocks</a> and <a href="https://www.masteringemacs.org">Mickey Peterson of Mastering Emacs</a>, to prolific package builders like <a href="https://github.com/abo-abo/">Abo-Abo</a> and <a href="https://github.com/tarsius">tarsius</a>. While reducing friction and pain point for newcomers will definitely help, Emacs should really focus on what makes these people like Emacs, what makes it different from its competitors (though new competitors like VS Code are changing the gaps).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-08-29">
+
+<title>skeptric - Interpretable models with Cynthia Rudin</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Interpretable models with Cynthia Rudin</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 29, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>A while ago I came across <a href="https://users.cs.duke.edu/~cynthia/home.html">Cynthia Rudin</a> through their work on the <a href="https://community.fico.com/s/explainable-machine-learning-challenge">FICO Explainable Machine Learning Challenge</a>. Her team got an <a href="https://www.fico.com/en/newsroom/fico-announces-winners-of-inaugural-xml-challenge?utm_source=FICO-Community&amp;utm_medium=xml-challenge-page">honourable mention</a> and she wrote an opinion with Joanna Radin <a href="https://hdsr.mitpress.mit.edu/pub/f9kuryi8/release/5">on explainable models</a>. I think the article was hyperbolic on claiming interpretable models always work as well as black box models. On the other hand I only came across her because of this article, so taking an extreme viewpoint in the media is a good way to get attention.</p>
+<p>But getting past the headlines there is an interesting perspective. Her tutorial on <a href="https://arxiv.org/pdf/1906.01998.pdf">The Secrets of Machine Learning</a> takes a more nuanced point of view:</p>
+<blockquote class="blockquote">
+<p>most machine learning methods tend to perform similarly, if tuned properly, when the covariates have an inherent meaning as predictor variables (e.g., age, gender, blood pressure) rather than raw measurement values (e.g., raw pixel values from images, raw time points from sound files)</p>
+</blockquote>
+<p>This is quite a reasonable claim; one of the benefits of black box models like boosted and bagged trees, and neural networks is that they do very well with complex raw features, and are currently nearly always a key part in winning machine learning competitions on Kaggle. However when you have reasonable features you may be able to construct a simple model that can do quite well. They go on to say:</p>
+<blockquote class="blockquote">
+<p>Interestingly, adding more data, adding domain knowledge, or improving the quality of data, can often be much more valuable than switching algorithms or changing tuning procedures</p>
+</blockquote>
+<p>This is a great point; the amount of data (especially unusual examples) and the quality data fundamentally limit how good the model can be (and even how well you can evaluate model performance). With simpler models it’s easier to integrate domain knowledge to make a simpler model. This has a larger up front cost than throwing a gradient boosting machine at the problem; but it has some potential benefits.</p>
+<p>It’s also important to consider the impact of performance on <a href="../analysis-decision">decisions</a>. There is often diminishing returns and a small increase in model performance leads to a negligible increase in expected return. This means that techniques common in machine learning competitions like ensembling and stacking models, which have a substantial operational and maintenance overhead, are often not worthwhile in practice. That’s not to mention the increased need for data quality to attain higher levels of performance. The optimal tradeoff point depends on the amount of leverage you have; for Google’s Ad products a small increase in click through rate can mean billions of dollars of revenue and it may be worth it (although these models are constrained by low latency). This is an exceptional case.</p>
+<p>The article concludes the section with a reasonable recommendation:</p>
+<blockquote class="blockquote">
+<p>Thus, the recommendation is simple: if you have classification or regression data with inherently meaningful (non-raw) covariates, then try several different algorithms. If several of them all perform similarly after parameter tuning, use the simplest or most meaningful model. Analyze the model, and try to embed domain knowledge into the next iteration of the model. On the other hand, if there are large performance differences between algorithms, or if your data are raw (e.g., pixels from images or raw time series measurements), you may want to use a neural network</p>
+</blockquote>
+<p>For computer vision or NLP there’s no doubt that the best models are specific types of neural networks. However, despite a lot of work, they’re not robustly interpretable (as can be seen from adversarial methods). For tabular datasets it’s generally a much closer game; and the idea of trying some different models and seeing what works best is often advocated, for example in Kuhn’s <a href="https://www.springer.com/gp/book/9781461468486">Applied Predictive Modelling</a>.</p>
+<p>There’s often deeper advantages of interpretable models. If the decision informed by the model is being made by a domain expert, they can understand why the model is making the prediction and use their expertise to override it if something is going wrong. They’re easier to maintain, understand and debug, easier to fine tune and hone, and unlikely to give surprisingly bad results. All other things being equal and interpretable model is the best choice.</p>
+<p>In the unstructured case you can use neural networks to extract structured features that then go into interpretable models. I discuss this in <a href="../rules-and-models">rules and models</a>, and it’s a standard approach in NLP using tools like <a href="../stanza">Stanza</a> to extract the features and writing rules on top of those.</p>
+<p>I’m not convinced by their claim that interpretable models can almost always be made to perform as well as black box models. They don’t occur in general competitive machine learning competitions (and didn’t even win the interpretable machine learning competition). Most of the research they point to is their own, and I don’t know how strong the baselines are. However I could believe they’re good enough to use, and if a <a href="../simple-model">simple model</a> does the trick to use it.</p>
+<p>Cynthia Rudin has a lot of <a href="https://users.cs.duke.edu/~cynthia/papers.html">interesting research</a> on this area. There are papers on discrete optimisation methods such as branch-and-bound for interpretable methods such as <a href="https://arxiv.org/abs/2006.08690">optimal sparse decision trees</a> (<a href="https://github.com/Jimmy-Lin/GeneralizedOptimalSparseDecisionTrees">code</a>), <a href="https://arxiv.org/pdf/1710.02572.pdf">falling rule lists</a> (<a href="https://github.com/cfchen-duke/FRLOptimization">code</a>), and notably using linear <a href="https://jmlr.org/papers/v20/18-615.html">risk scores</a> (<a href="https://github.com/ustunb/risk-slim">code</a>, <a href="https://youtu.be/WQDVejk17Aw">video</a>). There are prototype methods, in <a href="https://arxiv.org/abs/1806.10574">image recognition</a> (<a href="https://github.com/cfchen-duke/ProtoPNet">code</a>) including using <a href="https://arxiv.org/abs/1906.10651">hierarchical prototypes</a> (<a href="https://github.com/peterbhase/interpretable-image">code</a>), and in causal inference such as <a href="https://arxiv.org/abs/1811.07415">MALTS</a> (<a href="https://github.com/almost-matching-exactly/MALTS">code</a>) and <a href="https://arxiv.org/abs/1806.06802">Almost Matching Exactly</a> (<a href="https://github.com/almost-matching-exactly/DAME-FLAME-Python-Package">code</a>). There are an assortment of other types of papers like <a href="https://arxiv.org/abs/1104.5061">combining machine learning with decision making</a>, <a href="https://arxiv.org/abs/1505.05629">bandit methods in time series</a>, and applied papers in healthcase, justice and electrical systems. I’d like to dig deeper into a few of these later.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

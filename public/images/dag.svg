@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="252px" height="180px" viewBox="0 0 252 180" enable-background="new 0 0 252 180" xml:space="preserve">
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="126" y1="162" x2="37.183" y2="105.48"/>
+		<g>
+			<path fill="#231F20" d="M27,99c5.923,1.271,13.799,2.021,19.529,1.153l-8.009,6.177l-2.203,9.871
+				C34.676,110.643,30.661,103.826,27,99z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="126" y1="18" x2="37.183" y2="74.52"/>
+		<g>
+			<path fill="#231F20" d="M27,81c3.66-4.827,7.675-11.644,9.315-17.203l2.204,9.872l8.008,6.176C40.798,78.977,32.922,79.727,27,81
+				z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="162" y1="90" x2="208.93" y2="90"/>
+		<g>
+			<path fill="#231F20" d="M221,90c-5.68,2.107-12.727,5.703-17.095,9.512l3.44-9.512l-3.44-9.51
+				C208.273,84.299,215.32,87.895,221,90z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="162" y1="90" x2="115.57" y2="90"/>
+		<g>
+			<path fill="#231F20" d="M103.5,90c5.68-2.107,12.727-5.703,17.095-9.512L117.154,90l3.44,9.51
+				C116.227,95.701,109.18,92.105,103.5,90z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="234" y1="90" x2="145.043" y2="30.695"/>
+		<g>
+			<path fill="#231F20" d="M135,24c5.895,1.397,13.752,2.314,19.5,1.568l-8.139,6.006l-2.412,9.821
+				C142.427,35.803,138.558,28.902,135,24z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="234" y1="90" x2="145.066" y2="148.84"/>
+		<g>
+			<path fill="#231F20" d="M135,155.5c3.574-4.892,7.467-11.778,9.008-17.365l2.379,9.831l8.116,6.032
+				C148.76,153.232,140.898,154.122,135,155.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="90" y1="90" x2="112.245" y2="141.905"/>
+		<g>
+			<path fill="#231F20" d="M117,153c-4.174-4.391-10.255-9.451-15.477-11.966l10.098-0.585l7.386-6.908
+				C117.227,139.057,116.698,146.95,117,153z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#231F20" stroke-width="2" stroke-miterlimit="10" x1="90" y1="90" x2="115.24" y2="37.864"/>
+		<g>
+			<path fill="#231F20" d="M120.5,27c-0.578,6.03-0.412,13.94,1.112,19.531l-7.062-7.241l-10.059-1.047
+				C109.823,35.971,116.13,31.195,120.5,27z"/>
+		</g>
+	</g>
+</g>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="18" cy="90" r="9"/>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="126" cy="18" r="9"/>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="162" cy="90" r="9"/>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="126" cy="162" r="9"/>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="90" cy="90" r="9"/>
+<circle fill="#0081CD" stroke="#231F20" stroke-miterlimit="10" cx="234" cy="90" r="9"/>
+</svg>

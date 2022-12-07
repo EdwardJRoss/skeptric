@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-11-08">
+
+<title>skeptric - Insights From Google Analytics for a Small Blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Insights From Google Analytics for a Small Blog</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 8, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I started regularly writing this website to get better at writing, to build a portfolio and share my learnings. Because of this I haven’t been focused on building an audience or looking at analytics. However now I’ve been writing continuously for 6 months I’d see if I learned anything interesting from looking at Google Analytics.</p>
+<p>I installed Google Analytics a couple of weeks ago on the website to see how people are actually viewing my site. Here are my top insights based on recent usage:</p>
+<ol type="1">
+<li>Three in four people come through a web search to solve a specific technical problem and then leave</li>
+<li>One in four people come to this site through commoncrawl.org.</li>
+<li>About 150 people view this website each day</li>
+</ol>
+<section id="in-4-people-search-for-a-problem-then-leave" class="level1">
+<h1>3 in 4 people search for a problem then leave</h1>
+<p>Most of my traffic comes from web search and lands on specific well named pages that solve a specific technical issue, and then leave. These articles that go deeply into solving particular problems reach a lot of people, and I find myself going back to them when I hit the issue again. Writing more of these kinds of articles is useful, but isn’t likely to build return traffic.</p>
+<p>The most visited pages are all solving problems that people are likely to search for, and indeed I searched before writing them. The top visited page is <a href="../wsl2-xserver">Running an X Server with WSL2</a> which is a common problem, and I put together a few solutions to get a working answer. Similarly other top pages from search are <a href="../presto-integer-division">Integer Division in Presto</a>, <a href="../html-to-text">converting HTML to text</a>, <a href="../export-athena">exporting data from Amazon Athena</a>, <a href="../moving-averages-sql">calculating moving averages in SQL</a>, and <a href="../ngram-python">ngrams in Python and Pandas</a>. Each of these focused on a specific technology and solving a well-defined problem.</p>
+<p>There are definitely similar articles that I find useful that don’t make it to the top. I’ve gone back to <a href="../jupyter-nolatex">turning of LaTeX in Jupyter</a>, <a href="../display-r-jupyter">displaying all columns in R Jupyter</a> and <a href="../python-diffs">showing side-by-side diffs in Python</a> a number of times but they get no hits. I’m not sure if it’s because these are unusual problems, or I’ve used strange words to describe them, or if there’s better content available. I’m glad I wrote them since I find them useful but I wonder if there were better ways to describe them to make them appear in searches.</p>
+<p>After people have visited the article that addresses their problem they leave. In fact 90% of people arriving by search only view one page, which makes sense since they’re trying to solve a specific problem, and are not likely to feel like exploring. I have no visibility of whether it actually solved their problem, since even if it didn’t they would go back to search and try the next result. There could be an opportunity here to offer further expertise on the technology they are reading about to come back to another time, but I’m not sure what the uptake would be like.</p>
+</section>
+<section id="in-4-people-come-from-commoncrawl.org" class="level1">
+<h1>1 in 4 people come from commoncrawl.org</h1>
+<p>It was a huge surprise to me that a large amount of my traffic was from <a href="https://commoncrawl.org">commoncrawl.org</a>. This is because they’ve recently listed my articles on their example project list. The lesson for me is that writing useful content for existing projects is a great way to build referral traffic.</p>
+<p>This is because they’ve put my articles on common crawl to the top of their <a href="https://commoncrawl.org/the-data/examples/">chronological list of example projects</a>. I’m honoured they put my articles there; I learned a lot from those projects before I built those articles. I never reached out to them so I assume they must have come across my site through a search or alert on common crawl. A similar thing happened when DAVx5 <a href="https://twitter.com/davx5app/status/1245287410193358854">mentioned a post on Twitter</a>.</p>
+<p>I have 4 articles on their list and each article further down the list gets about half the traffic of the one above it. Many people must click just the top link, fewer the one below it and so on. While this is a good source of traffic for now, the next time they update the list and bump down my articles the amount of traffic will drop off quickly. That being said the <em>quality</em> of the traffic will get better; the people who view articles further down are more dedicated. I may really help someone else build something useful with Common Crawl some time from now.</p>
+<p>Next time I post an article on an existing project I will consider reaching out to the project and its users. It may help reach more people that find it useful.</p>
+</section>
+<section id="about-150-people-view-this-website-each-day" class="level1">
+<h1>About 150 people view this website each day</h1>
+<p>I’m pretty impressed that I reach 150 people each day without doing any promotional work. They’re likely different people each day given the nature of the traffic. Even if I only help a third of the people that come that’s 50 each day. I’ve only been writing daily for 6 months, in another 6 months I could help ten thousand people. This may be small to a media outlet, but for me that’s incredible.</p>
+<p>Even so it could be worth promoting this website in small ways to help reach the people that could find it useful. A little research into SEO and doing things like making the site faster and tagging appropriate keywords could help more people find the right posts. Sharing posts through social media, especially when it connects to relevant projects, could also help content reach the right people. I don’t have any need to build an audience since I don’t sell anything, but it would be great to get what I write to the people who want to read it.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

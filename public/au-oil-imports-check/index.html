@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-10-10">
+
+<title>skeptric - Checking Australian Oil Imports</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Checking Australian Oil Imports</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">insight</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 10, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’ve estimated <a href="../au-oil-imports">Australian oil imports</a>; here I check the data to see how reasonable my estimates are.</p>
+<p>The overall tree diagram for the estimate is below:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">graph BT;
+   Import[Oil imports&lt;br/&gt;1.3 Million Barrels/Day]
+
+   ImportL[Oil imports&lt;br/&gt;200ML/Day] --&gt; Import
+   Barrel[Size of Barrel&lt;br/&gt;160L] --&gt;|-1| Import
+   
+   Consumption[Oil consumed L/Day&lt;br/&gt;200ML/Day] --&gt; ImportL
+   ImportRatio[Oil Imported / Consumed&lt;br/&gt;1] --&gt; ImportL
+   
+   CarConsumption[Oil Consumed by Cars&lt;br/&gt;100ML/Day] --&gt; Consumption
+   CarFraction[Oil Consumed in Total  / Oil Consumed by Cars&lt;br/&gt;2] --&gt; Consumption
+   
+   Cars[Number of Cars&lt;br/&gt;20 Million] --&gt; CarConsumption
+   ConsumptionCar[Oil Consumed by Car&lt;br/&gt;5L/Day] --&gt; CarConsumption
+
+   People[Number of People&lt;br/&gt;25 Million] --&gt; Cars
+   CarPeople[Number of Cars per Person&lt;br/&gt;0.8] --&gt; Cars
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<section id="checking-oil-imports-and-consumption" class="level1">
+<h1>Checking oil imports and consumption</h1>
+<p>Australian oil imports can be found in <a href="https://publications.industry.gov.au/publications/resourcesandenergyquarterlyseptember2020/documents/Resources-and-Energy-Quarterly-Sept-2020.pdf">Australian Office of the Chief Economist - Resources and Energy Quarterly September 2020</a> on page 87.</p>
+<p>The total imports are about 1020 kb/day (made up of 645 kb/day of refined oil plus 375 kb/day of crude imports), which is remarkably close to my estimate of 1300 kb/day. Let’s break this down and check the intermediate steps to see <em>why</em> it was so accurate, and check where there was dumb luck.</p>
+<p>In the same report it mentions the consumption is around 1,000 kb/day so the assumption that imports is approximately equal to consumption is remarkably good. Australia does produce a significant amount of oil; around 300 kb/day but exports a similar number about 250 kb/day. This is quite curious; I’m not sure why Australia exports a similar volume of oil to production, nor the mixture of refined and crude imports.</p>
+<p>Finally we assumed car usage is about half of all oil usage. In the same report it mentions that of worldwide usage about 30% is diesel, 26% is gasoline, 12% is LPG and Ethane and 8% is aviation. Some of diesel and LPG/Ethane usage will be in passenger cars, so it’s probably around 30%, a bit lower than 50% but not dramatically so. Looking at Australian Refinery output in July-December 2019, it’s about 5BL of Gasoline, 4BL of Diesel, 2BL of Aviation and 2BL of Other, so again slightly under half of usage being cars seems reasonable.</p>
+<p>I’m ignoring the density difference in crude and refined oil; likely crude oil leads to a lower volume of refined oil but this is likely a marginal impact on the estimates.</p>
+</section>
+<section id="car-usage" class="level1">
+<h1>Car Usage</h1>
+<p>We’ve established the assumptions on estimating oil imports with car petrol consumption in Australia is fairly reasonable. Let’s trace our estimated car consumption of 100 ML/day, or about 36,000 megalitres per year.</p>
+<p>According to the <a href="https://www.abs.gov.au/statistics/industry/tourism-and-transport/survey-motor-vehicle-use-australia/latest-release">2018 Survey of Motor Vehicle Use</a>: For the 12 months ending 30 June 2018:</p>
+<ul>
+<li>Fuel consumed by all road registered vehicles totalled 34,170 megalitres.</li>
+<li>There were an estimated 19 million motor vehicles</li>
+</ul>
+<p>This is remarkably close to my estimates. Given in the <a href="https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/by%20Subject/2071.0~2016~Main%20Features~Snapshot%20of%20Australia,%202016~2">2016 Census</a> there were 23.4 Million people, the ratio of about 0.8 cars per person is about right.</p>
+</section>
+<section id="reflection" class="level1">
+<h1>Reflection</h1>
+<p>This envelope calculation was unreasonably accurate given my knowledge of Australia’s oil industry, although I have a lot of practical knowledge of the country from living in it. It would be interesting to try to extend this to other countries; it’s a powerful way to gain a deeper understanding of how part of a country’s economy works.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

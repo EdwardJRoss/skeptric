@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-04-05">
+
+<title>skeptric - Rules, Pipelines and Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Rules, Pipelines and Models</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">nlp</div>
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 5, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Over the past decade <em>deep neural networks</em> have revolutionised dealing with unstructured data. Problems like identifying what <a href="https://pjreddie.com/darknet/yolo/">objects are in a video</a> through <a href="https://transformer.huggingface.co/">generating realistic text</a> to <a href="https://ai.googleblog.com/2019/05/introducing-translatotron-end-to-end.html">translating speech between languages</a> that were intractable are now used in real-time production systems. You might think that today all problems on text, audio an images should be solved by training end-to-end neural networks. However rules and pipelines are still extremely valuable in building systems, and can leverage the information extracted from the black-box neural networks.</p>
+<p>Media coverage in natural language processing focuses on the new massive models like <a href="https://github.com/google-research/bert">BERT</a>, <a href="https://openai.com/blog/better-language-models/">GPT-2</a> and <a href="https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/">Turing-NLG</a> trained using tens of thousands of GPU hours on massive web crawls. This kind of hype made me think that training a single deep neural network, with the right architecture, is the right solution for almost any supervised learning problem. However there’s lots of good reasons to also use interpretable handcrafted rules, simpler models and pipelines.</p>
+<section id="informing-decisions" class="level1">
+<h1>Informing decisions</h1>
+<p>The primary value in any model is to help make a decision, by better understanding the consequences of different decisions. A black box model used on unstructured data may make a prediction without guiding what action needs to be taken.</p>
+<p>Consider the task of writing a job advertisement; you want to write it in such a way that the people you want to hire will apply while maintaining a diverse candidate pool. Suppose you could track how many good candidates applied for a large number of different advertisements, then you could build a Transformer to predict the number of good candidates that will apply given the job ad text.</p>
+<p>Then to write a good job ad you could try many different variations of the ad and see what optimises the score. However this approach is very time consuming for the person writing the job ad, and you may not even think of the types of changes that will improve the job ad. Moreover it’s not clear how much of score is real signal versus random noise in the model.</p>
+<p>Perhaps you could implement <a href="https://github.com/marcotcr/lime">lime</a> to see which words in the text have the most impact on the score. Highlighting those words could help direct your attention to where the ad needs to be edited. Unfortunately improving a job advertisement is rarely as simple as deleting a few words in isolation, which are the kinds of suggestions lime makes by default.</p>
+<p>So maybe you use the language model from your Transformer to rewrite the sentences and rescore it (like a more sophisticated lime), and make the suggestions that would improve the job the most. Even if we can generate text that is reasonable and the predictions don’t overfit to noise (making random suggestions), they may start suggesting things that you can’t or don’t want to change. Maybe it will suggest changing your company name to Google (their jobs get a lot of applicants), or increasing the salary significantly, or maybe even chaning the kind of role you’re hiring for! As the ad is changed the definition of a “good candidate” might change (maybe writing the ad a certain way indicates you have lower expectations) so it may no longer be meeting your objective.</p>
+<p>A different, more tractable, approach is to implement a bunch of rules like <a href="https://taprecruit.co/smart-editor/">Taprecruit</a> does:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/taprecruit.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Taprecruit suggesting change to the job ad title</figcaption><p></p>
+</figure>
+</div>
+<p>It seems like Taprecruit has a list of different rules of things that will strongly impact the number of candidates that apply and the gender balance. It then directly makes recommendations based on these rules like “add a programming language to a Software Engineer job title”. Under the hood there could be some sophisticated models to detect when the rules apply, what suggestions to make, and to give overall scores.</p>
+<p>The rule based strategy lets you suggest the kinds of changes hirers will make, and those that you have strong evidence that will make an impact based on expertise, independent research, or modelling. It also lets you explain the suggestions in context which makes them more likely to be adopted. You may miss some things that a black box model will find, but the rules approach leads to a product that can actually help a hirer. The management of creating hundreds of these sorts of rules has a much better payoff than trying to build a complex neural network that adheres to many subtle constraints.</p>
+</section>
+<section id="adding-real-world-knowledge" class="level1">
+<h1>Adding real world knowledge</h1>
+<p>Another benefit of rule based approaches is they let you add real world knowledge which can improve data efficiency, or even encode things that can’t be seen in the model. In the job advertisement example the model may not have known what changes a hirer would make when writing an ad (and obtaining this data might be very expensive), but a knowledgeable human might be able to hypothesise and collect qualitative data to support this. Adding this real world knowledge can make models much more effective and simple to implement.</p>
+<p>As a simple example if you wanted to extract human readable dates (like “5th of April, 2020”) you could get dates annotated in thousands of documents and build a complex machine learning model to tag the spans of text. You could even go a step further and train it to output the year, month and day; although I’d worry whether it generalises well to years not in the training set! Or you could do what <a href="https://dateparser.readthedocs.io/en/latest/">dateparser</a> does and just list out the <a href="https://github.com/scrapinghub/dateparser/blob/master/dateparser/data/date_translation_data/en.py">most common ways of writing dates</a>. You could then do lots of different testing to capture most of the variants and implement a high precision date extractor that’s easy to maintain fairly quickly. Moreover this approach will operate orders of magnitude faster than the neural network, with higher reliability.</p>
+</section>
+<section id="existing-tools-are-far-cheaper" class="level1">
+<h1>Existing tools are far cheaper</h1>
+<p>When there’s an existing tool that can do the job it will often be orders of magnitude cheaper to implement, operate, and maintain (which often makes more things worth doing) and may just perform better in general. To build a supervised model you need sufficiently many labelled data of a high enough quality, and it can be a challenge to choose the right model architecture, train it and debug any issues.</p>
+<p>In the date parser example it was much cheaper and faster to build the rules, but it’s also very unlikely to give unexpected results. Even Google’s high profile language translator gives very <em>unusual</em> results that are hard to interpret with data far out of the training set.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/google_translate.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Google translates gibberish from Frisian to an unrelated sentence in English</figcaption><p></p>
+</figure>
+</div>
+<p>These kinds of issues are notoriously hard to debug and fix in neural networks; whereas rules are much easier to trace and amend.</p>
+<p>When Dropbox created an application to <a href="https://dropbox.tech/machine-learning/creating-a-modern-ocr-pipeline-using-computer-vision-and-deep-learning">extract text from uploaded documents</a> they used a deep neural network to convert images of words to text. However they didn’t use the same neural network to detect the words in the image, instead using an algorithm called <a href="https://en.wikipedia.org/wiki/Maximally_stable_extremal_regions">Maximally stable extremal regions (MSER)</a>. It wasn’t clear that training an image detector for words would work well with hundreds to thousands of words in a document. However MSER works very well, there’s an existing fast implementation in <a href="https://opencv.org/">OpenCV</a>, and is easy to debug and fix issues. The pipeline of MSER and a neural network image-to-text converter was right for their application.</p>
+</section>
+<section id="modularity" class="level1">
+<h1>Modularity</h1>
+<p>Instead of having a single end-to-end model you can have multiple pieces in a pipeline that fit together and can be reused for different applications. For Dropbox’s text extractor they could use the off-the-shelf MSER algorithm, and if they found a better algorithm they could replace it with minimal impact on the image-to-text converter. This kind of technique is very common in natural language processing where there is a long history of using pipelines to get useful features out of text.</p>
+<p>The <a href="https://spacy.io/">spaCy</a> library implements this kind of pipeline where it tokenizes the text (splitting the text into words), tags the parts of speech (like nouns and verbs), parses the dependencies (like saying which noun a verb refers to) and performs Named Entity Recognition (finding names of people, places, times).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/spacy_pipeline.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">spaCy pipeline</figcaption><p></p>
+</figure>
+</div>
+<p>There’s a great example from Ines Montani on how you could use this to <a href="https://support.prodi.gy/t/fact-extraction-for-earnings-news/1023/2">extract sales figures from earning’s reports</a>. You could use the entity recogniser to find company names and money, and text matching to find dates (like Q2 2018) then writing rules with the dependency parser to find the relations between money figures, dates and company names. Text classification could be used to help find the relevant sentences, or to tag whole paragraphs based on the header, to help make the process faster with less false positives. While perhaps you could build a deep neural network to do this, it would require a lot of annotation, experimentation with models, expensive equipment, and may just not work.</p>
+<p>However there is one big drawback to pipelines; they’re only as good as their weakest component. If the tokenizer fails (maybe because of some special character or stray HTML tag), then the part of speech tagger, dependency parser and named entity recogniser will all do poorly. This means you may have to do some analysis and improvements for each component to work really well on your data (maybe writing a custom tokeniser or retraining the dependency parser). The upside of this is it is normally easy to see where your pipeline breaks down and how to fix it; when a black box model performing a complex task doesn’t work it can be incredibly hard to understand why and how to fix it.</p>
+</section>
+<section id="pipelines-of-models-and-rules" class="level1">
+<h1>Pipelines of models and rules</h1>
+<p>Advances in deep learning have made whole new things feasible in fields like object detection and automatic translation and transcription. However deep learning models are expensive to annotate for, train, operate and debug, and it’s not clear upfront whether they will succeed at complex end-to-end tasks. A very promising approach is to combine these deep learning models with existing techniques like rules, algorithms and simpler machine learning models, to attach complex tasks. When Google <a href="https://www.blog.google/products/search/search-language-understanding-bert/">put BERT into search results</a> they used it to augment their results for complex search phrases, not to replace their existing well-functioning search algorithm.</p>
+<p>Breaking a complex task into steps makes it much easier to obtain reusable components that can be built or bought and optimised separately. This is as true in systems using machine learning as it is for general software engineering. While there are some cases where an end-to-end deep learning model is the right solution, it’s rarely the place to start.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

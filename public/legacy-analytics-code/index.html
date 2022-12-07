@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-02-07">
+
+<title>skeptric - Working With Data Scientist Code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Working With Data Scientist Code</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 7, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>The idea of working with code written by a data scientist sends chills down the spine of many software engineers. Most data scientists, statisticians and data analysts are extremely good at quickly manipulating data and experimenting with different approaches to a problem. Fewer of them are skilled on writing software that is easy to maintain and deploy. Common software development practices like automated builds, tests and modular code are rarely adhered to in data science code. However it <strong>is</strong> possible to work effectively with them by producing reproducible runs, instrumenting metrics and creating diff scripts.</p>
+<p>There’s a good reason many data science and analytics codebases are hard to maintain. Most of these projects are experimental at inception. There is a lot of time spent understanding the data, trying different approaches, and evaluating the outcomes through different perspectives. Often whole projects are throwaway because the data is not good enough, or the problem is too difficult to solve for the expected return. When writing this kind of prototype code it’s important to iterate quickly and have many different diagnostics of the data. However if it’s successful and the script becomes part of a regular process, then it suddenly becomes important for it to be understandable, reliable and easy to change. When you need to work with data scientist code you should spend some of your time paying down this tech debt.</p>
+<p>An approach I’ve found effective for working with data scientist code is:</p>
+<ul>
+<li>Get the code working</li>
+<li>Follow the data flow to divide and conquer</li>
+<li>Create diff scripts and reproducible runs</li>
+<li>Refactor the code to make it easy to change</li>
+<li>Make the changes</li>
+</ul>
+<section id="getting-it-working" class="level1">
+<h1>Getting it working</h1>
+<blockquote class="blockquote">
+<p>Works on my machine</p>
+</blockquote>
+<p>Based on my experience I’m going to assume the current state is:</p>
+<ul>
+<li>You’ve got some collection of scripts in languages like Python, Bash, R or SQL (and maybe some SPSS or SAS)</li>
+<li>The scripts run in a pipeline (sometimes they’re helpfully labelled in order <code>01_</code>, <code>02_</code>)</li>
+<li>Each script contains long chains of impenetrable imperative data munging</li>
+<li>It worked once, on someone’s machine, but not on yours now</li>
+</ul>
+<p>The first step is to use a Version Control System like Git if it’s not already being used. It’s easiest just to commit all the files to start with, and sort out separating the data from the code later.</p>
+<p>The next step is to try to get an operating environment you can run it in.</p>
+<section id="setting-up-an-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-an-environment">Setting up an environment</h2>
+<p>It’s much easier to work reliably with running code than with broken code.</p>
+<p>The most common reasons code may not run are:</p>
+<ul>
+<li>Dependencies are not installed</li>
+<li>External resources like databases or URLs are not available</li>
+<li>You’re running it in a different place</li>
+</ul>
+</section>
+<section id="environment" class="level2">
+<h2 class="anchored" data-anchor-id="environment">Environment</h2>
+<p>Environmental assumptions: (/home/user/rperkins), datetime 2019-12-15, OSX</p>
+<p>Restoring dependencies: Changelogs and release history, git log, bisections</p>
+<p>Version of code (R’s random number generator!)</p>
+<p>External resources: Database changes, URLs changed content</p>
+<p><em>Strongly resist the urge to rewrite any of it from scratch.</em> ## Understanding it</p>
+<p>Looking at input and output.</p>
+<p>Start at end of function and read backwards</p>
+<p>Refactor it</p>
+</section>
+<section id="tackling-it" class="level2">
+<h2 class="anchored" data-anchor-id="tackling-it">Tackling it</h2>
+<p>Faking it: docker/VM/cloud VM</p>
+<p>Changing things and assessing risks</p>
+<p>Carefully checking output as expected</p>
+<p>Divide, debug and conquer</p>
+<hr>
+<p>An approach I’ve found effective for refactoring code analytics code is:</p>
+<ul>
+<li><p>Understand the data flow</p></li>
+<li><p>Divide and conquer</p></li>
+<li><p>Create diff scripts</p></li>
+<li><p>Break the code into small steps</p></li>
+<li><p>Create a small, representative test dataset</p></li>
+<li><p>Seeing the tree from the branches</p></li>
+</ul>
+</section>
+</section>
+<section id="crude-tests-with-diff-scripts" class="level1">
+<h1>Crude tests with Diff Scripts</h1>
+<p>Common software development practices like testing, <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY (Don’t repeat yourself)</a>, and automated building are uncommon in data scientist code. However by using</p>
+<p>For exploratory code, like a one-off analysis, this is sensible - When the code is a one-off analysis or experimenting to see whether a problem is solvable.</p>
+<p>Imagine that</p>
+<p>You have to rerun that script the advanced analytics team sent over, and switch it over to the new data source.</p>
+<p>And you have to add a new</p>
+<p>The idea of working with code written by statisticians, analysts or data scientists puts a chill down the spine of many a software engineer.</p>
+<p>We have to rerun that script the advanced analytics team sent to us. Oh</p>
+<p>Data scientists, analysts, and statisticians aren’t known for writing the m</p>
+<p>How do you deal with analytics code with no tests</p>
+<p><a href="https://refactoring.com/">Martin Fowler’s Refactoring</a></p>
+<ul>
+<li><p>Follow the variables</p></li>
+<li><p>Follow the output</p></li>
+</ul>
+</section>
+<section id="preparing-for-changes" class="level1">
+<h1>Preparing for changes</h1>
+<p>Goal: Test a change for invariance as quickly as possible</p>
+<section id="do-you-actually-need-to-change-this-portion-of-code" class="level2">
+<h2 class="anchored" data-anchor-id="do-you-actually-need-to-change-this-portion-of-code">Do you actually need to change this portion of code?</h2>
+<p>If you’re not changing it, and it works, try to leave it alone</p>
+</section>
+<section id="divide-and-conquer" class="level2">
+<h2 class="anchored" data-anchor-id="divide-and-conquer">Divide and conquer</h2>
+<p>Map out inputs -&gt; outputs</p>
+</section>
+<section id="gold-standard-technique" class="level2">
+<h2 class="anchored" data-anchor-id="gold-standard-technique">Gold standard technique</h2>
+<p>Static dataset and a diff script</p>
+<p>Small with edge cases (fast)</p>
+<p>Invariance of outputs: The diff script</p>
+</section>
+<section id="branching-and-parameterisation" class="level2">
+<h2 class="anchored" data-anchor-id="branching-and-parameterisation">Branching and parameterisation</h2>
+<p>Remove or test branches; run multiple times to test multiple branches</p>
+<p>Configure things to be fast; trust external dependencies</p>
+</section>
+<section id="nondeterminism" class="level2">
+<h2 class="anchored" data-anchor-id="nondeterminism">Nondeterminism</h2>
+<ul>
+<li>Randomness</li>
+<li>Race conditions</li>
+<li>External resources: time, database changes, URL content, user input</li>
+</ul>
+<p>Solutions: - Set random seeds of PRNG - Single threading - Mock environment - Diff scripts that are insensitive to these changes</p>
+</section>
+</section>
+<section id="making-changes" class="level1">
+<h1>Making changes</h1>
+<section id="refactoring-many-small-changes-and-test-goldset" class="level2">
+<h2 class="anchored" data-anchor-id="refactoring-many-small-changes-and-test-goldset">Refactoring: Many small changes and test goldset</h2>
+<p>Small change + quick test -&gt; quick incremental improvements</p>
+<p>Large change + slow test -&gt; long debugging cycles, more likely to miss errors</p>
+<p>Occasionally run fuller test on bigger test set, more parameters, etc. Write test cases for failures</p>
+<p>Goals? Refactoring by Martin Fowler</p>
+<p>Clean API, functional: Makes it easier to test - Each function does one thing - Functions don’t mutate their inputs - No mutable globals; few globals - Pass time as a parameter (multiple today() problems) - As many functions as makes it easy to read - No dead code - Fail fast (no warnings R!)</p>
+<p>Add tests?</p>
+</section>
+<section id="making-the-changes" class="level2">
+<h2 class="anchored" data-anchor-id="making-the-changes">Making the changes</h2>
+<p>Add tests Use diff scripts to check you only changed what was intended</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

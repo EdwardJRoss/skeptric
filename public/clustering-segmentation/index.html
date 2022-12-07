@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-05-05">
+
+<title>skeptric - Clustering for Segmentation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Clustering for Segmentation</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 5, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Dealing with thousands of different items is difficult. When you’ve got a couple of dozen you can view them together, but as you get into the hundreds, thousands and beyond it becomes necessary to group items to make sense of them. For example if you’ve got a list of customers you might group them by state, or by annual spend. But sometimes it would be useful to split them into a few groups using some heuristic criteria; clustering is a powerful technique to do this.</p>
+<p>First you’ll need some data with items and features about the items; for example this could be from a customer database or from a survey you have conducted. In the customer example it could look like:</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>customer_id</th>
+<th>first_date</th>
+<th>state</th>
+<th>industry</th>
+<th>acquisition_channel</th>
+<th>support_calls</th>
+<th>annual_spend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2003-05</td>
+<td>SA</td>
+<td>agriculture</td>
+<td>Referral</td>
+<td>2</td>
+<td>10,000</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2020-03</td>
+<td>Vic</td>
+<td>manufacturing</td>
+<td>Direct</td>
+<td>0</td>
+<td>3,100</td>
+</tr>
+</tbody>
+</table>
+<section id="clustering-and-descriptive-features" class="level1">
+<h1>Clustering and Descriptive features</h1>
+<p>You need to separate your <em>clustering features</em> from your <em>descriptive features</em>. The clustering features are things you would segment your customers on, for example it might not make sense to use <code>support_calls</code> because this will be highly variable and won’t apply to new customers, or maybe the <code>first_date</code> isn’t really going to be meaningful for customer behaviour. The descriptive features are the non-clustering columns that are useful for characterising a group.</p>
+<p>In this example it might make sense to have <code>state</code> and <code>industry</code> as clustering features, and <code>support_calls</code> and <code>annual_spend</code> as descriptive features. The simplest clustering is a <em>full pivot</em> of the clustering features; that is every combination. In this case we’d treat every state and industry as a separate group. The problem with this is we may end up with <em>lots</em> of groups, and many small groups for uncommon combinations (like customers in the <code>ACT</code> in <code>manufacturing</code>). Sometimes you can sweep this away by collecting all the small groups into an <code>Other</code> group, but you can lose valuable information this way.</p>
+</section>
+<section id="similarity-measure" class="level1">
+<h1>Similarity measure</h1>
+<p>Clustering works by grouping together objects that are more similar to each other than those in other groups. To do this we need to define what “similar” is. The general way of doing this is to combine distances as a weighted average of features (this is described well in <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">Elements of Statistical Learning (2nd ed.)</a> section 14.3).</p>
+<p>First you need a notion of distance for each feature in the similarity measure. For example you might have a notion of distances between states (maybe 1 if they share a border or 0 otherwise), and industries (based on subject matter expertise; for example you might curate your own hierarchy). Otherwise you could just say the distance is 1 if they are the same and 0 if they are different (see <a href="https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/daisy.html">Gower’s formula</a> for a fairly general dissimilarity function). For annual spend the distance could be the absolute difference between them.</p>
+<p>Then you combine them to create a distance with a weighted average accross the features. Because they are on different scales a weight of 1 does <em>not</em> give them all equal importance (and in this example <code>annual_spend</code> would dominate). It’s best to normalise the individual metrics so the average distance accross all pairs of items is 1, so they are on the same scale. Even then you will want to give more weight to some features than others; this is an iterative process where you use domain knowledge to choose how important each feature will be in your clustering.</p>
+<p>An alternative approach to a similarity measure is having a <em>fitness function</em> of the clustering. For example if we were most interested in clustering together customers with similar annual spend we could treat it as a regression problem. Then the quality of our cluster could be the (cross-validated) root mean square error of predicting the mean annual spend accross a cluster for each customer in that cluster. We could then use <a href="https://en.wikipedia.org/wiki/Decision_tree_learning">regression trees</a> over the cluster variables to create the clusters.</p>
+</section>
+<section id="clustering-algorithm" class="level1">
+<h1>Clustering Algorithm</h1>
+<p>There are lots of clustering algorithms such as <a href="https://en.wikipedia.org/wiki/K-medoids">k-medoids</a> (the <a href="https://en.wikipedia.org/wiki/K-means">k-means</a> equivalent for non-Euclidean distances) and <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">hierarchical clustering</a>, or more exotic ones like <a href="https://en.wikipedia.org/wiki/Self-organizing_map">self-organising maps</a>.</p>
+<p>You can try a few different algorithms but this is normally the easy bit; the hard part is evaluating it.</p>
+</section>
+<section id="evaluation" class="level1">
+<h1>Evaluation</h1>
+<p>Clustering is difficult because there’s no one way to evaluate a cluster. You have to think hard about what evidence that this clustering is going to be useful. In practice you’ll generally want to have the one segmentation accross a number of different use cases, and so you want to check it’s useful for all of them.</p>
+<p>The best way to look at a cluster is to look at the descriptive and clustering features and make sure they make sense and reveal some insights. It’s always useful to have cluster size; generally clusters that are too small are not useful but you might make an exception for a group of your top few customers that contribute most to your revenue (and similarly too large clusters will wash out useful information, but that might be ok for many customers that make small purchases).</p>
+<p>The clustering features will <em>define</em> your cluster; in this example it would be the groups of states and industries we consider the same. You should ask the question <em>does it make sense for these to go together</em>?</p>
+<p>The descriptive features help understand your cluster; it’s worth looking at the centre and the spread, if not the whole distribution. For example you might want to know the typical number of support calls you get from these customers, the most common aquisition channel and the typical spend. Measures of spread will tell you how tight the clustering is; common examples are the standard deviation, interquartile range or percentage not in most common category. If the spread is similar to the whole dataset then the cluster isn’t telling you anything useful. It can be useful to just plot the distributions of individual features to get an idea of how it’s composed.</p>
+</section>
+<section id="iteration" class="level1">
+<h1>Iteration</h1>
+<p>It’s important to think through the clustering and descriptive features up front. Then you can evaluate on different measures, with different weights and different clsutering algorithms as much as necessary. I’ve found I often want to constrain the clustering using business knowledge and this is much more difficult with some algorithms than others.</p>
+<p>Because the evaluation is subjective it makes sense to start with a simpler clustering method and try tuning feature weights or adding constraints until the clusters look useful. Reducing the iteration time is really useful for creating reasonable clusters; <a href="https://shiny.rstudio.com/">Shiny</a> or <a href="https://ipywidgets.readthedocs.io/en/latest/">ipywidgets</a> are handy tools for experimenting interactively. As you look more at the clusters you’ll get clearer about what a <em>good</em> clustering looks like and refine the evaluation criteria.</p>
+<p>Generally you want the clustering to be easy to explain, so it’s worth thinking about how to do this. Maybe making it easy to find what cluster something is in is good enough. Other time you may approximate the final clustering model with a more transparent model.</p>
+<p>Clustering isn’t the best way to do things like customer targeting; there you’re better off building a direct predictive model. But for extracting information, like reporting, clustering can be a useful tool to understand your dataset.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

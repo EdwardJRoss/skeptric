@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-12-02">
+
+<title>skeptric - Using Behaviour to Understand Items</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using Behaviour to Understand Items</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 2, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>When people access products online their behaviour gives lots of information about both the people and the products. This information deeply enriches understanding of how to better serve your customers, how your products are related to each other and can help answer deeper questions about them. However you need to find a way to unlock the information.</p>
+<p>Using behavioural information can greatly improve modelling on the tabular data in your database. In natural language processing there a large number of tasks like predicting whether a sentence is saying something good or bad (<a href="https://paperswithcode.com/task/sentiment-analysis">sentiment analysis</a>), identifying people and places in a document (<a href="https://paperswithcode.com/task/named-entity-recognition-ner">Named Entity Recognition</a>) and translating text from one language to another (<a href="https://paperswithcode.com/task/machine-translation">machine translation</a>). In recent years performance on all these tasks have increased dramatically by firt <a href="../dont-stop-pretraining">pretraining a language model</a> before training on the specific task. A language model predicts the next word (or letters) that will come part way through a sentence, like the next word suggestions on your phone’s keyboard (or <a href="https://transformer.huggingface.co/doc/gpt2-large">write with transformer</a> to see a state of the art example). By becoming really good at predicting the next word a language model gets really good representations of language, which allows it to better determine what a sentence is saying, whether these words are someone’s name and how to produce grammatical output in a translation. Recently the same idea has started to show promising results in computer vision, where it is called <a href="https://www.fast.ai/2020/01/13/self_supervised/">self-supervised learning</a>. So if you’ve got a large database filled with behavioural information then you’re only going to get the best results on building on that knowledge.</p>
+<p>Creating tasks that embed categorical items is a powerful way to use behavioural data, and enables use of the embeddings in other tasks. I’ve already written about <a href="../embeddings">building categorical embeddings</a>; in short instead of treating items as independent it lets you put them as points in some vector space where similar items are close together. Suppose you’re trying to gauge interest on some very niche category of item; you don’t have much direct information on the category and so can’t directly measure it. But in an embedding you can use information about interest of related items to infer how interest is changing for this item.</p>
+<p>Thinking about a website like eBay there are lots of different ways you can use behaviour to understand items. Uou could use people’s intent behaviour on items to understand both of them. For example people who view, watch (save), and buy many of the same items are likely similar in some way and products that are viewed, saved and bought by many of the same people are similar. But this doesn’t work for all sorts of purchases; maybe you need to filter it by search behaviour. Items that are likely to be clicked on by the same search term are likely to be similar in a more contextual sense. Items that are often posted together by the same person are similar in a different sense. Items that contain similar text descriptions or a similar photograph are similar in yet another way. You could do this for individual items, categories of items, or aspects of items. You could even use this <a href="../cluster-exploration">to make categories of items</a>.</p>
+<p>It would be great to demonstrate this effect in the open, but it’s hard to find good datasets. A good real example of this is <a href="https://github.com/entron/entity-embedding-rossmann">the 3rd place solution to the Kaggle <em>Rossman Stores Sales Data</em> competition</a>, where they solved it with a neural network and got informative embeddings of locations. The <a href="https://console.cloud.google.com/marketplace/product/obfuscated-ga360-data/obfuscated-ga360-data">Google Analytics sample dataset</a> is a good candidate, containing user behaviour in the Google Merchandise store. There’s an <a href="https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store">ecommerce behavioural dataset on Kaggle</a> which also could be good. Or using a big public forum like <a href="https://archive.org/details/2015_reddit_comments_corpus">pushshift.io’s export of Reddit</a>, <a href="https://console.cloud.google.com/marketplace/product/y-combinator/hacker-news">Hacker News</a> or <a href="https://archive.org/details/stackexchange">Stack Exchange</a> could be used by looking at people that comment in the same threads. In each of these cases it would be worth nominating a task to show improvement on, like <a href="https://www.kaggle.com/c/ga-customer-revenue-prediction">predicting revenue form Google Analytics</a> or <a href="https://www.kaggle.com/c/pycon-2015-tutorial-predict-closed-questions-on-stack-overflow">closed questions on Stack Overflow</a>.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

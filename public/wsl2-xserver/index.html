@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-07-25">
+
+<title>skeptric - Running an X server with WSL2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Running an X server with WSL2</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">wsl</div>
+    <div class="quarto-category">linux</div>
+    <div class="quarto-category">emacs</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 25, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’ve recently <a href="../wsl2-start">started working with WSL2</a> on my Windows machine, but have had trouble getting an X server to run. This is an issue for me because running Emacs with Evil keybindings under Windows Terminal I often find there’s a lag in registering pressing escape which leads to some confusing issues (but vanilla Vim is fine). But having an X Server would also allows running any Linux graphical application under X.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Windows now provides <a href="https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps">built-in support for GUI apps in WSL2</a> which is considerably easier to use and setup than the instructions below.</p>
+<p>Only follow the below tutorial if for some reason the WSL GUI experience doesn’t meet your needs.</p>
+</div>
+</div>
+<p>As outlined in <a href="https://stackoverflow.com/a/61110604">a StackOverflow answer</a> there are three steps to getting this working:</p>
+<ol type="1">
+<li>Enable WSL to access the X server on Windows Firewall</li>
+<li>Enable public access from an X11 Server</li>
+<li>Export the appropriate display variables from Linux</li>
+</ol>
+<section id="allow-wsl-access-via-windows-firewall" class="level1">
+<h1>Allow WSL Access via Windows Firewall</h1>
+<p>WSL2 runs in a Virtual Machine, so network traffic looks like it’s coming from another machine (as opposed to WSL1 where network traffic was local). This means that when we’re trying to forward X from WSL2 to an X Server running in Windows it has to pass through the firewall. We’ll enable this traffic to pass through the firewall, as described in <a href="https://github.com/cascadium/wsl-windows-toolbar-launcher#firewall-rules">cascadium</a>. This is straightforward but requires a few steps.</p>
+<p>Press the Windows Start Button and select “Firewall &amp; Network Protection” (typing until it comes up). Then select “Advanded Settings”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/windows_network_advanced.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Windows Network Advanced Settings</figcaption><p></p>
+</figure>
+</div>
+<p>You may be asked at an Administrator prompt to allow this application to make changes to the system; allow it. Right click on “Inbound Rules” and select the option “Add Rule…”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/windows_firewall_add_rule.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add firewall rule</figcaption><p></p>
+</figure>
+</div>
+<p>We’re going to open up Port 6000 for the X Server to communicate on. Under Rule Type select port and then click next. Select TCP Port 6000 and click next. Then click next through windows (allowing the connection and applying to all profiles) until the last screen, and then give it a reasonable name like “WSL2 X Access” and then Finish.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/windows_network_rule_type_port_6000.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Opening Port 6000</figcaption><p></p>
+</figure>
+</div>
+<p>This opens up the port to the whole internet, which is a security risk. We now need to narrow the scope so it’s only open to WSL2.</p>
+<p>Find the Rule you just created in the list of Inbound Rules, right click and select “Properties” Click the “Scope” tab, and under “Remote IP Addresses” click Add entering “172.16.0.0/12” under port. Then click Add again entering “192.168.0.0/16” under port. These are local subnets that may be used by WSL2.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/windows_network_limit_wsl_subnet.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">WSL Subnet</figcaption><p></p>
+</figure>
+</div>
+<p>Now WSL2, and only WSL2, is able to send network traffic to Windows on port 6000, which we need for X.</p>
+</section>
+<section id="enable-public-access-from-an-x11-server" class="level1">
+<h1>Enable public access from an X11 Server</h1>
+<p>For the X11 Server it appears as if the traffic is coming from elsewhere so we have to enable public access. Using <a href="https://sourceforge.net/projects/vcxsrv/">VcXsrv</a> via XLaunch this means checking the “Disable access control” on the “Extra settings” page.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/vcxsrv_disable_access_control.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Disable Access Control</figcaption><p></p>
+</figure>
+</div>
+<p>Alternatively you can do this with the <code>-ac</code> command line parameter to the vcxsrv executable. Assuming it’s installed in Program Files you could invoke it from Powershell as follows:</p>
+<pre><code>&amp; 'C:\Program Files\VcXsrv\vcxsrv.exe' :0 -multiwindow -wgl -ac -silent-dup-error</code></pre>
+<p>This sets up a multiwindow display using Windows GL with disabled access control, and doesn’t raise an error if this already exists (so it’s safe to run multiple times).</p>
+</section>
+<section id="export-appropriate-display-variables" class="level1">
+<h1>Export appropriate display variables</h1>
+<p>Finally you need to export the DISPLAY to the corresponding port from Windows, and set <code>LIBGL_ALWAYS_INDIRECT</code>. You can add this to your <code>.bashrc</code> or similar.</p>
+<pre><code>export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2&gt;/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=1</code></pre>
+<p>Now you should be able to run applications.</p>
+</section>
+<section id="making-the-process-smoother" class="level1">
+<h1>Making the process smoother</h1>
+<p>I used this for Emacs 26 under WSL2, and it works perfect after <a href="../emacs-buffering">disabling double buffering</a>.</p>
+<p>Once it’s configured you can run it directly from Powershell running <code>bash -c 'source ~/.bashrc; emacs'</code>. Note that if you exported the display variables in a <a href="../portable-custom-config">local config file</a> like <code>.bashrc.local</code> you have to source that file instead.</p>
+<p>You could put this all together into a single shortcut that starts the display and executes the application:</p>
+<pre><code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  -windowstyle hidden
+  -command &amp; 'C:\Program Files\VcXsrv\vcxsrv.exe' :0
+    -multiwindow -wgl -ac -silent-dup-error;
+  "&amp;{ bash -c \"source ~/.localrc; cd; emacs\" }"</code></pre>
+<p>Alternatively you could even launch a Window Manager and run all your linux applications from there.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

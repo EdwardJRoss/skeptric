@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-06-18">
+
+<title>skeptric - Finding Meaning in HTML</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Finding Meaning in HTML</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">html</div>
+    <div class="quarto-category">nlp</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>HTML is one of the most common forms of communication today. Emails, wikis, blogs, and many forums ultimately use some sort of HTML to communicate things such as emphasis, cross-links and structure. However in Natural Language Processing on HTML the most common practice is to throw away all the markup. A lot of markup is meaningless, from a communication perspective, but removing all of it is throwing out the baby with the bathwater, and there are better ways to do this.</p>
+<p>I’ve written before about <a href="../html-nlp">why you should use HTML in NLP</a> and how we can extract the text with context by <a href="../source-mapping-html">source mapping</a>. In this article I want to delve into what semantics we want to extract from HTML and outline some steps to do that. Ultimately this is for practical reasons; I want to extract information and meaning from webpages, and some of that meaning is encoded in the HTML.</p>
+<section id="linguistics-of-html" class="level1">
+<h1>Linguistics of HTML</h1>
+<p>HTML is a framework for a wide variety of things from describing the scaffolding of how a page should be visually laid out, to a data structure that can be dynamically modified with Javascript for applications, through to a communication medium. I’m going to focus on the latter, thinking of using HTML in the same way we use spoken languages.</p>
+<p>One useful feature of HTML is span elements like <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> (and their less semantic cousins <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code> and <code>&lt;u&gt;</code>) that signify that this piece of information is particularly important. These are analogous to when we are speaking we change the way say a word to bring attention to it; as can be seen in the corresponding emphasis element in the <a href="https://www.w3.org/TR/speech-synthesis11/#S3.2.2">Speech Synthesis Markup Language</a>. This has a long history in typesetting where different fonts are used to convey important parts of information (or sometimes different sorts of information such as names of works of art). It’s purely a historical accident that we consider quotes, indicating that someone is speaking, to be part of written language but not emphasis (but long quotes of other source are represented typographically and in HTML are <code>&lt;blockquote&gt;</code>).</p>
+<p>HTML can also refer to other things such as images, audio, or video embedded in the HTML or a hyperlink referencing another web page. This is the written equivalent of “pointing” at something as you talk about it, demonstrating what you’re talking about (although in some cases the media <em>is</em> the only subject, which is less relevant here). These have written analogues in pictures, and cross-references (through footnotes or bibliographies).</p>
+<p>HTML can also indicate structure which is more implicit in communication. A simple structure is the paragraph, <code>&lt;p&gt;</code>, which indicates a change in topic, and has a long tradition in written work. In fact it used to be explicitly denoted with a <a href="https://en.wikipedia.org/wiki/Pilcrow">pilcrow</a> ¶, and had language evolved differently we may not need this. In spoken language the change of topic is often indicated by a short break or a change in pace or body language. HTML also has more complicated structures like hierarchical headings from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> which are something of a generalisation of epics consisting of stories consisting of chapters, which are useful for complex communication. There’s also lists, <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> which in spoken language we may enumerate on our fingers as we change pace.</p>
+<p>The exact way HTML is used to convey these ideas depends on the context. Due to cultural differences or limitations of a particular environment the same concept can be represented in different ways. Consider the following HTML adapted from a job advertisement:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;&lt;strong&gt;&lt;em&gt;</span>The Client<span class="kw">&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Our client is ... <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;&lt;em&gt;&lt;strong&gt;</span>The Job<span class="kw">&lt;/strong&gt;&lt;/em&gt;&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>This is a job for a talented person ... <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>You'll be responsible for ... <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>• Managing ... <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>• Reporting ... <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>On the first line they’re using strong and emphasis to create a header. On the third line they do the same thing but the order of emphasis and strong are switched, then they use break to end the heading rather than create a new paragraph. Finally a list is creates using bullet points. A more semantic way to communicate the same thing would be:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;section&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;h1&gt;</span>The Client<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Our client is ... <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/section&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;section&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;h1&gt;</span>The Job<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>This is a job for a talented person ... <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>You'll be responsible for ... <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;li&gt;</span>Managing ... <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;li&gt;</span>Reporting ... <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/section&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How do we extract the key communication concepts in HTML?</p>
+</section>
+<section id="algebra-of-semantic-html" class="level1">
+<h1>Algebra of Semantic HTML</h1>
+<p>There are often different representations of HTML that are equivalent in communication. In the previous example <code>&lt;strong&gt;&lt;em&gt;</code> has the same effect as <code>&lt;em&gt;&lt;strong&gt;</code>; the elements commute. They’re also idempotent; <code>&lt;em&gt;&lt;em&gt;</code> has the same effect as <code>&lt;em&gt;</code>. They’re not exactly equivalent; it’s easy to write CSS that makes them different, but in practice they tend to mean the same thing.</p>
+<p>The rules of HTML prevent nesting paragraphs; by the <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element">whatwg standard</a> the end of a paragraph is inferred by another paragraph, a header and many other things. That is <code>&lt;p&gt;&lt;p&gt;&lt;/p&gt;</code> is interpreted as <code>&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</code>.</p>
+<p>Sectioning is implicit; a header element like <code>&lt;h3&gt;</code> implicitly starts a subsection if preceded by a higher level header (like <code>&lt;h2&gt;</code>), a sibling section if preceded by an equal level header (another <code>&lt;h3&gt;</code>), and a new section if preceded by a lower level header (like <code>&lt;h4&gt;</code>). This can be explicitly called out with the <code>&lt;section&gt;</code> tags, but rarely seems to in practice. This gives an outline-like tree structure to HTML documents (in contrast to the DOM tree like structure).</p>
+</section>
+<section id="markup-language-processing" class="level1">
+<h1>Markup Language Processing</h1>
+<p>We can think of these meaningful markup as features for a model. A heading for a section may be represented with a <code>&lt;h1&gt;</code> or with a paragraph consisting of a single sentence in a <code>&lt;em&gt;&lt;strong&gt;</code>. We can extract these and feed them in an appropriate way to a model to detect headers. We can consider a HTML document not as a tree but as a series of sections containing a header and paragraphs (where a paragraph includes things like a list). The exact choices depend on the usecase.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

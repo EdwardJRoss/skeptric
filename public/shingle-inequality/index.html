@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-04-14">
+
+<title>skeptric - Jaccard Shingle Inequality</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Jaccard Shingle Inequality</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">maths</div>
+    <div class="quarto-category">data</div>
+    <div class="quarto-category">nlp</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 14, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>Two similar documents are likely to have many similar phrases relative to the number of words in the document. In particular if you’re concerned with plagiarism and copyright, getting the same data through multiple sources, or finding versions of the same document this approach could be useful. In particular <a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> can quickly find pairs of items with a high <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a>, which we can run on sequences of <em>w</em> tokens. A hard question is what’s the right number for <em>w</em>? If you use bags (instead of sets) it turns out that increasing the sequence length decreases the Jaccard index (unless it’s 1 or 0).</p>
+<p>There are lots of measures of similarity between documents such as the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein (or Edit) Distance</a>. However few are efficient at finding similar documents at large scale. The <a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> algorithm allow finding sets that have a high Jaccard index (i.e.&nbsp;number of items in common relative to total number of items) and containment (number of items in common relative to items in one set) efficiently. Treating a document as a set or bag of words may not be ideal; two long documents on a similar topic may have a lot of words in common without having a similar source. However if the documents have many long sequences of words in common then they probably do have a similar source. We can form <a href="https://en.wikipedia.org/wiki/N-gram">n-grams</a> (also called <a href="https://en.wikipedia.org/wiki/W-shingling">w-shingles</a>); treating the documents as made up of sequences of words of a fixed length, and then calculate the Jaccard index or containment. How does changing the size of the sequence effect the scores?</p>
+<p>Increasing the shingling length will always decrease the Jaccard index and containment <em>for a bag</em> (a.k.a multiset), but not for a set.</p>
+<section id="sets-and-bags" class="level1">
+<h1>Sets and Bags</h1>
+<p>A <em>set</em> is a collection of distinct elements. A <em>bag</em> (or multiset) is a collection of elements that can be the same. A bag can be represented as a set by adding an index of the time it occurs.</p>
+<p>For example <a href="https://www.cs.princeton.edu/courses/archive/spring13/cos598C/broder97resemblance.pdf">from the MinHash paper</a> the phrase “a rose is a rose is a rose” contains the 4-grams [“a rose is a”, “rose is a rose”, “is a rose is”, “a rose is a”, “rose is a rose”].</p>
+<p>As a set the 4-grams are the unordered distinct terms [“a rose is a”, “rose is a rose”, “is a rose is”]. As a bag we can tread it as the set [(“a rose is a”, 1), (“rose is a rose”, 1), (“is a rose is”, 1), (“a rose is a”, 2), (“rose is a rose”, 2)]. Then we can calculate unions and intersections between bags the same way as sets and the Jaccard index <span class="math inline">\(J(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \cup B \rvert}\)</span> and containment <span class="math inline">\(C(A, B) = \frac{\lvert A \cap B \rvert}{\lvert A \rvert}\)</span> are well defined.</p>
+<p>Another useful representation for bags are as mappings from the item to its frequency (which is 0 if the item is not in the bag). So in this case it would be <code>{"a rose is a": 2, "rose is a rose": 2, "is a rose is": 1}</code>. Then the union of two bags is the <em>elementwise maximum</em>, the intersection is the <em>elementwise minimum</em> and the cardinality is the sum of the frequencies. This gives exactly the same behaviour as treating the bag as a set. A set can also be seen as the special case of a bag where the frequencies are just 0 or 1.</p>
+<p>This gives an intuitive proof of the <a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle">inclusion-exclusion principle</a>: <span class="math inline">\(\lvert A \rvert + \lvert B \rvert = \lvert A \cup B \rvert + \lvert A \cap B \rvert\)</span>. For each possible element of <em>A</em> and <em>B</em> exactly one is the minimum frequency, which can be matched to <span class="math inline">\(A \cap B\)</span>, and one is the maximum, which can be matched to <span class="math inline">\(A \cup B\)</span>. Summing over the frequencies of all possible elements the equality must also hold, since it holds for any individual element.</p>
+</section>
+<section id="increasing-shingle-length-decreases-jaccard-index-for-bags" class="level1">
+<h1>Increasing shingle length decreases Jaccard index for bags</h1>
+<p>Intuitively it makes sense that two documents are much more likely to have more words in common than sequences of 2-words, and so as the shingle length increases the Jaccard index should decrease. In fact this is always the case for bags, but not for sets.</p>
+<p>Consider the two documents <code>S = dog cat</code> and <code>T = dog cat lemur</code>. Then their Jaccard similarity at shingle length 1 is 2/3, and at length 2 is 1/2.</p>
+<p>Now consider the documents <code>S = dog dog cat cat dog</code> and <code>T = dog dog cat cat dog lemur</code>. As sets they have the same Jaccard similarity at single length 1; 2/3. The 2-shingles are <code>S = (dog, dog), (dog, cat), (cat, cat), (cat, dog)</code> and T additionally contains <code>(dog, lemur)</code>. So the 2-shingle Jaccard similarity is 4/5, which is greater than 2/3. However as bags the Jaccard similarity at shingle length 1 is 5/6 (since there are 5 words the same), which is less than 2/3.</p>
+<p>Denote the bag Jaccard similarity of a sequence at shingle length <em>k</em> as <span class="math inline">\(J_k\)</span> (when <em>k</em> is larger than both of the documents we take the similarity to be 0). Then <span class="math inline">\(J_{k+1}(S, T) &lt;= J_{k}(S, T)\)</span> for any two documents <em>S</em> and <em>T</em> and shingle length <em>k</em>. The rest of this section will prove this proposition.</p>
+<section id="cardinality-of-shingles" class="level2">
+<h2 class="anchored" data-anchor-id="cardinality-of-shingles">Cardinality of Shingles</h2>
+<p>The <em>k</em> shingles are all subsequences of length <em>k</em>. One way to think of this is by going through each index of the sequence, getting a string of length <em>k</em> until you get to the last <em>k</em>. In Python code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> seq_ngrams(xs, k):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [xs[i:i<span class="op">+</span>k] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xs)<span class="op">-</span>k<span class="op">+</span><span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The number of possible shingles is <em>N + 1 - k</em> where <em>N</em> is the length of the sequence. So there are <em>N</em> possible 1-shingles (tokens), down to 1 possible N shingle (the whole sequence). In particular <span class="math inline">\(\lvert S_{k} \rvert = \lvert S_{k+1} \rvert + 1\)</span>.</p>
+</section>
+<section id="inequality-of-intersection-cardinality" class="level2">
+<h2 class="anchored" data-anchor-id="inequality-of-intersection-cardinality">Inequality of Intersection Cardinality</h2>
+<p>Consider the elements in <span class="math inline">\(\lvert S_{k+1} \cap T_{k+1} \rvert\)</span>. These are sequences of tokens of length <em>k+1</em> in both <em>S</em> and <em>T</em>. Suppose that <em>all</em> of these elements were part of some long substring in both <em>S</em> and <em>T</em>, e.g.&nbsp;<span class="math inline">\(a_1 a_2 \ldots a_m\)</span> where <span class="math inline">\(m - k = \lvert S_{k+1} \cap T_{k+1} \rvert\)</span>. Then each subsequence of length <em>k</em> must also be in <span class="math inline">\(\lvert S_{k} \cap T_{k} \rvert\)</span>, and so <span class="math inline">\(\lvert S_{k} \cap T_{k} \rvert \geq \lvert S_{k+1} \cap T_{k+1} \rvert + 1\)</span>.</p>
+<p>In fact if they are <em>not</em> all in the same subsequence then there will be even more length <em>k</em> subsequences in common. So in <strong>general</strong> it is true (for bags) <span class="math inline">\(\lvert S_{k} \cap T_{k} \rvert \geq \lvert S_{k+1} \cap T_{k+1} \rvert + 1\)</span>.</p>
+</section>
+<section id="calculating-the-jaccard-similarity" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-jaccard-similarity">Calculating the Jaccard Similarity</h2>
+<p>By the inclusion-exclusion principle we have:</p>
+<p><span class="math display">\[J_k = \frac{\lvert S_k \cap T_k \rvert}{\lvert S_k \rvert + \lvert T_k \rvert - \lvert S_k \cap T_k \rvert}\]</span></p>
+<p>Plugging in our previous cardinality equality, the intersection inequality, and the inclusion-exclusion principle gives:</p>
+<p><span class="math display">\[J_k \geq \frac{\lvert S_{k+1} \cap T_{k+1} \rvert + 1}{\lvert S_{k+1} \cup T_{k+1} \rvert + 1}\]</span></p>
+<p>Finally note that <span class="math inline">\(\frac{N+1}{U+1} \geq \frac{N}{U}\)</span> with equality if and only if <em>N</em> equals <em>U</em>. So <span class="math inline">\(J_k \geq J_{k+1}\)</span> and equality can occur only if the intersection is the same as the union; that is <span class="math inline">\(J_{k+1}\)</span> is 1 or 0.</p>
+<p>This also applies to containment:</p>
+<p><span class="math display">\[C_{k} = \frac{\lvert S_{k} \cap T_{k} \rvert}{\lvert S_{k} \rvert} \geq \frac{\lvert S_{k+1} \cap T_{k+1} \rvert + 1}{\lvert S_{k+1} \rvert + 1} \geq C_{k+1}\]</span></p>
+<p>By the same inequality as before <span class="math inline">\(C_{k} \geq C_{k+1}\)</span> where equality is only if <span class="math inline">\(A_k\)</span> is empty or contains <span class="math inline">\(B_k\)</span>.</p>
+</section>
+</section>
+<section id="implications-for-shingle-size" class="level1">
+<h1>Implications for shingle size</h1>
+<p>If you’re not sure where to start if you look at length-1 shingles (tokens) you’re not likely to miss much. Then you can increase the shingle length to get a lower falspositive rate (at the risk of increasing chance of false positives).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

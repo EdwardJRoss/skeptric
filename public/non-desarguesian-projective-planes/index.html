@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2012-09-22">
+
+<title>skeptric - Non-desarguesian projective planes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Non-desarguesian projective planes</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 22, 2012</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>There are two main constructions of a projective space.</p>
+<!--more-->
+<p>Suppose we have an n-dimensional affine space over a skewfield k. We can construct an (n-1)-dimensional projective space by taking the pencils of lines as points (a <em>pencil</em> of lines is a complete set of parallel lines; that is the lines under the equivalence relation of parallelism), and 2-pencils of planes (complete sets of parallel planes) as lines, and so on. A less invariant way is to choose an origin, so we get a vector space; then each pencil is represented by a unique line through the origin, and each 2-pencil is represented by a unique plane through the origin; thus the points of projective space are lines through the origin and the lines are planes through the origin. Thus a projective space of dimension n can be constructed as the quotient of an affine or vector space of dimension n+1.</p>
+<p>Now given an n-dimesional projective space, consider an arbitrary (n-1)-dimensional projective subspace P. We can use this to form an affine subspace of dimension n: The points are the projective points not on P, the lines are the set of all lines not in P, and two lines are said to be parallel if they intersect at the same point of P. Given any line l and a point L not on that line the line through L and (the intersection of l with P) is the only line parallel to l through L. Thus a projective space of dimension n can be decomposed into an affine space of dimension n and a projective space of dimension (n-1).</p>
+<p>This second construction can in fact be extended to all projective planes. Given a skewfield we have a natural way of representing two dimensional (left)-affine lines, as the set of points (x,y) satisfying the equation y = xa+b for some a and b. For general planes we extend the notion of this triple T(x,a,b)=xa+b. A <strong>planar ternary ring</strong> is a set R with at least two elements and a ternary operation <span class="math inline">\(T: R \times R \times R \to R\)</span> that satisfies:</p>
+<ul>
+<li>For each a, b, c in R there exists a unique x in R such that T(a,b,x) = c</li>
+<li>For each <span class="math inline">\(a \neq a'\)</span> , b, b’ in R there exists a unique x in R such that T(x, a, b) = T(x, a’, b’)</li>
+<li>For each <span class="math inline">\(a \neq a'\)</span> , b, b’ in R there exists a unique pair (x, y) in <span class="math inline">\(R \times R\)</span> such that T(a, x, y) = b and T(a’, x, y) = b’.</li>
+</ul>
+<p>Then the following construction, roughly following <a href="http://www.ams.org/notices/200710/tx071001294p.pdf">Weibel</a>(who’s following <a href="http://www.ams.org/journals/tran/1943-054-02/S0002-9947-1943-0008892-4/S0002-9947-1943-0008892-4.pdf">Hall</a>), yields a projective plane by approximately the reverse of the construction above. The points are <span class="math inline">\(R \times R\)</span> (the ordinary points), R and <span class="math inline">\(\infty\)</span> (the projective line at infinity). The lines are <span class="math inline">\(\{(x,y) \in R \times R | y = T(x, a, b)\} \cup \{a\}\)</span> for each a in R and b in R, <span class="math inline">\(\{(c,y) | y \in R\} \cup \{\infty\}\)</span> for each c in R (these are the ordinary lines) and <span class="math inline">\(R \cup \{\infty\}\)</span> (the line at infinity). One can check that this does in fact define a projective plane.</p>
+<p>Two ternary rings (R, T) and (R, T’) are <em>comparative </em>if there exist permutations on R <span class="math inline">\(\alpha, \beta, \{\phi_x\}_{x \in R}, \{\psi_x\}_{x \in R}\)</span> such that <span class="math inline">\(\phi_x \circ T(x, a, b) = T'( \alpha \circ x, \beta \circ a, \psi_a \circ b)\)</span> for all a,b, x in R. It is easy to show comparative rings yield isomorphic projective planes.</p>
+<p>We can conversely construct a ternary ring from a projective plane, but there are clearly a lot of choices to be made; we need to choose a line at infinity, a y-axis and some isomorphisms between the y-axis minus it’s intersection with infinity and other lines, and use the lines and these isomorphisms to define T(x, a, b). Different choices need not yield comparative ternary rings (see <a href="http://www.springerlink.com/content/4fmhjmhy8eqxenrw/?MUD=MP">here</a> for a necessary and sufficient condition).</p>
+<p>If we add additional structure this is sometimes unique; for instance given a projective plane coordinitised by an <strong>alternative division ring</strong>, isomorphic projective planes yield isomorphic alternative division rings (see Bruck and Kleinfeld – The structure of alternative division rings, for a proof). I’m not sure if this is the best result one can obtain; in the finite case the coordinate rings are isomorphic (in the sense of Hall ternary rings; ternary rings with a 1 and a 0) if and only if they are a finite field.</p>
+<p>It’s interesting to note a generalised construction of projective planes of the first type for every division algebra over the real numbers (including the octonions). The points and lines of the space are each the 3-dimensional Hermitian idempotents of unit trace (that is 3×3 matrices P satisfying <span class="math inline">\(P = P^\dagger\)</span> , <span class="math inline">\(P^2=P\)</span> so P is a projection, and trace(P)=1). A point P lies on a line Q when PQ+QP=0. It can be shown this is a projective plane (see Conway and Smith, On Quaternions and Octionions, for the details).</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

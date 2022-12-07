@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-07-22">
+
+<title>skeptric - Adding a Book to Open Library</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Adding a Book to Open Library</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">hnbooks</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 22, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>I’ve been looking at <a href="../open-library">Open Library</a> as a knowledge base for books. A lot of the data here is manually uploaded by people, and the user interface has a big impact on the data they enter. To understand the data better I wanted to actually go through the process of adding a book, <a href="https://www.amazon.com.au/Overcoming-Floccinaucinihilipilification-Monetizing-Products-Services/dp/0645044407">Overcoming Floccinaucinihilipilification</a> by Jon Manning, and this article documents the process.</p>
+<p>Overall Open Library prioritises making it easy for people to add data, and then has facilities to edit it. There are few required fields, most fields are free text, and there is minimal validation. This is really helpful in getting lots of books in the system, at the cost of duplication and sparse and erroneous data. For their goal of getting a web page for every book this is the right approach, but it has implications for the resulting data.</p>
+<p>To add a book requires minimal data; the title, author, publisher and optionally an identifier like an ISBN. After adding a book there’s a prompt to encourage for additional details like a description and subject keywords. Then the work can be edited to add additional details such as a cover, other identifiers, and language. The author can also be edited to add a biography, birth and death date, and other identifiers.</p>
+<section id="adding-a-work" class="level1">
+<h1>Adding a Work</h1>
+<p>Open Library is publicly editable, you just need to create an account linked to an email address and log in. Adding a book easy; you just need to supply the title, author, publisher, when published and optionally an ID (an ISBN10, ISBN13, LCCN). The title is free text, the author field provides an autocomplete drop down of existing authors, and the publisher and published date is free text. There seems to be minimal validation, which helps get data into the system but allows incorrect data and duplicates. There doesn’t seem to be any indication of whether the title is already in the database, which explains why there are often duplicates. The title is parsed as <code>Title: Subtitle</code>, which is convenient but also can lead to certain kinds of errors. The author field by default creates a new author, which explains all the duplicate authors, and doesn’t prompt for any information about the author. The publisher and published date are free text, and I’ve seen many small variations in actual usage (there is a nudge “Are you sure that’s the published date?” if there’s nothing that looks like a year in the date). The ID field is an optional drop down; I’m not sure whether this is validated but encourages adding just one ID (which is why there’s often an ISBN10 or ISBN13 but not both).</p>
+</section>
+<section id="adding-work-details" class="level1">
+<h1>Adding Work details</h1>
+<p>After you submit this page (and the CAPTCHA) the book is added, and you’re sent to a new screen and encouraged to add more details.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/add_book_openlibrary_detail.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add book Detail Page</figcaption><p></p>
+</figure>
+</div>
+<p>A lot of the fields here are very open ended. For the “How would you describe the book?” field there is explanatory text saying “There’s no wrong answer here.”. I found it really hard to describe the book, so I put the blurb.</p>
+<p>Then there were fields for subject keywords, people, places, and times. In this case only keywords seemed appropriate, and it’s hard to think of some (the example text suggests: cheese, Roman Empire, psychology). I picked <code>pricing,business,microeconomics</code> but I could think of many variations; these are unlikely to be consistent.</p>
+<p>There’s also an option to add excerpts or the first sentence, but I couldn’t find one I thought was worth adding. Finally there’s a link section, giving an example of “New York Times review”; I added the publisher’s website.</p>
+<p>However after doing this the book data is still very sparse. If you view the work and click “Edit” you get many more options.</p>
+</section>
+<section id="editing-edition-details" class="level1">
+<h1>Editing Edition Details</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/edit_book_openlibrary_detail.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Edit Open Library Book</figcaption><p></p>
+</figure>
+</div>
+<p>The first thing to note is that in the add book page it said to use “Title: Subtitle”, but in the edit page they are separate fields! Most of the fields are free text, but the “Languages” field has an auto-suggest dropdown (where I could select “English”). The ID field has a large dropdown list of catalogues you can link with, but above the <code>---</code> are ISBN 10, ISBN 13, LC Control Number, OCLC/World Cat, Goodreads, and Library Thing. There is some validation around fields like dimensions need to be numbers. I didn’t immediately realise I could change the cover here until I accidentally moused over the grey cover and saw a tooltip saying “Add cover image”. Clicking here opens a popup to add a book cover.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/openlibrary_add_book_cover.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Add Book Cover</figcaption><p></p>
+</figure>
+</div>
+<p>It’s nice that you can add either a file or a URL; I added a cover URL and it worked well. This automatically populated the cover image for the work.</p>
+<p>I couldn’t see how to edit things like the subject keywords that were added after adding the work.</p>
+</section>
+<section id="adding-edition" class="level1">
+<h1>Adding Edition</h1>
+<p>I also tried adding a new edition for the digital version. The add book page is largely similar, with the title and author pre-filled but modifiable (and authors can be added). The publisher and publish date need to be added, along with IDs.</p>
+<p>After adding the edition there is a detail page similar to when we added the book originally. All the fields are emptied, including things such as subtitle which are likely to be stable across editions. This means the data is often going to be missing or inconsistent across editions.</p>
+</section>
+<section id="editing-author" class="level1">
+<h1>Editing Author</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/openlibrary_edit_author.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Edit author</figcaption><p></p>
+</figure>
+</div>
+<p>I also looked at editing the author, by clicking the author’s name and then edit. Biographies are hard to write; I just copied the biography from the back cover - it suggests to attribute it but with no guide as to how. I didn’t know his date of birth, so left it blank (but note they are free text). I didn’t know other names, or identifiers, so I added an image from the internet and submitted it.</p>
+</section>
+<section id="interfaces-for-data-collection" class="level1">
+<h1>Interfaces for Data Collection</h1>
+<p>Adding two editions of <a href="https://openlibrary.org/works/OL28589887W/Overcoming_Floccinaucinihilipilification">Overcoming Floccinaucinihilipilification</a> by <a href="https://openlibrary.org/authors/OL10598803A/Jon_Manning">Jon Manning</a> to Open Library was easy. However I had to carefully explore the interface to fill in a lot of detailed data, many works will be missing data. The lack of checks and prompts mean that there will be duplication and inconsistencies, especially around subtitle which was inconsistently handled throughout the interface. However the most important data, the title and author and linking id are often clearly captured.</p>
+<p>From Open Library’s perspective a lot of these design decisions are good; it should be as easy as possible to add a book. There are opportunities to make certain fields more accessible, improve the consistency of capturing subtitle, and pre-fill. But from the perspective of a data consumer it means we expect very high coverage, but need to be tolerant to duplicates, inconsistencies, and errors.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

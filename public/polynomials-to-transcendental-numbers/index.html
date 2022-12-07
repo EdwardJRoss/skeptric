@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2011-06-09">
+
+<title>skeptric - From polynomials to transcendental numbers</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">From polynomials to transcendental numbers</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 9, 2011</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>In a <a href="../solving-polynomials-of-low-degree">previous post</a> I discussed finding the zeros of low degree polynomials; I want to extend that discussion to algorithmically finding the zeros of polynomials, more on solving the quintic and a brief discussion of transcendental numbers.</p>
+<!--more-->
+<p>As we were taught in high school the roots of the quadratic equation <span class="math inline">\(a x^2 + b x + c=0\)</span> can be found by completing the square, giving <span class="math inline">\(x = \frac{-b \pm (b^2-4ac)^{1/2}}{2a}\)</span> .</p>
+<p>There are some problems with implementing it: firstly we need to be able to take square roots (that is solve <span class="math inline">\(x^2=a\)</span> ). This isn’t too bad there are <a href="http://en.wikipedia.org/wiki/Methods_of_computing_square_roots">lots of algorithms</a>, geometrically we can do it with a compass and a straightedge (indeed this is where the first examples of irrational numbers came from) and recently it’s been done using <a href="http://www.nature.com/news/2011/110602/full/news.2011.343.html">DNA</a>. A more serious problem is round-off error: if <span class="math inline">\(b^2 \gg ac\)</span> then <span class="math inline">\(|b| \approx |\sqrt{b^2-4ac}|\)</span> and so if you only calculate this using a few decimal places there will be significant roundoff error in <span class="math inline">\(b - \mbox{sgn}(b) \sqrt{b^2-4ac}\)</span> (whether this is important depends on the application). A simple workaround is to notice that at most one of the roots will have this roundoff error and the product of the roots is c so we can use this to find the other one.</p>
+<p>A much more detailed analysis of algorithms for solving the quadratic are in a <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1528437">pair</a>of <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1607926">articles</a> by James Blinn. In fact he also has a <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1626190">series</a> of <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1652931">articles</a> on <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4012570">solving</a> the <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4052506">cubic</a> using the analagous <a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4178164">cubic formula</a>. One important thing to draw from this is the amount of work involved in recasting the classical quadratic and cubic formulae in a numerically stable way. Also as Blinn points out the utility of these methods depends heavily on your tools and application: depending on your computer (whether it be a pen and paper, an old fashioned calculator, a GPU or a molecular computer) it may be faster to iterate a solution than solve using a formula, and whether it makes a difference depends on how many polynomial equations you have to solve and how long each takes to solve. [ There are specific zero finding methods for polynomials, for example the <a href="http://en.wikipedia.org/wiki/Jenkins-Traub_algorithm">Jenkins-Traub algorithm</a> that will converge much faster than generic methods such as Newton’s or gradient methods]. To solve a single cubic (or even a couple hundred) on a modern PC you wouldn’t notice a difference, but in some graphical applications you may need to solve thousands a second.</p>
+<p>Incidentally Felix Klein found the quintic equation was tied up with the geometry of the icosahedron. In 1989 it was <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.120.7132">shown</a> further that the quintic could be solved by an <strong>iterative algorithm</strong>, which (I think) means that to each quintic is assigned a rational function and the roots can be found by repeatedly applying the rational function. The whole kit – from the insolubility by radicals to this algorithm – is explained in detail in this excellent set of <a href="http://people.reed.edu/~jerry/Quintic/quintic.html">notes</a>. (I would love an excuse to implement this algorithm in a stable manner).</p>
+<p>Why limit ourselves to radicals? Why not consider <span class="math inline">\(\tan(\pi/15)\)</span> a perfectly good solution (it’s in a familiar ‘nice’ form). This is the type of question <a href="http://www-math.mit.edu/~tchow/closedform.pdf">Timothy Chow asks</a>. More precisely he looks at the <strong>‘EL numbers’</strong>, the smallest subfield of the complex numbers closed under exponentiation and its compositional inverse, taking logarithms and asks what sorts of equations can you solve with it. The answer isn’t known, it lies in transcendental theory.</p>
+<p>It’s possible, once you know <a href="http://en.wikipedia.org/wiki/Transcendental_number#Sketch_of_a_proof_that_e_is_transcendental">the trick</a> to show <span class="math inline">\(e\)</span> and <span class="math inline">\(\pi\)</span> are transcendental. In fact the <a href="http://en.wikipedia.org/wiki/Lindemann%E2%80%93Weierstrass_theorem">Lindemann-Weierstrass theorem</a> states that given linearly independent algebraic numbers over the rationals their exponentials are linearly independent over the rationals. The <a href="http://en.wikipedia.org/wiki/Gelfond%E2%80%93Schneider_theorem">Gelfond-Schneider theorem</a> states that all values of <span class="math inline">\(\alpha^\beta\)</span> are transcendental for <span class="math inline">\(\alpha \neq 0,1\)</span> and <span class="math inline">\(\beta\)</span> irrational. There are some <a href="http://en.wikipedia.org/wiki/Transcendence_theory">more theorems</a> and a handful of other <a href="http://mathworld.wolfram.com/TranscendentalNumber.html">transcendental numbers known</a> but a great deal is still unknown, for example are <span class="math inline">\(e + \pi\)</span> and <span class="math inline">\(e \pi\)</span> transcendental. The <a href="http://en.wikipedia.org/wiki/Constant_problem">constant problem</a> of determining when a given transcendental function is zero (useful for computer algebra) has only been solved or proven algorithmically undecidable in certain cases.</p>
+<p>A huge conjecture in transcendence theory is <a href="http://en.wikipedia.org/wiki/Schanuel%27s_conjecture">Schnaul’s conjecture</a>: given n complex numbers linearly independent over the rationals, then some collection of n terms taken from these numbers and their exponentials are algebraically independent. It would have strong implications: the Lindeman-Weirstrass and Gelfond-Schneider theorems are special cases, it would imply that Euler’s identity <span class="math inline">\(e^{i \pi} + 1 = 0\)</span> is (in an appropriate sense) essentially the only algebraic relationship between <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span> , and would bring us closer to understanding which algebraic and transcendental equations are solvable in the ‘EL numbers’ and their closure (the elementary numbers).</p>
+<p>Of course one often talks as well about elementary functions (functions generated by constant functions, identity function and exponentiation under addition, multiplication, composition and their inverse operations) and it’s often said that <span class="math inline">\(\int_0^x e^{-t^2} \mathrm{d}x\)</span> isn’t elementary. This apparently can be proved using Picard-Vessiot theory and differential galois theory. This is very closely related to my previous posts on integrable systems, Lie algebras and symmetries.</p>
+<p>One last trick to leave you with. Solving one linear equation is easy, and in first year mathematics courses we are taught how to solve systems of linear equations. Since we’ve discussed solving one polynomial equation it’s natural to ask how would one solve a system of linear equations… one approach is a <a href="http://math.berkeley.edu/~bernd/what-is.pdf">Gröbner basis</a></p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

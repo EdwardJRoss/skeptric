@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-11-27">
+
+<title>skeptric - Common Crawl Time Ranges</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Common Crawl Time Ranges</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">commoncrawl</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 27, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://commoncrawl.org">Common Crawl</a> provides a huge open web dataset of going back to around 2009. Unfortunately it’s not easy to find out the time period covered in each index, and so I ran a quick job to get rough estimates of the periods. This is useful if you want to get data from a specific time range.</p>
+<section id="methodology" class="level1">
+<h1>Methodology</h1>
+<p>The best way to do this would be to use the <a href="../common-crawl-index-athena">Athena Columnar Index</a> to search the dates, but I didn’t have Athena set up and I’d have to be a <em>little</em> careful about the costs. As a proxy I used the <a href="../searching-100b-pages-cdx">CDX Server</a> and for each index searched ’en.wikipedia.org/*’ and got the oldest and newest timestamps across the first and last page of results. This won’t exactly get the whole range, but because Wikipedia is frequently crawled this would be a reasonable proxy.</p>
+<p>Here are the results showing the earliest and latest days found, as well as the ISO Week Start (so e.g.&nbsp;2021-43 starts on 2021-10-31). Most crawls span a couple of weeks or less.</p>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index Name</th>
+<th>Crawl Days</th>
+<th>Earliest Date</th>
+<th>Latest Date</th>
+<th>ISO Week Start</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CC-MAIN-2021-43</td>
+<td>13</td>
+<td>2021-10-15</td>
+<td>2021-10-28</td>
+<td>2021-10-31</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2021-39</td>
+<td>13</td>
+<td>2021-09-16</td>
+<td>2021-09-29</td>
+<td>2021-10-03</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2021-31</td>
+<td>14</td>
+<td>2021-07-23</td>
+<td>2021-08-06</td>
+<td>2021-08-08</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2021-25</td>
+<td>13</td>
+<td>2021-06-12</td>
+<td>2021-06-25</td>
+<td>2021-06-27</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2021-21</td>
+<td>14</td>
+<td>2021-05-05</td>
+<td>2021-05-19</td>
+<td>2021-05-30</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2021-17</td>
+<td>13</td>
+<td>2021-04-10</td>
+<td>2021-04-23</td>
+<td>2021-05-02</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2021-10</td>
+<td>13</td>
+<td>2021-02-24</td>
+<td>2021-03-09</td>
+<td>2021-03-14</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2021-04</td>
+<td>13</td>
+<td>2021-01-15</td>
+<td>2021-01-28</td>
+<td>2021-01-31</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-50</td>
+<td>13</td>
+<td>2020-11-23</td>
+<td>2020-12-06</td>
+<td>2020-12-20</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-45</td>
+<td>13</td>
+<td>2020-10-19</td>
+<td>2020-11-01</td>
+<td>2020-11-15</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-40</td>
+<td>14</td>
+<td>2020-09-18</td>
+<td>2020-10-02</td>
+<td>2020-10-11</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-34</td>
+<td>12</td>
+<td>2020-08-03</td>
+<td>2020-08-15</td>
+<td>2020-08-30</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-29</td>
+<td>14</td>
+<td>2020-07-02</td>
+<td>2020-07-16</td>
+<td>2020-07-26</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-24</td>
+<td>14</td>
+<td>2020-05-24</td>
+<td>2020-06-07</td>
+<td>2020-06-21</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-16</td>
+<td>13</td>
+<td>2020-03-28</td>
+<td>2020-04-10</td>
+<td>2020-04-26</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2020-10</td>
+<td>13</td>
+<td>2020-02-16</td>
+<td>2020-02-29</td>
+<td>2020-03-15</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2020-05</td>
+<td>12</td>
+<td>2020-01-17</td>
+<td>2020-01-29</td>
+<td>2020-02-09</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-51</td>
+<td>11</td>
+<td>2019-12-05</td>
+<td>2019-12-16</td>
+<td>2019-12-29</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-47</td>
+<td>12</td>
+<td>2019-11-11</td>
+<td>2019-11-23</td>
+<td>2019-12-01</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-43</td>
+<td>11</td>
+<td>2019-10-13</td>
+<td>2019-10-24</td>
+<td>2019-11-03</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-39</td>
+<td>9</td>
+<td>2019-09-15</td>
+<td>2019-09-24</td>
+<td>2019-10-06</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-35</td>
+<td>9</td>
+<td>2019-08-17</td>
+<td>2019-08-26</td>
+<td>2019-09-08</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-30</td>
+<td>9</td>
+<td>2019-07-15</td>
+<td>2019-07-24</td>
+<td>2019-08-04</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-26</td>
+<td>12</td>
+<td>2019-06-15</td>
+<td>2019-06-27</td>
+<td>2019-07-07</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-22</td>
+<td>8</td>
+<td>2019-05-19</td>
+<td>2019-05-27</td>
+<td>2019-06-09</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-18</td>
+<td>8</td>
+<td>2019-04-18</td>
+<td>2019-04-26</td>
+<td>2019-05-12</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-13</td>
+<td>9</td>
+<td>2019-03-18</td>
+<td>2019-03-27</td>
+<td>2019-04-07</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2019-09</td>
+<td>9</td>
+<td>2019-02-15</td>
+<td>2019-02-24</td>
+<td>2019-03-10</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2019-04</td>
+<td>9</td>
+<td>2019-01-15</td>
+<td>2019-01-24</td>
+<td>2019-02-03</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-51</td>
+<td>10</td>
+<td>2018-12-09</td>
+<td>2018-12-19</td>
+<td>2018-12-23</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-47</td>
+<td>10</td>
+<td>2018-11-12</td>
+<td>2018-11-22</td>
+<td>2018-11-25</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-43</td>
+<td>9</td>
+<td>2018-10-15</td>
+<td>2018-10-24</td>
+<td>2018-10-28</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-39</td>
+<td>8</td>
+<td>2018-09-18</td>
+<td>2018-09-26</td>
+<td>2018-09-30</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-34</td>
+<td>8</td>
+<td>2018-08-14</td>
+<td>2018-08-22</td>
+<td>2018-08-26</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-30</td>
+<td>8</td>
+<td>2018-07-15</td>
+<td>2018-07-23</td>
+<td>2018-07-29</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-26</td>
+<td>8</td>
+<td>2018-06-17</td>
+<td>2018-06-25</td>
+<td>2018-07-01</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-22</td>
+<td>8</td>
+<td>2018-05-20</td>
+<td>2018-05-28</td>
+<td>2018-06-03</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-17</td>
+<td>8</td>
+<td>2018-04-19</td>
+<td>2018-04-27</td>
+<td>2018-04-29</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-13</td>
+<td>8</td>
+<td>2018-03-17</td>
+<td>2018-03-25</td>
+<td>2018-04-01</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2018-09</td>
+<td>9</td>
+<td>2018-02-17</td>
+<td>2018-02-26</td>
+<td>2018-03-04</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2018-05</td>
+<td>8</td>
+<td>2018-01-16</td>
+<td>2018-01-24</td>
+<td>2018-02-04</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-51</td>
+<td>9</td>
+<td>2017-12-10</td>
+<td>2017-12-19</td>
+<td>2017-12-24</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-47</td>
+<td>8</td>
+<td>2017-11-17</td>
+<td>2017-11-25</td>
+<td>2017-11-26</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-43</td>
+<td>8</td>
+<td>2017-10-16</td>
+<td>2017-10-24</td>
+<td>2017-10-29</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-39</td>
+<td>7</td>
+<td>2017-09-19</td>
+<td>2017-09-26</td>
+<td>2017-10-01</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-34</td>
+<td>8</td>
+<td>2017-08-16</td>
+<td>2017-08-24</td>
+<td>2017-08-27</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-30</td>
+<td>9</td>
+<td>2017-07-20</td>
+<td>2017-07-29</td>
+<td>2017-07-30</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-26</td>
+<td>7</td>
+<td>2017-06-22</td>
+<td>2017-06-29</td>
+<td>2017-07-02</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-22</td>
+<td>8</td>
+<td>2017-05-22</td>
+<td>2017-05-30</td>
+<td>2017-06-04</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-17</td>
+<td>8</td>
+<td>2017-04-23</td>
+<td>2017-05-01</td>
+<td>2017-04-30</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-13</td>
+<td>9</td>
+<td>2017-03-22</td>
+<td>2017-03-31</td>
+<td>2017-04-02</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2017-09</td>
+<td>10</td>
+<td>2017-02-19</td>
+<td>2017-03-01</td>
+<td>2017-03-05</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2017-04</td>
+<td>9</td>
+<td>2017-01-16</td>
+<td>2017-01-25</td>
+<td>2017-01-29</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2016-50</td>
+<td>9</td>
+<td>2016-12-02</td>
+<td>2016-12-11</td>
+<td>2016-12-18</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2016-44</td>
+<td>9</td>
+<td>2016-10-20</td>
+<td>2016-10-29</td>
+<td>2016-11-06</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2016-40</td>
+<td>8</td>
+<td>2016-09-24</td>
+<td>2016-10-02</td>
+<td>2016-10-09</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2016-36</td>
+<td>9</td>
+<td>2016-08-23</td>
+<td>2016-09-01</td>
+<td>2016-09-11</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2016-30</td>
+<td>8</td>
+<td>2016-07-23</td>
+<td>2016-07-31</td>
+<td>2016-07-31</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2016-26</td>
+<td>8</td>
+<td>2016-06-24</td>
+<td>2016-07-02</td>
+<td>2016-07-03</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2016-22</td>
+<td>8</td>
+<td>2016-05-24</td>
+<td>2016-06-01</td>
+<td>2016-06-05</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2016-18</td>
+<td>9</td>
+<td>2016-04-28</td>
+<td>2016-05-07</td>
+<td>2016-05-08</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2016-07</td>
+<td>10</td>
+<td>2016-02-05</td>
+<td>2016-02-15</td>
+<td>2016-02-21</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2015-48</td>
+<td>8</td>
+<td>2015-11-24</td>
+<td>2015-12-02</td>
+<td>2015-12-06</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2015-40</td>
+<td>10</td>
+<td>2015-10-04</td>
+<td>2015-10-14</td>
+<td>2015-10-11</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2015-35</td>
+<td>9</td>
+<td>2015-08-27</td>
+<td>2015-09-05</td>
+<td>2015-09-06</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2015-32</td>
+<td>8</td>
+<td>2015-07-28</td>
+<td>2015-08-05</td>
+<td>2015-08-16</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2015-27</td>
+<td>9</td>
+<td>2015-06-29</td>
+<td>2015-07-08</td>
+<td>2015-07-12</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2015-22</td>
+<td>13</td>
+<td>2015-05-22</td>
+<td>2015-06-04</td>
+<td>2015-06-07</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2015-18</td>
+<td>19</td>
+<td>2015-04-18</td>
+<td>2015-05-07</td>
+<td>2015-05-10</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2015-14</td>
+<td>7</td>
+<td>2015-03-26</td>
+<td>2015-04-02</td>
+<td>2015-04-12</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2015-11</td>
+<td>9</td>
+<td>2015-02-26</td>
+<td>2015-03-07</td>
+<td>2015-03-22</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2015-06</td>
+<td>8</td>
+<td>2015-01-25</td>
+<td>2015-02-02</td>
+<td>2015-02-15</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2014-52</td>
+<td>12</td>
+<td>2014-12-17</td>
+<td>2014-12-29</td>
+<td>2015-01-04</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2014-49</td>
+<td>9</td>
+<td>2014-11-20</td>
+<td>2014-11-29</td>
+<td>2014-12-14</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2014-42</td>
+<td>12</td>
+<td>2014-10-20</td>
+<td>2014-11-01</td>
+<td>2014-10-26</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2014-41</td>
+<td>17</td>
+<td>2014-09-15</td>
+<td>2014-10-02</td>
+<td>2014-10-19</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2014-35</td>
+<td>14</td>
+<td>2014-08-20</td>
+<td>2014-09-03</td>
+<td>2014-09-07</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2014-23</td>
+<td>24</td>
+<td>2014-07-09</td>
+<td>2014-08-02</td>
+<td>2014-06-15</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2014-15</td>
+<td>9</td>
+<td>2014-04-16</td>
+<td>2014-04-25</td>
+<td>2014-04-20</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2014-10</td>
+<td>10</td>
+<td>2014-03-07</td>
+<td>2014-03-17</td>
+<td>2014-03-16</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2013-48</td>
+<td>18</td>
+<td>2013-12-04</td>
+<td>2013-12-22</td>
+<td>2013-12-08</td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2013-20</td>
+<td>33</td>
+<td>2013-05-18</td>
+<td>2013-06-20</td>
+<td>2013-05-26</td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2012</td>
+<td>130</td>
+<td>2012-01-27</td>
+<td>2012-06-05</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>CC-MAIN-2009-2010</td>
+<td>435</td>
+<td>2009-07-02</td>
+<td>2010-09-10</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>CC-MAIN-2008-2009</td>
+<td>245</td>
+<td>2008-05-09</td>
+<td>2009-01-09</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="isnt-it-written-somewhere" class="level1">
+<h1>Isn’t it written somewhere?</h1>
+<p>This same problem is solved in CDX Toolkit where they <a href="https://github.com/cocrawler/cdx_toolkit/blob/0.9.33/cdx_toolkit/timeutils.py#L79">hardcode timestamps for early dates</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> {  <span class="co"># times provided by Sebastian</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'2012'</span>: timestamp_to_time(<span class="st">'201206'</span>),  <span class="co"># end 20120605, start was 20120127</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'2009-2010'</span>: timestamp_to_time(<span class="st">'201009'</span>),  <span class="co"># end 20100910, start was 20100910</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'2008-2009'</span>: timestamp_to_time(<span class="st">'200901'</span>),  <span class="co"># end 20090109, start was 20080509</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For more recent data which is in the form CRAWL-NAME-YYYY-WW they assume the first day of the week is at the end of the crawl. Looking at recent crawls this is true; for example <a href="https://commoncrawl.org/2021/11/october-2021-crawl-archive-now-available/">the October 2021 Crawl</a> was crawled Oct 15-28, and has label <code>CC-MAIN-2021-43</code>; which starts on 2021-10-31. I’ve validated this by looking through the Common Crawl blog posts back to December 2020.</p>
+<p>However it’s not always true; looking at the <a href="https://commoncrawl.org/2013/11/new-crawl-data-available/">earliest crawl in this format</a> which describes the format as:</p>
+<blockquote class="blockquote">
+<p>CRAWL-NAME-YYYY-WW – The name of the crawl and year + week# initiated on</p>
+<p>The 2013 wide web crawl data is located at /crawl-data/CC-MAIN-2013-20/ which represents the main CC crawl initiated during the 20th week of 2013.</p>
+</blockquote>
+<p>Unfortunately I couldn’t easily find blog releases with capture dates for every dataset, so I had to run the query to find out when this changed. In fact it looks like it’s all over the place before around mid 2014, and the ISO week start is pretty close but not always after the crawl.</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Index Name</th>
+<th style="text-align: left;">Earliest Date</th>
+<th style="text-align: left;">Latest Date</th>
+<th style="text-align: left;">ISO Week Start</th>
+<th style="text-align: right;">Days After Week Start</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CC-MAIN-2017-17</td>
+<td style="text-align: left;">2017-04-23</td>
+<td style="text-align: left;">2017-05-01</td>
+<td style="text-align: left;">2017-04-30</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CC-MAIN-2015-40</td>
+<td style="text-align: left;">2015-10-04</td>
+<td style="text-align: left;">2015-10-14</td>
+<td style="text-align: left;">2015-10-11</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CC-MAIN-2014-42</td>
+<td style="text-align: left;">2014-10-20</td>
+<td style="text-align: left;">2014-11-01</td>
+<td style="text-align: left;">2014-10-26</td>
+<td style="text-align: right;">-6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CC-MAIN-2014-23</td>
+<td style="text-align: left;">2014-07-09</td>
+<td style="text-align: left;">2014-08-02</td>
+<td style="text-align: left;">2014-06-15</td>
+<td style="text-align: right;">-48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CC-MAIN-2014-15</td>
+<td style="text-align: left;">2014-04-16</td>
+<td style="text-align: left;">2014-04-25</td>
+<td style="text-align: left;">2014-04-20</td>
+<td style="text-align: right;">-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CC-MAIN-2014-10</td>
+<td style="text-align: left;">2014-03-07</td>
+<td style="text-align: left;">2014-03-17</td>
+<td style="text-align: left;">2014-03-16</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CC-MAIN-2013-48</td>
+<td style="text-align: left;">2013-12-04</td>
+<td style="text-align: left;">2013-12-22</td>
+<td style="text-align: left;">2013-12-08</td>
+<td style="text-align: right;">-14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CC-MAIN-2013-20</td>
+<td style="text-align: left;">2013-05-18</td>
+<td style="text-align: left;">2013-06-20</td>
+<td style="text-align: left;">2013-05-26</td>
+<td style="text-align: right;">-25</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-index-metadata" class="level1">
+<h1>Missing index metadata</h1>
+<p>When running the queries I filtered to those with a 200 OK status, but got an error for exactly two indexes:</p>
+<pre><code>ERROR:root:404 Client Error: Not Found for url: https://index.commoncrawl.org/CC-MAIN-2015-11-index?url=en.wikipedia.org%2F%2A&amp;output=json&amp;filter=%3Dstatus%3A200
+ERROR:root:404 Client Error: Not Found for url: https://index.commoncrawl.org/CC-MAIN-2015-06-index?url=en.wikipedia.org%2F%2A&amp;output=json&amp;filter=%3Dstatus%3A200</code></pre>
+<p>Running it without the filter showed <em>just</em> those two indexes seem to be missing status, and they are missing mimetype as well as other features. For example here’s the first two lines of a response from 2015-06:</p>
+<pre><code>[{'urlkey': 'org,wikipedia,en)/?banner=blackout',
+  'timestamp': '20150131071342',
+  'url': 'http://en.wikipedia.org/?banner=blackout',
+  'digest': 'YZPQWVBHLGVUKY2DAZAVNZTMPOVOGV5P',
+  'length': '17573',
+  'offset': '107669292',
+  'filename': 'crawl-data/CC-MAIN-2015-06/segments/1422122108378.68/warc/CC-MAIN-20150124175508-00190-ip-10-180-212-252.ec2.internal.warc.gz'},
+ {'urlkey': 'org,wikipedia,en)/robots.txt',
+  'timestamp': '20150129073755',
+  'url': 'http://en.wikipedia.org/robots.txt',
+  'digest': 'IXB3SAHXDS54OVWAQIIND22TH7HNXR7W',
+  'length': '6017',
+  'offset': '114218356',
+  'filename': 'crawl-data/CC-MAIN-2015-06/segments/1422115855845.27/warc/CC-MAIN-20150124161055-00146-ip-10-180-212-252.ec2.internal.warc.gz'},</code></pre>
+<p>Compared with the previous index 2014-52:</p>
+<pre><code>{'urlkey': 'org,wikipedia,en)/?banner=blackout',
+  'timestamp': '20141226070722',
+  'url': 'http://en.wikipedia.org/?banner=blackout',
+  'mime': 'text/html',
+  'status': '200',
+  'digest': 'CQ66DSSKOUHSJXUWYW3HI45BEG22ZTYI',
+  'length': '18811',
+  'offset': '33342669',
+  'filename': 'crawl-data/CC-MAIN-2014-52/segments/1419447548645.134/warc/CC-MAIN-20141224185908-00083-ip-10-231-17-201.ec2.internal.warc.gz'},
+ {'urlkey': 'org,wikipedia,en)/?title=pet_scanner',
+  'timestamp': '20141227154942',
+  'url': 'http://en.wikipedia.org/?title=PET_scanner',
+  'mime': 'text/html',
+  'status': '200',
+  'digest': '52CNIQXTQ6DBUCSL7JQ7AUWP6CN3BU3L',
+  'length': '49966',
+  'offset': '30581136',
+  'filename': 'crawl-data/CC-MAIN-2014-52/segments/1419447552326.50/warc/CC-MAIN-20141224185912-00056-ip-10-231-17-201.ec2.internal.warc.gz'},</code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

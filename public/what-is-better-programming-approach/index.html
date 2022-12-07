@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-12-19">
+
+<title>skeptric - What Is a Better Programming Approach?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">skeptric</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/EdwardJRoss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What Is a Better Programming Approach?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">programming</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 19, 2020</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>When you solve a problem in code you will use some programming <em>approach</em>, and the approach you choose can make a big impact on your efficiency. I talk about <em>approach</em> rather than language because it’s more than just the language. A project will typically only use a subset of the language (especially for massive languages like C++), some set of libraries, and develop patterns in the lanugage for working with those libraries. The problem is it’s really hard to know what approach is going to work best.</p>
+<p>I used to write a lot of bespoke reports that took data from a database and filtered, joined and aggregated them to produce a summary. Originally there were a few generic report types that were written in PHP, because the standard reports available through a web application were written in that. The scripts were really hard to modify because there were many function arguments that <em>looked</em> generic, but would only work for certain cases that had been implemented in the web application; and the only way to find out for sure was to dig in to the monolithic codebase. The team moved to writing custom SQL in Python, and some data munging occurred in both SQL and Python. Most of the Python we used standard Python data structures and <a href="https://docs.python.org/3/library/itertools.html">itertools</a> to do the transformations. Then one of our coworkers introduced us to <a href="https://pandas.pydata.org/">Pandas</a>; I was initially sceptical but quickly saw how effectively it solved certain problems (even if we had to keep putting <code>.reset_index()</code> everywhere). We adopted it and it made the type of transformations we were doing really simple, our efficiency increased and removing the low level details of implementing the transforms enabled us to think about how we could deliver more value.</p>
+<p>It’s hard to know how generalisable an increase in efficiency was. Our team generally got more things done in our Python libraries than the PHP hooks, but that was partly due to our team being more familiar with Python than PHP. Pandas made our team much more effective than plain Python because of the types of problems we were solving. But perhaps experienced PHP developers could have gotten a lot more done in PHP (I doubt it, but I don’t know). We had hundreds of reports, many running on a schedule, but maybe the system would have broken down at tens of thousands of reports.</p>
+<p>After we started using Pandas I learned about R’s tidyverse, but even though I think it’s much better it wasn’t worth our team switching from Pandas to R. I went to another modelling team that was working in R and started reading through <a href="https://r4ds.had.co.nz/">R for Data Science</a>. The bespoke reporting team used the <a href="../pandas-pipe">Pandas pipe style</a> but there are some operations that are hard to pipe, like <a href="../topn-chaining">calculating the second most common value</a>. Where Pandas is an organically grown mess of operations, dplyr and tidyr are well designed minimal composible APIs. There was a tradeoff that writing functions was harder in dplyr because of the quasiquotation style you had to adopt (it looks like this has changed now and it looks much easier). But the team was already effective enough in Pandas (and didn’t know R), had extensive Python libraries for producing standard reports, and we had experience maintaining and operating the environment. For a completely new team it would be worth considering R, but for bespoke reporting team the benefits wouldn’t offset the switching costs.</p>
+<p>When I was using Hadoop in the pre-Spark days there were lots of ways to write jobs with different tradeoffs. The default was using Java (or anothe JVM language) to write MapReduce jobs, but it’s full of boilerplate and there’s a lot of code to get simple things done. There was <a href="https://pig.apache.org/">Pig</a> which allowed writing the jobs in a much simpler high-level language, and you could use custom UDFs in Java. There was <a href="https://hive.apache.org/">Hive</a> which allowed an SQL-like interface, less flexible than Pig but more similar to other tools. Finally there was <a href="https://hadoop.apache.org/docs/r1.2.1/streaming.html">Hadoop Streaming</a> which let you run any custom program on Hadoop, with some limitations. There were some one-off jobs I wrote in Hadoop Streaming in a couple of days that would have taken the developers months to write in Java. But I wouldn’t build our whole system on this because it would be hard to maintain and ensure the integrity you could in a large Java system. There was a place for all these tools for different kinds of workloads from more static to more dynamic. However when Spark came along it effectively obsoleted all of these (except parts of Hive like the meta-store); it was flexible enough to do everything and you won’t hear much about the other technologies any more. The industry decided that Spark was a <em>better</em> approach for transforming data, and the PySpark interface gave it broader adoption.</p>
+<p>The video game industry has had a large movement from building deep Object hierarchies to building entity component systems which has made it easier to build features and optimise code. Mick West’s <a href="http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/">Evolve Your Hierarchy</a> explains that game developers traditionally build deep object hierarchies. I’ve seen this taught in Introductory Programming classes in Java; start with an automobile class and then subclass it with a car. Incidentally this is a terrible way to introduce programming because it’s an advanced design technique you can’t really appreciate until you can build simple programs, and there are many other ways to represent code. Indeed the problem with inheritance is that it <em>tightly couples the components</em> (which is exactly the opposite of the compartmentalisation that is taught as good software engineering practice); it’s essentially an easy way to copy code between components. This means if you make a change, like your player can now control a fly-by-wire missile, you’ll need to completely restructure your hierarchy and change code in lots of places (now fly-by-wire missile needs to inherit from controllable character, but it doesn’t have a health bar so we’ll have to create a new mutual superclass called “controllable” and move the appropriate code around). A different approach is to treat the entities as data, an aggregation of components, and have separate systems (or engines) that act on these components. This approach makes it easier to build new entities with custom functionality because you just need to assign the relevant components to them and let the systems act on them. In gaming it also can make it much faster because you can allocate all the entities together and process them in parallel when running a function, rather than calling out to lots of mutable objects where concurrency is hard. This kind of programming has it’s own challenges (such as communication between entities) but has been very successful; see <a href="http://gameprogrammingpatterns.com/component.html">game programming patterns article on components</a> or <a href="http://gamesfromwithin.com/data-oriented-design">games from within’s article on data oriented design</a> for more details. Many game studios found it beneficial to make the cultural and code switch to an entity component system.</p>
+<p>Because of the context dependence it’s very hard to show that a programming language of feature increases productivity, as <a href="http://tagide.com/blog/academia/research-in-programming-languages/">Crista Videira Lopes’ argues in an article on research in programming languages</a>. She mentions that people make claims like Haskell programs have fewer bugs because of its features, without providing any evidence. In my experience looking at <a href="https://pandoc.org/">Pandoc</a>, one of the most used Haskell programs (along with <a href="https://www.shellcheck.net/">ShellCheck</a>), a lot of its code is complex string transformations which is a class of errors Haskell can’t help with (although it may help with many others). Even if Haskell does lead to fewer bugs, how much does it slow down development? Maybe paying a cost of unit tests and occasional bugs is less costly than trying to frame everything in terms of pure functions and jumping through monadic hoops everywhere. For a large development team there’s the additional issue that there isn’t a huge supply of Haskell developers, and they would likely have to support training people in the language which is an additional cost. For many teams Haskell may actually decrease productivity, rather than increase. I have heard a lot of stories of teams of Java developers moving to Scala writing “Scava code”; that is still using Java idioms rather than adoping functional programming techniques that Scala advocates. The kind of culture change of moving to a language like Haskell may be really difficult for some developers.</p>
+<p>There are definitely times when changing your programming approach could make your team dramatically more effective. As far as I know there are no rules around this, largely because it depends on the team and their experience as well as the problem being solved. Software engineering is all about tradeoffs and you have to try to find what approach is best for your situation. In my personal experience I find object oriented approaches great for writing graphical user interfaces and functional approaches best for transforming and handling data. I really like R for analysis, but will move to Python for transforming data, and bash for quickly doing some file manipulation and SQL for extracting data and aggregating datasets too large to work with locally. But I’m left wondering is there a better way? This is the best reason in my mind to learn <a href="../programming-languages-2020">new programming languages</a>, even esoteric ones, and try new libraries and read about different programming techniques. One day actors or logic programming or a custom DSL or <a href="https://groups.csail.mit.edu/mac/users/gjs/propagators/">propagators</a> may make a hard problem easy to solve. But it’s really hard to know what works until you have experienced (that is, have tried it a few places and gotten it wrong a couple of times).</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
