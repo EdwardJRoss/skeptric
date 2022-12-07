@@ -1,5 +1,7 @@
 ---
-tags: ["R", "blog"]
+categories:
+  - r
+  - blog
 title: "From Hugo to R Blogdown"
 date: "2020-04-18T15:00:20+10:00"
 image: "/images/blogdown.png"

@@ -1,6 +1,7 @@
 ---
 categories:
 - programming
+- blog
 date: '2020-06-20T08:00:00+10:00'
 image: /images/cron.png
 title: Scheduling Github Actions

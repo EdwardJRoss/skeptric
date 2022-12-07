@@ -1,4 +1,6 @@
 ---
+categories:
+  - blog
 date: '2020-05-03T22:29:15+10:00'
 image: /images/cover_image.png
 title: Writing 50 Daily Articles

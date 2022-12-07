@@ -1,6 +1,6 @@
 ---
 categories:
-- hugo
+- blog
 date: '2020-09-24T08:00:00+10:00'
 image: /images/diagram_money_volume.png
 title: Diagrams in Hugo with Mermaid

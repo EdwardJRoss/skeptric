@@ -1,6 +1,7 @@
 ---
 categories:
 - programming
+- blog
 date: '2020-10-31T21:29:34+11:00'
 image: /images/jamstack.png
 title: Choosing a Static Site Generator

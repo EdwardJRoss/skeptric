@@ -1,7 +1,7 @@
 ---
 categories:
 - sql
-- hugo
+- blog
 date: '2020-12-07T23:27:49+11:00'
 image: /images/hugo_bigquery.png
 title: Finding Hugo Blogs with BigQuery

@@ -1,6 +1,7 @@
 ---
 categories:
 - python
+- blog
 date: '2020-08-02T08:00:00+10:00'
 image: /images/jupyter-blog.png
 title: Writing Blog Posts with Jupyter and Hugo

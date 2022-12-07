@@ -1,7 +1,7 @@
 ---
 categories:
 - programming
-- hugo
+- blog
 date: '2020-10-26T08:44:14+11:00'
 image: /images/hugo_casper3_edit.png
 title: Learning Hugo by Editing Themes

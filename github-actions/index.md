@@ -1,6 +1,7 @@
 ---
 categories:
 - programming
+- blog
 date: '2020-05-23T21:28:43+10:00'
 image: /images/github_marketplace_hugo.png
 title: Using Github Actions with Hugo

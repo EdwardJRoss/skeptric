@@ -1,6 +1,7 @@
 ---
 categories:
 - programming
+- blog
 date: '2020-06-19T08:00:00+10:00'
 image: /images/github_actions.png
 title: Using Local Github Actions

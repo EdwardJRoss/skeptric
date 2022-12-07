@@ -1,7 +1,7 @@
 ---
 categories:
 - emacs
-- hugo
+- blog
 date: '2021-11-22T08:00:00+11:00'
 image: /images/hugo_readdir_error.png
 title: Hugo Readdir Error with Emacs
