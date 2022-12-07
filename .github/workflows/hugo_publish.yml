@@ -21,9 +21,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
-      with:
-        submodules: true  # Fetch Hugo themes
-        fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
     # Rclone to destination
     - name: rclone
