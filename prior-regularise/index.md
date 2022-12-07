@@ -12,7 +12,7 @@ This is just like [regularisation](https://en.wikipedia.org/wiki/Regularization_
 This is more than just an analogy, and this article will explore a couple of cases with constant regression and classification.
 
 A typical machine learning approach to regression is to minimise the root mean squared error.
-A probabilistic perspective for this is to consider the regression $y = f_\theta(X) + \epsilon$, where y is the outcome, X are the predictors, $f_\theta$ is a function parameterised by $\theta$, and \$\epsilon\$ is the error term.
+A probabilistic perspective for this is to consider the regression $y = f_\theta(X) + \epsilon$, where y is the outcome, X are the predictors, $f_\theta$ is a function parameterised by $\theta$, and $\epsilon$ is the error term.
 If we assume that $\epsilon \in N(0, \sigma^2)$ is normally distributed, this is equivalent to saying that $y \in N(f_\theta^2(X), \sigma^2)$.
 We then need to pick the most likely parameters $\theta$ given the data.
 

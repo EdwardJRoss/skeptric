@@ -125,7 +125,7 @@ TEXTFILE is a text delimited format, *similar* to a CSV.
 As per the [documentation](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-StorageFormatsStorageFormatsRowFormat,StorageFormat,andSerDe) the rows are separated by new lines `\n`, and the fields are delimited by a separator, by default the [Start of Heading character](https://en.wikipedia.org/wiki/C0_and_C1_control_codes#SOH) `\001` (and strangely not the [Record Separator](https://en.wikipedia.org/wiki/C0_and_C1_control_codes#RS)).
 The record separator could be specified to be a ',' (using properties in Presto or the [`field_delimiter`](https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html) in Athena), and in many cases this will read or write a CSV.
 
-There's a mechanism for escaping characters (so a newline in a field can be written '\n', and a backslash as '\\') and a special character for NULLs ('\N'), but there's no method for escaping (or quoting) the field separator!
+There's a mechanism for escaping characters (so a newline in a field can be written `\n`, and a backslash as `\\`) and a special character for NULLs (`\N`), but there's no method for escaping (or quoting) the field separator!
 
 So for example the following query in Athena:
 

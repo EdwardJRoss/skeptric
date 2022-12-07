@@ -86,7 +86,7 @@ Below are the operations, I will use the notation n[4] to represent a parameter 
 <td>8B</td>
 <td>bop</td>
 <td>a{0-9}[4] p[4]</td>
-<td>New page, a{0-9} are TeX registers \count{0-9} to identify the page for reference, p is a pointer to previous page (or -1 for first page). All state is reset</td>
+<td>New page, a{0-9} are TeX registers `\count{0-9}` to identify the page for reference, p is a pointer to previous page (or -1 for first page). All state is reset</td>
 </tr>
 <tr>
 <td>8C</td>
@@ -188,7 +188,7 @@ Below are the operations, I will use the notation n[4] to represent a parameter 
 <td>{EF-F2}</td>
 <td>xxx{1-4}</td>
 <td>m[1-4] X[m]</td>
-<td>Implementation dependent; nop in general. Sent via TeX’s \special.</td>
+<td>Implementation dependent; nop in general. Sent via TeX’s `\special`.</td>
 </tr>
 <tr>
 <td>{F3-F5}</td>
@@ -307,7 +307,7 @@ Evidently I ran TeX at 18:04 pm on the 12th of August 2013 A.D.
 
     8b 00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 ffffff
 
-The preoperation is followed by the values in the registers count 0 through 9. By default TeX uses \count0 for the page number and doesn’t affect the other counts, so we get \count0 = 1 (first page), \count{1-9}=0. Finally since this is the first page the pointer to the previous page is -1 (ffffff).
+The preoperation is followed by the values in the registers count 0 through 9. By default TeX uses `\count0` for the page number and doesn’t affect the other counts, so we get `\count0 = 1` (first page), `\count{1-9}=0`. Finally since this is the first page the pointer to the previous page is -1 (ffffff).
 
 
 ### Setup
@@ -446,4 +446,4 @@ Because we have to have a pointer to the postamble the DVI can’t much more tha
 It’s odd there are two widths w, x and two heights y and z; in fact zero would suffice by directly adding to h and v. I think the reason for these variables must be buried in TeX.
 
 
-There’s no way to insert images, change the colour of text, and for computer viewers no way to insert hyperlinks, videos and sounds or take user input. There’s also no way to draw complex objects without either rendering them specially as fonts, or explicitly constructing them using rectangular boxes as pixels. However the instruction xxx (from TeX’s \special{}) allows us to implement these things on an ad hoc basis. So it is extremely extensible; but we have to work to make those extensions portable.
+There’s no way to insert images, change the colour of text, and for computer viewers no way to insert hyperlinks, videos and sounds or take user input. There’s also no way to draw complex objects without either rendering them specially as fonts, or explicitly constructing them using rectangular boxes as pixels. However the instruction xxx (from TeX’s `\special{}`) allows us to implement these things on an ad hoc basis. So it is extremely extensible; but we have to work to make those extensions portable.

@@ -1,4 +1,6 @@
 ---
+categories:
+  - maths
 date: 2013-04-30 04:57:01+00:00
 image: /images/obreshkoffarc.png
 title: Algorithms for finding the real roots of polynomials
@@ -34,7 +36,7 @@ This converse is given by a pair of theorems due to **Obreshkoff**: Given a degr
 
 
 *  If p(x) has least p complex zeros with arguments in the range  $- \frac{\pi}{n + 2 - p} < \phi < \frac{\pi}{n+2-p}$  then the number of sign variations is bounded above by p.
-*  If p(x) has at least n-q complex zeros with arguments in range  $pi - \frac{\pi}{q + 2} \leq \phi \leq \pi + \frac{\pi}{q + 2}$  then the number of sign variations is bounded below by q.
+*  If p(x) has at least n-q complex zeros with arguments in range  $\pi - \frac{\pi}{q + 2} \leq \phi \leq \pi + \frac{\pi}{q + 2}$  then the number of sign variations is bounded below by q.
 
 
 

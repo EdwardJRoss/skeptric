@@ -17,22 +17,22 @@ Given a set of points on a sphere we're trying to find the point that minimises 
 
 ### Part 1: Calculating the centroid
 
-1. [Coordinate Transformations](#Coordinate-transformations) between spherical and cartesian coordinates
-2. [Creating Random Points on the Sphere](#Creating-Random-Points-on-the-Sphere) for testing
-3. [Geodesic Distance](#Geodesic-Distance) calculations
-4. [Measuring the Centroid](#Measuring-the-Centroid) in terms of minimising the geodesic distance
-5. [Iteratively Finding the Minimum](#Iteratively-finding-the-minimum) using a closed form solution
+1. [Coordinate Transformations](#coordinate-transformations) between spherical and cartesian coordinates
+2. [Creating Random Points on the Sphere](#creating-random-points-on-the-sphere) for testing
+3. [Geodesic Distance](#geodesic-distance) calculations
+4. [Measuring the Centroid](#measuring-the-centroid) in terms of minimising the geodesic distance
+5. [Iteratively Finding the Minimum](#iteratively-finding-the-minimum) using a closed form solution
 
 ### Part 2: Implementing Buss and Filmore's approach
 
-1. [The exponential map and its inverse](#The-exponential-map-and-its-inverse) calculated at the North Pole
-2. [Rotating spheres](#Rotating-Spheres) to enable moving arbitrary points to the North Pole
-3. [Exponential map at any point](#Exponential-map-at-any-point)
-4. [Attempting to implement the algorithm](#Attempting-to-Implement-Algorithm-A1) (and failing to get it to work)
+1. [The exponential map and its inverse](#the-exponential-map-and-its-inverse) calculated at the North Pole
+2. [Rotating spheres](#rotating-spheres) to enable moving arbitrary points to the North Pole
+3. [Exponential map at any point](#exponential-map-at-any-point)
+4. [Attempting to implement the algorithm](#attempting-to-implement-algorithm-a1) (and failing to get it to work)
 
 ### Part 3: Gradient Descent with Pytorch
 
-1. [Gradient Descent](#Gradient-Descent)
+1. [Gradient Descent](#gradient-descent)
 
 # Part 1: Calculating the centroid
 
@@ -473,9 +473,9 @@ I claim that the geodesic distance of two points on a sphere is the arccos of th
 
 [According to Wikipedia](https://en.wikipedia.org/wiki/Great-circle_distance) the distance between two points is:
 
-\\[ \\Delta\\sigma = \\arccos\\bigl(\\sin\\phi\_1\\sin\\phi\_2 + \\cos\\phi\_1\\cos\\phi\_2\\cos(\\Delta\\lambda)\\bigr). \\]
+$$\Delta\sigma = \arccos\bigl(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda)\bigr).$$
 
-Where \\(\\lambda\_1, \\phi\_1\\) and \\(\\lambda\_2, \\phi\_2\\) are the longitude and latitude respectively.
+Where $\lambda_1, \phi_1\) and \(\lambda_2, \phi_2$ are the longitude and latitude respectively.
 
 Although this is numerically unstable let's check this to see if we're in the right ballpark
 
@@ -965,7 +965,7 @@ avg, meanpoint_dist, meanpoint_dist <= distances.min()
 
 As I derived in [finding the Centroid of a Spherical Polygon](/centroid-spherical-polygon) it occurs where
 
-\\[ c = k \\sum\_{i=1}^{N} \\frac{p\_i}{\\sqrt{1 - (c \\cdot p\_i)^2}} \\]
+$$c = k \sum_{i=1}^{N} \frac{p_i}{\sqrt{1 - (c \cdot p_i)^2}}$$
 
 We can evaluate this iteratively and hope that it converges to the minimum.
 
@@ -1102,9 +1102,9 @@ The exponential map from the north pole takes an (x,y) point on that plane and r
 
 They give the formula (bottom of page 11):
 
-\\[ exp\_{(0,0,1)} (x, y) = (x \\frac{\\sin r}{r}, y \\frac{\\sin r}{r}, \\cos{r}) \\]
+$$\exp_{(0,0,1)} (x, y) = (x \frac{\sin r}{r}, y \frac{\sin r}{r}, \cos{r})$$
 
-Where \\[ r = \\sqrt{x^2 + y^2} \\] is the distance of the point on the tangent plane from where it touches the sphere.
+Where $r = \sqrt{x^2 + y^2}$ is the distance of the point on the tangent plane from where it touches the sphere.
 
 In code (using sinc for numerical stability at 0)
 
@@ -1221,9 +1221,9 @@ exp_northpole(0, 4*np.pi)
 
 It's easy to calculate the inverse of the exponential map at the north pole, which they call l (for log), and they have the formula on page 12:
 
-\\[ l\_{(0,0,1)}(x, y, z) = \\left(x \\frac{\\theta}{\\sin(\\theta)}, y \\frac{\\theta}{\\sin(\\theta)}\\right) \\]
+$$l_{(0,0,1)}(x, y, z) = \left(x \frac{\theta}{\sin(\theta)}, y \frac{\theta}{\sin(\theta)}\right)$$
 
-Where \\[ \\theta = \\cos^{-1}(z) \\].
+Where $\theta = \cos^{-1}(z)$.
 
 
 ```python
@@ -1360,11 +1360,11 @@ This is inefficient, but gets us the right answer.
 First we need a way of rotating the sphere.
 This is [surpisingly complicated](https://en.wikipedia.org/wiki/Rotation_matrix), but given an axis represented by unit vector u and an angle theta we can do a rotation with the following matrix:
 
-\\[ R = \\begin{bmatrix}
-\\cos \\theta +u\_x^2 \\left(1-\\cos \\theta\\right) & u\_x u\_y \\left(1-\\cos \\theta\\right) - u\_z \\sin \\theta & u\_x u\_z \\left(1-\\cos \\theta\\right) + u\_y \\sin \\theta \\\\
-u\_y u\_x \\left(1-\\cos \\theta\\right) + u\_z \\sin \\theta & \\cos \\theta + u\_y^2\\left(1-\\cos \\theta\\right) & u\_y u\_z \\left(1-\\cos \\theta\\right) - u\_x \\sin \\theta \\\\
-u\_z u\_x \\left(1-\\cos \\theta\\right) - u\_y \\sin \\theta & u\_z u\_y \\left(1-\\cos \\theta\\right) + u\_x \\sin \\theta & \\cos \\theta + u\_z^2\\left(1-\\cos \\theta\\right)
-\\end{bmatrix} \\]
+$$R = \begin{bmatrix}
+\cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\
+u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\
+u_z u_x \left(1-\cos \theta\right) - u_y \sin \theta & u_z u_y \left(1-\cos \theta\right) + u_x \sin \theta & \cos \theta + u_z^2\left(1-\cos \theta\right)
+\end{bmatrix}$$
 
 
 ```python

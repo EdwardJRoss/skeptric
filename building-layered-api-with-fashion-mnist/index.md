@@ -34,7 +34,7 @@ We have a two layer neural net with random parameters
 
 
 ```python
-def init_params(size, std=1.0): return (randn(size)*std).requires_grad_()    
+def init_params(size, std=1.0): return (randn(size)*std).requires_grad_()
 
 w1, b1 = init_params((784, 100)), init_params((100,))
 w2, b2 = init_params((100, 10)), init_params((10,))
@@ -723,7 +723,7 @@ Looking at [the source](https://pytorch.org/docs/stable/_modules/torch/nn/module
 
 Looking up Kaiming Initialisation brings us to [this paper](https://arxiv.org/abs/1502.01852) which says:
 
-> This leads to a zero-mean Gaussian distribution whose standard eviation (std) is \\(\\sqrt{2/n\_l}\\). This is our way of initialization. We also initialize b=0.
+> This leads to a zero-mean Gaussian distribution whose standard eviation (std) is $\sqrt{2/n_l}$. This is our way of initialization. We also initialize b=0.
 
 Let's try this
 

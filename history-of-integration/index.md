@@ -43,7 +43,7 @@ Peano and Jordan assigned a size to sets using intervals (or in 2 dimensions, re
 Unfortunately the Smith-Volterra-Cantor set is not Jordan measurable: it contains no intervals so its inner content is 0, but its outer content is 1/2.
 
 
-Borel took a different approach, by defining the lengths of countable disjoint unions of intervals to be the sums of the lengths of the intervals, and the length of B\A to be the length of B minus the length of A. Consequently the Smith-Volterra-Cantor set is measurable.
+Borel took a different approach, by defining the lengths of countable disjoint unions of intervals to be the sums of the lengths of the intervals, and the length of $B \setminus A$ to be the length of B minus the length of A. Consequently the Smith-Volterra-Cantor set is measurable.
 
 
 However the cardinality of the Borel measurable sets is  $\mathfrak{c}$  (the cardinality of the reals) since every Borel measurable set can be constructed from the intervals (which have cardinality  $\mathfrak{c}$ ) by complementation and countable unions. To contrast the Cantor set has outer content zero, so every subset will have outer content zero, and hence be Jordan measurable. Since the Cantor set is uncountable this implies the cardinality of the Jordan measurable sets is at least  $2^\mathfrak{c}$ .
