@@ -1,0 +1,42 @@
+---
+categories:
+  - blog
+date: '2022-12-08T21:04:00+10:00'
+image: quarto.png
+title: Migrating from Hugo to Quarto
+---
+
+I've just moved this website from [Hugo](https://gohugo.io/) to [Quarto](https://quarto.org/), and I am very happy.
+Quarto is much better for a mathematics, data, and programming website because it has better support for rendering maths equations, built in support for Jupyter Notebooks (and more), and a *much* better website out of the box than any Hugo theme I could find.
+
+It was a moderate amount of work to convert over 400 articles from Hugo with [Casper 3](https://github.com/jonathanjanssens/hugo-casper3) to Quarto.
+I had to convert the frontmatter from TOML to YAML, change the formatting of many equations (which occur in over 100 articles), and move a lot of files around.
+But now I have pagination on my index page, text search, and have support for callouts, diagrams, and Jupyter notebooks.
+
+This article will cover why I made the change from Hugo to Quarto; for the details of how I transformed the metadata, converted `mmark` equations to Quarto/Pandoc format, and moved the files see the scripts in my [hugo2quarto](https://github.com/EdwardJRoss/hugo2quarto) code repository.
+
+# Why move away from Hugo
+
+I originally migrated to Hugo from [Hakyll](https://jaspervdj.be/hakyll/) because I liked it had many themes, it seemed easier to configure, and I [wanted to use R blogdown](/blogdown).
+However it was actually hard to switch between themes, configuration often required deeply understanding Hugo's internals, and I only ever wrote 3 R blogdown posts.
+Even worse the theme I had didn't support pagination and my listing page would take minutes downloading 500 cover images, the `mmark` format [used for typesetting equations](https://github.com/gohugoio/hugo/issues/6544) has been removed from the current version, and I'm writing more Jupyter notebooks which are [laborious to use in Hugo](/jupyter-hugo-blog).
+
+These problems largely stem from Hugo's core values of being fast to generate, rapid to develop, and flexible in the kinds of websites it supports.
+They make it fast to generate by keeping it in pure Go and not allowing executing external code, which makes it hard to extend to Jupyter Notebooks (Blogdown works by wrapping Hugo, which makes it slow to render).
+The rapid development means Hugo rapidly deprecates features like `mmark` format, and breaks existing themes (which is why I migrated to [Casper 3 theme from Casper 2](/casper-2-to-3)).
+Hugo's flexibility makes themes largely incompatible because different themes have different conventions on things like the names and metadata they support, and where assets are stored, and so any theme change requires a migration.
+
+However I would happily trade speed and flexibility for something that better supports my particular usecase.
+It's not for everyone; while [Rob Hyndman has migrated his larger website to Quarto](https://robjhyndman.com/hyndsight/quarto.html), Yihui Xie is [staying with Blogdown](https://yihui.org/en/2022/04/quarto-r-markdown/) and an old version of Hugo because it's fast, stable, and he's customised it to his needs.
+But the pain points were enough for me to migrate.
+
+# Why move to Quarto
+
+Quarto is a much better fit for this website because Quarto values scientific and technical publishing with dynamic content from Python and R code.
+Hugo was a pain with mathematical equations, [Mermaid for diagrams](/diagrams-in-hugo), and Jupyter Notebook publishing, but these are all first class citizens of Quarto.
+Quarto's project and publishing system is very well designed (it can also make books and slideshows), and all the things I want are easily configurable and well documented.
+
+Quarto is very new, and there is a risk that it will make breaking changes or disappear, but because it comes out of [Posit](https://posit.co/) (formerly known as RStudio) I'm confident they will continue to support and grow it.
+Speed isn't a real issue; an incremental preview takes seconds, and a full clean generation takes a couple of minutes for 500 articles which I do in an external [Quarto Github action](https://github.com/quarto-dev/quarto-actions).
+
+I'm hoping as I write more it will continue to fit my needs, but if I ever need to [choose another static site generator](/choosing-static-site-generator) I'm likely to go with something like Jekyll which has a much better plugin ecosystem than Hugo and is much more stable.
