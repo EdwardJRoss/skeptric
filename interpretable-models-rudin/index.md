@@ -2,7 +2,7 @@
 categories:
 - data
 date: '2020-08-29T08:00:00+10:00'
-image: /images/almost_matching_exactly.png
+image: /images/almost_matching_exactly.jpg
 title: Interpretable models with Cynthia Rudin
 ---
 
