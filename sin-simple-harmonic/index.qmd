@@ -1,0 +1,74 @@
+---
+categories:
+- maths
+date: '2022-12-10T13:06:00+10:00'
+image: harmonic_oscillator.svg
+title: Sinusoidal Functions as Harmonic Oscillations
+---
+
+The sinusoidal functions (like *sin* and *cosine*) normally first come up when students are learning about angles of right angled triangles.
+However there are [many other ways to define them](https://math.stackexchange.com/questions/1176098/what-are-some-rigorous-definitions-for-sine-and-cosine); as projections of points on a circle, as the real and imaginary parts of the mapping $f(x) = e^{ix}$, in [terms of addition law](https://www.jstor.org/stable/2689051), as a [power series](https://daylateanddollarshort.com/mathdocs/Zig-Zag-Up-Down-Secant-Tangent.pdf) or as inverse functions of the anti-derivatives of $f(x) = \frac{1}{\sqrt{1-x^2}}$.
+A physically motivated way is through the Simple Harmonic Oscillator and differential equations.
+
+Consider an object at rest that stays near its initial state after a small perturbation, like a ball at the bottom of a hill given a small kick, a swing hanging straight down given a small push, or a chair given a small push on its back.
+Representing the potential energy at $x$ by $V(x)$ then by Newton's equations of motion $m\frac{{\rm d}^2x}{{\rm d}t^2} = -\frac{{\rm d}V}{{\rm d}{x}}$.
+Since the object isn't initially accelerating the first derivative of V must be zero, and since a small perturbation accelerates the object back towards its initial state the second derivative of V must be non-negative.
+So locally $V(x) \approx c + k^2 x^2 + O(x^3)$ where $c$ and $k$ are arbitrary constants.
+Under this approximation then the equations of motion are $m\frac{{\rm d}^2x}{{\rm d}t^2} = -k^2 x$.
+Without loss of generality assume $m = 1$, then we are trying to solve the equation $$x''(t) = -k^2 x(t)$$
+for some arbitrary $k$.
+
+We can find a power series solution to this equation; setting $$x(t) = \sum_{n=0}^{\infty} a_n \frac{t^n}{n!}$$ then a change of variables gives $$x'(t) = \sum_{n=0}^{\infty} a_{n} n \frac{t^{n-1}}{n!} = \sum_{n=0}^{\infty} a_{n+1} \frac{t^n}{n!}$$ and similarly $$x''(t) = \sum_{n=0}^{\infty} a_{n+2} \frac{t^n}{n!}$$ for all values of t.
+Then the equation becomes $$ \sum_{n=0}^{\infty} (a_{n+2} + k^2 a_{n}) \frac{t^n}{n!} = 0$$ and since this is true for all values of $t$ then it must hold for each coefficient $n$, $a_{n+2} = -k^2 a_n$.
+Thus $a_{2n} = \left(-k^2\right)^{2n} a_0$ and $a_{2n+1} = \left(-k^2\right)^{2n} a_1$.
+A set of solutions is thus $$x(t) = a_0 \left(\sum_{n=0}^{\infty} (-1)^n \frac{(kt)^{2n}}{(2n)!} \right) + a_1 \left( \sum_{n=0}^{\infty} (-1)^n \frac{(kt)^{2n+1}}{(2n+1)!}\right)$$
+for some arbitrary constants $a_0$ and $a_1$.
+We then define $\cos(t) = \sum_{n=0}^{\infty} (-1)^n \frac{t^{2n}}{(2n)!}$ and $\sin(t) = \sum_{n=0}^{\infty} (-1)^n \frac{t^{2n+1}}{(2n+1)!}$ making the solution $x(t) = a_0 \cos(kt) + a_1 \sin(kt)$.
+
+Now we have defined sin and cos as solutions of the Simple Harmonic Oscillator, we need to discover some of their properties in order to understand the oscillator.
+First note that the power series converges for all $t$ by the ratio test, so the functions are well defined on the whole real line.
+Note from the power series that $\sin(0) = 0$ and $\cos(0) = 1$, and that $\sin(-t) = \sin(t)$ and $\cos(-t) = \cos(t)$ (that is $\sin$ is an odd function and $\cos$ is an even function).
+Taking derivatives term-wise in the power series immediately shows $\cos'(t) = -\sin(t)$ and $\sin'(t) = \cos(t)$ (which are consistent with our original differential equation).
+
+The most important property is the addition formula, which I can't find a good motivation for.
+However if you consider the start of the expansion of
+$$
+\begin{align}
+\sin(s)\cos(t) &\approx \left(s - \frac{s^3}{3!} + \frac{s^5}{5!} - O(s^7)\ldots \right) \left(1 - \frac{t^2}{2!} + \frac{t^4}{4!} + O(t^6)\right) \\
+&\approx s - \frac{st^2}{2!} - \frac{s^3}{3!} + \frac{st^4}{4!} + \frac{s^5}{5!} + \frac{s^3t^2}{2!3!} + O(s^k t^{7-k})
+\end{align}
+$$
+then it follows that
+$$
+\begin{align}
+\sin(s)\cos(t) + \cos(s)\sin(t) \approx&  s + t - \frac{s^3 + 3 s t^2 + 3 s^2 t + t^3}{3!} + \\
+ &\frac{s^5 + 5st^4 + 5 s^4 t + 10 s^3 t^2 + 10 s^2 t^3}{5!} + O(s^k t^{7-k}) \\
+\approx& (s + t) - \frac{(s+t)^3}{3!} + \frac{(s+t)^5}{5!}  + O(s^k t^{7-k}) \\
+\approx& \sin(s+t)
+\end{align}
+$$
+for small $s$ and $t$.
+A more rigorous computation of the power series (rearranging the sums into groups of equal sum of power) can show that $$\sin(s+t) = \sin(s) \cos(t) + \cos(s) \sin(t)$$ for all $s$ and $t$.
+
+Taking the derivative of the sin addition formula with respect to $s$ gives the cosine addition formula $$\cos(s+t) = \cos(s) \cos(t) - \sin(s) \sin(t)$$
+for all $s$ and $t$.
+Setting $s=-t$ gives $$1 = \cos^2(t) + \sin^2(t)$$
+for all $t$.
+
+Now there is almost enough to show the *periodicity* of cos and sin; that is the Simple Harmonic Oscillator will actually oscillate back and forth from its original position (ignoring frictional forces).
+Assume that $\cos(t)$ has a zero, and define $\pi$ as twice the smallest positive zero; $\cos(\pi/2) = 0$.
+Since $\sin^2(t) = 1 - \cos^2(t)$, $\sin^2(\pi/2) = 1$, and as $\sin(t)$ is 0 and increasing at the origin, and this is the first zero of its derivative $\cos$, then the value must be positive; $\sin(\pi/2) = 1$.
+The $\sin(t+\pi/2) = \sin(\pi/2) \cos(t) + \cos(\pi/2) \sin(t) = \cos(t)$ and $\cos(t+\pi/2) = \cos(\pi/2) \cos(t) - \sin(\pi/2) \sin(t) = - \sin(t)$.
+Then it follows $\sin(t + \pi) = \cos(t+\pi/2) = -\sin(t)$ and so $\sin(t+2\pi) = \sin(t)$.
+Similarly $\cos(t+\pi) = -\sin(t+\pi/2) = -\cos(t) and so $\cos(t+2\pi) = \sin(t)$, and so both functions are periodic with period $2 \pi$ (the period can't be less than $2 \pi$ by the translation formula and the definition of $\pi/2$ as the first positive zero of $\cos$).
+
+However we need to actually prove that $\cos$ has a zero somewhere.
+Consider $$\cos(2) \approx 1 - \frac{2^2}{2!} + \ldots = -1 + \ldots$$
+where $\ldots$ are the higher order terms $(-1)^{n}\frac{2^{2n}}{2n!}$ for $n=2,3,4,\ldots$.
+Note that these are less than 1, alternate in sign, and get smaller since $(2n)! > 2^{2n}$ for $n>=2$, and consequently none of them will change the sign of the result.
+Thus $\cos(2) < 0$, and since $\cos$ is continuous it must have a zero between 0 and 2.
+Hence by our previous arguments the functions are periodic.
+
+From here it is straightforward to prove other properties of trigonometric and inverse trigonometric functions.
+There is nothing novel here but this gives a different axiomitisation of the trigonometric functions.
+It would be interesting to understand how the properties of the trigonometric functions are related to the symmetry of the classical Simple Harmonic Oscillator, analogous to the [symmetries of the Quantum Simple Harmonic Oscillator](/symmetry-lie-alebras-qde-1).
