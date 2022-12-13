@@ -1,3 +1,6 @@
 /.quarto/
 /_site/
 /public/
+**/.venv
+**/.env
+**/.ipynb_checkpoints

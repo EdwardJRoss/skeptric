@@ -1,7 +1,7 @@
 ---
 title: "Skeptric"
 listing:
-  contents: ["/*/*.*md", "!notebooks/*"]
+  contents: ["/*/*.*md", "/*/*.ipynb", "!notebooks/*"]
   sort: "date desc"
   type: default
   categories: true
