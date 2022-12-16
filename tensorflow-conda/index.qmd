@@ -1,0 +1,256 @@
+---
+categories:
+- python
+date: '2022-12-17T22:00:00+10:00'
+image: environment_yml.png
+title: Conda Environment YAML for running TensorFlow on GPU
+---
+
+Getting TensorFlow to work on a GPU can be tricky, but conda can make it relatively easy.
+Here's a configuration that I find works on TensorFlow 2.11 with CUDA 11.7:
+
+```{.yaml filename="environment.yml"}
+name: tensorflow
+channels:
+  - defaults
+  - nvidia/label/cuda-11.7.1
+dependencies:
+  - python=3.9
+  - cudatoolkit=11.7
+  - cudnn=8.1.0
+  - cuda-nvcc
+  - pip
+  - pip:
+      - tensorflow==2.11.0
+variables:
+  LD_LIBRARY_PATH: "'$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/'"
+  XLA_FLAGS: "'--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/'"
+```
+
+This assumes you have a few pre-requisites:
+
+* a Linux machine (including [WSL2](https://learn.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl))
+* an NVIDIA GPU and [appropriate drivers installed](https://www.nvidia.com/Download/index.aspx) (which you can check by running `nvidia-smi`)
+* `conda` installed (for example through [miniconda](https://docs.conda.io/en/latest/miniconda.html) or alternatively [mamba](https://mamba.readthedocs.io/en/latest/installation.html) which is a faster drop in replacement).
+
+Then to install it you can run at a shell (you can switch the name `tensorflow` wiht whatever you like):
+
+```{.sh}
+TFC_ENV_NAME=tensorflow
+
+conda env remove -n "$TFC_ENV_NAME"
+conda env create -f environment.yml -n "$TFC_ENV_NAME"
+
+TFC_CONDA_PREFIX=$(conda info --envs | grep -Po "$TFC_ENV_NAME\K .*" | sed 's: ::g')
+
+mkdir -p "$TFC_CONDA_PREFIX/lib/nvvm/libdevice/"
+ln -s "$TFC_CONDA_PREFIX/lib/libdevice.10.bc" "$TFC_CONDA_PREFIX/lib/nvvm/libdevice/"
+```
+
+and now you should be able to run training python code whenever you `conda activate tensorflow`.
+
+The rest of this article will discuss how this all goes together.
+
+
+# Basic setup
+
+Let's start with a very simple `environment.yml` that installs Python 3.9 and uses `pip` to
+install Python and TensorFlow.
+Instead of using `pip` we could use the [Anaconda TensorFlow conda package](https://anaconda.org/anaconda/tensorflow), but that tends to be an earlier version.
+
+```{.yaml filename="environment.yml"}
+name: tensorflow
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - tensorflow==2.11.0
+```
+
+We can use this with TensorFlow, but it runs on the CPU as can be verified with this code:
+
+```{.python filename="test_gpu.py"}
+import tensorflow as tf
+
+assert tf.config.list_physical_devices('GPU')
+```
+
+# Adding GPU Support
+
+[Tensorflow official documentation](https://www.tensorflow.org/install/pip#step-by-step_instructions)
+
+> Miniconda is the recommended approach for installing TensorFlow with GPU support. It creates a separate environment to avoid changing any installed software in your system. This is also the easiest way to install the required software especially for the GPU setup.
+>
+> ...
+>
+> ## GPU Setup
+> First install the NVIDIA GPU driver if you have not. You can use the following command to verify it is installed.
+> `nvidia-smi`
+> Then install CUDA and cuDNN with conda.
+>
+> ```
+> conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+> ```
+> Configure the system paths. You can do it with following command everytime your start a new terminal after activating your conda environment.
+>
+> ```
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
+> ```
+> For your convenience it is recommended that you automate it with the following commands. The system paths will be automatically configured when you activate this conda environment.
+>
+> ```
+> mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/' > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+> ```
+
+Rather than running the install script we can simply add the dependencies to `environment.yml`.
+Note that you can also [use a more recent version of CUDA](https://github.com/tensorflow/tensorflow/issues/54384#issuecomment-1043467342) providing your GPU is compatible with it, so I used the more recent 11.7 instead.
+
+Setting the library path is a bit more complex; as suggested we could use `activate.d/env_vars.sh`, but it would be better if we declare it in our `environment.yml`.
+Instead of using the conda activate scripts we can [set environment variables with `variables`](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables).
+This has the added benefit that any changed variables are reset when the environment is deactivates.
+This only lets us *set* an environment variable, whereas we want to append to it.
+We can hack this using that [in the conda implementation](https://github.com/conda/conda/blob/6ea6a2d4d215d9118a1e10560c8931e97f6ebd4c/conda/core/initialize.py#L218) conda uses the shell to call `export {envvar}='{value}'`.
+We can do a shell injection by including single quotes *inside* our environment variable.
+
+
+```{.yaml filename="environment.yml"}
+name: tensorflow
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - cudatoolkit=11.7
+  - cudnn=8.1.0
+  - pip
+  - pip:
+      - tensorflow==2.11.0
+variables:
+  LD_LIBRARY_PATH: "'$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/'"
+```
+Now the GPU test passes, but when we try to train a model it fails.
+
+# Enabling XLA
+
+Lets try a very simple training example:
+
+
+```{.python filename="test_train.py"}
+import numpy as np
+from keras.models import Sequential
+from keras import layers
+
+X_train = np.array([[0.2], [0.7]])
+
+y_train = np.array([0, 1])
+
+input_dim = X_train.shape[1]
+
+model = Sequential()
+model.add(layers.Dense(1, activation='sigmoid'))
+
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+model.fit(X_train, y_train, epochs=1, verbose=0)
+```
+
+When we try to run them we get an error like:
+
+```
+InternalError: Graph execution error:
+
+...
+
+Node: 'StatefulPartitionedCall'
+libdevice not found at ./libdevice.10.bc
+	 [[{{node StatefulPartitionedCall}}]] [Op:__inference_train_function_2088]
+```
+
+Some more digging shows this `libdevice` driver is related to [XLA](https://www.tensorflow.org/xla), an optimizing compiler, that is apparently automatically used by Keras.
+We'll need to install some additional libraries associated with it.
+
+## Giving access to shared libraries
+
+The libraries we need are already installed [but not where TensorFlow looks for it](https://discuss.tensorflow.org/t/cant-find-libdevice-directory-cuda-dir-nvvm-libdevice/11896/5).
+We can tell TensorFlow where to look by setting the `XLA_FLAGS`:
+
+
+```{.python filename="environment.yml"}
+name: tensorflow
+dependencies:
+  - python=3.9
+  - cudatoolkit=11.7
+  - cudnn=8.1.0
+variables:
+  LD_LIBRARY_PATH: "'$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/'"
+  XLA_FLAGS: "'--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/'"
+```
+
+Unfortunately this doesn't quite work, because TensorFlow is [hardcoded](https://github.com/tensorflow/tensorflow/blob/421d449b5d459ae960ac7faeefc30a307f05b609/tensorflow/compiler/xla/service/gpu/nvptx_helper.cc#L49) to look for the XLA drivers in the `./nvmm/libdevice` subdirectory [since 2.10](https://github.com/tensorflow/tensorflow/issues/56927).
+However Conda has all the libraries in `lib`; as a workaround we can symlink the driver to where TensorFlow will look for it; we can run
+
+```{.sh}
+conda activate tensorflow
+
+mkdir -p $CONDA_PREFIX/lib/nvvm/libdevice/
+ln -s $CONDA_PREFIX/lib/libdevice.10.bc $CONDA_PREFIX/lib/nvvm/libdevice/
+```
+
+This can't run inside a shell script because Conda requires an interactive shell to activate (you *can* source a shell script though).
+We could instead look up the [path with a bit of shell-fu](https://stackoverflow.com/questions/69153038/how-to-get-path-of-conda-env-from-its-name):
+
+```{.sh}
+TFC_CONDA_PREFIX=$(conda info --envs | grep -Po "tensorflow .*" | sed 's: ::g')
+
+mkdir -p "$TFC_CONDA_PREFIX/lib/nvvm/libdevice/"
+ln -s "$TFC_CONDA_PREFIX/lib/libdevice.10.bc" "$TFC_CONDA_PREFIX/lib/nvvm/libdevice/"
+```
+In any case after doing this we get a different error.
+
+```
+2022-12-14 16:11:28.203907: F tensorflow/compiler/xla/service/gpu/nvptx_compiler.cc:454] ptxas returned an error during compilation of ptx to sass: 'INTERNAL: Failed to launch ptxas'  If the error message indicates that a file could not be written, please verify that sufficient filesystem space is provided.
+```
+
+## Instaling ptxas
+
+The error is related to a component of the Nvidia CUDA Compiler, which is provided as a Conda [package by nvidia](https://anaconda.org/nvidia/cuda-nvcc).
+We just have to add the channel `nvidia/label/cuda-11.7.1` corresponding to the version of `cudatoolkit` we specified, and add `cuda-nvcc` to the requirements.
+
+
+```{.python filename="environment.yml"}
+name: tensorflow
+channels:
+  - defaults
+  - nvidia/label/cuda-11.7.1
+dependencies:
+  - python=3.9
+  - cudatoolkit=11.7
+  - cudnn=8.1.0
+  - cuda-nvcc
+  - pip
+  - pip:
+      - tensorflow==2.11.0
+variables:
+  LD_LIBRARY_PATH: "'$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/'"
+  XLA_FLAGS: "'--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/'"
+```
+
+Then finally the training runs successfully; we've got a working GPU setup with Tensorflow.
+However there's one more improvement we can make to the setup to enable faster inference.
+
+
+# Making inference faster with TensorRT
+
+When running the test code there are a bunch of warnings about [TensorRT](https://developer.nvidia.com/tensorrt), a way of making inference faster.
+
+```
+2022-12-14 23:27:03.152268: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: ...
+2022-12-14 23:27:03.152353: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: ...
+2022-12-14 23:27:03.152358: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+```
+
+I still haven't managed to successfully install these; it would be great to know how to solve this.
+
+# Reflection
