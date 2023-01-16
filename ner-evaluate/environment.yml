@@ -1,0 +1,15 @@
+name: ner-evaluate
+channels:
+  - conda-forge
+dependencies:
+  - python==3.8
+  - notebook==6.5.2
+  - spacy==3.4.3
+  - cupy==11.4.0
+  - pandas==1.5.2
+  - ipywidgets==8.0.3
+  - pip
+  - pip:
+    - nervaluate==0.1.8
+    - seqeval==1.2.2
+    - https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.4.1/en_core_web_trf-3.4.1-py3-none-any.whl
