@@ -1,0 +1,4 @@
+notebook==6.5.4
+nltk==3.8.1
+scikit-learn==1.2.2
+pandas==2.0.1
