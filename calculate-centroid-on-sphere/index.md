@@ -7,6 +7,11 @@ image: /images/sphere_tangent_plane.png
 title: Centroid of Points on the Surface of a Sphere
 ---
 
+::: {.callout-warning}
+There is a fundamental mistake here where we minimise the average distance, but the centroid should minimise the average *squared* distance.
+This article needs rewriting to fix this mistake.
+:::
+
 I've written a derivation of [how to find the centroid of a polygon on a sphere](https://skeptric.com/centroid-spherical-polygon/).
 This post shows it explicitly in numerical computations, and also looks at the solution in [Spherical Averages and Applications to Spherical Splines and Interpolation, by Buss and Fillmore, *ACM Transactions on Graphics* 20, 95–126 (2001)](http://math.ucsd.edu/~sbuss/ResearchWeb/spheremean/).
 Explicitly coding mathematics is a great exercise; having to concretely represent everything unearthed gaps in my understanding and found errors in both drafts of my derivation and the paper.
