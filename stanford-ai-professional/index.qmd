@@ -1,6 +1,6 @@
 ---
 date: '2024-02-29T23:27:00+11:00'
-image: /images/jabra85h.jpg
+image: stanfordai.jpg
 title: Stanford AI Professional Program Review
 ---
 
