@@ -1,0 +1,44 @@
+---
+date: '2024-02-29T23:27:00+11:00'
+image: /images/jabra85h.jpg
+title: Stanford AI Professional Program Review
+---
+
+In 2023 I completed the [Stanford AI Professional Program](https://online.stanford.edu/programs/artificial-intelligence-professional-program) to deepen my understanding of Artificial Intelligence, especially with natural language.
+The courses I took were great and definitely broadened my perspective of AI, but I could have obtained a lot of without paying the course fee and I don't think the [digital credential](https://online.stanford.edu/digital-credential) means a lot.
+There were some aspects that were better as part of a course, in particular the assignments and course project for Natural Language Understanding, but if you are motivated you could get the same education without the course fee.
+
+The program requires you to complete at least 3 courses, and I picked the three that most closely aligned with my current goals of deep learning for natural language:
+
+* [XCS224U](https://online.stanford.edu/courses/xcs224u-natural-language-understanding) Natural Language Understanding with Christopher Potts
+* [XCS224N](https://online.stanford.edu/courses/xcs224n-natural-language-processing-deep-learning) Natural Language Processing with Deep Learning with Christopher Manning
+* [XCS330](https://online.stanford.edu/courses/xcs330-deep-multi-task-and-meta-learning) Deep Multi-Task and Meta Learning with Chelsea Finn
+
+It's worth noting that pre-recorded videos for each of these courses are available free on the [Stanford Online YouTube Channel](https://www.youtube.com/@stanfordonline/playlists), for example there is a [CS224U playlist](https://www.youtube.com/watch?v=K_Dh0Sxujuc&list=PLoROMvodv4rOwvldxftJTmoR3kRcWkJBp) from Spring 2023.
+The course consists of these videos, but broken into smaller segments and collected over various years, maybe including more recent content than is on YouTube but the gap is small.
+The lectures are extremely high quality, taught by experts in the field, and are well worth watching.
+The main benefits you get from the program are interacting with other students, course facilitators, and getting access to assignments (though notably the CS224U exercises are [available on Github](https://github.com/cgpotts/cs224u/)) and access to the autograder.
+
+Interacting with others was one of the main benefits of the course, but was made difficult by being in an unusual timezone and busy.
+Meeting other students is a benefit of the course, and is mainly self-driven, facilitated by course Slack channels and organised coffee-catchups (which were unfortunately in the small hours of the morning for me).
+The course facilitators were always quick to respond, especially for issues with the assignment and autograder, and for CS224U there was a facilitator that made the time to catch up with me to talk through the course project.
+The Slack channels allowed free discussion and I did benefit from other students questions about the material, but in my experience there wasn't a lot of discussion outside of the assignments.
+I was also lucky to have live Q&A sessions with the lecturers for all the courses (which are not guaranteed to happen) at 3 AM local time, and while I got something out of them (asking about the field of AI was immersed in ChatGPT hype) they didn't add a lot to my overall experience.
+There is a lot of potential to make new relationships out of the course but you have to put the work in to make it worthwhile.
+
+The assignments were a huge benefit to my learning, but the types of assignment and quality varied a lot by course.
+Natural Language Understanding had the most open ended assignments and a self-driven project that were flexible enough to challenge a range of level of experiences.
+The project was particularly challenging, to actually write a paper, and although my project on applying [multilingual distillation](https://arxiv.org/abs/2004.09813) to retrieval models did not succeed I learned a lot in the process (and was marked fairly).
+Natural language processing had assignments that were straight-forward and focussed on the mechanics of models (you didn't need to look at the data), and I did not learn a lot from them, aside how to implement multi-headed attention, because I already knew a lot of the fundamentals.
+Deep multi-task and meta learning had well-designed assignments and I really only understood meta learning through doing the assignments.
+All the courses had an autograder that gave you immediate feedback, and allowed resubmissions.
+The autograder for deep multi-task and meta learning assignments was very fragile and would fail code that used a different random function (that wasn't specified in the assignment), or used variables in a different order, but the course facilitators were very responsive and helpful in getting code the autograder would accept.
+
+The digital credential that you get with the course is nice, but I would not assign a lot of value to it.
+The courses are pass/fail based on achieving some score threshold, which is very easy if you put the effort in given the generosity of the autograder and helpful course facilitators.
+You get a [digital credential](https://online.stanford.edu/digital-credential) that you can share, and does signal you have put that time and effort in, but I'm not sure whether it would be recognised by employers.
+
+The Stanford AI Professional program was very helpful for to learn about natural language understanding and deep meta-learning.
+In particular my highlight was the Natural Language Understanding project and assignment "bake-offs", which would be an in-class competition on a particular dataset.
+If you are in a US compatible-timezone and motivated then it could be a good way to make connections with other people working in machine learning and technology.
+However the program is relatively expensive and you can get a lot of the value by watching the very high quality lectures for free on the [Stanford Online YouTube Channel](https://www.youtube.com/@stanfordonline/playlists).
