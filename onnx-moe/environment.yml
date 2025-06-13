@@ -1,0 +1,8 @@
+name: onnx-moe
+channels:
+  - conda-forge
+dependencies:
+  - python==3.11.13
+  - pip
+  - pip:
+    - -r requirements.txt
