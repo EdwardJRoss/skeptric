@@ -19,7 +19,7 @@ defusedxml==0.7.1
 einops==0.8.1
 executing==2.2.0
 fastjsonschema==2.21.1
-filelock==3.13.1
+filelock==3.20.3
 flatbuffers==25.2.10
 fqdn==1.5.1
 fsspec==2024.6.1
